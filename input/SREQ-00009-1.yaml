@@ -17,7 +17,7 @@ requirement:
     users away from. The frontier policy gives legacy-syntax files a usable
     tree without dedicated support.
   owner: dcoello-dev
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids:
     - SREQ-00001-1
