@@ -1,0 +1,13 @@
+requirement:
+  id: REQ-00008-1
+  title: The syntax tree shall cover every non-whitespace source byte with token spans
+  description: >
+    The syntax tree shall cover every non-whitespace source byte with token spans
+  rationale: >
+    Token-span coverage plus error-freeness is the mechanical form of losslessness: a formatter can reconstruct the input from leaves plus inter-token whitespace.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00004-1
+  tags:
+    - losslessness
