@@ -166,6 +166,10 @@
         {
           "type": "relation",
           "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
         }
       ]
     }
@@ -190,6 +194,14 @@
         "types": [
           {
             "type": "hide",
+            "named": false
+          },
+          {
+            "type": "remove",
+            "named": false
+          },
+          {
+            "type": "restore",
             "named": false
           },
           {
@@ -509,6 +521,10 @@
         {
           "type": "relation",
           "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
         }
       ]
     }
@@ -658,6 +674,10 @@
         {
           "type": "relation",
           "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
         }
       ]
     }
@@ -788,6 +808,65 @@
     }
   },
   {
+    "type": "together_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "class_declaration",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "display_directive",
+          "named": true
+        },
+        {
+          "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
+          "named": true
+        },
+        {
+          "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "raw_block",
+          "named": true
+        },
+        {
+          "type": "raw_line",
+          "named": true
+        },
+        {
+          "type": "relation",
+          "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "type",
     "named": true,
     "fields": {}
@@ -895,6 +974,10 @@
     "named": false
   },
   {
+    "type": "link",
+    "named": false
+  },
+  {
     "type": "namespace",
     "named": false
   },
@@ -904,6 +987,10 @@
   },
   {
     "type": "of",
+    "named": false
+  },
+  {
+    "type": "on",
     "named": false
   },
   {
@@ -917,6 +1004,14 @@
   {
     "type": "relation_operator",
     "named": true
+  },
+  {
+    "type": "remove",
+    "named": false
+  },
+  {
+    "type": "restore",
+    "named": false
   },
   {
     "type": "right",
@@ -933,6 +1028,10 @@
   {
     "type": "string",
     "named": true
+  },
+  {
+    "type": "together",
+    "named": false
   },
   {
     "type": "top",

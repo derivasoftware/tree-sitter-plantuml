@@ -47,3 +47,27 @@ class Foo
     (raw_line)
     (class_declaration
       (identifier))))
+
+==================
+skinparam block passes through
+==================
+@startuml
+skinparam class {
+  BackgroundColor White
+  BorderColor Grey
+}
+skinparam monochrome true
+class Foo
+@enduml
+---
+
+(source_file
+  (diagram
+    (raw_block
+      (raw_line)
+      (raw_line)
+      (raw_line)
+      (raw_line))
+    (raw_line)
+    (class_declaration
+      (identifier))))

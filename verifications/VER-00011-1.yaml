@@ -1,6 +1,6 @@
 verification:
   id: VER-00011-1
-  req_id: REQ-00011-1
+  req_id: REQ-00011-2
   title: Corpus tests cover hide and show directives
   description: >
     Corpus tests cover hide and show directives
