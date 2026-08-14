@@ -15,7 +15,7 @@ requirement:
     on the node vocabulary (SREQ-00005-1) enforceable in practice — a
     consumer can only pin what is published.
   owner: dcoello-dev
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids:
     - SREQ-00001-1
