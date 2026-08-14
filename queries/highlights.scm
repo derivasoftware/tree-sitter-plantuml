@@ -1,0 +1,58 @@
+; PlantUML highlight queries — milestone 1 (class-diagram subset)
+
+(comment) @comment
+(block_comment) @comment
+
+[
+  "@startuml"
+  "@enduml"
+] @keyword.directive
+
+[
+  "class"
+  "interface"
+  "enum"
+  "package"
+  "namespace"
+  "as"
+] @keyword
+
+(abstract) @keyword.modifier
+(modifier) @keyword.modifier
+
+(class_declaration name: (identifier) @type)
+(class_declaration alias: (identifier) @type)
+(interface_declaration name: (identifier) @type)
+(interface_declaration alias: (identifier) @type)
+(enum_declaration name: (identifier) @type)
+(enum_declaration alias: (identifier) @type)
+(relation left: (identifier) @type)
+(relation right: (identifier) @type)
+(package_block name: (identifier) @module)
+(namespace_block name: (identifier) @module)
+
+(method name: (identifier) @function.method)
+(attribute name: (identifier) @variable.member)
+(type) @type
+(generics) @type
+(stereotype) @attribute
+
+(string) @string
+(cardinality) @string.special
+(label) @string
+(diagram_name) @string.special
+
+(relation_operator) @operator
+(visibility) @operator
+
+[
+  "{"
+  "}"
+  "("
+  ")"
+] @punctuation.bracket
+
+[
+  ":"
+  ","
+] @punctuation.delimiter

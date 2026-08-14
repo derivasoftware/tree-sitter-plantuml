@@ -1,0 +1,40 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "plantuml",
+      "camelcase": "Plantuml",
+      "title": "PlantUML",
+      "scope": "source.plantuml",
+      "path": ".",
+      "file-types": [
+        "puml",
+        "plantuml",
+        "iuml",
+        "wsd"
+      ],
+      "injection-regex": "^(plant)?uml$"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "PlantUML grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "dcoello-dev"
+      }
+    ],
+    "links": {
+      "repository": "https://gitlab.semantiqa.dev/deriva/tree-sitter-plantuml"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": false,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": false
+  }
+}
