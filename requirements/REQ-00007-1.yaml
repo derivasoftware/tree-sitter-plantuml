@@ -1,0 +1,13 @@
+requirement:
+  id: REQ-00007-1
+  title: The grammar shall parse unsupported statements as raw pass-through nodes
+  description: >
+    The grammar shall parse unsupported statements as raw pass-through nodes
+  rationale: >
+    raw_line and raw_block are the frontier contract: consumers distinguish 'opaque, preserve verbatim' from 'malformed'; known-but-unsupported keyword heads and note blocks route here.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00003-1
+  tags:
+    - frontier-policy
