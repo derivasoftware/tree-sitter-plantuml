@@ -18,7 +18,7 @@ requirement:
     incremental diagram-type coverage behind an explicit frontier policy is
     the parent decision every other requirement refines.
   owner: dcoello-dev
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids: []
   tags:
