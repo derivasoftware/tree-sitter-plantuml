@@ -18,7 +18,7 @@ requirement:
     Scheduling them as an explicit input requirement keeps the roadmap on
     the record without widening the v1 scope.
   owner: dcoello-dev
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids:
     - SREQ-00001-1
