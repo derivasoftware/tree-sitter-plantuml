@@ -1,0 +1,13 @@
+requirement:
+  id: REQ-00001-1
+  title: The grammar shall parse the @startuml and @enduml diagram envelope
+  description: >
+    The grammar shall parse the @startuml and @enduml diagram envelope
+  rationale: >
+    Every diagram type shares the envelope; it is the common entry point of all parsing.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00001-1
+  tags:
+    - envelope
