@@ -1,0 +1,13 @@
+requirement:
+  id: REQ-00006-1
+  title: The grammar shall parse line and block comments
+  description: >
+    The grammar shall parse line and block comments
+  rationale: >
+    PlantUML line comments are whole lines (a mid-line quote is literal), so they parse as statements; block comments are extras valid anywhere.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags:
+    - comments
