@@ -1,0 +1,61 @@
+==================
+single-line targeted note
+==================
+@startuml
+note left of Foo : remember this
+@enduml
+---
+
+(source_file
+  (diagram
+    (note_statement
+      (note_position)
+      (identifier)
+      (label))))
+
+==================
+block note with target
+==================
+@startuml
+note right of Bar
+  first line
+  class-looking words
+end note
+@enduml
+---
+
+(source_file
+  (diagram
+    (note_statement
+      (note_position)
+      (identifier)
+      (raw_line)
+      (raw_line))))
+
+==================
+positional note without target
+==================
+@startuml
+note top : floating position note
+@enduml
+---
+
+(source_file
+  (diagram
+    (note_statement
+      (note_position)
+      (label))))
+
+==================
+floating note with alias
+==================
+@startuml
+note "free text" as N1
+@enduml
+---
+
+(source_file
+  (diagram
+    (note_statement
+      (string)
+      (identifier))))

@@ -15,7 +15,14 @@
   "package"
   "namespace"
   "as"
+  "note"
+  "of"
+  "end note"
+  "hide"
+  "show"
 ] @keyword
+
+(note_position) @keyword.modifier
 
 (abstract) @keyword.modifier
 (modifier) @keyword.modifier

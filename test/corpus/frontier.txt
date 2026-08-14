@@ -4,8 +4,8 @@ raw_line frontier: unsupported statements pass through
 @startuml
 title My diagram
 skinparam monochrome true
-hide empty members
-note left of Foo : hi
+left to right direction
+!pragma layout smetana
 class Foo
 @enduml
 ---
@@ -20,13 +20,16 @@ class Foo
       (identifier))))
 
 ==================
-multi-line note block
+raw blocks: legend, header and footer pass through
 ==================
 @startuml
-note left of Foo
-  Any text goes here
-  even class-looking words
-end note
+legend right
+  some legend text
+end legend
+header
+  multi-line header
+end header
+footer Simple inline footer
 class Foo
 @enduml
 ---
@@ -36,7 +39,11 @@ class Foo
     (raw_block
       (raw_line)
       (raw_line)
+      (raw_line))
+    (raw_block
+      (raw_line)
       (raw_line)
       (raw_line))
+    (raw_line)
     (class_declaration
       (identifier))))
