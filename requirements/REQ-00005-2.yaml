@@ -1,0 +1,18 @@
+requirement:
+  id: REQ-00005-2
+  title: The grammar shall parse package, namespace and together grouping blocks
+  description: >
+    The grammar shall parse package, namespace and together grouping blocks.
+    Package and namespace blocks carry a name and an optional stereotype;
+    together blocks are anonymous. All three nest arbitrary statements.
+  rationale: >
+    Grouping blocks nest arbitrary statements; they exercise the recursive
+    statement structure. Revision 2 adds together blocks, the third grouping
+    form of the class-diagram language.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags:
+    - class-diagram
+    - grouping

@@ -21,3 +21,22 @@ namespace core {
       (identifier)
       (class_declaration
         (identifier)))))
+
+==================
+together block
+==================
+@startuml
+together {
+  class A
+  class B
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (together_block
+      (class_declaration
+        (identifier))
+      (class_declaration
+        (identifier)))))

@@ -16,3 +16,19 @@ hide circle
       (display_target))
     (display_directive
       (display_target))))
+
+==================
+remove and restore directives
+==================
+@startuml
+remove @unlinked
+restore Foo
+@enduml
+---
+
+(source_file
+  (diagram
+    (display_directive
+      (display_target))
+    (display_directive
+      (display_target))))

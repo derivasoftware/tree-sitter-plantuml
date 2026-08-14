@@ -18,11 +18,13 @@ incrementally, one diagram type at a time, behind an explicit frontier policy:
   stereotypes), members with visibility and `{static}`/`{abstract}` modifiers,
   the relation operators (inheritance, realization, composition, aggregation,
   dependency, association) with cardinalities and labels, `package` /
-  `namespace` blocks, structured notes (positional, targeted, block and
-  floating forms), and `hide`/`show` display directives.
-- **next** — the remaining class-diagram constructs (`note on link`,
-  `together`, `remove`), then sequence diagrams, then activity diagrams
-  (new syntax only).
+  `namespace` / `together` blocks, structured notes (positional, targeted,
+  on-link, block and floating forms), and `hide`/`show`/`remove`/`restore`
+  display directives. `legend`/`header`/`footer` and braced `skinparam`
+  blocks pass through the raw frontier safely.
+- **next** — remaining class-diagram constructs (member-group separators,
+  `extends`/`implements`, colors and relation styles), then sequence
+  diagrams, then activity diagrams (new syntax only).
 
 **Frontier policy**: any statement outside the supported subset parses as a
 `raw_line` (or `raw_block` for multi-line notes) instead of an `ERROR` node,

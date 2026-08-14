@@ -17,9 +17,14 @@
   "as"
   "note"
   "of"
+  "on"
+  "link"
   "end note"
   "hide"
   "show"
+  "remove"
+  "restore"
+  "together"
 ] @keyword
 
 (note_position) @keyword.modifier

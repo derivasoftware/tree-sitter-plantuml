@@ -42,6 +42,7 @@ module.exports = grammar({
       $.relation,
       $.package_block,
       $.namespace_block,
+      $.together_block,
       $.note_statement,
       $.display_directive,
       $.comment,
@@ -53,21 +54,19 @@ module.exports = grammar({
     // ── Notes ──────────────────────────────────────────────────────────
 
     note_statement: $ => choice(
-      // note <position> [of <entity>] — inline (colon) or block form
+      // note <position> of <entity> — attached to an entity
       seq(
         'note',
         field('position', $.note_position),
-        optional(seq('of', field('target', $._entity_name))),
-        choice(
-          seq(':', field('text', $.label), $._newline),
-          seq(
-            $._newline,
-            repeat(choice(alias($._raw_block_line, $.raw_line), $._newline)),
-            alias(token(prec(3, /end[ \t]*note/)), 'end note'),
-            $._newline,
-          ),
-        ),
+        'of',
+        field('target', $._entity_name),
+        $._note_body,
       ),
+      // note [<position>] on link — attached to the preceding relation
+      seq('note', field('position', $.note_position), 'on', 'link', $._note_body),
+      seq('note', 'on', 'link', $._note_body),
+      // note <position> — attached to the preceding entity
+      seq('note', field('position', $.note_position), $._note_body),
       // floating note: note "text" as N
       seq(
         'note',
@@ -78,12 +77,22 @@ module.exports = grammar({
       ),
     ),
 
+    _note_body: $ => choice(
+      seq(':', field('text', $.label), $._newline),
+      seq(
+        $._newline,
+        repeat(choice(alias($._raw_block_line, $.raw_line), $._newline)),
+        alias(token(prec(3, /end[ \t]*note/)), 'end note'),
+        $._newline,
+      ),
+    ),
+
     note_position: $ => choice('left', 'right', 'top', 'bottom'),
 
     // ── Display directives ─────────────────────────────────────────────
 
     display_directive: $ => seq(
-      field('verb', choice('hide', 'show')),
+      field('verb', choice('hide', 'show', 'remove', 'restore')),
       field('target', alias($._to_eol, $.display_target)),
       $._newline,
     ),
@@ -205,6 +214,14 @@ module.exports = grammar({
       $._newline,
     ),
 
+    together_block: $ => seq(
+      'together',
+      '{',
+      repeat($._statement),
+      '}',
+      $._newline,
+    ),
+
     // ── Comments ───────────────────────────────────────────────────────
 
     // PlantUML line comments are whole lines starting with a quote, so
@@ -243,7 +260,7 @@ module.exports = grammar({
     _unsupported_keyword_line: $ => token(prec(2, seq(
       choice(
         'title', 'skinparam', 'scale', 'caption',
-        'autonumber', 'together', 'remove', 'restore', 'set',
+        'autonumber', 'set',
         'left', 'allowmixing', 'allow_mixing',
         'actor', 'participant', 'usecase', 'component', 'state',
         'object', 'database', 'collections', 'folder', 'frame',
@@ -261,6 +278,18 @@ module.exports = grammar({
       $._legend_block,
       $._header_block,
       $._footer_block,
+      $._skinparam_block,
+    ),
+
+    // skinparam <name> { … }: the braced block form. The head token
+    // requires the opening brace, so single-line skinparam stays a
+    // keyword raw_line (lower precedence, no brace required).
+    _skinparam_block: $ => seq(
+      alias(token(prec(3, /skinparam[ \t][^\n]*\{[ \t]*/)), $.raw_line),
+      $._newline,
+      repeat(choice(alias($._raw_block_line, $.raw_line), $._newline)),
+      alias('}', $.raw_line),
+      $._newline,
     ),
 
     _legend_block: $ => seq(

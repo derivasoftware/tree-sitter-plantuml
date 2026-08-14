@@ -59,3 +59,43 @@ note "free text" as N1
     (note_statement
       (string)
       (identifier))))
+
+==================
+note on link
+==================
+@startuml
+Driver --> Car : drives
+note on link : since 1998
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (label))
+    (note_statement
+      (label))))
+
+==================
+positioned block note on link
+==================
+@startuml
+Driver --> Car
+note left on link
+  free text body
+end note
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (note_statement
+      (note_position)
+      (raw_line))))

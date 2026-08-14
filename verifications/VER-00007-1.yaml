@@ -1,6 +1,6 @@
 verification:
   id: VER-00007-1
-  req_id: REQ-00005-1
+  req_id: REQ-00005-2
   title: Corpus tests cover grouping blocks
   description: >
     Corpus tests cover grouping blocks
