@@ -1,0 +1,24 @@
+requirement:
+  id: SREQ-00007-1
+  title: The project shall publish the grammar as installable node and python packages
+  description: >
+    The project shall publish the generated parser with bindings as
+    installable packages for at least the node and python runtimes, so that
+    downstream tools consume the grammar as a versioned dependency rather
+    than by vendoring the repository. Additional runtimes (rust, c) follow
+    the standard tree-sitter binding layout and may be published as demand
+    appears.
+  rationale: >
+    The intended consumers live in different runtimes: formatter tooling and
+    pre-commit hooks favour python or a compiled binary, editor tooling
+    favours node/wasm. Versioned packages are what make the semver contract
+    on the node vocabulary (SREQ-00005-1) enforceable in practice — a
+    consumer can only pin what is published.
+  owner: dcoello-dev
+  status: DRAFT
+  asil: QM
+  parent_ids:
+    - SREQ-00001-1
+  tags:
+    - packaging
+    - distribution

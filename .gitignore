@@ -1,0 +1,8 @@
+node_modules/
+build/
+dist/
+target/
+*.log
+*.wasm
+.venv/
+__pycache__/

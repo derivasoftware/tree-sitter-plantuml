@@ -1,0 +1,23 @@
+requirement:
+  id: SREQ-00004-1
+  title: The syntax tree shall preserve every byte of the source text
+  description: >
+    Every byte of the parsed source shall be reachable from the syntax tree:
+    concatenating the text spans of the tree's leaves, including comments,
+    raw nodes and whitespace between tokens, shall reconstruct the input
+    byte-identically. No construct may be silently dropped during parsing.
+  rationale: >
+    Losslessness is the property that enables formatters, refactoring tools
+    and round-trip pipelines to be built on the grammar: a formatter can only
+    guarantee "no information lost" if the tree itself loses nothing.
+    Verifying it is mechanical — parse a corpus, reconstruct from the tree,
+    compare bytes — which makes this the cheapest strong guarantee the
+    project can offer downstream consumers.
+  owner: dcoello-dev
+  status: DRAFT
+  asil: QM
+  parent_ids:
+    - SREQ-00001-1
+  tags:
+    - losslessness
+    - round-trip

@@ -1,0 +1,26 @@
+requirement:
+  id: SREQ-00009-1
+  title: The grammar shall parse PlantUML activity diagrams in the new syntax
+  description: >
+    The grammar shall parse the PlantUML activity-diagram language in its
+    new syntax only: activity lines (:action;), start/stop/end, conditionals
+    (if/then/elseif/else/endif), loops (while/endwhile, repeat/repeat
+    while), forks and splits, swimlanes and connectors. The legacy
+    activity-diagram syntax is explicitly out of scope and shall parse under
+    the frontier policy as raw nodes. Activity diagrams are the third
+    diagram type, scheduled after sequence diagrams.
+  rationale: >
+    Activity diagrams complete the behavioural pair most design workflows
+    need. Restricting coverage to the new syntax is deliberate: the legacy
+    syntax is deprecated upstream, structurally irregular, and supporting it
+    would consume grammar complexity on inputs that PlantUML itself steers
+    users away from. The frontier policy gives legacy-syntax files a usable
+    tree without dedicated support.
+  owner: dcoello-dev
+  status: DRAFT
+  asil: QM
+  parent_ids:
+    - SREQ-00001-1
+  tags:
+    - activity-diagram
+    - roadmap

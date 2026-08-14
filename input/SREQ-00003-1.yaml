@@ -1,0 +1,25 @@
+requirement:
+  id: SREQ-00003-1
+  title: The grammar shall parse unsupported constructs as raw pass-through nodes
+  description: >
+    Any input construct outside the supported subset shall parse as a
+    dedicated raw node (raw_line for single lines, raw_block for multi-line
+    constructs such as notes) rather than as a tree-sitter ERROR node. Every
+    PlantUML input shall therefore produce a usable syntax tree, regardless
+    of how much of the language the current grammar revision supports.
+  rationale: >
+    The grammar covers PlantUML incrementally, so at every revision most of
+    the language is out of scope. Consumers — especially formatters — must be
+    able to distinguish "not yet supported, pass through verbatim" from
+    "malformed input": reformatting or transforming text inside an ERROR node
+    risks corrupting what the tool does not understand, while a raw node is
+    an explicit contract that the content is opaque and must be preserved.
+    This frontier policy is what makes incremental coverage safe.
+  owner: dcoello-dev
+  status: DRAFT
+  asil: QM
+  parent_ids:
+    - SREQ-00001-1
+  tags:
+    - frontier-policy
+    - error-tolerance

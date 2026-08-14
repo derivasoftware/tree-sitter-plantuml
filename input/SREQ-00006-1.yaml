@@ -1,0 +1,24 @@
+requirement:
+  id: SREQ-00006-1
+  title: The grammar shall provide editor highlight queries for the supported subset
+  description: >
+    The repository shall ship tree-sitter highlight queries
+    (queries/highlights.scm) covering every construct the grammar supports,
+    using the standard capture vocabulary so that editors consuming the
+    grammar (Neovim, Helix, Zed, and web-tree-sitter embeddings) render
+    PlantUML with meaningful syntax highlighting out of the box. Query
+    coverage shall grow in lockstep with grammar coverage.
+  rationale: >
+    Highlight queries are the first thing every editor integration needs and
+    the de-facto acceptance test of a grammar's node design: if a construct
+    cannot be captured cleanly in a query, its node shape is wrong. Shipping
+    them in-repo follows the ecosystem convention that editors pull queries
+    from the grammar repository itself.
+  owner: dcoello-dev
+  status: DRAFT
+  asil: QM
+  parent_ids:
+    - SREQ-00001-1
+  tags:
+    - editor-integration
+    - queries

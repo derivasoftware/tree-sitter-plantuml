@@ -1,0 +1,27 @@
+requirement:
+  id: SREQ-00001-1
+  title: The project shall provide a tree-sitter grammar for the PlantUML language
+  description: >
+    The project shall provide a tree-sitter grammar for PlantUML, consumable
+    by any tree-sitter client — editors, formatters, linters and analysis
+    tooling. The grammar is a standalone product with no coupling to any
+    specific downstream consumer. Coverage of the PlantUML language grows
+    incrementally by diagram type, starting with class diagrams; the full
+    PlantUML surface is explicitly out of scope as a goal.
+  rationale: >
+    PlantUML has no formal grammar: the reference implementation parses
+    line-oriented regexes, and downstream tooling that wants structure ends up
+    re-implementing fragile ad-hoc readers. A tree-sitter grammar provides an
+    error-tolerant concrete syntax tree with precise locations, reusable
+    across the whole tree-sitter ecosystem. Aiming at the full language would
+    sink the project — PlantUML's surface is enormous and irregular — so
+    incremental diagram-type coverage behind an explicit frontier policy is
+    the parent decision every other requirement refines.
+  owner: dcoello-dev
+  status: DRAFT
+  asil: QM
+  parent_ids: []
+  tags:
+    - domain
+    - grammar
+    - parsing

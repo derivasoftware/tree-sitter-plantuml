@@ -1,0 +1,27 @@
+requirement:
+  id: SREQ-00008-1
+  title: The grammar shall parse PlantUML sequence diagrams
+  description: >
+    The grammar shall parse the PlantUML sequence-diagram language:
+    participant declarations (participant, actor, boundary, control, entity,
+    database, collections, queue) with aliases and ordering, messages with
+    the sequence arrow vocabulary, activation and deactivation, grouping
+    frames (alt/else, opt, loop, par, break, critical, group), references,
+    dividers and delays. Sequence diagrams are the second diagram type,
+    scheduled after the class-diagram subset is complete.
+  rationale: >
+    Sequence diagrams are the most widely used PlantUML diagram type in the
+    wild, and the natural second step: they reuse the envelope, comment and
+    frontier machinery while introducing the arrow-vocabulary ambiguity
+    (constructs like "A --> B : label" are valid in several diagram types
+    with different meanings) that the grammar's module layout must absorb.
+    Scheduling them as an explicit input requirement keeps the roadmap on
+    the record without widening the v1 scope.
+  owner: dcoello-dev
+  status: DRAFT
+  asil: QM
+  parent_ids:
+    - SREQ-00001-1
+  tags:
+    - sequence-diagram
+    - roadmap
