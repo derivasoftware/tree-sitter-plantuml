@@ -9,7 +9,7 @@ requirement:
     verb-plus-target node lets consumers normalize them without interpreting
     the target vocabulary, which stays an opaque token. Revision 2 adds the
     remove and restore verbs, which share the hide/show target grammar.
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids:
     - SREQ-00002-1
