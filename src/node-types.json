@@ -132,6 +132,10 @@
           "named": true
         },
         {
+          "type": "display_directive",
+          "named": true
+        },
+        {
           "type": "enum_declaration",
           "named": true
         },
@@ -141,6 +145,10 @@
         },
         {
           "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
           "named": true
         },
         {
@@ -160,6 +168,36 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "display_directive",
+    "named": true,
+    "fields": {
+      "target": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "display_target",
+            "named": true
+          }
+        ]
+      },
+      "verb": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "hide",
+            "named": false
+          },
+          {
+            "type": "show",
+            "named": false
+          }
+        ]
+      }
     }
   },
   {
@@ -437,6 +475,10 @@
           "named": true
         },
         {
+          "type": "display_directive",
+          "named": true
+        },
+        {
           "type": "enum_declaration",
           "named": true
         },
@@ -446,6 +488,10 @@
         },
         {
           "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
           "named": true
         },
         {
@@ -462,6 +508,75 @@
         },
         {
           "type": "relation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "note_position",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "note_statement",
+    "named": true,
+    "fields": {
+      "alias": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "position": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "note_position",
+            "named": true
+          }
+        ]
+      },
+      "target": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "text": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "label",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "raw_line",
           "named": true
         }
       ]
@@ -509,6 +624,10 @@
           "named": true
         },
         {
+          "type": "display_directive",
+          "named": true
+        },
+        {
           "type": "enum_declaration",
           "named": true
         },
@@ -518,6 +637,10 @@
         },
         {
           "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
           "named": true
         },
         {
@@ -724,6 +847,10 @@
     "extra": true
   },
   {
+    "type": "bottom",
+    "named": false
+  },
+  {
     "type": "cardinality",
     "named": true
   },
@@ -736,12 +863,24 @@
     "named": true
   },
   {
+    "type": "display_target",
+    "named": true
+  },
+  {
+    "type": "end note",
+    "named": false
+  },
+  {
     "type": "enum",
     "named": false
   },
   {
     "type": "generics",
     "named": true
+  },
+  {
+    "type": "hide",
+    "named": false
   },
   {
     "type": "identifier",
@@ -752,7 +891,19 @@
     "named": false
   },
   {
+    "type": "left",
+    "named": false
+  },
+  {
     "type": "namespace",
+    "named": false
+  },
+  {
+    "type": "note",
+    "named": false
+  },
+  {
+    "type": "of",
     "named": false
   },
   {
@@ -768,12 +919,24 @@
     "named": true
   },
   {
+    "type": "right",
+    "named": false
+  },
+  {
+    "type": "show",
+    "named": false
+  },
+  {
     "type": "stereotype",
     "named": true
   },
   {
     "type": "string",
     "named": true
+  },
+  {
+    "type": "top",
+    "named": false
   },
   {
     "type": "{",

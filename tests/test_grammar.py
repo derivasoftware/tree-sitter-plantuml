@@ -39,3 +39,11 @@ def test_corpus_comments():
 
 def test_corpus_frontier():
     check_corpus("frontier")
+
+
+def test_corpus_notes():
+    check_corpus("notes")
+
+
+def test_corpus_display():
+    check_corpus("display")

@@ -1,0 +1,14 @@
+requirement:
+  id: REQ-00011-1
+  title: The grammar shall parse hide and show display directives
+  description: >
+    The grammar shall parse hide and show display directives
+  rationale: >
+    hide/show lines control rendering of declared entities; a structured verb-plus-target node lets consumers normalize them without interpreting the target vocabulary, which stays an opaque token.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags:
+    - class-diagram
+    - display

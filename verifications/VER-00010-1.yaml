@@ -1,0 +1,9 @@
+verification:
+  id: VER-00010-1
+  req_id: REQ-00010-1
+  title: Corpus tests cover the four note forms
+  description: >
+    Corpus tests cover the four note forms
+  method: test
+  test_ids:
+    - tests/test_grammar.py::test_corpus_notes

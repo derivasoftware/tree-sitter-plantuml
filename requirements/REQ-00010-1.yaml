@@ -1,0 +1,14 @@
+requirement:
+  id: REQ-00010-1
+  title: The grammar shall parse note statements in positional, targeted, block and floating forms
+  description: >
+    The grammar shall parse note statements in positional, targeted, block and floating forms
+  rationale: >
+    Notes are first-class class-diagram content: position, target entity, alias and text become queryable fields, while block bodies stay opaque raw lines a formatter passes through verbatim.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags:
+    - class-diagram
+    - notes

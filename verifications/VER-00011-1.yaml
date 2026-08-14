@@ -1,0 +1,9 @@
+verification:
+  id: VER-00011-1
+  req_id: REQ-00011-1
+  title: Corpus tests cover hide and show directives
+  description: >
+    Corpus tests cover hide and show directives
+  method: test
+  test_ids:
+    - tests/test_grammar.py::test_corpus_display

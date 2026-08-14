@@ -1,0 +1,18 @@
+==================
+hide and show directives
+==================
+@startuml
+hide empty members
+show Foo methods
+hide circle
+@enduml
+---
+
+(source_file
+  (diagram
+    (display_directive
+      (display_target))
+    (display_directive
+      (display_target))
+    (display_directive
+      (display_target))))

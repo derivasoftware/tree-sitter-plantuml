@@ -42,9 +42,49 @@ module.exports = grammar({
       $.relation,
       $.package_block,
       $.namespace_block,
+      $.note_statement,
+      $.display_directive,
       $.comment,
       $.raw_line,
       $.raw_block,
+      $._newline,
+    ),
+
+    // ── Notes ──────────────────────────────────────────────────────────
+
+    note_statement: $ => choice(
+      // note <position> [of <entity>] — inline (colon) or block form
+      seq(
+        'note',
+        field('position', $.note_position),
+        optional(seq('of', field('target', $._entity_name))),
+        choice(
+          seq(':', field('text', $.label), $._newline),
+          seq(
+            $._newline,
+            repeat(choice(alias($._raw_block_line, $.raw_line), $._newline)),
+            alias(token(prec(3, /end[ \t]*note/)), 'end note'),
+            $._newline,
+          ),
+        ),
+      ),
+      // floating note: note "text" as N
+      seq(
+        'note',
+        field('text', $.string),
+        'as',
+        field('alias', $.identifier),
+        $._newline,
+      ),
+    ),
+
+    note_position: $ => choice('left', 'right', 'top', 'bottom'),
+
+    // ── Display directives ─────────────────────────────────────────────
+
+    display_directive: $ => seq(
+      field('verb', choice('hide', 'show')),
+      field('target', alias($._to_eol, $.display_target)),
       $._newline,
     ),
 
@@ -185,23 +225,26 @@ module.exports = grammar({
     //   1. a line whose first character cannot start any supported token
     //      (preprocessor !directives, separators, …)
     //   2. a line headed by a known-but-unsupported PlantUML keyword
-    //   3. a single-line note (colon form)
+    //   3. a single-line header/footer (content on the head line)
     // A truly unknown identifier-headed statement still errors; hardening
     // this frontier (scanner-assisted fallback) is a roadmap item.
     raw_line: $ => seq(
       choice(
         token(prec(-2, /[^ \t\r\n][^\r\n]*/)),
         $._unsupported_keyword_line,
-        token(prec(3, /note[ \t][^\n]*:[^\n]*/)),
+        // header/footer with inline content: same precedence as the bare
+        // block heads below so the longer single-line match wins.
+        token(prec(3, /header[ \t][^ \t\n][^\n]*/)),
+        token(prec(3, /footer[ \t][^ \t\n][^\n]*/)),
       ),
       $._newline,
     ),
 
     _unsupported_keyword_line: $ => token(prec(2, seq(
       choice(
-        'title', 'skinparam', 'hide', 'show', 'scale', 'caption',
+        'title', 'skinparam', 'scale', 'caption',
         'autonumber', 'together', 'remove', 'restore', 'set',
-        'header', 'footer', 'left', 'allowmixing', 'allow_mixing',
+        'left', 'allowmixing', 'allow_mixing',
         'actor', 'participant', 'usecase', 'component', 'state',
         'object', 'database', 'collections', 'folder', 'frame',
         'cloud', 'node', 'rectangle', 'artifact', 'agent',
@@ -211,13 +254,36 @@ module.exports = grammar({
       optional(/[ \t][^\n]*/),
     ))),
 
-    // Multi-line note blocks: inside the body only raw lines and the
-    // closing `end note` are valid tokens, so arbitrary text is safe.
-    raw_block: $ => seq(
-      alias(token(prec(3, /note([ \t][^\n:]*)?/)), $.raw_line),
+    // Multi-line raw blocks (legend/header/footer): inside the body only
+    // raw lines and the closing token are valid, so arbitrary text is
+    // safe. Notes used to route here; they are structured nodes now.
+    raw_block: $ => choice(
+      $._legend_block,
+      $._header_block,
+      $._footer_block,
+    ),
+
+    _legend_block: $ => seq(
+      alias(token(prec(3, /legend([ \t][^\n]*)?/)), $.raw_line),
       $._newline,
       repeat(choice(alias($._raw_block_line, $.raw_line), $._newline)),
-      alias(token(prec(3, /end[ \t]*note/)), $.raw_line),
+      alias(token(prec(3, /end[ \t]*legend/)), $.raw_line),
+      $._newline,
+    ),
+
+    _header_block: $ => seq(
+      alias(token(prec(3, 'header')), $.raw_line),
+      $._newline,
+      repeat(choice(alias($._raw_block_line, $.raw_line), $._newline)),
+      alias(token(prec(3, /end[ \t]*header/)), $.raw_line),
+      $._newline,
+    ),
+
+    _footer_block: $ => seq(
+      alias(token(prec(3, 'footer')), $.raw_line),
+      $._newline,
+      repeat(choice(alias($._raw_block_line, $.raw_line), $._newline)),
+      alias(token(prec(3, /end[ \t]*footer/)), $.raw_line),
       $._newline,
     ),
 

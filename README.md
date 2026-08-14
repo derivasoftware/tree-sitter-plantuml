@@ -17,11 +17,12 @@ incrementally, one diagram type at a time, behind an explicit frontier policy:
   `interface` / `enum` declarations (quoted names, aliases, generics,
   stereotypes), members with visibility and `{static}`/`{abstract}` modifiers,
   the relation operators (inheritance, realization, composition, aggregation,
-  dependency, association) with cardinalities and labels, and `package` /
-  `namespace` blocks.
-- **next** — the remaining class-diagram constructs (notes as structured
-  nodes, `hide`/`show`, `together`), then sequence diagrams, then activity
-  diagrams (new syntax only).
+  dependency, association) with cardinalities and labels, `package` /
+  `namespace` blocks, structured notes (positional, targeted, block and
+  floating forms), and `hide`/`show` display directives.
+- **next** — the remaining class-diagram constructs (`note on link`,
+  `together`, `remove`), then sequence diagrams, then activity diagrams
+  (new syntax only).
 
 **Frontier policy**: any statement outside the supported subset parses as a
 `raw_line` (or `raw_block` for multi-line notes) instead of an `ERROR` node,
