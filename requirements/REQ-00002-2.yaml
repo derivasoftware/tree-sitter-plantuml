@@ -12,7 +12,7 @@ requirement:
     Revision 2 adds the extends/implements clauses and the trailing color,
     both common in wild corpora — a colored declaration previously produced
     an ERROR node.
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids:
     - SREQ-00002-1
