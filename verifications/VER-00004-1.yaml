@@ -1,6 +1,6 @@
 verification:
   id: VER-00004-1
-  req_id: REQ-00002-1
+  req_id: REQ-00002-2
   title: Corpus tests cover entity declarations
   description: >
     Corpus tests cover entity declarations

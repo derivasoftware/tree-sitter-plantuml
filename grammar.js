@@ -124,7 +124,14 @@ module.exports = grammar({
       optional(field('generics', $.generics)),
       optional(field('stereotype', $.stereotype)),
       optional(seq('as', field('alias', $._entity_name))),
+      optional(seq('extends', field('extends', $.entity_list))),
+      optional(seq('implements', field('implements', $.entity_list))),
+      optional(field('color', $.color)),
     ),
+
+    entity_list: $ => sep1($._entity_name, ','),
+
+    color: $ => token(/#[\w;:.\/\\|-]+/),
 
     _entity_name: $ => choice($.identifier, $.string),
 
@@ -134,8 +141,21 @@ module.exports = grammar({
 
     entity_body: $ => seq(
       '{',
-      repeat(choice($.member, $.comment, $._newline)),
+      repeat(choice($.member, $.member_separator, $.comment, $._newline)),
       '}',
+    ),
+
+    // Group separators inside a body: --, .., ==, each with an optional
+    // title; the underscore form requires a title (`__ text __`) so bare
+    // dunder members (__init__) keep lexing as identifiers.
+    member_separator: $ => seq(
+      choice(
+        token(prec(1, /--[^\n]*/)),
+        token(prec(1, /\.\.[^\n]*/)),
+        token(prec(1, /==[^\n]*/)),
+        token(prec(1, /__[ \t][^\n]*/)),
+      ),
+      $._newline,
     ),
 
     // ── Members ────────────────────────────────────────────────────────

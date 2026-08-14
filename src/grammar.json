@@ -625,8 +625,106 @@
               "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "extends"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "extends",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "entity_list"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "implements"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "implements",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "entity_list"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "color",
+              "content": {
+                "type": "SYMBOL",
+                "name": "color"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
+    },
+    "entity_list": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_entity_name"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ","
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_entity_name"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "color": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "#[\\w;:.\\/\\\\|-]+"
+      }
     },
     "_entity_name": {
       "type": "CHOICE",
@@ -699,6 +797,10 @@
               },
               {
                 "type": "SYMBOL",
+                "name": "member_separator"
+              },
+              {
+                "type": "SYMBOL",
                 "name": "comment"
               },
               {
@@ -711,6 +813,64 @@
         {
           "type": "STRING",
           "value": "}"
+        }
+      ]
+    },
+    "member_separator": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "TOKEN",
+              "content": {
+                "type": "PREC",
+                "value": 1,
+                "content": {
+                  "type": "PATTERN",
+                  "value": "--[^\\n]*"
+                }
+              }
+            },
+            {
+              "type": "TOKEN",
+              "content": {
+                "type": "PREC",
+                "value": 1,
+                "content": {
+                  "type": "PATTERN",
+                  "value": "\\.\\.[^\\n]*"
+                }
+              }
+            },
+            {
+              "type": "TOKEN",
+              "content": {
+                "type": "PREC",
+                "value": 1,
+                "content": {
+                  "type": "PATTERN",
+                  "value": "==[^\\n]*"
+                }
+              }
+            },
+            {
+              "type": "TOKEN",
+              "content": {
+                "type": "PREC",
+                "value": 1,
+                "content": {
+                  "type": "PATTERN",
+                  "value": "__[ \\t][^\\n]*"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
         }
       ]
     },
