@@ -11,7 +11,7 @@ requirement:
     alias and text become queryable fields, while block bodies stay opaque
     raw lines a formatter passes through verbatim. Revision 2 adds the
     on-link form, which attaches to the preceding relation.
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids:
     - SREQ-00002-1
