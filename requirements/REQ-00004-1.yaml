@@ -1,0 +1,14 @@
+requirement:
+  id: REQ-00004-1
+  title: The grammar shall parse the class relation operators with cardinalities and labels
+  description: >
+    The grammar shall parse the class relation operators with cardinalities and labels
+  rationale: >
+    Inheritance, realization, composition, aggregation, dependency and association carry the diagram's semantics; embedded direction hints are part of the wild-corpus reality.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags:
+    - class-diagram
+    - relations
