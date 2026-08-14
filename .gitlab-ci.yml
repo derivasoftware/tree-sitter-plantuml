@@ -1,0 +1,22 @@
+# CI — tree-sitter-plantuml. Shared shell-runner foundation comes from
+# deriva/infra/ci-templates (.node-base bootstraps Node via fnm). The
+# pytest harness needs only pytest + py-tree-sitter, so the job builds
+# a throwaway venv inline instead of .python-base (which is shaped
+# around editable installs of Python packages).
+
+include:
+  - project: deriva/infra/ci-templates
+    ref: main
+    file:
+      - /templates/base.yml
+      - /templates/node.yml
+
+test:
+  stage: test
+  extends: [.node-base, .on-mr-and-main]
+  script:
+    - npm ci
+    - npm test
+    - python3 -m venv .venv-ci
+    - ./.venv-ci/bin/pip install -q pytest tree-sitter
+    - ./.venv-ci/bin/pytest tests/ -q
