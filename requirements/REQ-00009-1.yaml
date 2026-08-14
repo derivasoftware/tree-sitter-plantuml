@@ -1,0 +1,15 @@
+requirement:
+  id: REQ-00009-1
+  title: The highlight queries shall reference only node types defined by the grammar
+  description: >
+    The highlight queries shall reference only node types defined by the grammar
+  rationale: >
+    A query naming a nonexistent node fails silently in editors; compiling the query against the grammar in CI catches renames — this is the enforcement half of the node-name API contract.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00005-1
+    - SREQ-00006-1
+  tags:
+    - editor-integration
+    - queries
