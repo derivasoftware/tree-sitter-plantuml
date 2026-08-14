@@ -16,7 +16,7 @@ requirement:
     consumers can pin safely, and it forces node-naming decisions to be made
     deliberately at design time rather than drifting release to release.
   owner: dcoello-dev
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids:
     - SREQ-00001-1
