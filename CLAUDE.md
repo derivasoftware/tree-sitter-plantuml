@@ -47,5 +47,21 @@ argos tree                 # requirement DAG with status and ASIL
 ## Definition of Done
 
 ```bash
-npm test && pre-commit run --all-files
+npm test && ./.venv/bin/pytest tests/ -q && pre-commit run --all-files
 ```
+
+`npm test` runs `tree-sitter generate && tree-sitter test` (corpus). The
+pytest harness adds the per-feature corpus gates the VER artefacts link to,
+the round-trip losslessness check (token-span coverage over corpus +
+examples), and the highlight-query compilation check. Bootstrap the venv
+once with `python3 -m venv .venv && ./.venv/bin/pip install pytest
+tree-sitter`.
+
+## Baseline diagnostics (not regressions)
+
+- `W-REQ-NO-DESIGN` on every REQ: the CL_-class design methodology
+  (argos-design-plantuml) does not map to a grammar.js repository. A
+  design-artefact convention for grammar repos is open future work.
+- `W-SREQ-NOT-DECOMPOSED` on SREQ-00007-1 (packaging), SREQ-00008-1
+  (sequence diagrams) and SREQ-00009-1 (activity diagrams): roadmap
+  SREQs, decomposed when their milestone starts.

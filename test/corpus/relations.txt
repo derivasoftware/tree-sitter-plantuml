@@ -1,0 +1,48 @@
+==================
+relations
+==================
+@startuml
+Dog --|> Animal
+Window ..|> IWindow
+Engine *-- Piston
+Garage o-- Car
+Driver --> Car : drives
+A "1" -- "many" B : owns
+Client -left-> Server
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (label))
+    (relation
+      (identifier)
+      (cardinality)
+      (relation_operator)
+      (cardinality)
+      (identifier)
+      (label))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))))

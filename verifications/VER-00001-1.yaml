@@ -1,0 +1,9 @@
+verification:
+  id: VER-00001-1
+  req_id: REQ-00008-1
+  title: Round-trip tests assert token-span coverage over corpus and examples
+  description: >
+    Round-trip tests assert token-span coverage over corpus and examples
+  method: test
+  test_ids:
+    - tests/test_round_trip.py::test_token_coverage

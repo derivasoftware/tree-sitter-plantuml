@@ -1,0 +1,41 @@
+==================
+class with body, visibility and modifiers
+==================
+@startuml
+class Account {
+  - balance : int
+  + {static} count : int
+  + deposit(amount : int) : void
+  # {abstract} audit()
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (attribute
+            (identifier)
+            (type)))
+        (member
+          (visibility)
+          (modifier)
+          (attribute
+            (identifier)
+            (type)))
+        (member
+          (visibility)
+          (method
+            (identifier)
+            (parameter_list
+              (parameter))
+            (type)))
+        (member
+          (visibility)
+          (modifier)
+          (method
+            (identifier)))))))

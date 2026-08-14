@@ -1,0 +1,23 @@
+==================
+empty diagram
+==================
+@startuml
+@enduml
+---
+
+(source_file
+  (diagram))
+
+==================
+named diagram
+==================
+@startuml order-view
+class Order
+@enduml
+---
+
+(source_file
+  (diagram
+    (diagram_name)
+    (class_declaration
+      (identifier))))

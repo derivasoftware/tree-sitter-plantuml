@@ -1,0 +1,9 @@
+verification:
+  id: VER-00008-1
+  req_id: REQ-00006-1
+  title: Corpus tests cover line and block comments
+  description: >
+    Corpus tests cover line and block comments
+  method: test
+  test_ids:
+    - tests/test_grammar.py::test_corpus_comments

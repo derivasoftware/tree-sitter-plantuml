@@ -1,0 +1,52 @@
+@startuml billing-model
+title Billing domain model
+skinparam monochrome true
+
+' the aggregate root
+package "com.acme.billing" {
+  abstract class BaseEntity {
+    + id : UUID
+    # {static} registry : Registry
+    + touch() : void
+  }
+
+  class Invoice <<aggregate>> {
+    - lines : List<InvoiceLine>
+    - state : InvoiceState
+    + addLine(line : InvoiceLine) : void
+    + total() : Money
+  }
+
+  class InvoiceLine {
+    + amount : Money
+    + description : String
+  }
+
+  interface Payable {
+    + pay(amount : Money) : Receipt
+  }
+
+  enum InvoiceState {
+    OPEN
+    PAID
+    VOID
+  }
+}
+
+class "Payment Gateway" as Gateway
+
+BaseEntity <|-- Invoice
+Invoice *-- "1..*" InvoiceLine : contains
+Invoice ..|> Payable
+Invoice --> InvoiceState
+Gateway o-- Invoice : settles
+
+note left of Gateway
+  External system boundary.
+  Retries are handled upstream.
+end note
+
+/' colours are intentionally
+   left to the default theme '/
+hide empty members
+@enduml

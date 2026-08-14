@@ -1,0 +1,9 @@
+verification:
+  id: VER-00007-1
+  req_id: REQ-00005-1
+  title: Corpus tests cover grouping blocks
+  description: >
+    Corpus tests cover grouping blocks
+  method: test
+  test_ids:
+    - tests/test_grammar.py::test_corpus_grouping

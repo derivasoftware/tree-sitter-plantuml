@@ -1,0 +1,9 @@
+verification:
+  id: VER-00009-1
+  req_id: REQ-00007-1
+  title: Corpus tests cover the raw pass-through frontier
+  description: >
+    Corpus tests cover the raw pass-through frontier
+  method: test
+  test_ids:
+    - tests/test_grammar.py::test_corpus_frontier

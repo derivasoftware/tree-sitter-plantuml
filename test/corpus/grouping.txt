@@ -1,0 +1,23 @@
+==================
+package and namespace blocks
+==================
+@startuml
+package "com.acme" {
+  class Widget
+}
+namespace core {
+  class Kernel
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (package_block
+      (string)
+      (class_declaration
+        (identifier)))
+    (namespace_block
+      (identifier)
+      (class_declaration
+        (identifier)))))

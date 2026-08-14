@@ -1,0 +1,42 @@
+==================
+raw_line frontier: unsupported statements pass through
+==================
+@startuml
+title My diagram
+skinparam monochrome true
+hide empty members
+note left of Foo : hi
+class Foo
+@enduml
+---
+
+(source_file
+  (diagram
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (class_declaration
+      (identifier))))
+
+==================
+multi-line note block
+==================
+@startuml
+note left of Foo
+  Any text goes here
+  even class-looking words
+end note
+class Foo
+@enduml
+---
+
+(source_file
+  (diagram
+    (raw_block
+      (raw_line)
+      (raw_line)
+      (raw_line)
+      (raw_line))
+    (class_declaration
+      (identifier))))

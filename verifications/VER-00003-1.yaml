@@ -1,0 +1,9 @@
+verification:
+  id: VER-00003-1
+  req_id: REQ-00001-1
+  title: Corpus tests cover the diagram envelope
+  description: >
+    Corpus tests cover the diagram envelope
+  method: test
+  test_ids:
+    - tests/test_grammar.py::test_corpus_envelope

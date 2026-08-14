@@ -1,0 +1,9 @@
+verification:
+  id: VER-00006-1
+  req_id: REQ-00004-1
+  title: Corpus tests cover the relation operators
+  description: >
+    Corpus tests cover the relation operators
+  method: test
+  test_ids:
+    - tests/test_grammar.py::test_corpus_relations

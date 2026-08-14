@@ -1,0 +1,20 @@
+==================
+comments
+==================
+@startuml
+' a line comment
+class Foo
+/' a block
+   comment '/
+class Bar
+@enduml
+---
+
+(source_file
+  (diagram
+    (comment)
+    (class_declaration
+      (identifier))
+    (block_comment)
+    (class_declaration
+      (identifier))))
