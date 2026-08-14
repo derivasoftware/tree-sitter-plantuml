@@ -1,0 +1,14 @@
+requirement:
+  id: REQ-00002-1
+  title: The grammar shall parse class, abstract class, interface and enum declarations
+  description: >
+    The grammar shall parse class, abstract class, interface and enum declarations
+  rationale: >
+    Entity declarations are the backbone of the class diagram: quoted display names, aliases, generics and stereotypes must all yield structured nodes.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags:
+    - class-diagram
+    - declarations
