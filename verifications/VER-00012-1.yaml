@@ -1,0 +1,9 @@
+verification:
+  id: VER-00012-1
+  req_id: REQ-00013-1
+  title: Corpus tests cover member-group separators
+  description: >
+    Corpus tests cover member-group separators
+  method: test
+  test_ids:
+    - tests/test_grammar.py::test_corpus_separators
