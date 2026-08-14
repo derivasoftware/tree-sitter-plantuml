@@ -9,7 +9,7 @@ requirement:
     Grouping blocks nest arbitrary statements; they exercise the recursive
     statement structure. Revision 2 adds together blocks, the third grouping
     form of the class-diagram language.
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids:
     - SREQ-00002-1
