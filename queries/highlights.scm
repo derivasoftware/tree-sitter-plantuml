@@ -25,7 +25,13 @@
   "remove"
   "restore"
   "together"
+  "extends"
+  "implements"
 ] @keyword
+
+(entity_list (identifier) @type)
+(color) @string.special
+(member_separator) @punctuation.special
 
 (note_position) @keyword.modifier
 

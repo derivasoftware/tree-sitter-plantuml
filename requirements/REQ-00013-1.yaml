@@ -1,0 +1,14 @@
+requirement:
+  id: REQ-00013-1
+  title: The grammar shall parse member-group separator lines inside entity bodies
+  description: >
+    The grammar shall parse member-group separator lines inside entity bodies
+  rationale: >
+    Separator lines (--, .., ==, and titled __ text __) group members visually; the underscore form requires a title so dunder members keep lexing as identifiers — a deliberate lexical trade documented in the grammar.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags:
+    - class-diagram
+    - separators

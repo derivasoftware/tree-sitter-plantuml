@@ -1,0 +1,21 @@
+requirement:
+  id: REQ-00002-2
+  title: The grammar shall parse class, abstract class, interface and enum declarations
+  description: >
+    The grammar shall parse class, abstract class, interface and enum
+    declarations, including quoted display names, aliases, generics,
+    stereotypes, extends and implements clauses with entity lists, and a
+    trailing color.
+  rationale: >
+    Entity declarations are the backbone of the class diagram: quoted display
+    names, aliases, generics and stereotypes must all yield structured nodes.
+    Revision 2 adds the extends/implements clauses and the trailing color,
+    both common in wild corpora — a colored declaration previously produced
+    an ERROR node.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags:
+    - class-diagram
+    - declarations

@@ -63,12 +63,42 @@
           }
         ]
       },
+      "color": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "color",
+            "named": true
+          }
+        ]
+      },
+      "extends": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "entity_list",
+            "named": true
+          }
+        ]
+      },
       "generics": {
         "multiple": false,
         "required": false,
         "types": [
           {
             "type": "generics",
+            "named": true
+          }
+        ]
+      },
+      "implements": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "entity_list",
             "named": true
           }
         ]
@@ -227,6 +257,29 @@
         {
           "type": "member",
           "named": true
+        },
+        {
+          "type": "member_separator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "entity_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
         }
       ]
     }
@@ -259,12 +312,42 @@
           }
         ]
       },
+      "color": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "color",
+            "named": true
+          }
+        ]
+      },
+      "extends": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "entity_list",
+            "named": true
+          }
+        ]
+      },
       "generics": {
         "multiple": false,
         "required": false,
         "types": [
           {
             "type": "generics",
+            "named": true
+          }
+        ]
+      },
+      "implements": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "entity_list",
             "named": true
           }
         ]
@@ -323,12 +406,42 @@
           }
         ]
       },
+      "color": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "color",
+            "named": true
+          }
+        ]
+      },
+      "extends": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "entity_list",
+            "named": true
+          }
+        ]
+      },
       "generics": {
         "multiple": false,
         "required": false,
         "types": [
           {
             "type": "generics",
+            "named": true
+          }
+        ]
+      },
+      "implements": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "entity_list",
             "named": true
           }
         ]
@@ -403,6 +516,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "member_separator",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "method",
@@ -938,6 +1056,10 @@
     "named": false
   },
   {
+    "type": "color",
+    "named": true
+  },
+  {
     "type": "diagram_name",
     "named": true
   },
@@ -954,6 +1076,10 @@
     "named": false
   },
   {
+    "type": "extends",
+    "named": false
+  },
+  {
     "type": "generics",
     "named": true
   },
@@ -964,6 +1090,10 @@
   {
     "type": "identifier",
     "named": true
+  },
+  {
+    "type": "implements",
+    "named": false
   },
   {
     "type": "interface",

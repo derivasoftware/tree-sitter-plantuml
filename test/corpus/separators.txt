@@ -1,0 +1,40 @@
+==================
+member group separators
+==================
+@startuml
+class Foo {
+  + a : int
+  -- Getters --
+  + getA() : int
+  ..
+  == statics ==
+  __ internals __
+  - b : int
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (attribute
+            (identifier)
+            (type)))
+        (member_separator)
+        (member
+          (visibility)
+          (method
+            (identifier)
+            (type)))
+        (member_separator)
+        (member_separator)
+        (member_separator)
+        (member
+          (visibility)
+          (attribute
+            (identifier)
+            (type)))))))

@@ -59,3 +59,43 @@ class Box<T> <<container>>
       (identifier)
       (generics)
       (stereotype))))
+
+==================
+extends and implements clauses
+==================
+@startuml
+class Derived extends Base
+class Impl implements IFace, IOther
+interface Child extends Parent
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_list
+        (identifier)))
+    (class_declaration
+      (identifier)
+      (entity_list
+        (identifier)
+        (identifier)))
+    (interface_declaration
+      (identifier)
+      (entity_list
+        (identifier)))))
+
+==================
+colored declaration
+==================
+@startuml
+class Alert #FFAAAA
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (color))))
