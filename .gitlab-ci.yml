@@ -11,6 +11,14 @@ include:
       - /templates/base.yml
       - /templates/node.yml
 
+# The shared workflow only admits MR and main pipelines; release tags must
+# also pipeline (publish jobs below), so the workflow is overridden here.
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_TAG
+
 test:
   stage: test
   extends: [.node-base, .on-mr-and-main]
@@ -18,5 +26,31 @@ test:
     - npm ci
     - npm test
     - python3 -m venv .venv-ci
-    - ./.venv-ci/bin/pip install -q pytest tree-sitter
+    - ./.venv-ci/bin/pip install -q pytest tree-sitter setuptools
     - ./.venv-ci/bin/pytest tests/ -q
+
+# Release publishing: cut a vX.Y.Z tag from green main and both packages
+# land in this project's GitLab registries (PyPI + npm).
+publish-pypi:
+  stage: deploy
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - python3 -m venv .venv-pub
+    - ./.venv-pub/bin/pip install -q build twine
+    - ./.venv-pub/bin/python -m build --wheel
+    - >
+      TWINE_USERNAME=gitlab-ci-token TWINE_PASSWORD=$CI_JOB_TOKEN
+      ./.venv-pub/bin/twine upload
+      --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi
+      dist/*
+
+publish-npm:
+  stage: deploy
+  extends: [.node-base]
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - npm ci
+    - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" > .npmrc
+    - npm publish --registry "https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/"

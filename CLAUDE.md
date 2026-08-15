@@ -62,6 +62,6 @@ tree-sitter`.
 - `W-REQ-NO-DESIGN` on every REQ: the CL_-class design methodology
   (argos-design-plantuml) does not map to a grammar.js repository. A
   design-artefact convention for grammar repos is open future work.
-- `W-SREQ-NOT-DECOMPOSED` on SREQ-00007-1 (packaging), SREQ-00008-1
-  (sequence diagrams) and SREQ-00009-1 (activity diagrams): roadmap
-  SREQs, decomposed when their milestone starts.
+- `W-SREQ-NOT-DECOMPOSED` on SREQ-00008-1 (sequence diagrams) and
+  SREQ-00009-1 (activity diagrams): roadmap SREQs, decomposed when their
+  milestone starts.
