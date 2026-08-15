@@ -1097,8 +1097,17 @@
           "type": "FIELD",
           "name": "name",
           "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "cpp_method_name"
+              }
+            ]
           }
         },
         {
@@ -1151,6 +1160,46 @@
           ]
         }
       ]
+    },
+    "cpp_method_name": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "~\\w+"
+            },
+            {
+              "type": "PATTERN",
+              "value": "operator\\s*\\(\\s*\\)"
+            },
+            {
+              "type": "PATTERN",
+              "value": "operator\\s*\\[\\s*\\]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "operator\\s+new(\\s*\\[\\s*\\])?"
+            },
+            {
+              "type": "PATTERN",
+              "value": "operator\\s+delete(\\s*\\[\\s*\\])?"
+            },
+            {
+              "type": "PATTERN",
+              "value": "operator\\s+\\w+"
+            },
+            {
+              "type": "PATTERN",
+              "value": "operator\\s*[^()\\[\\]\\s\\w][^()\\[\\]\\s]*"
+            }
+          ]
+        }
+      }
     },
     "parameter_list": {
       "type": "SEQ",

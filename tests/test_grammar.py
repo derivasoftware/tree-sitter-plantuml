@@ -67,3 +67,7 @@ def test_corpus_frames():
 
 def test_corpus_dividers():
     check_corpus("dividers")
+
+
+def test_corpus_cpp_members():
+    check_corpus("cpp-members")

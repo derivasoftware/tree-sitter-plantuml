@@ -194,12 +194,24 @@ export default grammar({
     modifier: $ => choice('{static}', '{abstract}'),
 
     method: $ => seq(
-      field('name', $.identifier),
+      field('name', choice($.identifier, $.cpp_method_name)),
       '(',
       optional(field('parameters', $.parameter_list)),
       ')',
       optional(seq(':', field('type', $.type))),
     ),
+
+    // C++ member names beyond plain identifiers (BOK-mirrored from the
+    // argos-design-plantuml reader): destructors and operator overloads.
+    cpp_method_name: $ => token(prec(1, choice(
+      /~\w+/,
+      /operator\s*\(\s*\)/,
+      /operator\s*\[\s*\]/,
+      /operator\s+new(\s*\[\s*\])?/,
+      /operator\s+delete(\s*\[\s*\])?/,
+      /operator\s+\w+/,
+      /operator\s*[^()\[\]\s\w][^()\[\]\s]*/,
+    ))),
 
     parameter_list: $ => sep1($.parameter, ','),
 

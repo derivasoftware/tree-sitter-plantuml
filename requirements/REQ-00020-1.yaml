@@ -1,0 +1,14 @@
+requirement:
+  id: REQ-00020-1
+  title: The grammar shall parse C++ destructor and operator method names
+  description: >
+    The grammar shall parse C++ destructor and operator method names
+  rationale: >
+    The argos C++ federation designs 43 members with ~Destructor and operator overload names (call, subscript, new/delete, conversion, sigil forms); mirrored from the argos-design-plantuml reader's method-name vocabulary. Before this, 9 of 43 cpp corpus files parsed with ERROR nodes.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags:
+    - class-diagram
+    - cpp-members
