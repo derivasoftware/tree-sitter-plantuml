@@ -2,7 +2,8 @@
   "name": "tree-sitter-plantuml",
   "version": "0.1.0",
   "description": "PlantUML grammar for tree-sitter",
-  "repository": "https://gitlab.semantiqa.dev/deriva/tree-sitter-plantuml",
+  "type": "module",
+  "repository": "https://gitlab.semantiqa.dev/deriva/plantuml/tree-sitter-plantuml",
   "license": "MIT",
   "author": "dcoello-dev",
   "main": "bindings/node",
@@ -24,8 +25,21 @@
     "*.wasm"
   ],
   "scripts": {
+    "install": "node-gyp-build",
     "generate": "tree-sitter generate",
     "test": "tree-sitter generate && tree-sitter test"
+  },
+  "dependencies": {
+    "node-addon-api": "^8.3.1",
+    "node-gyp-build": "^4.8.4"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.25.0"
+  },
+  "peerDependenciesMeta": {
+    "tree-sitter": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "tree-sitter-cli": "^0.26.12"

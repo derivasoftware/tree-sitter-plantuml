@@ -1,0 +1,17 @@
+README.md
+pyproject.toml
+setup.py
+bindings/python/tree_sitter_plantuml/__init__.py
+bindings/python/tree_sitter_plantuml/__init__.pyi
+bindings/python/tree_sitter_plantuml/binding.c
+bindings/python/tree_sitter_plantuml/py.typed
+bindings/python/tree_sitter_plantuml.egg-info/PKG-INFO
+bindings/python/tree_sitter_plantuml.egg-info/SOURCES.txt
+bindings/python/tree_sitter_plantuml.egg-info/dependency_links.txt
+bindings/python/tree_sitter_plantuml.egg-info/not-zip-safe
+bindings/python/tree_sitter_plantuml.egg-info/requires.txt
+bindings/python/tree_sitter_plantuml.egg-info/top_level.txt
+src/parser.c
+tests/test_grammar.py
+tests/test_queries.py
+tests/test_round_trip.py

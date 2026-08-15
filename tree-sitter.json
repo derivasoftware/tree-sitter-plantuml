@@ -26,15 +26,17 @@
       }
     ],
     "links": {
-      "repository": "https://gitlab.semantiqa.dev/deriva/tree-sitter-plantuml"
+      "repository": "https://gitlab.semantiqa.dev/deriva/plantuml/tree-sitter-plantuml"
     }
   },
   "bindings": {
     "c": true,
     "go": false,
+    "java": false,
     "node": true,
     "python": true,
     "rust": true,
-    "swift": false
+    "swift": false,
+    "zig": false
   }
 }
