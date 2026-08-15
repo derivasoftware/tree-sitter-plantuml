@@ -16,7 +16,7 @@ requirement:
     note-over, unquoted-floating and member-qualified-target forms — the
     unquoted floating block alone accounted for 98 ERROR trees in the
     wild-corpus evaluation over the argos design diagrams.
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids:
     - SREQ-00002-1
