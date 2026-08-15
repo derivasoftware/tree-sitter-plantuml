@@ -6,3 +6,5 @@ target/
 *.wasm
 .venv/
 __pycache__/
+bindings/python/*.egg-info/
+dist/
