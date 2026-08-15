@@ -12,7 +12,7 @@ requirement:
     statement structure. Revision 3 adds the bodyless namespace declaration,
     which accounted for dozens of ERROR trees in the wild-corpus evaluation
     over the argos design diagrams.
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids:
     - SREQ-00002-1
