@@ -12,7 +12,7 @@ requirement:
     distinct nodes for consumers to query. Revision 2 adds free-text member
     lines, found in the wild corpus (prose contracts documented as members),
     which previously produced ERROR nodes.
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids:
     - SREQ-00002-1
