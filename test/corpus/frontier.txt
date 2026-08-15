@@ -71,3 +71,25 @@ class Foo
     (raw_line)
     (class_declaration
       (identifier))))
+
+==================
+sequence frames pass through
+==================
+@startuml
+loop for each item
+alt delta: breaking
+else minor
+end
+activate Worker
+deactivate Worker
+@enduml
+---
+
+(source_file
+  (diagram
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)))

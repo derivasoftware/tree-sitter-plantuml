@@ -54,12 +54,19 @@ module.exports = grammar({
     // ── Notes ──────────────────────────────────────────────────────────
 
     note_statement: $ => choice(
-      // note <position> of <entity> — attached to an entity
+      // note <position> of <entity> — attached to an entity or member
       seq(
         'note',
         field('position', $.note_position),
         'of',
-        field('target', $._entity_name),
+        field('target', choice($._entity_name, $.member_ref)),
+        $._note_body,
+      ),
+      // note over <entities> — the sequence-diagram attachment form
+      seq(
+        'note',
+        field('position', alias('over', $.note_position)),
+        field('target', $.entity_list),
         $._note_body,
       ),
       // note [<position>] on link — attached to the preceding relation
@@ -75,6 +82,8 @@ module.exports = grammar({
         field('alias', $.identifier),
         $._newline,
       ),
+      // floating note with block body: note as N … end note
+      seq('note', 'as', field('alias', $.identifier), $._note_body),
     ),
 
     _note_body: $ => choice(
@@ -133,7 +142,17 @@ module.exports = grammar({
 
     color: $ => token(/#[\w;:.\/\\|-]+/),
 
-    _entity_name: $ => choice($.identifier, $.string),
+    _entity_name: $ => choice($.identifier, $.string, $.qualified_name),
+
+    // "namespace.path".Member — a quoted namespace qualifying a member.
+    qualified_name: $ => seq($.string, token.immediate('.'), $.identifier),
+
+    // Entity::member (or Entity::"member") — a member-qualified target.
+    member_ref: $ => seq(
+      $._entity_name,
+      token.immediate('::'),
+      choice($.identifier, $.string),
+    ),
 
     generics: $ => token(seq('<', /[^<>\n]+/, '>')),
 
@@ -185,7 +204,13 @@ module.exports = grammar({
 
     attribute: $ => seq(
       field('name', $.identifier),
-      optional(seq(':', field('type', $.type))),
+      optional(choice(
+        seq(':', field('type', $.type)),
+        // free-text member lines ("Callable Protocol — called as …"):
+        // anything after the leading identifier that is not a typed
+        // attribute or a method call stays as one opaque raw_text token.
+        field('text', alias(token(prec(-1, /[^ \t\n:({][^\n]*/)), $.raw_text)),
+      )),
     ),
 
     type: $ => $._to_eol,
@@ -228,10 +253,11 @@ module.exports = grammar({
       'namespace',
       field('name', $._entity_name),
       optional(field('stereotype', $.stereotype)),
-      '{',
-      repeat($._statement),
-      '}',
-      $._newline,
+      choice(
+        seq('{', repeat($._statement), '}', $._newline),
+        // bodyless declaration, common in HLD overviews
+        $._newline,
+      ),
     ),
 
     together_block: $ => seq(
@@ -287,6 +313,11 @@ module.exports = grammar({
         'cloud', 'node', 'rectangle', 'artifact', 'agent',
         'boundary', 'control', 'queue', 'card', 'file', 'stack',
         'circle',
+        // sequence-diagram frames and lifecycle verbs: raw until
+        // SREQ-00008-1 lands, so sequence diagrams parse without ERROR
+        'loop', 'alt', 'else', 'opt', 'par', 'break', 'critical',
+        'group', 'end', 'activate', 'deactivate', 'return', 'ref',
+        'create', 'destroy', 'autoactivate', 'box',
       ),
       optional(/[ \t][^\n]*/),
     ))),
@@ -340,7 +371,10 @@ module.exports = grammar({
 
     // ── Lexical ────────────────────────────────────────────────────────
 
-    identifier: $ => /[A-Za-z_][\w.]*/,
+    // Dotted, optionally hyphenated segments (clients.argos-web.src).
+    // A hyphen must be followed by a word character so unspaced relation
+    // operators (A--|>B) never lex into the left identifier.
+    identifier: $ => /[A-Za-z_]\w*([.-]\w+)*/,
 
     string: $ => token(seq('"', /[^"\n]*/, '"')),
 

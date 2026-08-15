@@ -99,3 +99,70 @@ end note
     (note_statement
       (note_position)
       (raw_line))))
+
+==================
+floating block note without quotes
+==================
+@startuml
+note as PluginRegistry
+  body text here
+end note
+@enduml
+---
+
+(source_file
+  (diagram
+    (note_statement
+      (identifier)
+      (raw_line))))
+
+==================
+note over entities
+==================
+@startuml
+note over repo : log warning, skip
+note over a, b
+  spanning body
+end note
+@enduml
+---
+
+(source_file
+  (diagram
+    (note_statement
+      (note_position)
+      (entity_list
+        (identifier))
+      (label))
+    (note_statement
+      (note_position)
+      (entity_list
+        (identifier)
+        (identifier))
+      (raw_line))))
+
+==================
+member-qualified note target
+==================
+@startuml
+note right of Opener::"call"
+  contract text
+end note
+note left of Box::width : pixels
+@enduml
+---
+
+(source_file
+  (diagram
+    (note_statement
+      (note_position)
+      (member_ref
+        (identifier)
+        (string))
+      (raw_line))
+    (note_statement
+      (note_position)
+      (member_ref
+        (identifier)
+        (identifier))
+      (label))))

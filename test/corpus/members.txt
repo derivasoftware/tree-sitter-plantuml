@@ -39,3 +39,28 @@ class Account {
           (modifier)
           (method
             (identifier)))))))
+
+==================
+free-text member lines
+==================
+@startuml
+class Contract {
+  Callable Protocol — instances are called as
+  count : int
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (attribute
+            (identifier)
+            (raw_text)))
+        (member
+          (attribute
+            (identifier)
+            (type)))))))

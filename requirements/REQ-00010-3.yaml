@@ -1,0 +1,25 @@
+requirement:
+  id: REQ-00010-3
+  title: The grammar shall parse note statements in positional, targeted, on-link, block and floating forms
+  description: >
+    The grammar shall parse note statements in positional, targeted, on-link,
+    block and floating forms: a position with optional target entity, a note
+    attached to the preceding relation (note [position] on link), the
+    sequence-style note over one or more entities, block bodies closed by
+    end note, and floating notes declared with an alias — quoted inline
+    (note "text" as N) or unquoted with a block body (note as N … end note).
+    Targets may be member-qualified (Entity::member or Entity::"member").
+  rationale: >
+    Notes are first-class class-diagram content: position, target entity,
+    alias and text become queryable fields, while block bodies stay opaque
+    raw lines a formatter passes through verbatim. Revision 3 adds the
+    note-over, unquoted-floating and member-qualified-target forms — the
+    unquoted floating block alone accounted for 98 ERROR trees in the
+    wild-corpus evaluation over the argos design diagrams.
+  status: DRAFT
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags:
+    - class-diagram
+    - notes

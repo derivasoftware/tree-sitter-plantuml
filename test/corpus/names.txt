@@ -1,0 +1,40 @@
+==================
+hyphenated dotted identifiers
+==================
+@startuml
+namespace clients.argos-web.src.App {
+  class Panel
+}
+front-end --> back-end : calls
+@enduml
+---
+
+(source_file
+  (diagram
+    (namespace_block
+      (identifier)
+      (class_declaration
+        (identifier)))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (label))))
+
+==================
+quoted-qualified reference
+==================
+@startuml
+LspServer ..> "argos.surfaces.lsp".WorkspaceManager : delegates
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (identifier)
+      (relation_operator)
+      (qualified_name
+        (string)
+        (identifier))
+      (label))))
