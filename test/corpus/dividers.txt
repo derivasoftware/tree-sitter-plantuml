@@ -1,0 +1,27 @@
+==================
+section dividers
+==================
+@startuml
+== Setup ==
+user -> cli : run
+== Execution ==
+cli -> repo : load
+==
+@enduml
+---
+
+(source_file
+  (diagram
+    (divider)
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (label))
+    (divider)
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (label))
+    (divider)))

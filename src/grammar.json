@@ -97,6 +97,18 @@
         },
         {
           "type": "SYMBOL",
+          "name": "participant_declaration"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "frame_block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "divider"
+        },
+        {
+          "type": "SYMBOL",
           "name": "note_statement"
         },
         {
@@ -1502,6 +1514,229 @@
         }
       ]
     },
+    "participant_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "kind",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "participant"
+              },
+              {
+                "type": "STRING",
+                "value": "actor"
+              },
+              {
+                "type": "STRING",
+                "value": "boundary"
+              },
+              {
+                "type": "STRING",
+                "value": "control"
+              },
+              {
+                "type": "STRING",
+                "value": "entity"
+              },
+              {
+                "type": "STRING",
+                "value": "database"
+              },
+              {
+                "type": "STRING",
+                "value": "collections"
+              },
+              {
+                "type": "STRING",
+                "value": "queue"
+              }
+            ]
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_entity_name"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "as"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "alias",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_entity_name"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        }
+      ]
+    },
+    "frame_block": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "kind",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "alt"
+              },
+              {
+                "type": "STRING",
+                "value": "opt"
+              },
+              {
+                "type": "STRING",
+                "value": "loop"
+              },
+              {
+                "type": "STRING",
+                "value": "par"
+              },
+              {
+                "type": "STRING",
+                "value": "break"
+              },
+              {
+                "type": "STRING",
+                "value": "critical"
+              },
+              {
+                "type": "STRING",
+                "value": "group"
+              }
+            ]
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "label",
+              "content": {
+                "type": "SYMBOL",
+                "name": "label"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_statement"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "else_clause"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "end"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        }
+      ]
+    },
+    "else_clause": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "else"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "label",
+              "content": {
+                "type": "SYMBOL",
+                "name": "label"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_statement"
+          }
+        }
+      ]
+    },
+    "divider": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "PATTERN",
+              "value": "==[^\\n]*"
+            }
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        }
+      ]
+    },
     "comment": {
       "type": "SEQ",
       "members": [
@@ -1642,14 +1877,6 @@
                 },
                 {
                   "type": "STRING",
-                  "value": "actor"
-                },
-                {
-                  "type": "STRING",
-                  "value": "participant"
-                },
-                {
-                  "type": "STRING",
                   "value": "usecase"
                 },
                 {
@@ -1663,14 +1890,6 @@
                 {
                   "type": "STRING",
                   "value": "object"
-                },
-                {
-                  "type": "STRING",
-                  "value": "database"
-                },
-                {
-                  "type": "STRING",
-                  "value": "collections"
                 },
                 {
                   "type": "STRING",
@@ -1702,18 +1921,6 @@
                 },
                 {
                   "type": "STRING",
-                  "value": "boundary"
-                },
-                {
-                  "type": "STRING",
-                  "value": "control"
-                },
-                {
-                  "type": "STRING",
-                  "value": "queue"
-                },
-                {
-                  "type": "STRING",
                   "value": "card"
                 },
                 {
@@ -1727,42 +1934,6 @@
                 {
                   "type": "STRING",
                   "value": "circle"
-                },
-                {
-                  "type": "STRING",
-                  "value": "loop"
-                },
-                {
-                  "type": "STRING",
-                  "value": "alt"
-                },
-                {
-                  "type": "STRING",
-                  "value": "else"
-                },
-                {
-                  "type": "STRING",
-                  "value": "opt"
-                },
-                {
-                  "type": "STRING",
-                  "value": "par"
-                },
-                {
-                  "type": "STRING",
-                  "value": "break"
-                },
-                {
-                  "type": "STRING",
-                  "value": "critical"
-                },
-                {
-                  "type": "STRING",
-                  "value": "group"
-                },
-                {
-                  "type": "STRING",
-                  "value": "end"
                 },
                 {
                   "type": "STRING",

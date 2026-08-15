@@ -184,7 +184,15 @@
           "named": true
         },
         {
+          "type": "divider",
+          "named": true
+        },
+        {
           "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "frame_block",
           "named": true
         },
         {
@@ -201,6 +209,10 @@
         },
         {
           "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
           "named": true
         },
         {
@@ -258,6 +270,93 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "divider",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "else_clause",
+    "named": true,
+    "fields": {
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "label",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "class_declaration",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "display_directive",
+          "named": true
+        },
+        {
+          "type": "divider",
+          "named": true
+        },
+        {
+          "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "frame_block",
+          "named": true
+        },
+        {
+          "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
+          "named": true
+        },
+        {
+          "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
+          "named": true
+        },
+        {
+          "type": "raw_block",
+          "named": true
+        },
+        {
+          "type": "raw_line",
+          "named": true
+        },
+        {
+          "type": "relation",
+          "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -406,6 +505,126 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "frame_block",
+    "named": true,
+    "fields": {
+      "kind": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "alt",
+            "named": false
+          },
+          {
+            "type": "break",
+            "named": false
+          },
+          {
+            "type": "critical",
+            "named": false
+          },
+          {
+            "type": "group",
+            "named": false
+          },
+          {
+            "type": "loop",
+            "named": false
+          },
+          {
+            "type": "opt",
+            "named": false
+          },
+          {
+            "type": "par",
+            "named": false
+          }
+        ]
+      },
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "label",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "class_declaration",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "display_directive",
+          "named": true
+        },
+        {
+          "type": "divider",
+          "named": true
+        },
+        {
+          "type": "else_clause",
+          "named": true
+        },
+        {
+          "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "frame_block",
+          "named": true
+        },
+        {
+          "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
+          "named": true
+        },
+        {
+          "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
+          "named": true
+        },
+        {
+          "type": "raw_block",
+          "named": true
+        },
+        {
+          "type": "raw_line",
+          "named": true
+        },
+        {
+          "type": "relation",
+          "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -674,7 +893,15 @@
           "named": true
         },
         {
+          "type": "divider",
+          "named": true
+        },
+        {
           "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "frame_block",
           "named": true
         },
         {
@@ -691,6 +918,10 @@
         },
         {
           "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
           "named": true
         },
         {
@@ -843,7 +1074,15 @@
           "named": true
         },
         {
+          "type": "divider",
+          "named": true
+        },
+        {
           "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "frame_block",
           "named": true
         },
         {
@@ -860,6 +1099,10 @@
         },
         {
           "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
           "named": true
         },
         {
@@ -894,6 +1137,86 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "participant_declaration",
+    "named": true,
+    "fields": {
+      "alias": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "kind": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "actor",
+            "named": false
+          },
+          {
+            "type": "boundary",
+            "named": false
+          },
+          {
+            "type": "collections",
+            "named": false
+          },
+          {
+            "type": "control",
+            "named": false
+          },
+          {
+            "type": "database",
+            "named": false
+          },
+          {
+            "type": "entity",
+            "named": false
+          },
+          {
+            "type": "participant",
+            "named": false
+          },
+          {
+            "type": "queue",
+            "named": false
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1054,7 +1377,15 @@
           "named": true
         },
         {
+          "type": "divider",
+          "named": true
+        },
+        {
           "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "frame_block",
           "named": true
         },
         {
@@ -1071,6 +1402,10 @@
         },
         {
           "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
           "named": true
         },
         {
@@ -1151,6 +1486,14 @@
     "named": true
   },
   {
+    "type": "actor",
+    "named": false
+  },
+  {
+    "type": "alt",
+    "named": false
+  },
+  {
     "type": "as",
     "named": false
   },
@@ -1164,6 +1507,14 @@
     "named": false
   },
   {
+    "type": "boundary",
+    "named": false
+  },
+  {
+    "type": "break",
+    "named": false
+  },
+  {
     "type": "cardinality",
     "named": true
   },
@@ -1172,8 +1523,24 @@
     "named": false
   },
   {
+    "type": "collections",
+    "named": false
+  },
+  {
     "type": "color",
     "named": true
+  },
+  {
+    "type": "control",
+    "named": false
+  },
+  {
+    "type": "critical",
+    "named": false
+  },
+  {
+    "type": "database",
+    "named": false
   },
   {
     "type": "diagram_name",
@@ -1184,7 +1551,19 @@
     "named": true
   },
   {
+    "type": "else",
+    "named": false
+  },
+  {
+    "type": "end",
+    "named": false
+  },
+  {
     "type": "end note",
+    "named": false
+  },
+  {
+    "type": "entity",
     "named": false
   },
   {
@@ -1198,6 +1577,10 @@
   {
     "type": "generics",
     "named": true
+  },
+  {
+    "type": "group",
+    "named": false
   },
   {
     "type": "hide",
@@ -1224,6 +1607,10 @@
     "named": false
   },
   {
+    "type": "loop",
+    "named": false
+  },
+  {
     "type": "namespace",
     "named": false
   },
@@ -1240,12 +1627,28 @@
     "named": false
   },
   {
+    "type": "opt",
+    "named": false
+  },
+  {
     "type": "package",
+    "named": false
+  },
+  {
+    "type": "par",
     "named": false
   },
   {
     "type": "parameter",
     "named": true
+  },
+  {
+    "type": "participant",
+    "named": false
+  },
+  {
+    "type": "queue",
+    "named": false
   },
   {
     "type": "raw_text",

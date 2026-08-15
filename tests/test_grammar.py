@@ -55,3 +55,15 @@ def test_corpus_separators():
 
 def test_corpus_names():
     check_corpus("names")
+
+
+def test_corpus_participants():
+    check_corpus("participants")
+
+
+def test_corpus_frames():
+    check_corpus("frames")
+
+
+def test_corpus_dividers():
+    check_corpus("dividers")

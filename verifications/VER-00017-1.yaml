@@ -1,0 +1,9 @@
+verification:
+  id: VER-00017-1
+  req_id: REQ-00018-1
+  title: Corpus tests cover frames and else clauses
+  description: >
+    Corpus tests cover frames and else clauses
+  method: test
+  test_ids:
+    - tests/test_grammar.py::test_corpus_frames
