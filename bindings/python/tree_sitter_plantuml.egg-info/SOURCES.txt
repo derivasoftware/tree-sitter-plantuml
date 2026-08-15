@@ -13,5 +13,6 @@ bindings/python/tree_sitter_plantuml.egg-info/requires.txt
 bindings/python/tree_sitter_plantuml.egg-info/top_level.txt
 src/parser.c
 tests/test_grammar.py
+tests/test_packaging.py
 tests/test_queries.py
 tests/test_round_trip.py

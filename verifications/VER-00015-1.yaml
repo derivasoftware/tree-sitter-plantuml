@@ -1,0 +1,7 @@
+verification:
+  id: VER-00015-1
+  req_id: REQ-00016-1
+  title: Release review of the v0.1.0 tag pipeline publishing both packages
+  description: >
+    Evidence: the tag pipeline for v0.1.0 with publish-pypi and publish-npm green, and the packages visible in the project registries. Re-verify on each release tag.
+  method: review

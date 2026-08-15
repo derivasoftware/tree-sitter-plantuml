@@ -1,0 +1,14 @@
+requirement:
+  id: REQ-00016-1
+  title: The pipeline shall publish the node and python packages on release tags
+  description: >
+    The pipeline shall publish the node and python packages on release tags
+  rationale: >
+    Tag vX.Y.Z from green main → publish-pypi (build + twine, job token) and publish-npm (project npm registry) upload to this project's GitLab registries; the shared workflow is overridden to admit tag pipelines.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00007-1
+  tags:
+    - ci
+    - packaging
