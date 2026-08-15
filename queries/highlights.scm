@@ -32,6 +32,8 @@
 (entity_list (identifier) @type)
 (color) @string.special
 (member_separator) @punctuation.special
+(qualified_name (identifier) @type)
+(member_ref (identifier) @type)
 
 (note_position) @keyword.modifier
 
