@@ -1,6 +1,6 @@
 verification:
   id: VER-00005-1
-  req_id: REQ-00003-1
+  req_id: REQ-00003-2
   title: Corpus tests cover members with visibility and modifiers
   description: >
     Corpus tests cover members with visibility and modifiers

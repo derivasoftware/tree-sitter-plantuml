@@ -40,3 +40,21 @@ together {
         (identifier))
       (class_declaration
         (identifier)))))
+
+==================
+bodyless namespace declaration
+==================
+@startuml
+namespace domain <<layer>>
+namespace adapters <<package>>
+@enduml
+---
+
+(source_file
+  (diagram
+    (namespace_block
+      (identifier)
+      (stereotype))
+    (namespace_block
+      (identifier)
+      (stereotype))))

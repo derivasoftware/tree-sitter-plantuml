@@ -13,6 +13,16 @@
           }
         ]
       },
+      "text": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "raw_text",
+            "named": true
+          }
+        ]
+      },
       "type": {
         "multiple": false,
         "required": false,
@@ -45,6 +55,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
             "named": true
           },
           {
@@ -109,6 +123,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
             "named": true
           },
           {
@@ -278,6 +296,10 @@
           "named": true
         },
         {
+          "type": "qualified_name",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         }
@@ -294,6 +316,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
             "named": true
           },
           {
@@ -358,6 +384,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
             "named": true
           },
           {
@@ -391,6 +421,10 @@
             "named": true
           },
           {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           }
@@ -452,6 +486,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
             "named": true
           },
           {
@@ -518,6 +556,29 @@
     }
   },
   {
+    "type": "member_ref",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "qualified_name",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "member_separator",
     "named": true,
     "fields": {}
@@ -573,6 +634,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
             "named": true
           },
           {
@@ -681,7 +746,19 @@
         "required": false,
         "types": [
           {
+            "type": "entity_list",
+            "named": true
+          },
+          {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "member_ref",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
             "named": true
           },
           {
@@ -726,6 +803,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
             "named": true
           },
           {
@@ -816,6 +897,25 @@
     }
   },
   {
+    "type": "qualified_name",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "raw_block",
     "named": true,
     "fields": {},
@@ -858,6 +958,10 @@
             "named": true
           },
           {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           }
@@ -889,6 +993,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
             "named": true
           },
           {
@@ -1019,7 +1127,15 @@
     "named": false
   },
   {
+    "type": ".",
+    "named": false
+  },
+  {
     "type": ":",
+    "named": false
+  },
+  {
+    "type": "::",
     "named": false
   },
   {
@@ -1129,6 +1245,10 @@
   },
   {
     "type": "parameter",
+    "named": true
+  },
+  {
+    "type": "raw_text",
     "named": true
   },
   {

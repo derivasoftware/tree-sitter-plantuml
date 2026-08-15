@@ -51,3 +51,7 @@ def test_corpus_display():
 
 def test_corpus_separators():
     check_corpus("separators")
+
+
+def test_corpus_names():
+    check_corpus("names")

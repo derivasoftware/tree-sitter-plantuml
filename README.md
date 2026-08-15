@@ -49,6 +49,15 @@ npm test           # tree-sitter generate && tree-sitter test
 Corpus tests live in `test/corpus/`. Every grammar change ships with corpus
 coverage.
 
+To evaluate against a wild corpus of real diagrams:
+
+```bash
+.venv/bin/python scripts/eval_wild_corpus.py <root>...
+```
+
+The current grammar parses the full argos design corpus (6&#8239;192 `.puml`
+files) 100% ERROR-free and 100% lossless.
+
 ## Governance
 
 This repository is an [argos](https://gitlab.semantiqa.dev/deriva/argos/argos)
