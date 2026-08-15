@@ -1,0 +1,14 @@
+requirement:
+  id: REQ-00014-1
+  title: The grammar shall parse hyphenated, quoted-qualified and member-qualified names
+  description: >
+    The grammar shall parse hyphenated, quoted-qualified and member-qualified names
+  rationale: >
+    Wild corpora qualify names three ways the plain identifier missed: hyphenated dotted segments (clients.argos-web.src), a quoted namespace qualifying a member ("ns".Class), and member-qualified targets (Entity::member). The hyphen rule requires a following word character so unspaced relation operators never lex into the left identifier.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags:
+    - class-diagram
+    - names
