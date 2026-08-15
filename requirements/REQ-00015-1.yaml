@@ -1,0 +1,13 @@
+requirement:
+  id: REQ-00015-1
+  title: The project shall build a python wheel carrying the compiled binding and queries
+  description: >
+    The project shall build a python wheel carrying the compiled binding and queries
+  rationale: >
+    The wheel is the consumable unit for python downstreams (plantuml-fmt, the argos reader, governance venvs): compiled _binding plus the query files, verified buildable in the DoD.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00007-1
+  tags:
+    - packaging
