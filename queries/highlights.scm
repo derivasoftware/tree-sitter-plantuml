@@ -73,6 +73,7 @@
 (namespace_block name: (identifier) @module)
 
 (method name: (identifier) @function.method)
+(method name: (cpp_method_name) @function.method)
 (attribute name: (identifier) @variable.member)
 (type) @type
 (generics) @type

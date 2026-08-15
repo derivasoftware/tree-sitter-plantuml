@@ -1,0 +1,74 @@
+==================
+cpp destructor and operator members
+==================
+@startuml
+class Result {
+  + ~Result()
+  + operator=(other: Result) : Result&
+  + operator==(other: Result) : bool
+  + operator()(lhs: T, rhs: T) : bool
+  + operator[](idx: int) : T&
+  + operator new(size: std::size_t) : void*
+  - operator delete[](ptr: void*) : void
+  + operator bool() : bool
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (cpp_method_name)))
+        (member
+          (visibility)
+          (method
+            (cpp_method_name)
+            (parameter_list
+              (parameter))
+            (type)))
+        (member
+          (visibility)
+          (method
+            (cpp_method_name)
+            (parameter_list
+              (parameter))
+            (type)))
+        (member
+          (visibility)
+          (method
+            (cpp_method_name)
+            (parameter_list
+              (parameter)
+              (parameter))
+            (type)))
+        (member
+          (visibility)
+          (method
+            (cpp_method_name)
+            (parameter_list
+              (parameter))
+            (type)))
+        (member
+          (visibility)
+          (method
+            (cpp_method_name)
+            (parameter_list
+              (parameter))
+            (type)))
+        (member
+          (visibility)
+          (method
+            (cpp_method_name)
+            (parameter_list
+              (parameter))
+            (type)))
+        (member
+          (visibility)
+          (method
+            (cpp_method_name)
+            (type)))))))

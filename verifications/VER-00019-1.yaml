@@ -1,0 +1,9 @@
+verification:
+  id: VER-00019-1
+  req_id: REQ-00020-1
+  title: Corpus tests cover the C++ member name forms
+  description: >
+    Corpus tests cover the C++ member name forms
+  method: test
+  test_ids:
+    - tests/test_grammar.py::test_corpus_cpp_members
