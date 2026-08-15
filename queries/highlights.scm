@@ -27,7 +27,28 @@
   "together"
   "extends"
   "implements"
+  "participant"
+  "actor"
+  "boundary"
+  "control"
+  "entity"
+  "database"
+  "collections"
+  "queue"
+  "alt"
+  "opt"
+  "loop"
+  "par"
+  "break"
+  "critical"
+  "group"
+  "else"
+  "end"
 ] @keyword
+
+(divider) @punctuation.special
+(participant_declaration name: (identifier) @type)
+(participant_declaration alias: (identifier) @type)
 
 (entity_list (identifier) @type)
 (color) @string.special

@@ -43,6 +43,9 @@ export default grammar({
       $.package_block,
       $.namespace_block,
       $.together_block,
+      $.participant_declaration,
+      $.frame_block,
+      $.divider,
       $.note_statement,
       $.display_directive,
       $.comment,
@@ -268,6 +271,43 @@ export default grammar({
       $._newline,
     ),
 
+    // ── Sequence diagrams ──────────────────────────────────────────────
+
+    participant_declaration: $ => seq(
+      field('kind', choice(
+        'participant', 'actor', 'boundary', 'control', 'entity',
+        'database', 'collections', 'queue',
+      )),
+      field('name', $._entity_name),
+      optional(seq('as', field('alias', $._entity_name))),
+      $._newline,
+    ),
+
+    // alt/else…end, loop…end, opt/par/break/critical/group frames.
+    // Statements before the first else belong to the frame itself.
+    frame_block: $ => seq(
+      field('kind', choice(
+        'alt', 'opt', 'loop', 'par', 'break', 'critical', 'group',
+      )),
+      optional(field('label', $.label)),
+      $._newline,
+      repeat($._statement),
+      repeat($.else_clause),
+      'end',
+      $._newline,
+    ),
+
+    else_clause: $ => seq(
+      'else',
+      optional(field('label', $.label)),
+      $._newline,
+      repeat($._statement),
+    ),
+
+    // == section divider == (statement level; body separators are a
+    // different construct inside entity bodies)
+    divider: $ => seq(token(prec(1, /==[^\n]*/)), $._newline),
+
     // ── Comments ───────────────────────────────────────────────────────
 
     // PlantUML line comments are whole lines starting with a quote, so
@@ -308,15 +348,14 @@ export default grammar({
         'title', 'skinparam', 'scale', 'caption',
         'autonumber', 'set',
         'left', 'allowmixing', 'allow_mixing',
-        'actor', 'participant', 'usecase', 'component', 'state',
-        'object', 'database', 'collections', 'folder', 'frame',
+        'usecase', 'component', 'state',
+        'object', 'folder', 'frame',
         'cloud', 'node', 'rectangle', 'artifact', 'agent',
-        'boundary', 'control', 'queue', 'card', 'file', 'stack',
+        'card', 'file', 'stack',
         'circle',
-        // sequence-diagram frames and lifecycle verbs: raw until
-        // SREQ-00008-1 lands, so sequence diagrams parse without ERROR
-        'loop', 'alt', 'else', 'opt', 'par', 'break', 'critical',
-        'group', 'end', 'activate', 'deactivate', 'return', 'ref',
+        // sequence lifecycle verbs: raw until evidence demands
+        // structure (zero occurrences in the wild corpus so far)
+        'activate', 'deactivate', 'return', 'ref',
         'create', 'destroy', 'autoactivate', 'box',
       ),
       optional(/[ \t][^\n]*/),

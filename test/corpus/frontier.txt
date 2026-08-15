@@ -76,19 +76,15 @@ class Foo
 sequence frames pass through
 ==================
 @startuml
-loop for each item
-alt delta: breaking
-else minor
-end
 activate Worker
+autonumber 10 10
+ref over Worker : external flow
 deactivate Worker
 @enduml
 ---
 
 (source_file
   (diagram
-    (raw_line)
-    (raw_line)
     (raw_line)
     (raw_line)
     (raw_line)

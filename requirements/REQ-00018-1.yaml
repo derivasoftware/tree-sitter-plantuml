@@ -1,0 +1,14 @@
+requirement:
+  id: REQ-00018-1
+  title: The grammar shall parse sequence frames with else clauses
+  description: >
+    The grammar shall parse sequence frames with else clauses
+  rationale: >
+    alt/opt/loop/par/break/critical/group blocks with optional labels, interleaved else clauses and the end terminator; statements nest recursively. Frames were the largest ERROR source in sequence diagrams before this milestone.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00008-1
+  tags:
+    - frames
+    - sequence-diagram

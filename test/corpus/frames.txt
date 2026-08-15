@@ -1,0 +1,96 @@
+==================
+alt with else clauses
+==================
+@startuml
+alt delta: breaking
+  cli -> repo : reject
+else minor
+  cli -> repo : accept
+else
+  cli --> user : ask
+end
+@enduml
+---
+
+(source_file
+  (diagram
+    (frame_block
+      (label)
+      (relation
+        (identifier)
+        (relation_operator)
+        (identifier)
+        (label))
+      (else_clause
+        (label)
+        (relation
+          (identifier)
+          (relation_operator)
+          (identifier)
+          (label)))
+      (else_clause
+        (relation
+          (identifier)
+          (relation_operator)
+          (identifier)
+          (label))))))
+
+==================
+nested loop inside alt
+==================
+@startuml
+alt cached
+  loop for each entry
+    cache -> disk : read
+  end
+else
+  repo -> git : clone
+end
+@enduml
+---
+
+(source_file
+  (diagram
+    (frame_block
+      (label)
+      (frame_block
+        (label)
+        (relation
+          (identifier)
+          (relation_operator)
+          (identifier)
+          (label)))
+      (else_clause
+        (relation
+          (identifier)
+          (relation_operator)
+          (identifier)
+          (label))))))
+
+==================
+bare group frames
+==================
+@startuml
+opt
+  a -> b
+end
+group validation
+  b -> c : check
+end
+@enduml
+---
+
+(source_file
+  (diagram
+    (frame_block
+      (relation
+        (identifier)
+        (relation_operator)
+        (identifier)))
+    (frame_block
+      (label)
+      (relation
+        (identifier)
+        (relation_operator)
+        (identifier)
+        (label)))))

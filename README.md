@@ -24,9 +24,17 @@ incrementally, one diagram type at a time, behind an explicit frontier policy:
   on-link, block and floating forms), and `hide`/`show`/`remove`/`restore`
   display directives. `legend`/`header`/`footer` and braced `skinparam`
   blocks pass through the raw frontier safely.
-- **next** — relation styles (`-[#red,dashed]->`) and the frontier
-  hardening for identifier-headed unknowns (REQ-00012-1), then sequence
-  diagrams, then activity diagrams (new syntax only).
+- **v0.2 (current)** — the sequence-diagram core, evidence-scoped from a
+  real 84-diagram corpus: participant declarations (all eight kinds,
+  quoted names, aliases), `alt`/`opt`/`loop`/`par`/`break`/`critical`/
+  `group` frames with `else` clauses, and `==` section dividers. Arrow
+  lines (`A -> B : msg`) parse as the generic `relation` node — whether
+  that is an association or a message is diagram context the consumer
+  holds. Lifecycle verbs (`activate`, `return`, `ref`…) stay on the raw
+  frontier until evidence demands structure.
+- **next** — activity diagrams (new syntax only), then the frontier
+  hardening for identifier-headed unknowns (REQ-00012-1) and relation
+  styles (`-[#red,dashed]->`).
 
 **Frontier policy**: any statement outside the supported subset parses as a
 `raw_line` (or `raw_block` for multi-line notes) instead of an `ERROR` node,

@@ -1,0 +1,14 @@
+requirement:
+  id: REQ-00017-1
+  title: The grammar shall parse participant declarations with kinds, quoted names and aliases
+  description: >
+    The grammar shall parse participant declarations with kinds, quoted names and aliases
+  rationale: >
+    The eight participant kinds (participant, actor, boundary, control, entity, database, collections, queue) with quoted display names and as-aliases: 588 declarations in the evidence corpus; also used by HLD actor lines.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00008-1
+  tags:
+    - participants
+    - sequence-diagram

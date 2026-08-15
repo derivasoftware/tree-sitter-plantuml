@@ -1,0 +1,27 @@
+==================
+participant declarations
+==================
+@startuml
+participant "AuditEvaluator" as eval
+actor Developer
+actor "Auditor\n(human)" as user
+boundary api
+database "Store" as db
+@enduml
+---
+
+(source_file
+  (diagram
+    (participant_declaration
+      (string)
+      (identifier))
+    (participant_declaration
+      (identifier))
+    (participant_declaration
+      (string)
+      (identifier))
+    (participant_declaration
+      (identifier))
+    (participant_declaration
+      (string)
+      (identifier))))
