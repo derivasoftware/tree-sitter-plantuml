@@ -1,0 +1,14 @@
+requirement:
+  id: REQ-00019-1
+  title: The grammar shall parse section dividers
+  description: >
+    The grammar shall parse section dividers
+  rationale: >
+    == title == lines at statement level (238 in the evidence corpus); distinct from member-group separators, which live inside entity bodies.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00008-1
+  tags:
+    - dividers
+    - sequence-diagram
