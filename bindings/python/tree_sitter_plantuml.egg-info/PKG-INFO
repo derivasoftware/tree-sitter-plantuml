@@ -1,0 +1,83 @@
+Metadata-Version: 2.4
+Name: tree-sitter-plantuml
+Version: 0.1.0
+Summary: PlantUML grammar for tree-sitter
+Author: dcoello-dev
+License: MIT
+Project-URL: Homepage, https://gitlab.semantiqa.dev/deriva/plantuml/tree-sitter-plantuml
+Keywords: incremental,parsing,tree-sitter,plantuml
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Compilers
+Classifier: Topic :: Text Processing :: Linguistic
+Classifier: Typing :: Typed
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Provides-Extra: core
+Requires-Dist: tree-sitter~=0.24; extra == "core"
+
+# tree-sitter-plantuml
+
+A [tree-sitter](https://tree-sitter.github.io/) grammar for the
+[PlantUML](https://plantuml.com/) language.
+
+This is a standalone project: the grammar is a general-purpose parser for any
+tree-sitter consumer — editors, formatters, linters, documentation tooling.
+It carries no coupling to any specific downstream.
+
+## Scope and roadmap
+
+PlantUML has no formal grammar and an enormous surface. This project covers it
+incrementally, one diagram type at a time, behind an explicit frontier policy:
+
+- **v0.1 (current)** — the `@startuml`/`@enduml` envelope, line and block
+  comments, and the class-diagram core: `class` / `abstract class` /
+  `interface` / `enum` declarations (quoted names, aliases, generics,
+  stereotypes, `extends`/`implements` clauses, trailing colors), members
+  with visibility and `{static}`/`{abstract}` modifiers plus group
+  separator lines (`--`, `..`, `==`, `__ titled __`),
+  the relation operators (inheritance, realization, composition, aggregation,
+  dependency, association) with cardinalities and labels, `package` /
+  `namespace` / `together` blocks, structured notes (positional, targeted,
+  on-link, block and floating forms), and `hide`/`show`/`remove`/`restore`
+  display directives. `legend`/`header`/`footer` and braced `skinparam`
+  blocks pass through the raw frontier safely.
+- **next** — relation styles (`-[#red,dashed]->`) and the frontier
+  hardening for identifier-headed unknowns (REQ-00012-1), then sequence
+  diagrams, then activity diagrams (new syntax only).
+
+**Frontier policy**: any statement outside the supported subset parses as a
+`raw_line` (or `raw_block` for multi-line notes) instead of an `ERROR` node,
+and must survive a round-trip byte-identical. Consumers can rely on every
+input producing a usable tree. Known limitation: a truly unknown
+identifier-headed statement can still produce an `ERROR`; hardening this
+frontier is on the roadmap.
+
+**Node names are public API.** The node vocabulary (`class_declaration`,
+`relation`, `member`, …) is versioned under semver; renames are breaking
+changes.
+
+## Development
+
+```bash
+npm install        # installs tree-sitter-cli
+npm test           # tree-sitter generate && tree-sitter test
+```
+
+Corpus tests live in `test/corpus/`. Every grammar change ships with corpus
+coverage.
+
+To evaluate against a wild corpus of real diagrams:
+
+```bash
+.venv/bin/python scripts/eval_wild_corpus.py <root>...
+```
+
+The current grammar parses the full argos design corpus (6&#8239;192 `.puml`
+files) 100% ERROR-free and 100% lossless.
+
+## Governance
+
+This repository is an [argos](https://gitlab.semantiqa.dev/deriva/argos/argos)
+NA project: input requirements live in `input/` (SREQ artefacts), local
+requirements and verifications in `requirements/` and `verifications/`. See
+`CLAUDE.md` for the working rules.
