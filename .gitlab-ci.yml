@@ -54,3 +54,18 @@ publish-npm:
     - npm ci
     - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}" > .npmrc
     - npm publish --registry "https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/"
+
+# The grammar compiled to wasm, for web-tree-sitter consumers (the
+# vscode preview). The CLI fetches its own wasi-sdk — no emscripten.
+publish-wasm:
+  stage: deploy
+  extends: [.node-base]
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - npm ci
+    - npx tree-sitter build --wasm -o tree-sitter-plantuml.wasm
+    - >
+      curl --fail --header "JOB-TOKEN: ${CI_JOB_TOKEN}"
+      --upload-file tree-sitter-plantuml.wasm
+      "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/wasm/${CI_COMMIT_TAG}/tree-sitter-plantuml.wasm"
