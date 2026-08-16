@@ -1,0 +1,262 @@
+==================
+extended entity kinds
+==================
+@startuml
+annotation SuppressWarnings
+exception OutOfRange
+metaclass MetaCls
+protocol Speaks
+record Pair
+dataclass Config
+struct Point {
+  x : int
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (entity_declaration
+      (entity_kind)
+      (identifier))
+    (entity_declaration
+      (entity_kind)
+      (identifier))
+    (entity_declaration
+      (entity_kind)
+      (identifier))
+    (entity_declaration
+      (entity_kind)
+      (identifier))
+    (entity_declaration
+      (entity_kind)
+      (identifier))
+    (entity_declaration
+      (entity_kind)
+      (identifier))
+    (entity_declaration
+      (entity_kind)
+      (identifier)
+      (entity_body
+        (member
+          (attribute
+            (identifier)
+            (type)))))))
+
+==================
+colon members
+==================
+@startuml
+Object : equals()
+Object : -hash : int
+@enduml
+---
+
+(source_file
+  (diagram
+    (colon_member
+      (identifier)
+      (label))
+    (colon_member
+      (identifier)
+      (label))))
+
+==================
+entity tags
+==================
+@startuml
+class C1 $tag13
+class C2 $tag1 $tag2
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (tag))
+    (class_declaration
+      (identifier)
+      (tag)
+      (tag))))
+
+==================
+qualified association
+==================
+@startuml
+Shop [customerId] ---> "1" Customer
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (identifier)
+      (qualifier)
+      (relation_operator)
+      (cardinality)
+      (identifier))))
+
+==================
+role-slash cardinalities
+==================
+@startuml
+User "owner"/1 -- "0..n"/items Item
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (identifier)
+      (cardinality)
+      (role)
+      (relation_operator)
+      (cardinality)
+      (role)
+      (identifier))))
+
+==================
+decorated relation operators
+==================
+@startuml
+foo -[bold]-> bar1
+foo -[#red,dashed,thickness=2]-> bar2
+foo -l-> bar3
+bar4 ()- foo
+foo -() bar5
+foo1.foo2 +-- foo1.foo2.foo3
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))))
+
+==================
+relation inline style color
+==================
+@startuml
+foo --> bar #line:red;line.bold;text:red
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (color))))
+
+==================
+member endpoint relations
+==================
+@startuml
+Foo::field1 --> Bar::field3
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (member_ref
+        (identifier)
+        (identifier))
+      (relation_operator)
+      (member_ref
+        (identifier)
+        (identifier)))))
+
+==================
+package-private visibility member
+==================
+@startuml
+class A {
+  ~x : int
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (attribute
+            (identifier)
+            (type)))))))
+
+==================
+field method and classifier modifiers
+==================
+@startuml
+class A {
+  {field} area()
+  {method} plain
+  {classifier} String id
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (modifier)
+          (method
+            (identifier)))
+        (member
+          (modifier)
+          (attribute
+            (identifier)))
+        (member
+          (modifier)
+          (attribute
+            (identifier)
+            (raw_text)))))))
+
+==================
+package color
+==================
+@startuml
+package "Classic Collections" #DDDDDD {
+  class A
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (package_block
+      (string)
+      (color)
+      (class_declaration
+        (identifier)))))

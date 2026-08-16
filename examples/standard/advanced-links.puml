@@ -1,0 +1,16 @@
+@startuml
+class foo
+class bar
+bar ()- foo
+bar2 ()-- foo
+foo -() bar3
+class Student
+class Course
+(Student, Course) .. Enrollment
+(Student, Course) . Enrollment2
+class1 [Qualifier] - class2
+Shop [customerId] ---> "1" Customer
+Foo::field1 --> Bar::field3
+Foo::method2 --> Bar2
+A -[hidden]-> Hidden1
+@enduml

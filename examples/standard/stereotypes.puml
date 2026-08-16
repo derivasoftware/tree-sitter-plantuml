@@ -1,0 +1,11 @@
+@startuml
+class Object << general >>
+class System << (S,#FF7700) Singleton >>
+class Foo<? extends Element> {
+  int size()
+}
+skinparam genericDisplay old
+class Bar<X>
+class Tagged $tag13
+class DoubleTag $tag1 $tag2
+@enduml

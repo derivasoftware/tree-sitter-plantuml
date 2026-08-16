@@ -1,0 +1,24 @@
+@startuml
+class foo
+class bar
+foo -[bold]-> bar1
+foo -[dashed]-> bar2
+foo -[dotted]-> bar3
+foo -[hidden]-> bar4
+foo -[plain]-> bar5
+foo -[#red]-> bar6
+foo -[thickness=8]-> bar7
+foo -[#red,dashed,thickness=2]-> bar8
+foo --> bar9 #line:red;line.bold;text:red
+foo --> bar10 #green;line.dashed;text:green
+class FooRed #red
+class FooMix #line:green;back:lightblue
+class FooBold #line.bold
+class FooDashed #line.dashed:blue
+class FooDotted #line.dotted:blue
+class Demo1 #back:red;header:blue
+class Demo2 #back:red-green
+class Demo3 #back:lightgreen\yellow
+class Demo4 #back:lightgreen/yellow
+class Demo5 #back:lightgreen|yellow
+@enduml

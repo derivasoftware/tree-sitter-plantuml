@@ -1,0 +1,19 @@
+requirement:
+  id: REQ-00022-1
+  title: The grammar shall parse the extended entity kinds with tags and dollar names
+  description: >
+    The grammar shall parse the extended entity kinds with tags and dollar names
+  rationale: >
+    annotation, exception, metaclass, protocol, struct, record and
+    dataclass share one entity_declaration node with an entity_kind
+    child (entity stays a participant kind; circle and diamond stay
+    raw). Declarations accept $tag markers (hide/remove/restore
+    targets), identifiers accept the $-prefixed form, and package
+    blocks accept a color.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags:
+    - declarations
+    - standard-conformance

@@ -24,6 +24,10 @@ export default grammar({
 
   extras: $ => [/[ \t]/, $.block_comment],
 
+  // ~ opens both a visibility marker and a destructor name; GLR keeps
+  // both readings alive until the following token decides.
+  conflicts: $ => [[$.visibility, $.cpp_method_name]],
+
   rules: {
     source_file: $ => repeat(choice($.diagram, $._newline)),
 
@@ -39,7 +43,9 @@ export default grammar({
       $.class_declaration,
       $.interface_declaration,
       $.enum_declaration,
+      $.entity_declaration,
       $.relation,
+      $.colon_member,
       $.package_block,
       $.namespace_block,
       $.together_block,
@@ -129,6 +135,25 @@ export default grammar({
       choice($._newline, seq(field('body', $.entity_body), $._newline)),
     ),
 
+    // The remaining element keywords of the reference share one node;
+    // `entity` stays a participant kind and circle/diamond stay raw.
+    entity_declaration: $ => seq(
+      field('kind', alias(choice(
+        'annotation', 'exception', 'metaclass', 'protocol',
+        'struct', 'record', 'dataclass',
+      ), $.entity_kind)),
+      $._entity_head,
+      choice($._newline, seq(field('body', $.entity_body), $._newline)),
+    ),
+
+    // Entity : member — the single-line member form of the reference.
+    colon_member: $ => seq(
+      field('entity', $._entity_name),
+      ':',
+      field('member', $.label),
+      $._newline,
+    ),
+
     abstract: $ => 'abstract',
 
     _entity_head: $ => seq(
@@ -139,7 +164,10 @@ export default grammar({
       optional(seq('extends', field('extends', $.entity_list))),
       optional(seq('implements', field('implements', $.entity_list))),
       optional(field('color', $.color)),
+      repeat(field('tag', $.tag)),
     ),
+
+    tag: $ => token(/\$[\w-]+/),
 
     entity_list: $ => sep1($._entity_name, ','),
 
@@ -191,7 +219,9 @@ export default grammar({
 
     visibility: $ => choice('+', '-', '#', '~'),
 
-    modifier: $ => choice('{static}', '{abstract}'),
+    modifier: $ => choice(
+      '{static}', '{abstract}', '{field}', '{method}', '{classifier}',
+    ),
 
     method: $ => seq(
       field('name', choice($.identifier, $.cpp_method_name)),
@@ -203,15 +233,21 @@ export default grammar({
 
     // C++ member names beyond plain identifiers (BOK-mirrored from the
     // argos-design-plantuml reader): destructors and operator overloads.
-    cpp_method_name: $ => token(prec(1, choice(
-      /~\w+/,
+    cpp_method_name: $ => choice(
+      // Destructor: tilde and name are the same tokens the ~ visibility
+      // marker and identifiers use, so the parser can defer — ~name(
+      // stays a destructor (dynamic precedence) while ~name : type
+      // parses as a package-private attribute.
+      prec.dynamic(1, seq('~', $.identifier)),
+      token(prec(1, choice(
       /operator\s*\(\s*\)/,
       /operator\s*\[\s*\]/,
       /operator\s+new(\s*\[\s*\])?/,
       /operator\s+delete(\s*\[\s*\])?/,
       /operator\s+\w+/,
       /operator\s*[^()\[\]\s\w][^()\[\]\s]*/,
-    ))),
+      ))),
+    ),
 
     parameter_list: $ => sep1($.parameter, ','),
 
@@ -233,21 +269,34 @@ export default grammar({
     // ── Relations ──────────────────────────────────────────────────────
 
     relation: $ => seq(
-      field('left', $._entity_name),
-      optional(field('left_cardinality', alias($.string, $.cardinality))),
+      field('left', choice($._entity_name, $.member_ref)),
+      optional(field('qualifier', $.qualifier)),
+      optional(seq(
+        field('left_cardinality', alias($.string, $.cardinality)),
+        optional(field('left_role', alias(token.immediate(/\/[\w.-]+/), $.role))),
+      )),
       field('operator', $.relation_operator),
-      optional(field('right_cardinality', alias($.string, $.cardinality))),
-      field('right', $._entity_name),
+      optional(seq(
+        field('right_cardinality', alias($.string, $.cardinality)),
+        optional(field('right_role', alias(token.immediate(/\/[\w.-]+/), $.role))),
+      )),
+      field('right', choice($._entity_name, $.member_ref)),
+      optional(field('color', $.color)),
       optional(seq(':', field('label', $.label))),
       $._newline,
     ),
 
+    // [Qualifier] — the qualified-association bracket after the left
+    // endpoint.
+    qualifier: $ => token(seq('[', /[^\]\n]+/, ']')),
+
     relation_operator: $ => token(choice(
-      // dashed core:  --|> <|-- *-- --* o-- --o --> <-- -- (with optional
-      // embedded direction hint: -left-> etc.)
-      /(<\||<|\*|o)?-+((left|right|up|down)-+)?(\|>|>|\*|o)?/,
+      // dashed core:  --|> <|-- *-- --* o-- --o --> <-- -- () lollipops
+      // and the + hierarchy head, with optional [style,...] tags and
+      // embedded direction hints (-left->, -l->)
+      /(<\||<|\*|o|\(\)|\+)?-+(\[[^\]\n]+\]-*)?((left|right|up|down|l|r|u|d)-+)?(\|>|>|\*|o|\(\)|\+)?/,
       // dotted core:  ..|> <|.. ..> <.. ..
-      /(<\||<|\*|o)?\.+((left|right|up|down)\.+)?(\|>|>|\*|o)?/,
+      /(<\||<|\*|o|\(\)|\+)?\.+(\[[^\]\n]+\]\.*)?((left|right|up|down|l|r|u|d)\.+)?(\|>|>|\*|o|\(\)|\+)?/,
     )),
 
     label: $ => $._to_eol,
@@ -258,6 +307,7 @@ export default grammar({
       'package',
       field('name', $._entity_name),
       optional(field('stereotype', $.stereotype)),
+      optional(field('color', $.color)),
       '{',
       repeat($._statement),
       '}',
@@ -364,7 +414,8 @@ export default grammar({
         'object', 'folder', 'frame',
         'cloud', 'node', 'rectangle', 'artifact', 'agent',
         'card', 'file', 'stack',
-        'circle',
+        'circle', 'diamond', 'page', 'json',
+        'top', 'bottom',
         // sequence lifecycle verbs: raw until evidence demands
         // structure (zero occurrences in the wild corpus so far)
         'activate', 'deactivate', 'return', 'ref',
@@ -425,7 +476,7 @@ export default grammar({
     // Dotted, optionally hyphenated segments (clients.argos-web.src).
     // A hyphen must be followed by a word character so unspaced relation
     // operators (A--|>B) never lex into the left identifier.
-    identifier: $ => /[A-Za-z_]\w*([.-]\w+)*/,
+    identifier: $ => /\$?[A-Za-z_]\w*([.-]\w+)*/,
 
     string: $ => token(seq('"', /[^"\n]*/, '"')),
 

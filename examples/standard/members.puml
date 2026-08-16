@@ -1,0 +1,36 @@
+@startuml
+Object : equals()
+Object : -hash : int
+class Dummy {
+  String data
+  void methods()
+  {field} A field (despite parentheses)
+  {method} Some method
+}
+class Visibilities {
+  -privateField : int
+  #protectedField : int
+  ~packagePrivateField : int
+  +publicField : int
+}
+class Modifiers {
+  {static} String id
+  {abstract} void methods()
+  {classifier} String classId
+}
+class Separators {
+  field1
+  --
+  field2
+  ..
+  method1()
+  ==
+  method2()
+  __
+  helper()
+  -- Encrypted --
+  secret()
+}
+-class "private Class"
++class PublicClass
+@enduml

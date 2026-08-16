@@ -1,0 +1,10 @@
+verification:
+  id: VER-00021-1
+  req_id: REQ-00022-1
+  title: Corpus and conformance tests cover extended entity kinds and tags
+  description: >
+    Corpus and conformance tests cover extended entity kinds and tags
+  method: test
+  test_ids:
+    - tests/test_grammar.py::test_corpus_standard
+    - tests/test_standard_coverage.py::test_construct_maps_to_intended_node

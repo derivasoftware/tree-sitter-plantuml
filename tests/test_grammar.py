@@ -71,3 +71,7 @@ def test_corpus_dividers():
 
 def test_corpus_cpp_members():
     check_corpus("cpp-members")
+
+
+def test_corpus_standard():
+    check_corpus("standard")

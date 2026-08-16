@@ -144,6 +144,50 @@
             "named": true
           }
         ]
+      },
+      "tag": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "tag",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "colon_member",
+    "named": true,
+    "fields": {
+      "entity": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "member": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "label",
+            "named": true
+          }
+        ]
       }
     }
   },
@@ -151,6 +195,21 @@
     "type": "comment",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "cpp_method_name",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "diagram",
@@ -176,6 +235,10 @@
           "named": true
         },
         {
+          "type": "colon_member",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },
@@ -185,6 +248,10 @@
         },
         {
           "type": "divider",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
           "named": true
         },
         {
@@ -301,6 +368,10 @@
           "named": true
         },
         {
+          "type": "colon_member",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },
@@ -310,6 +381,10 @@
         },
         {
           "type": "divider",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
           "named": true
         },
         {
@@ -380,6 +455,128 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "entity_declaration",
+    "named": true,
+    "fields": {
+      "alias": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "entity_body",
+            "named": true
+          }
+        ]
+      },
+      "color": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "color",
+            "named": true
+          }
+        ]
+      },
+      "extends": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "entity_list",
+            "named": true
+          }
+        ]
+      },
+      "generics": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "generics",
+            "named": true
+          }
+        ]
+      },
+      "implements": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "entity_list",
+            "named": true
+          }
+        ]
+      },
+      "kind": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "entity_kind",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "stereotype": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "stereotype",
+            "named": true
+          }
+        ]
+      },
+      "tag": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "tag",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -504,6 +701,16 @@
             "named": true
           }
         ]
+      },
+      "tag": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "tag",
+            "named": true
+          }
+        ]
       }
     }
   },
@@ -565,6 +772,10 @@
           "named": true
         },
         {
+          "type": "colon_member",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },
@@ -578,6 +789,10 @@
         },
         {
           "type": "else_clause",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
           "named": true
         },
         {
@@ -723,6 +938,16 @@
         "types": [
           {
             "type": "stereotype",
+            "named": true
+          }
+        ]
+      },
+      "tag": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "tag",
             "named": true
           }
         ]
@@ -889,6 +1114,10 @@
           "named": true
         },
         {
+          "type": "colon_member",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },
@@ -898,6 +1127,10 @@
         },
         {
           "type": "divider",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
           "named": true
         },
         {
@@ -1032,6 +1265,16 @@
     "type": "package_block",
     "named": true,
     "fields": {
+      "color": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "color",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -1070,6 +1313,10 @@
           "named": true
         },
         {
+          "type": "colon_member",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },
@@ -1079,6 +1326,10 @@
         },
         {
           "type": "divider",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
           "named": true
         },
         {
@@ -1266,6 +1517,16 @@
     "type": "relation",
     "named": true,
     "fields": {
+      "color": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "color",
+            "named": true
+          }
+        ]
+      },
       "label": {
         "multiple": false,
         "required": false,
@@ -1282,6 +1543,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "member_ref",
             "named": true
           },
           {
@@ -1304,6 +1569,16 @@
           }
         ]
       },
+      "left_role": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "role",
+            "named": true
+          }
+        ]
+      },
       "operator": {
         "multiple": false,
         "required": true,
@@ -1314,12 +1589,26 @@
           }
         ]
       },
+      "qualifier": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "qualifier",
+            "named": true
+          }
+        ]
+      },
       "right": {
         "multiple": false,
         "required": true,
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "member_ref",
             "named": true
           },
           {
@@ -1338,6 +1627,16 @@
         "types": [
           {
             "type": "cardinality",
+            "named": true
+          }
+        ]
+      },
+      "right_role": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "role",
             "named": true
           }
         ]
@@ -1373,6 +1672,10 @@
           "named": true
         },
         {
+          "type": "colon_member",
+          "named": true
+        },
+        {
           "type": "comment",
           "named": true
         },
@@ -1382,6 +1685,10 @@
         },
         {
           "type": "divider",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
           "named": true
         },
         {
@@ -1539,10 +1846,6 @@
     "named": false
   },
   {
-    "type": "cpp_method_name",
-    "named": true
-  },
-  {
     "type": "critical",
     "named": false
   },
@@ -1573,6 +1876,10 @@
   {
     "type": "entity",
     "named": false
+  },
+  {
+    "type": "entity_kind",
+    "named": true
   },
   {
     "type": "enum",
@@ -1655,6 +1962,10 @@
     "named": false
   },
   {
+    "type": "qualifier",
+    "named": true
+  },
+  {
     "type": "queue",
     "named": false
   },
@@ -1679,6 +1990,10 @@
     "named": false
   },
   {
+    "type": "role",
+    "named": true
+  },
+  {
     "type": "show",
     "named": false
   },
@@ -1688,6 +2003,10 @@
   },
   {
     "type": "string",
+    "named": true
+  },
+  {
+    "type": "tag",
     "named": true
   },
   {
@@ -1704,6 +2023,18 @@
   },
   {
     "type": "{abstract}",
+    "named": false
+  },
+  {
+    "type": "{classifier}",
+    "named": false
+  },
+  {
+    "type": "{field}",
+    "named": false
+  },
+  {
+    "type": "{method}",
     "named": false
   },
   {

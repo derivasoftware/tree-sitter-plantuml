@@ -1,0 +1,17 @@
+@startuml
+skinparam classBackgroundColor Wheat
+skinparam class {
+  ArrowColor SeaGreen
+  BorderColor SpringGreen
+}
+skinparam stereotypeCBackgroundColor YellowGreen
+skinparam stereotypeCBackgroundColor<<Foo>> DimGray
+skinparam classAttributeIconSize 0
+skinparam groupInheritance 2
+skinparam pageMargin 10
+skinparam pageExternalColor gray
+skinparam pageBorderColor black
+page 2x2
+!pragma layout smetana
+class Quotes
+@enduml

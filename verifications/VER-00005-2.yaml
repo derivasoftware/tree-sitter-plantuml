@@ -1,0 +1,10 @@
+verification:
+  id: VER-00005-2
+  req_id: REQ-00003-3
+  title: Corpus tests cover members with visibility and the five modifiers
+  description: >
+    Corpus tests cover members with visibility and the five modifiers
+  method: test
+  test_ids:
+    - tests/test_grammar.py::test_corpus_members
+    - tests/test_grammar.py::test_corpus_standard

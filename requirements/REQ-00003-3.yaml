@@ -1,0 +1,18 @@
+requirement:
+  id: REQ-00003-3
+  title: The grammar shall parse entity members with visibility markers and the five body modifiers
+  description: >
+    The grammar shall parse entity members with visibility markers and the five body modifiers
+  rationale: >
+    Visibility: + - # ~ (tilde shares its token with the C++ destructor
+    head; GLR defers until the following token decides — REQ-00020-1).
+    Modifiers, per the reference: {static}, {abstract}, {field}, {method},
+    {classifier}. Revision 3 adds the last three and the tilde
+    disambiguation, closing the member gaps of the standard-conformance
+    matrix.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags:
+    - members

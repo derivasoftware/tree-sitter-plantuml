@@ -1,0 +1,115 @@
+"""Standard conformance: the class-diagram constructs of the PlantUML
+Language Reference (plantuml.com/class-diagram) parse without ERROR and
+map to the intended node (REQ-00012-1, REQ-00021-1, REQ-00022-1,
+REQ-00023-1).
+
+examples/standard/*.puml is the dummy-diagram corpus: every construct
+the reference documents appears at least once. Frontier policy applies:
+a construct is either structural (dedicated node) or raw (lossless
+pass-through) — ERROR is never acceptable (SREQ-00003).
+"""
+
+from pathlib import Path
+
+import pytest
+from conftest import EXAMPLES_DIR
+
+STANDARD_DIR = EXAMPLES_DIR / "standard"
+FILES = sorted(p.name for p in STANDARD_DIR.glob("*.puml"))
+
+# (file, line-prefix, expected statement-level node type)
+CONSTRUCTS = [
+    ("elements.puml", "annotation SuppressWarnings", "entity_declaration"),
+    ("elements.puml", "exception OutOfRange", "entity_declaration"),
+    ("elements.puml", "metaclass MetaCls", "entity_declaration"),
+    ("elements.puml", "protocol Speaks", "entity_declaration"),
+    ("elements.puml", "struct Point", "entity_declaration"),
+    ("elements.puml", "record Pair", "entity_declaration"),
+    ("elements.puml", "dataclass Config", "entity_declaration"),
+    ("elements.puml", "entity Row", "participant_declaration"),
+    ("elements.puml", "circle Dot", "raw_line"),
+    ("elements.puml", "() DotShort", "raw_line"),
+    ("elements.puml", "diamond Dec", "raw_line"),
+    ("elements.puml", "<> DecShort", "raw_line"),
+    ("elements.puml", "class $Dollar", "class_declaration"),
+    ("elements.puml", 'class "$Quoted" as dollarQ', "class_declaration"),
+    ("relations.puml", 'User "owner"/1 -- "0..n"/items Item', "relation"),
+    ("relations.puml", "Aaa o--> Factory : #factory", "relation"),
+    ("members.puml", "Object : equals()", "colon_member"),
+    ("members.puml", "Object : -hash : int", "colon_member"),
+    ("members.puml", "{field} A field", "member"),
+    ("members.puml", "{method} Some method", "member"),
+    ("members.puml", "~packagePrivateField : int", "member"),
+    ("members.puml", "{classifier} String classId", "member"),
+    ("members.puml", '-class "private Class"', "raw_line"),
+    ("members.puml", "+class PublicClass", "raw_line"),
+    ("stereotypes.puml", "class Tagged $tag13", "class_declaration"),
+    ("stereotypes.puml", "class DoubleTag $tag1 $tag2", "class_declaration"),
+    ("packages.puml", 'package "Classic Collections" #DDDDDD {', "package_block"),
+    ("packages.puml", "foo1.foo2 +-- foo1.foo2.foo3", "relation"),
+    ("packages.puml", "set separator ::", "raw_line"),
+    ("packages.puml", "!pragma useIntermediatePackages false", "raw_line"),
+    ("direction.puml", "left to right direction", "raw_line"),
+    ("direction.puml", "top to bottom direction", "raw_line"),
+    ("direction.puml", "foo -l-> b5", "relation"),
+    ("direction.puml", "foo -d-> b6", "relation"),
+    ("advanced-links.puml", "bar ()- foo", "relation"),
+    ("advanced-links.puml", "bar2 ()-- foo", "relation"),
+    ("advanced-links.puml", "foo -() bar3", "relation"),
+    ("advanced-links.puml", "(Student, Course) .. Enrollment", "raw_line"),
+    ("advanced-links.puml", "class1 [Qualifier] - class2", "relation"),
+    ("advanced-links.puml", 'Shop [customerId] ---> "1" Customer', "relation"),
+    ("advanced-links.puml", "Foo::field1 --> Bar::field3", "relation"),
+    ("styling.puml", "foo -[bold]-> bar1", "relation"),
+    ("styling.puml", "foo -[#red,dashed,thickness=2]-> bar8", "relation"),
+    ("styling.puml", "foo --> bar9 #line:red;line.bold;text:red", "relation"),
+    ("styling.puml", "class Demo3 #back:lightgreen\\yellow", "class_declaration"),
+    ("skinparams.puml", "page 2x2", "raw_line"),
+    ("skinparams.puml", "skinparam stereotypeCBackgroundColor<<Foo>> DimGray", "raw_line"),
+    ("special.puml", "json JSON {", "raw_line"),
+    ("special.puml", '"fruit": "Apple",', "colon_member"),
+]
+
+
+def parse(language, path: Path):
+    from tree_sitter import Parser
+
+    source = path.read_bytes()
+    return source, Parser(language).parse(source)
+
+
+@pytest.mark.parametrize("name", FILES)
+def test_standard_file_is_error_free(language, name):
+    source, tree = parse(language, STANDARD_DIR / name)
+    assert not tree.root_node.has_error, tree.root_node
+
+
+def statement_node(tree, row: int, col: int):
+    """Innermost named node at (row, col), lifted to the statement level
+    (direct child of diagram / a grouping body)."""
+    node = tree.root_node.named_descendant_for_point_range((row, col), (row, col + 1))
+    lifted = node
+    while node is not None:
+        if node.type in ("diagram", "entity_body", "package_block",
+                         "namespace_block", "together_block", "source_file"):
+            break
+        lifted = node
+        node = node.parent
+    return lifted
+
+
+@pytest.mark.parametrize("case", CONSTRUCTS, ids=lambda c: f"{c[0]}:{c[1][:28]}")
+def test_construct_maps_to_intended_node(language, case):
+    file, prefix, expected = case
+    path = STANDARD_DIR / file
+    source, tree = parse(language, path)
+    lines = source.decode().split("\n")
+    rows = [i for i, line in enumerate(lines) if line.strip().startswith(prefix)]
+    assert rows, f"construct not found in {file}: {prefix!r}"
+    row = rows[0]
+    col = len(lines[row]) - len(lines[row].lstrip())
+    node = statement_node(tree, row, col)
+    assert node is not None and node.type == expected, (
+        f"{file}:{rows[0] + 1} {prefix!r} -> "
+        f"{node.type if node else None}, expected {expected}"
+    )

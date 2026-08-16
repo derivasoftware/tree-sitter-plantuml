@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+top to bottom direction
+class foo
+class bar
+foo -left-> b1
+foo -right-> b2
+foo -up-> b3
+foo -down-> b4
+foo -l-> b5
+foo -d-> b6
+foo -r-> b7
+foo -u-> b8
+together {
+  class T1
+  class T2
+}
+@enduml

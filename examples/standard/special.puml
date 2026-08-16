@@ -1,0 +1,10 @@
+@startuml
+class Kitchen
+json JSON {
+  "fruit": "Apple",
+  "size": {
+    "unit": "cm",
+    "value": 10
+  }
+}
+@enduml

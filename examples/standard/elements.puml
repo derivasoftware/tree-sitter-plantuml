@@ -1,0 +1,23 @@
+@startuml
+' every element kind from plantuml.com/class-diagram
+class Cls
+abstract class AbstractCls
+abstract Alone
+interface Iface
+enum Season
+annotation SuppressWarnings
+entity Row
+exception OutOfRange
+metaclass MetaCls
+protocol Speaks
+struct Point
+record Pair
+dataclass Config
+circle Dot
+() DotShort
+diamond Dec
+<> DecShort
+class $Dollar
+class "$Quoted" as dollarQ
+class "Display Name" as alias1
+@enduml

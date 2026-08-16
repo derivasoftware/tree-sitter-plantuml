@@ -50,6 +50,6 @@ def corpus_inputs() -> dict[str, str]:
 
 def example_inputs() -> dict[str, str]:
     return {
-        f"examples::{p.name}": p.read_text()
-        for p in sorted(EXAMPLES_DIR.glob("*.puml"))
+        f"examples::{p.relative_to(EXAMPLES_DIR)}": p.read_text()
+        for p in sorted(EXAMPLES_DIR.rglob("*.puml"))
     }

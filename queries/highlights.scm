@@ -61,6 +61,14 @@
 (abstract) @keyword.modifier
 (modifier) @keyword.modifier
 
+(entity_kind) @keyword
+(entity_declaration name: (identifier) @type)
+(entity_declaration alias: (identifier) @type)
+(colon_member entity: (identifier) @type)
+(tag) @attribute
+(qualifier) @string.special
+(role) @string.special
+
 (class_declaration name: (identifier) @type)
 (class_declaration alias: (identifier) @type)
 (interface_declaration name: (identifier) @type)
