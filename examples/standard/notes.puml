@@ -1,0 +1,25 @@
+@startuml
+class Object
+note top of Object : in java, every class extends this one
+note bottom of Object : bottom note
+note left of Object : left note
+note right of Object : right note
+note "This is a floating note" as N1
+Object .. N1
+class Foo
+note left : note on last element
+Object --> Foo : link label
+note on link : note attached to the relation
+note right on link : positioned link note
+class C {
+  +method()
+  +field : int
+}
+note right of C::method : documents the method
+note left of C::field : documents the field
+note right of C::"method(int)" : overloaded form
+note as N2
+a multi line
+<b>creole</b> body
+end note
+@enduml

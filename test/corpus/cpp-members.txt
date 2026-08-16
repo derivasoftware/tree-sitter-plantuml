@@ -23,7 +23,8 @@ class Result {
         (member
           (visibility)
           (method
-            (cpp_method_name)))
+            (cpp_method_name
+              (identifier))))
         (member
           (visibility)
           (method

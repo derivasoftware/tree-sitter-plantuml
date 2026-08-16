@@ -1,0 +1,17 @@
+requirement:
+  id: REQ-00023-1
+  title: The grammar shall parse single-line colon member statements
+  description: >
+    The grammar shall parse single-line colon member statements
+  rationale: >
+    Object : equals() — the reference's single-line member form,
+    previously an identifier-headed frontier ERROR. The colon_member
+    node keeps entity and member text addressable; it also rescues
+    quoted-key lines inside raw json blocks.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags:
+    - members
+    - standard-conformance

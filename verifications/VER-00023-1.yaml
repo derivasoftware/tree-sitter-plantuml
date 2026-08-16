@@ -1,0 +1,12 @@
+verification:
+  id: VER-00023-1
+  req_id: REQ-00007-1
+  title: Standard conformance dummy corpus parses error-free end to end
+  description: >
+    Evidence - every construct of plantuml.com/class-diagram appears in
+    examples/standard/*.puml and each file parses with zero ERROR or
+    MISSING nodes and full token-span coverage (round-trip suite picks
+    the directory up recursively).
+  method: test
+  test_ids:
+    - tests/test_standard_coverage.py::test_standard_file_is_error_free

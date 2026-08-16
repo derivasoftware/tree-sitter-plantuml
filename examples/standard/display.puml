@@ -1,0 +1,24 @@
+@startuml
+class Dummy1
+class Dummy2 <<Serializable>>
+hide empty members
+hide empty fields
+hide empty methods
+hide fields
+hide methods
+hide members
+hide circle
+hide stereotype
+show Dummy1 methods
+hide <<Serializable>> circle
+hide private members
+hide Dummy1
+class Tagged1 $tag13
+remove Dummy2
+hide $tag13
+remove $tag13
+restore $tag13
+remove *
+hide @unlinked
+remove @unlinked
+@enduml

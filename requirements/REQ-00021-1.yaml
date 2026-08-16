@@ -1,0 +1,21 @@
+requirement:
+  id: REQ-00021-1
+  title: The grammar shall parse decorated relation operators with qualifiers, roles and member endpoints
+  description: >
+    The grammar shall parse decorated relation operators with qualifiers, roles and member endpoints
+  rationale: >
+    The reference decorates relations beyond the six core operators:
+    style tags (-[bold]->, -[#red,dashed,thickness=2]->), single-letter
+    direction shorthands (-l->), lollipop interfaces (()-, -()), the
+    package-hierarchy plus head (+--), the qualified-association bracket
+    (Shop [customerId] -->), role-slash cardinalities ("owner"/1), an
+    inline style color after the right endpoint, and Entity::member
+    endpoints. All parse into the existing relation node; new child
+    nodes: qualifier, role.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags:
+    - relations
+    - standard-conformance

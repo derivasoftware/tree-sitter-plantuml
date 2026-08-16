@@ -1,0 +1,20 @@
+@startuml
+class Class01
+class Class02
+Class01 <|-- Class02
+Class01 <|.. Iface01
+class ArrayList extends AbstractList
+class LinkedList implements List
+Class01 *-- Class03
+Class01 o-- Class04
+Class01 --> Class05
+Class01 ..> Class06
+Class01 -- Class07
+Class01 - Class08
+Class01 <--* Class09
+Class01 "1" *-- "many" Class10
+Class01 --> Class11 : contains
+Class01 -- Class12 : drives >
+User "owner"/1 -- "0..n"/items Item
+Aaa o--> Factory : #factory
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+package "Classic Collections" #DDDDDD {
+  class ArrayList
+}
+package net.dummy {
+  package nested.inner {
+    class Deep
+  }
+}
+package foo1 <<Node>> {
+  class Class1
+}
+package foo2 <<Rectangle>> {
+  class Class2
+}
+package foo3 <<Folder>> {
+  class Class3
+}
+package foo4 <<Frame>> {
+  class Class4
+}
+package foo5 <<Cloud>> {
+  class Class5
+}
+package foo6 <<Database>> {
+  class Class6
+}
+foo1.foo2 +-- foo1.foo2.foo3
+namespace Named {
+  class InNs
+}
+set separator ::
+set separator none
+!pragma useIntermediatePackages false
+@enduml
