@@ -106,6 +106,22 @@ bool tree_sitter_plantuml_external_scanner_scan(
     }
   }
   if (!compound) {
+    /* Activity `group Label {` is a raw braced block head; the
+       braceless sequence `group` frame keeps its structure. Peek the
+       rest of the line before the keyword table gets a say. */
+    if (strcmp(head, "group") == 0) {
+      bool brace = false;
+      while (lexer->lookahead != 0 && lexer->lookahead != '\n') {
+        if (lexer->lookahead == '{') brace = true;
+        lexer->advance(lexer, false);
+      }
+      if (brace) {
+        lexer->result_symbol = RAW_STATEMENT;
+        lexer->mark_end(lexer);
+        return true;
+      }
+      return false;
+    }
     for (size_t i = 0; i < sizeof(KEYWORDS) / sizeof(KEYWORDS[0]); i++) {
       if (strcmp(head, KEYWORDS[i]) == 0) return false;
     }

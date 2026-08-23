@@ -1,0 +1,23 @@
+@startuml
+start
+fork
+  :path one;
+fork again
+  :path two;
+end fork {or}
+fork
+  :merged;
+end merge
+split
+  :s1;
+split again
+  :s2;
+end split
+:after;
+kill
+detach
+label mylabel
+goto mylabel
+(A)
+#blue:(B)
+@enduml

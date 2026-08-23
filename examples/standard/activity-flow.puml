@@ -1,0 +1,32 @@
+@startuml
+start
+:first action;
+#pink:colored action;
+:action with terminator|
+:sdl input<
+:sdl output>
+:sdl save/
+if (condition?) then (yes)
+  :branch a;
+elseif (other?) then (maybe)
+  :branch b;
+else (no)
+  :branch c;
+endif
+switch (test?)
+case (A)
+  :case a;
+case (B)
+  :case b;
+endswitch
+while (more?) is (yes)
+  :loop body;
+endwhile (no)
+repeat
+  :repeated;
+  backward:go back;
+repeat while (again?)
+break
+stop
+end
+@enduml

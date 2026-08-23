@@ -31,7 +31,14 @@ export default grammar({
 
   // ~ opens both a visibility marker and a destructor name; GLR keeps
   // both readings alive until the following token decides.
-  conflicts: $ => [[$.visibility, $.cpp_method_name]],
+  conflicts: $ => [
+    [$.visibility, $.cpp_method_name],
+    // bare `break` at diagram level: activity raw line vs an unlabeled
+    // sequence break frame — GLR forks and the dynamic precedence on
+    // the closer prefers raw when both parse (zero break frames in the
+    // wild corpus; labeled break frames are unambiguous).
+    [$._activity_closer, $.frame_block],
+  ],
 
   rules: {
     source_file: $ => repeat(choice($.diagram, $._newline)),
@@ -40,8 +47,22 @@ export default grammar({
       '@startuml',
       optional(field('name', alias($._to_eol, $.diagram_name))),
       $._newline,
-      repeat($._statement),
+      repeat(choice($._statement, alias($._activity_closer, $.raw_line))),
       '@enduml',
+    ),
+
+    // Activity flow-control lines that reuse frame tokens (`end`,
+    // `else (label)`, bare `break`) are raw — but only at diagram
+    // level, where no frame is open. Inside a frame the same tokens
+    // keep their exact closing semantics, with no ambiguity: this
+    // alternative simply is not part of a frame's body.
+    _activity_closer: $ => seq(
+      choice(
+        'end',
+        seq('else', optional($.label)),
+        prec.dynamic(1, 'break'),
+      ),
+      $._newline,
     ),
 
     _statement: $ => choice(
@@ -454,6 +475,9 @@ export default grammar({
         // keyword lines; their `end X` must reach raw too, while a bare
         // frame `end` keeps closing frames)
         token(prec(3, /end[ \t]+(ref|title|box)([ \t][^\n]*)?/)),
+        // activity `group X {` (braced) reaches raw through the
+        // scanner, which claims group lines containing a brace; the
+        // braceless sequence `group` frame keeps its structure.
         // header/footer with inline content: same precedence as the bare
         // block heads below so the longer single-line match wins.
         token(prec(3, /header[ \t][^ \t\n][^\n]*/)),

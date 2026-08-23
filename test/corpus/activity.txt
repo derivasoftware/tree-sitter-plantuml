@@ -1,0 +1,47 @@
+==================
+activity closers are raw at diagram level
+==================
+@startuml
+start
+:action;
+end
+else (no)
+break
+stop
+@enduml
+---
+
+(source_file
+  (diagram
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line
+      (label))
+    (raw_line)
+    (raw_line)))
+
+==================
+braced group is raw while braceless group stays a frame
+==================
+@startuml
+group MyGroup {
+  :grouped;
+}
+group validation
+  b -> c
+end
+@enduml
+---
+
+(source_file
+  (diagram
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (frame_block
+      (label)
+      (relation
+        (identifier)
+        (relation_operator)
+        (identifier)))))
