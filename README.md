@@ -62,8 +62,17 @@ incrementally, one diagram type at a time, behind an explicit frontier policy:
   bodies), note colors and `across`. Lifecycle verbs, autonumber,
   ref/box blocks, delays and spacing stay deliberately raw (zero
   corpus evidence). Result: 70/111 structural, 41 raw, **0 ERROR**.
-- **next** — activity diagrams (new syntax only), pending corpus
-  evidence.
+- **v0.7 (current)** — activity chapter conformance at the **raw
+  tier** (`examples/standard/activity-*.puml`, plantuml.com/
+  activity-diagram-beta): every construct — actions, if/switch/while/
+  repeat, forks and splits, swimlanes, connectors, partitions —
+  parses lossless with zero ERROR, none structural. The frontier work:
+  bare `end`/`else (label)`/`break` are raw at diagram level while
+  keeping their exact frame-closing semantics inside frames, and
+  braced `group X {` heads are scanner-claimed raw. Structural
+  promotion is gated on a consumer arriving (the likely one: rendering
+  argos PaC processes as activity diagrams).
+- **next** — structural activity, when a consumer provides evidence.
 
 **Frontier policy**: any statement outside the supported subset parses as a
 `raw_line` (or `raw_block` for multi-line notes) instead of an `ERROR` node,

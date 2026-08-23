@@ -1,0 +1,11 @@
+verification:
+  id: VER-00027-1
+  req_id: REQ-00026-1
+  title: Corpus and matrix tests cover activity closers, braced groups and the raw tier
+  description: >
+    Corpus and matrix tests cover activity closers, braced groups and the raw tier
+  method: test
+  test_ids:
+    - tests/test_grammar.py::test_corpus_activity
+    - tests/test_standard_coverage.py::test_construct_maps_to_intended_node
+    - tests/test_standard_coverage.py::test_standard_file_is_error_free

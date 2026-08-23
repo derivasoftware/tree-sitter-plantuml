@@ -1,0 +1,31 @@
+@startuml
+|Swimlane1|
+start
+:in lane one;
+|#AntiqueWhite|Swimlane2|
+:in lane two;
+-> arrow label;
+-[#blue]->
+-[#green,dashed]-> styled;
+partition Initialization {
+  :read config;
+}
+group MyGroup {
+  :grouped;
+}
+package Deployment {
+  :packaged;
+}
+rectangle Boxed {
+  :boxed;
+}
+card Carded {
+  :carded;
+}
+note right : simple note
+note left
+  multiline body
+end note
+floating note left : floating text
+:action with stereotype; <<procedure>>
+@enduml
