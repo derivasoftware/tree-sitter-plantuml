@@ -1,0 +1,21 @@
+@startuml
+participant Alice
+participant Bob
+Alice -> Bob
+note left : plain left
+note right : plain right
+note left
+a multiline
+note body
+end note
+note left of Alice : targeted
+note over Alice : over one
+note over Alice, Bob : over both
+note right of Alice #aqua : colored
+note across : spanning note
+hnote over Alice : hexagon
+rnote over Alice : rectangle
+note over Alice : first
+/ note over Bob : aligned second
+Alice -> Bob : **bold** //italic// ""mono""
+@enduml

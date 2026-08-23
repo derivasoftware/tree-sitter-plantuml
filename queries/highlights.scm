@@ -106,3 +106,6 @@
   ":"
   ","
 ] @punctuation.delimiter
+
+(activation) @operator
+(number) @number

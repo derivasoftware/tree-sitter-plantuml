@@ -1,0 +1,234 @@
+==================
+sequence arrow decorations
+==================
+@startuml
+Bob ->> Alice
+Bob -\ Alice
+Bob -// Alice
+Bob ->x Alice
+Bob x-> Alice
+Bob o->o Alice
+Bob <->o Alice
+A ->(10) B
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))))
+
+==================
+arrow tails never eat identifier heads
+==================
+@startuml
+A -> old : spaced stays intact
+A --> xenon
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (label))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))))
+
+==================
+activation shorthands
+==================
+@startuml
+Alice -> Bob ++ : go
+Alice -> Bob -- : done
+Alice -> Bob ++ #gold : go
+Alice -> Bob ** : make
+Alice -> Bob !! : kill
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (activation)
+      (label))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (activation)
+      (label))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (activation)
+      (color)
+      (label))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (activation)
+      (label))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (activation)
+      (label))))
+
+==================
+boundary messages
+==================
+@startuml
+[-> Bob : incoming
+[o-> Alice
+Bob ->] : outgoing
+Bob o-]
+Bob ->?
+?-> Alice
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (relation_operator)
+      (identifier)
+      (label))
+    (relation
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (label))
+    (relation
+      (identifier)
+      (relation_operator))
+    (relation
+      (identifier)
+      (relation_operator))
+    (relation
+      (relation_operator)
+      (identifier))))
+
+==================
+participant decorations
+==================
+@startuml
+actor Bob #red
+participant Last order 30
+participant Gen << Generated >>
+participant Multi [
+  =Title
+  ----
+]
+@enduml
+---
+
+(source_file
+  (diagram
+    (participant_declaration
+      (identifier)
+      (color))
+    (participant_declaration
+      (identifier)
+      (number))
+    (participant_declaration
+      (identifier)
+      (stereotype))
+    (participant_declaration
+      (identifier)
+      (raw_line)
+      (raw_line))))
+
+==================
+sequence note variants
+==================
+@startuml
+participant Alice
+note right of Alice #aqua : colored
+note across : spanning
+@enduml
+---
+
+(source_file
+  (diagram
+    (participant_declaration
+      (identifier))
+    (note_statement
+      (note_position)
+      (identifier)
+      (color)
+      (label))
+    (note_statement
+      (note_position)
+      (label))))
+
+==================
+block closers reach raw
+==================
+@startuml
+title
+a body line
+end title
+ref over Alice
+ref body
+end ref
+box "Grouped"
+participant B
+end box
+@enduml
+---
+
+(source_file
+  (diagram
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (participant_declaration
+      (identifier))
+    (raw_line)))

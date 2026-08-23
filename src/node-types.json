@@ -1199,6 +1199,16 @@
           }
         ]
       },
+      "color": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "color",
+            "named": true
+          }
+        ]
+      },
       "position": {
         "multiple": false,
         "required": false,
@@ -1416,6 +1426,16 @@
           }
         ]
       },
+      "color": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "color",
+            "named": true
+          }
+        ]
+      },
       "kind": {
         "multiple": false,
         "required": true,
@@ -1471,7 +1491,37 @@
             "named": true
           }
         ]
+      },
+      "order": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "number",
+            "named": true
+          }
+        ]
+      },
+      "stereotype": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "stereotype",
+            "named": true
+          }
+        ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "raw_line",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1517,6 +1567,16 @@
     "type": "relation",
     "named": true,
     "fields": {
+      "activation": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "activation",
+            "named": true
+          }
+        ]
+      },
       "color": {
         "multiple": false,
         "required": false,
@@ -1539,7 +1599,7 @@
       },
       "left": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
@@ -1601,7 +1661,7 @@
       },
       "right": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
@@ -1793,7 +1853,23 @@
     "named": false
   },
   {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
     "type": "abstract",
+    "named": true
+  },
+  {
+    "type": "across",
+    "named": false
+  },
+  {
+    "type": "activation",
     "named": true
   },
   {
@@ -1934,6 +2010,10 @@
     "named": false
   },
   {
+    "type": "number",
+    "named": true
+  },
+  {
     "type": "of",
     "named": false
   },
@@ -1943,6 +2023,10 @@
   },
   {
     "type": "opt",
+    "named": false
+  },
+  {
+    "type": "order",
     "named": false
   },
   {

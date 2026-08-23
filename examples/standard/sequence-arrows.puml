@@ -1,0 +1,24 @@
+@startuml
+Alice -> Bob : sync
+Alice --> Bob : response
+Alice <- Bob : reverse
+Alice <-- Bob : reverse dotted
+Bob ->> Alice : thin
+Bob -->> Alice : thin dotted
+Bob -\ Alice : half bottom
+Bob -\\ Alice : thin half bottom
+Bob -/ Alice : half top
+Bob -// Alice : thin half top
+Bob ->x Alice : lost
+Bob x-> Alice : lost source
+Bob ->o Alice : circle
+Bob o-> Alice : circle source
+Bob o->o Alice : both circles
+Bob <-> Alice : bidirectional
+Bob <->o Alice : bidir circle
+Bob -[#red]> Alice : colored
+Bob -[#0000FF]-> Alice : colored long
+Alice -> Alice : self
+A ->(10) B : slanted
+A -> B : one & B -> C : parallel
+@enduml

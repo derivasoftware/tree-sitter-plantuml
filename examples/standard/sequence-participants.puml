@@ -1,0 +1,20 @@
+@startuml
+participant Alice
+participant "Long Name" as LN
+actor Bob #red
+boundary B1
+control C1
+entity E1
+database D1
+collections Co1
+queue Q1
+participant Last order 30
+participant Gen << Generated >>
+participant Spot << (C,#ADD1B2) Testable >>
+participant Multi [
+  =Title
+  ----
+  ""SubTitle""
+]
+"Bob()" -> "Alice()" : quoted
+@enduml

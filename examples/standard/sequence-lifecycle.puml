@@ -1,0 +1,24 @@
+@startuml
+participant Alice
+participant Bob
+activate Alice
+activate Alice #FFBBBB
+Alice -> Bob ++ : activate target
+Alice -> Bob -- : deactivate source
+Alice -> Bob ++ #gold : activate colored
+Alice -> Bob ** : create target
+Alice -> Bob !! : destroy target
+return result
+deactivate Alice
+destroy Alice
+autoactivate on
+create Bob
+create control String
+autonumber
+autonumber 10 5
+autonumber "<b>[000]"
+autonumber stop
+autonumber resume
+autonumber 1.1.1
+autonumber inc A
+@enduml

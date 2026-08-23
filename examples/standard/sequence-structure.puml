@@ -1,0 +1,40 @@
+@startuml
+title Simple title
+title
+a multiline
+title body
+end title
+header Page Header
+footer Page %page% of %lastpage%
+newpage
+newpage A new page title
+participant Alice
+participant Bob
+alt ok
+  Alice -> Bob
+else ko
+  Alice -> Bob : fail
+end
+alt#Gold #LightBlue colored frame
+  Alice -> Bob
+end
+group MyLabel [Secondary Label]
+  Alice -> Bob
+end
+mainframe This is mainframe
+== Initialization ==
+ref over Alice : see other diagram
+ref over Alice, Bob
+  a multiline
+  reference body
+end ref
+...
+...5 minutes later...
+|||
+||45||
+box "Internal Service" #LightBlue
+  participant Bob
+end box
+hide footbox
+hide unlinked
+@enduml

@@ -1,0 +1,18 @@
+requirement:
+  id: REQ-00025-1
+  title: The grammar shall parse participant declarations with stereotypes, colors, order and multiline bodies
+  description: >
+    The grammar shall parse participant declarations with stereotypes, colors, order and multiline bodies
+  rationale: >
+    Sequence participants decorate like entities: << stereotypes >>
+    (spot form included), trailing colors, an explicit order N, and the
+    bracketed multiline display body whose creole lines stay opaque raw
+    lines. Lifecycle verbs (activate, return, create, autonumber…) stay
+    deliberately raw — zero occurrences in the wild corpus.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00008-1
+  tags:
+    - sequence
+    - standard-conformance

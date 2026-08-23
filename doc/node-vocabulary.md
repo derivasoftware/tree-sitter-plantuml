@@ -49,10 +49,17 @@ optional `color:` (inline style suffix) and `label:`.
 
 `relation_operator` is one token covering: the six core kinds and their
 reversed forms, embedded direction hints (`-left->`, `-l->`), style
-tags (`-[#red,dashed,thickness=2]->`), lollipops (`()-`, `-()`) and the
-package-hierarchy head (`+--`). Decoding head/tail semantics from the
-token text is the consumer's job (see plantuml-render's
-`decodeOperator` for a reference implementation).
+tags (`-[#red,dashed,thickness=2]->`), lollipops (`()-`, `-()`), the
+package-hierarchy head (`+--`), and the sequence decorations — thin
+(`->>`), lost (`->x`, `x->`), circle (`->o`, `o->`), half-arrows
+(`-\`, `-/` and thin doubles), bidirectional composites (`<->o`) and
+slanted suffixes (`->(10)`). Boundary messages (`[->`, `?->`, `->]`,
+`->?`, `o-]`) parse as `relation` with the edge carried in the
+operator and the missing endpoint absent. Sequence activation
+shorthands land as an `activation` child (`++ -- ** !!`) with an
+optional `color`. Decoding head/tail semantics from the token text is
+the consumer's job (see plantuml-render's `decodeOperator` for a
+reference implementation).
 
 ## Grouping and sequence
 
