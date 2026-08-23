@@ -45,17 +45,21 @@ incrementally, one diagram type at a time, behind an explicit frontier policy:
   modifiers, `~` package-private members (GLR-disambiguated from C++
   destructors), and package colors. Result: 125/149 structural, 24/149
   raw, **0 ERROR**.
-- **next** — activity diagrams (new syntax only), then the frontier
-  hardening for identifier-headed unknowns (REQ-00012-1).
+- **v0.5 (current)** — the frontier fallback (REQ-00012-2): an external
+  scanner claims any identifier-headed statement no structural rule can
+  parse as a `raw_line`, looking past qualifiers and cardinalities
+  before deciding. The never-ERROR guarantee now holds for **any**
+  input — deployment syntax, mindmaps, sprites, future PlantUML — not
+  just the documented class-diagram standard.
+- **next** — activity diagrams (new syntax only), pending corpus
+  evidence.
 
 **Frontier policy**: any statement outside the supported subset parses as a
 `raw_line` (or `raw_block` for multi-line notes) instead of an `ERROR` node,
 and must survive a round-trip byte-identical. Consumers can rely on every
-input producing a usable tree. Every construct documented by the class-diagram
-reference parses without `ERROR` (see `tests/test_standard_coverage.py`).
-Known limitation: a truly unknown identifier-headed statement outside the
-reference can still produce an `ERROR`; hardening this frontier is on the
-roadmap (REQ-00012-1).
+input producing a usable tree — this is universal as of v0.5, and every
+construct documented by the class-diagram reference additionally parses to
+its intended node (`tests/test_standard_coverage.py`).
 
 ## Documentation
 

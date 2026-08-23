@@ -75,3 +75,7 @@ def test_corpus_cpp_members():
 
 def test_corpus_standard():
     check_corpus("standard")
+
+
+def test_corpus_fallback():
+    check_corpus("fallback")
