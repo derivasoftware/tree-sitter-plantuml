@@ -57,6 +57,15 @@ Known limitation: a truly unknown identifier-headed statement outside the
 reference can still produce an `ERROR`; hardening this frontier is on the
 roadmap (REQ-00012-1).
 
+## Documentation
+
+- [`doc/node-vocabulary.md`](doc/node-vocabulary.md) — every named node
+  and field: the semver-governed public API.
+- [`doc/frontier-policy.md`](doc/frontier-policy.md) — the raw-never-ERROR
+  guarantee, the standard-conformance matrix, the one known gap.
+- [`doc/development.md`](doc/development.md) — TDD flow, test pyramid,
+  tree-sitter gotchas, wasm/packaging, release procedure.
+
 **Node names are public API.** The node vocabulary (`class_declaration`,
 `relation`, `member`, …) is versioned under semver; renames are breaking
 changes.
