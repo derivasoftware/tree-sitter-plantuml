@@ -17,7 +17,7 @@ change):
 
 ## How a line reaches raw
 
-Three lexical routes (in `grammar.js`):
+Four routes:
 
 1. A first character that cannot start any supported token
    (`!directives`, separators, …).
@@ -25,6 +25,15 @@ Three lexical routes (in `grammar.js`):
    (`skinparam`, `title`, `circle`, `json`, sequence lifecycle verbs, …).
 3. Block heads (`legend`/`header`/`footer`/braced `skinparam`) open a
    `raw_block` whose body lines are all raw.
+4. **The fallback** (`src/scanner.c`, REQ-00012-2): an external scanner
+   claims an identifier-headed line whose head is not a statement
+   keyword and whose continuation — looking past qualifiers (`[k]`)
+   and cardinalities (`"1"/role`) — cannot open a relation or colon
+   member. When in doubt it declines, so structural rules keep their
+   exact behaviour; an error-recovery sentinel keeps it silent during
+   recovery. Keyword-table drift fails loudly: a keyword added to
+   `grammar.js` but missing from the C table turns its construct raw
+   and its corpus test red.
 
 ## Standard conformance
 
@@ -34,14 +43,6 @@ per-construct matrix (149 constructs, `examples/standard/*.puml`,
 raw, 0 ERROR**. The deliberately-raw set is style/config surface
 (`skinparam`, `set separator`, `page`, diagram-level direction), the
 drawn-but-unmodeled shapes (`circle`, `diamond`) and `json` bodies.
-
-## Known limitation
-
-A truly unknown **identifier-headed** statement outside the reference
-(e.g. `sprite foo bar`) still errors: the parser commits to the
-relation rule after the leading identifier. Hardening this last gap is
-REQ-00012-1 (DRAFT, backlog) — it needs a scanner-assisted fallback so
-the guarantee holds for every possible head.
 
 ## Growing the frontier
 

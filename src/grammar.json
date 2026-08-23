@@ -2154,6 +2154,10 @@
               "name": "_unsupported_keyword_line"
             },
             {
+              "type": "SYMBOL",
+              "name": "_raw_statement"
+            },
+            {
               "type": "TOKEN",
               "content": {
                 "type": "PREC",
@@ -2715,7 +2719,16 @@
     ]
   ],
   "precedences": [],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "_raw_statement"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_error_sentinel"
+    }
+  ],
   "inline": [],
   "supertypes": [],
   "reserved": {}

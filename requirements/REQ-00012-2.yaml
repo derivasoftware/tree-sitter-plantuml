@@ -1,0 +1,23 @@
+requirement:
+  id: REQ-00012-2
+  title: The grammar shall parse unknown identifier-headed statements as raw lines
+  description: >
+    The grammar shall parse unknown identifier-headed statements as raw lines
+  rationale: >
+    Route 4 of the frontier, implemented as an external scanner
+    (src/scanner.c): at statement level it claims a line as raw when
+    the head is a non-keyword identifier and nothing that follows —
+    looking past qualifiers ([k]) and cardinalities ("1"/role) — can
+    open a relation or colon member. When in doubt it declines and the
+    structural rules keep their exact behaviour; during error recovery
+    a sentinel token keeps it silent. Keyword-table drift fails loudly:
+    a keyword missing from the C table turns its construct raw and its
+    corpus test red. With this the never-ERROR guarantee holds for any
+    input, not just the documented standard. Revision 2 closes the
+    DRAFT captured during the notes/display milestone.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00003-1
+  tags:
+    - frontier-policy

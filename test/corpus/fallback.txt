@@ -1,0 +1,109 @@
+==================
+unknown identifier-headed statements fall back to raw
+==================
+@startuml
+sprite foo bar
+mainframe hello world
+url of x is [[http://e.com]]
+Foo
+foo <T> extra tokens
+classes are not the class keyword
+Widget #transparent
+@enduml
+---
+
+(source_file
+  (diagram
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)))
+
+==================
+fallback inside grouping blocks
+==================
+@startuml
+package P {
+  sprite inner thing
+  class Real
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (package_block
+      (identifier)
+      (raw_line)
+      (class_declaration
+        (identifier)))))
+
+==================
+structural lines stay structural next to fallback lines
+==================
+@startuml
+sprite foo bar
+A --> B
+Object : member()
+class C
+a.b-c o-- d
+Alice -> Bob : hi
+@enduml
+---
+
+(source_file
+  (diagram
+    (raw_line)
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (colon_member
+      (identifier)
+      (label))
+    (class_declaration
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (label))))
+
+==================
+fallback beyond cardinalities and qualifiers
+==================
+@startuml
+binary "B" as b
+Widget [half open
+A "1" B no operator
+lifeline "titled"/role stops here
+Real [k] --> "1" Target
+Card "1" -- "n" Owner
+@enduml
+---
+
+(source_file
+  (diagram
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (relation
+      (identifier)
+      (qualifier)
+      (relation_operator)
+      (cardinality)
+      (identifier))
+    (relation
+      (identifier)
+      (cardinality)
+      (relation_operator)
+      (cardinality)
+      (identifier))))

@@ -24,6 +24,11 @@ export default grammar({
 
   extras: $ => [/[ \t]/, $.block_comment],
 
+  // The frontier fallback (src/scanner.c): _raw_statement claims an
+  // identifier-headed line no structural rule can parse; the sentinel
+  // is never produced — it detects error recovery inside the scanner.
+  externals: $ => [$._raw_statement, $._error_sentinel],
+
   // ~ opens both a visibility marker and a destructor name; GLR keeps
   // both readings alive until the following token decides.
   conflicts: $ => [[$.visibility, $.cpp_method_name]],
@@ -397,6 +402,8 @@ export default grammar({
       choice(
         token(prec(-2, /[^ \t\r\n][^\r\n]*/)),
         $._unsupported_keyword_line,
+        // route 4: scanner-claimed identifier-headed unknowns
+        $._raw_statement,
         // header/footer with inline content: same precedence as the bare
         // block heads below so the longer single-line match wins.
         token(prec(3, /header[ \t][^ \t\n][^\n]*/)),
