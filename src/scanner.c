@@ -159,7 +159,7 @@ bool tree_sitter_plantuml_external_scanner_scan(
 
   /* Only a relation operator can continue the statement now. */
   if (c == '-' || c == '.') return false;
-  if (c == '<' || c == '*' || c == '+' || c == 'o') {
+  if (c == '<' || c == '*' || c == '+' || c == 'o' || c == 'x') {
     lexer->advance(lexer, false);
     int32_t d = lexer->lookahead;
     if (d == '-' || d == '.') return false;

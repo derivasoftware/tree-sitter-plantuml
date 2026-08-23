@@ -1,0 +1,14 @@
+@startuml
+participant Bob
+participant Alice
+[-> Bob : incoming
+[--> Bob : incoming dotted
+[o-> Alice : circle in
+[x-> Alice : lost in
+?-> Alice : short in
+Bob ->] : outgoing
+Bob -->] : outgoing dotted
+Bob o-] : circle out
+Bob ->? : short out
+Bob x<-] : who knows
+@enduml

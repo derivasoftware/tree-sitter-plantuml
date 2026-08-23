@@ -1,0 +1,22 @@
+requirement:
+  id: REQ-00024-1
+  title: The grammar shall parse sequence message decorations, boundary endpoints and activation shorthands
+  description: >
+    The grammar shall parse sequence message decorations, boundary endpoints and activation shorthands
+  rationale: >
+    From the sequence-diagram reference: thin (>>), lost (x), circle (o)
+    heads and tails, half-arrow heads (backslash and slash forms),
+    bidirectional composites, slanted (N) suffixes — all in the one
+    relation_operator token, whose x/o tails only lex adjacent to the
+    arrow so "-> owner" keeps its plain operator. Boundary messages
+    ([->, ?->, ->], ->?, o-]) carry the diagram edge in the operator
+    and alias to relation, keeping the node vocabulary closed.
+    Activation shorthands (++ -- ** !!) land as an activation node
+    with an optional color before the label.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00008-1
+  tags:
+    - sequence
+    - standard-conformance

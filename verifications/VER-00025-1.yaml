@@ -1,0 +1,10 @@
+verification:
+  id: VER-00025-1
+  req_id: REQ-00024-1
+  title: Corpus and matrix tests cover message decorations, boundaries and activations
+  description: >
+    Corpus and matrix tests cover message decorations, boundaries and activations
+  method: test
+  test_ids:
+    - tests/test_grammar.py::test_corpus_seq_standard
+    - tests/test_standard_coverage.py::test_construct_maps_to_intended_node

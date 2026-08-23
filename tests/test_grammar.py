@@ -79,3 +79,7 @@ def test_corpus_standard():
 
 def test_corpus_fallback():
     check_corpus("fallback")
+
+
+def test_corpus_seq_standard():
+    check_corpus("seq-standard")

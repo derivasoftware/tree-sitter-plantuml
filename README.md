@@ -51,6 +51,17 @@ incrementally, one diagram type at a time, behind an explicit frontier policy:
   before deciding. The never-ERROR guarantee now holds for **any**
   input — deployment syntax, mindmaps, sprites, future PlantUML — not
   just the documented class-diagram standard.
+- **v0.6 (current)** — sequence standard conformance, driven by a
+  111-construct matrix of plantuml.com/sequence-diagram
+  (`examples/standard/sequence-*.puml`): all arrow decorations (thin
+  `>>`, lost `x`, circle `o`, half-arrows `\` `/`, bidirectional
+  composites, slanted `(N)`), boundary messages (`[->`, `?->`, `->]`,
+  `->?` — aliased to `relation`), activation shorthands
+  (`++ -- ** !!` → `activation` node with optional color), participant
+  decorations (stereotypes, colors, `order N`, multiline `[…]`
+  bodies), note colors and `across`. Lifecycle verbs, autonumber,
+  ref/box blocks, delays and spacing stay deliberately raw (zero
+  corpus evidence). Result: 70/111 structural, 41 raw, **0 ERROR**.
 - **next** — activity diagrams (new syntax only), pending corpus
   evidence.
 

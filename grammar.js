@@ -50,6 +50,7 @@ export default grammar({
       $.enum_declaration,
       $.entity_declaration,
       $.relation,
+      alias($.boundary_message, $.relation),
       $.colon_member,
       $.package_block,
       $.namespace_block,
@@ -74,6 +75,7 @@ export default grammar({
         field('position', $.note_position),
         'of',
         field('target', choice($._entity_name, $.member_ref)),
+        optional(field('color', $.color)),
         $._note_body,
       ),
       // note over <entities> — the sequence-diagram attachment form
@@ -81,6 +83,7 @@ export default grammar({
         'note',
         field('position', alias('over', $.note_position)),
         field('target', $.entity_list),
+        optional(field('color', $.color)),
         $._note_body,
       ),
       // note [<position>] on link — attached to the preceding relation
@@ -110,7 +113,7 @@ export default grammar({
       ),
     ),
 
-    note_position: $ => choice('left', 'right', 'top', 'bottom'),
+    note_position: $ => choice('left', 'right', 'top', 'bottom', 'across'),
 
     // ── Display directives ─────────────────────────────────────────────
 
@@ -286,9 +289,37 @@ export default grammar({
         optional(field('right_role', alias(token.immediate(/\/[\w.-]+/), $.role))),
       )),
       field('right', choice($._entity_name, $.member_ref)),
+      optional(field('activation', $.activation)),
       optional(field('color', $.color)),
       optional(seq(':', field('label', $.label))),
       $._newline,
+    ),
+
+    // Sequence activation shorthands after the target: A -> B ++ #gold
+    activation: $ => token(choice('++', '--', '**', '!!')),
+
+    // Boundary messages: one endpoint is the diagram edge, expressed in
+    // the operator itself ([->, ?->, ->], ->?, o-]). Aliased to relation
+    // so the node vocabulary stays closed.
+    boundary_message: $ => choice(
+      seq(
+        field('operator', alias(
+          token(/[\[?][ox]?[-.]+(>>|>[xo]?|\\\\|\\|\/\/|\/)?/),
+          $.relation_operator,
+        )),
+        field('right', $._entity_name),
+        optional(seq(':', field('label', $.label))),
+        $._newline,
+      ),
+      seq(
+        field('left', $._entity_name),
+        field('operator', alias(
+          token(/(<\||<|\*|[ox])?[-.]+(>>|>[xo]?)?[\]?]/),
+          $.relation_operator,
+        )),
+        optional(seq(':', field('label', $.label))),
+        $._newline,
+      ),
     ),
 
     // [Qualifier] — the qualified-association bracket after the left
@@ -296,12 +327,15 @@ export default grammar({
     qualifier: $ => token(seq('[', /[^\]\n]+/, ']')),
 
     relation_operator: $ => token(choice(
-      // dashed core:  --|> <|-- *-- --* o-- --o --> <-- -- () lollipops
-      // and the + hierarchy head, with optional [style,...] tags and
-      // embedded direction hints (-left->, -l->)
-      /(<\||<|\*|o|\(\)|\+)?-+(\[[^\]\n]+\]-*)?((left|right|up|down|l|r|u|d)-+)?(\|>|>|\*|o|\(\)|\+)?/,
+      // dashed core:  --|> <|-- *-- --* o-- --o --> <-- -- () lollipops,
+      // the + hierarchy head, [style,...] tags, embedded direction hints
+      // (-left->, -l->), and the sequence decorations: >> thin, >x lost,
+      // >o circle (x/o heads too), \ / half heads, (N) slant. The x/o
+      // tails only lex when adjacent to the arrow (`->o Alice`), so a
+      // spaced `-> owner` keeps its plain operator.
+      /(<\||<|\*|[ox]|\(\)|\+)?-+(\[[^\]\n]+\]-*)?((left|right|up|down|l|r|u|d)-+)?(\|>|>>|>[xo]?|\*|o|x|\(\)|\+|\\\\|\\|\/\/|\/)?(\(\d+\))?/,
       // dotted core:  ..|> <|.. ..> <.. ..
-      /(<\||<|\*|o|\(\)|\+)?\.+(\[[^\]\n]+\]\.*)?((left|right|up|down|l|r|u|d)\.+)?(\|>|>|\*|o|\(\)|\+)?/,
+      /(<\||<|\*|[ox]|\(\)|\+)?\.+(\[[^\]\n]+\]\.*)?((left|right|up|down|l|r|u|d)\.+)?(\|>|>>|>[xo]?|\*|o|x|\(\)|\+|\\\\|\\|\/\/|\/)?(\(\d+\))?/,
     )),
 
     label: $ => $._to_eol,
@@ -347,6 +381,18 @@ export default grammar({
       )),
       field('name', $._entity_name),
       optional(seq('as', field('alias', $._entity_name))),
+      repeat(choice(
+        field('stereotype', $.stereotype),
+        field('color', $.color),
+        seq('order', field('order', alias(token(/\d+/), $.number))),
+      )),
+      // multiline declaration body: participant P [ …creole lines… ]
+      optional(seq(
+        '[',
+        $._newline,
+        repeat(choice(alias($._raw_block_line, $.raw_line), $._newline)),
+        ']',
+      )),
       $._newline,
     ),
 
@@ -404,6 +450,10 @@ export default grammar({
         $._unsupported_keyword_line,
         // route 4: scanner-claimed identifier-headed unknowns
         $._raw_statement,
+        // closers of keyword-raw blocks (ref/title/box open as raw
+        // keyword lines; their `end X` must reach raw too, while a bare
+        // frame `end` keeps closing frames)
+        token(prec(3, /end[ \t]+(ref|title|box)([ \t][^\n]*)?/)),
         // header/footer with inline content: same precedence as the bare
         // block heads below so the longer single-line match wins.
         token(prec(3, /header[ \t][^ \t\n][^\n]*/)),
