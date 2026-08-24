@@ -1,0 +1,19 @@
+requirement:
+  id: REQ-00027-1
+  title: The grammar shall ship fold and indent queries for native tree-sitter editors
+  description: >
+    The grammar shall ship fold and indent queries for native tree-sitter editors
+  rationale: >
+    Neovim, Helix and Zed consume the grammar directly; folds.scm makes
+    bodies, grouping blocks, frames and multi-line notes foldable, and
+    indents.scm (nvim-treesitter capture vocabulary) mirrors the
+    plantuml-fmt canonical style — blocks open one level, closers and
+    else lines align with their opener. The query validator covers
+    every .scm shipped, not just highlights.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00005-1
+  tags:
+    - queries
+    - editors
