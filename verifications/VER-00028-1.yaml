@@ -1,0 +1,10 @@
+verification:
+  id: VER-00028-1
+  req_id: REQ-00027-1
+  title: Query tests validate every shipped scm against the grammar
+  description: >
+    Query tests validate every shipped scm against the grammar
+  method: test
+  test_ids:
+    - tests/test_queries.py::test_queries_reference_known_nodes
+    - tests/test_queries.py::test_all_editor_queries_ship
