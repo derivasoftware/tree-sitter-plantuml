@@ -14,7 +14,8 @@ stop
 (source_file
   (diagram
     (raw_line)
-    (raw_line)
+    (activity_action
+      (action_text))
     (raw_line)
     (raw_line
       (label))
@@ -37,7 +38,8 @@ end
 (source_file
   (diagram
     (raw_line)
-    (raw_line)
+    (activity_action
+      (action_text))
     (raw_line)
     (frame_block
       (label)

@@ -73,6 +73,8 @@ export default grammar({
       $.relation,
       alias($.boundary_message, $.relation),
       $.colon_member,
+      $.activity_action,
+      $.swimlane,
       $.package_block,
       $.namespace_block,
       $.together_block,
@@ -173,6 +175,23 @@ export default grammar({
       ), $.entity_kind)),
       $._entity_head,
       choice($._newline, seq(field('body', $.entity_body), $._newline)),
+    ),
+
+    // Activity actions and swimlanes are structural — the consumer is
+    // call-level correlation (an action invokes a method; the lane
+    // names the receiver). Control flow stays deliberately raw until
+    // native rendering demands it. Single-line actions only; multiline
+    // bodies keep falling to the raw frontier.
+    activity_action: $ => seq(
+      field('text', alias(
+        token(prec(1, /:[^;\n]*[;|<>/\\\]][^\n]*/)), $.action_text)),
+      $._newline,
+    ),
+
+    swimlane: $ => seq(
+      field('name', alias(
+        token(prec(1, /\|(#[^|\n]+\|)?[^|\n]+\|[^\n]*/)), $.lane_text)),
+      $._newline,
     ),
 
     // Entity : member — the single-line member form of the reference.

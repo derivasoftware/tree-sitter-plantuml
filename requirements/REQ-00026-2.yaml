@@ -1,0 +1,24 @@
+requirement:
+  id: REQ-00026-2
+  title: The grammar shall parse activity actions and swimlanes structurally and the rest of the chapter as raw
+  description: >
+    The grammar shall parse activity actions and swimlanes structurally and the rest of the chapter as raw
+  rationale: >
+    Revision 2: the consumer arrived — call-level correlation (an
+    action invokes a method; the lane names the receiver), so
+    single-line actions (:text; and the SDL terminators, trailing
+    stereotypes tolerated) and swimlanes (|Name|, colored variant)
+    become activity_action/swimlane nodes with their text as a child
+    token. Control flow (if/while/fork/repeat/switch), multiline
+    action bodies, colored #x:action; heads and connectors stay
+    deliberately raw — their consumer would be native rendering.
+    Sequence spacing lines (|||, ||45||) keep falling to raw: the
+    swimlane token requires a non-pipe after the first pipe. The
+    never-ERROR guarantee is untouched.
+  status: APPROVED
+  asil: QM
+  parent_ids:
+    - SREQ-00009-1
+  tags:
+    - activity
+    - frontier-policy
