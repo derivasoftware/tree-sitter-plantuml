@@ -1,6 +1,6 @@
 verification:
   id: VER-00027-1
-  req_id: REQ-00026-1
+  req_id: REQ-00026-2
   title: Corpus and matrix tests cover activity closers, braced groups and the raw tier
   description: >
     Corpus and matrix tests cover activity closers, braced groups and the raw tier

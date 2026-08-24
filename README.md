@@ -72,7 +72,14 @@ incrementally, one diagram type at a time, behind an explicit frontier policy:
   braced `group X {` heads are scanner-claimed raw. Structural
   promotion is gated on a consumer arriving (the likely one: rendering
   argos PaC processes as activity diagrams).
-- **next** — structural activity, when a consumer provides evidence.
+- **v0.8 (current)** — the consumer arrived: activity **actions**
+  (`:text;`, SDL terminators) and **swimlanes** (`|Name|`) are
+  structural (`activity_action`/`swimlane` nodes) so the LSP can
+  correlate actions with the methods they invoke and lanes with the
+  classes they name. Control flow stays deliberately raw — its
+  consumer would be native rendering.
+- **next** — structural activity control flow, if native rendering
+  ever demands it.
 
 **Frontier policy**: any statement outside the supported subset parses as a
 `raw_line` (or `raw_block` for multi-line notes) instead of an `ERROR` node,

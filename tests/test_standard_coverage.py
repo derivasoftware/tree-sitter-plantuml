@@ -101,7 +101,7 @@ CONSTRUCTS = [
     ("sequence-notes.puml", "/ note over Bob : aligned second", "raw_line"),
     # activity chapter (plantuml.com/activity-diagram-beta) — raw tier:
     # structural promotion waits for a consumer (renderer/LSP evidence)
-    ("activity-flow.puml", ":first action;", "raw_line"),
+    ("activity-flow.puml", ":first action;", "activity_action"),
     ("activity-flow.puml", "#pink:colored action;", "raw_line"),
     ("activity-flow.puml", "if (condition?) then (yes)", "raw_line"),
     ("activity-flow.puml", "elseif (other?) then (maybe)", "raw_line"),
@@ -122,13 +122,13 @@ CONSTRUCTS = [
     ("activity-parallel.puml", "label mylabel", "raw_line"),
     ("activity-parallel.puml", "goto mylabel", "raw_line"),
     ("activity-parallel.puml", "(A)", "raw_line"),
-    ("activity-structure.puml", "|Swimlane1|", "raw_line"),
+    ("activity-structure.puml", "|Swimlane1|", "swimlane"),
     ("activity-structure.puml", "-> arrow label;", "raw_line"),
     ("activity-structure.puml", "partition Initialization {", "raw_line"),
     ("activity-structure.puml", "group MyGroup {", "raw_line"),
     ("activity-structure.puml", "package Deployment {", "package_block"),
     ("activity-structure.puml", "floating note left : floating text", "raw_line"),
-    ("activity-structure.puml", ":action with stereotype; <<procedure>>", "raw_line"),
+    ("activity-structure.puml", ":action with stereotype; <<procedure>>", "activity_action"),
 ]
 
 

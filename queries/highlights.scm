@@ -109,3 +109,6 @@
 
 (activation) @operator
 (number) @number
+
+(action_text) @string
+(lane_text) @module
