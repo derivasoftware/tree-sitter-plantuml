@@ -25,7 +25,8 @@ def load_parser():
     if not LIB.exists():
         subprocess.run(
             ["npx", "tree-sitter", "build", "--output", str(LIB)],
-            cwd=ROOT, check=True,
+            cwd=ROOT,
+            check=True,
         )
     lib = ctypes.cdll.LoadLibrary(str(LIB))
     lib.tree_sitter_plantuml.restype = ctypes.c_void_p
@@ -42,7 +43,7 @@ def leaves(node):
 def lossless(src, tree):
     end = 0
     for leaf in leaves(tree.root_node):
-        if leaf.is_missing or src[end:leaf.start_byte].strip():
+        if leaf.is_missing or src[end : leaf.start_byte].strip():
             return False
         end = leaf.end_byte
     return not src[end:].strip()
@@ -60,7 +61,9 @@ def first_error_line(src, node):
 def main(roots):
     parser = load_parser()
     files = [
-        p for r in roots for p in pathlib.Path(r).rglob("*.puml")
+        p
+        for r in roots
+        for p in pathlib.Path(r).rglob("*.puml")
         if ".venv" not in p.parts and "node_modules" not in p.parts
     ]
     if not files:
@@ -82,8 +85,10 @@ def main(roots):
         key = " ".join(line.split()[:2])[:40] or "<empty>"
         signatures[key] += 1
         examples.setdefault(key, f"{f}:{line_no + 1}: {line[:70]}")
-    print(f"files: {len(files)}  error-free: {clean} ({clean / len(files):.1%})"
-          f"  lossless: {covered} ({covered / len(files):.1%})")
+    print(
+        f"files: {len(files)}  error-free: {clean} ({clean / len(files):.1%})"
+        f"  lossless: {covered} ({covered / len(files):.1%})"
+    )
     for key, n in signatures.most_common(20):
         print(f"{n:5}  {key!r:44} {examples[key]}")
     return 0 if clean == len(files) else 2

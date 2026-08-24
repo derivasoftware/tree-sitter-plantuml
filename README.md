@@ -1,128 +1,65 @@
 # tree-sitter-plantuml
 
+<!-- folio: colophon --project tree-sitter-plantuml --junit test-results/junit.xml -->
+![powered by: argos](https://img.shields.io/badge/powered%20by-argos-1f6feb) ![verified: 100%](https://img.shields.io/badge/verified-100%25-2ea44f) ![tests: 100%](https://img.shields.io/badge/tests-100%25-2ea44f) ![UT: n/a](https://img.shields.io/badge/UT-n%2Fa-lightgrey) ![ST: n/a](https://img.shields.io/badge/ST-n%2Fa-lightgrey) ![diagnostics: 27](https://img.shields.io/badge/diagnostics-27-dfb317)
+
+> **tree-sitter-plantuml** is powered by **argos**. **folio** generates this documentation from the repository's model: 27 requirements · 28 verifications · 0 constraints. Quality: 100% verified · 100% tests passing.
+<!-- /folio -->
+
 A [tree-sitter](https://tree-sitter.github.io/) grammar for the
-[PlantUML](https://plantuml.com/) language.
+[PlantUML](https://plantuml.com/) language. Standalone and consumer-neutral:
+editors, formatters, linters and documentation tooling all parse through it.
+Root of the `deriva/plantuml` family: grammar → formatter → LSP → editor.
 
-This is a standalone project: the grammar is a general-purpose parser for any
-tree-sitter consumer — editors, formatters, linters, documentation tooling.
-It carries no coupling to any specific downstream.
+The structural guarantee: **never ERROR**. Statements the grammar knows
+become structured nodes; anything else (deployment syntax, mindmaps, future
+PlantUML) passes through lossless as `raw_line` via the frontier fallback.
+Coverage is standard-driven: per-construct matrices of plantuml.com (class
+125/149 structural, sequence 70/111, activity at the raw tier), all at zero
+ERROR.
 
-## Scope and roadmap
+## Install
 
-PlantUML has no formal grammar and an enormous surface. This project covers it
-incrementally, one diagram type at a time, behind an explicit frontier policy:
+**Neovim**: [plantuml.nvim](https://gitlab.semantiqa.dev/deriva/plantuml/plantuml.nvim)
+builds the pinned grammar for you; nothing else to do.
 
-- **v0.1 (current)** — the `@startuml`/`@enduml` envelope, line and block
-  comments, and the class-diagram core: `class` / `abstract class` /
-  `interface` / `enum` declarations (quoted names, aliases, generics,
-  stereotypes, `extends`/`implements` clauses, trailing colors), members
-  with visibility and `{static}`/`{abstract}` modifiers plus group
-  separator lines (`--`, `..`, `==`, `__ titled __`),
-  the relation operators (inheritance, realization, composition, aggregation,
-  dependency, association) with cardinalities and labels, `package` /
-  `namespace` / `together` blocks, structured notes (positional, targeted,
-  on-link, block and floating forms), and `hide`/`show`/`remove`/`restore`
-  display directives. `legend`/`header`/`footer` and braced `skinparam`
-  blocks pass through the raw frontier safely.
-- **v0.2 (current)** — the sequence-diagram core, evidence-scoped from a
-  real 84-diagram corpus: participant declarations (all eight kinds,
-  quoted names, aliases), `alt`/`opt`/`loop`/`par`/`break`/`critical`/
-  `group` frames with `else` clauses, and `==` section dividers. Arrow
-  lines (`A -> B : msg`) parse as the generic `relation` node — whether
-  that is an association or a message is diagram context the consumer
-  holds. Lifecycle verbs (`activate`, `return`, `ref`…) stay on the raw
-  frontier until evidence demands structure.
-- **v0.4 (current)** — standard conformance for class diagrams, driven
-  by a per-construct matrix of plantuml.com/class-diagram (149
-  constructs, `examples/standard/`): the extended entity kinds
-  (`annotation`, `exception`, `metaclass`, `protocol`, `struct`,
-  `record`, `dataclass` → `entity_declaration`), single-line colon
-  members (`Object : equals()`), decorated relation operators (style
-  tags `-[#red,dashed,thickness=2]->`, shorthands `-l->`, lollipops
-  `()-`/`-()`, hierarchy `+--`, qualifiers `[customerId]`, role-slash
-  cardinalities, inline colors, `Entity::member` endpoints), `$tag`
-  markers and `$`-prefixed names, `{field}`/`{method}`/`{classifier}`
-  modifiers, `~` package-private members (GLR-disambiguated from C++
-  destructors), and package colors. Result: 125/149 structural, 24/149
-  raw, **0 ERROR**.
-- **v0.5 (current)** — the frontier fallback (REQ-00012-2): an external
-  scanner claims any identifier-headed statement no structural rule can
-  parse as a `raw_line`, looking past qualifiers and cardinalities
-  before deciding. The never-ERROR guarantee now holds for **any**
-  input — deployment syntax, mindmaps, sprites, future PlantUML — not
-  just the documented class-diagram standard.
-- **v0.6 (current)** — sequence standard conformance, driven by a
-  111-construct matrix of plantuml.com/sequence-diagram
-  (`examples/standard/sequence-*.puml`): all arrow decorations (thin
-  `>>`, lost `x`, circle `o`, half-arrows `\` `/`, bidirectional
-  composites, slanted `(N)`), boundary messages (`[->`, `?->`, `->]`,
-  `->?` — aliased to `relation`), activation shorthands
-  (`++ -- ** !!` → `activation` node with optional color), participant
-  decorations (stereotypes, colors, `order N`, multiline `[…]`
-  bodies), note colors and `across`. Lifecycle verbs, autonumber,
-  ref/box blocks, delays and spacing stay deliberately raw (zero
-  corpus evidence). Result: 70/111 structural, 41 raw, **0 ERROR**.
-- **v0.7 (current)** — activity chapter conformance at the **raw
-  tier** (`examples/standard/activity-*.puml`, plantuml.com/
-  activity-diagram-beta): every construct — actions, if/switch/while/
-  repeat, forks and splits, swimlanes, connectors, partitions —
-  parses lossless with zero ERROR, none structural. The frontier work:
-  bare `end`/`else (label)`/`break` are raw at diagram level while
-  keeping their exact frame-closing semantics inside frames, and
-  braced `group X {` heads are scanner-claimed raw. Structural
-  promotion is gated on a consumer arriving (the likely one: rendering
-  argos PaC processes as activity diagrams).
-- **v0.8 (current)** — the consumer arrived: activity **actions**
-  (`:text;`, SDL terminators) and **swimlanes** (`|Name|`) are
-  structural (`activity_action`/`swimlane` nodes) so the LSP can
-  correlate actions with the methods they invoke and lanes with the
-  classes they name. Control flow stays deliberately raw — its
-  consumer would be native rendering.
-- **next** — structural activity control flow, if native rendering
-  ever demands it.
+**Python** (the binding the LSP uses), straight from git. Generated
+from the manifest and the latest tag:
 
-**Frontier policy**: any statement outside the supported subset parses as a
-`raw_line` (or `raw_block` for multi-line notes) instead of an `ERROR` node,
-and must survive a round-trip byte-identical. Consumers can rely on every
-input producing a usable tree — this is universal as of v0.5, and every
-construct documented by the class-diagram reference additionally parses to
-its intended node (`tests/test_standard_coverage.py`).
+<!-- folio: install -->
+```bash
+pip install git+https://gitlab.semantiqa.dev/deriva/plantuml/tree-sitter-plantuml.git@v0.8.0
+```
+
+Or from a clone: `git clone https://gitlab.semantiqa.dev/deriva/plantuml/tree-sitter-plantuml && pip install ./tree-sitter-plantuml`.
+<!-- /folio -->
+
+**C or anything else**: compile `src/parser.c` and `src/scanner.c` from a
+clone (`cc -shared -fPIC -Isrc src/parser.c src/scanner.c`).
+
+## Use cases
+
+**Parse from Python**:
+
+```python
+from tree_sitter import Language, Parser
+import tree_sitter_plantuml
+
+parser = Parser(Language(tree_sitter_plantuml.language()))
+tree = parser.parse(b"@startuml\nclass Cafetera\n@enduml\n")
+```
+
+**Highlight, fold and indent** in any tree-sitter editor; the `queries/`
+directory ships alongside the parser.
+
+**Build tooling on the node vocabulary**: `src/node-types.json` is the
+machine-readable contract (120 node types, semver-governed); see
+[doc/node-vocabulary.md](doc/node-vocabulary.md).
 
 ## Documentation
 
-- [`doc/node-vocabulary.md`](doc/node-vocabulary.md) — every named node
-  and field: the semver-governed public API.
-- [`doc/frontier-policy.md`](doc/frontier-policy.md) — the raw-never-ERROR
-  guarantee, the standard-conformance matrix, the one known gap.
-- [`doc/development.md`](doc/development.md) — TDD flow, test pyramid,
-  tree-sitter gotchas, wasm/packaging, release procedure.
-
-**Node names are public API.** The node vocabulary (`class_declaration`,
-`relation`, `member`, …) is versioned under semver; renames are breaking
-changes.
-
-## Development
-
-```bash
-npm install        # installs tree-sitter-cli
-npm test           # tree-sitter generate && tree-sitter test
-```
-
-Corpus tests live in `test/corpus/`. Every grammar change ships with corpus
-coverage.
-
-To evaluate against a wild corpus of real diagrams:
-
-```bash
-.venv/bin/python scripts/eval_wild_corpus.py <root>...
-```
-
-The current grammar parses the full argos design corpus (6&#8239;192 `.puml`
-files) 100% ERROR-free and 100% lossless.
-
-## Governance
-
-This repository is an [argos](https://gitlab.semantiqa.dev/deriva/argos/argos)
-NA project: input requirements live in `input/` (SREQ artefacts), local
-requirements and verifications in `requirements/` and `verifications/`. See
-`CLAUDE.md` for the working rules.
+- [Node vocabulary](doc/node-vocabulary.md): the grammar's public API
+- [Frontier policy](doc/frontier-policy.md): what becomes structure, what stays raw, and why
+- [Development](doc/development.md): corpus tests, conformance matrices, releasing
+- [Requirements & status](doc/requirements.md): what was asked and the traceability matrix
+- [Repo quality](doc/quality.md): artefact inventory and health metrics

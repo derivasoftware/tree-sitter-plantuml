@@ -9,8 +9,17 @@ from conftest import ROOT
 
 def test_wheel_builds(tmp_path):
     result = subprocess.run(
-        [sys.executable, "-m", "pip", "wheel", str(ROOT), "--no-deps",
-         "--no-build-isolation", "-w", str(tmp_path)],
+        [
+            sys.executable,
+            "-m",
+            "pip",
+            "wheel",
+            str(ROOT),
+            "--no-deps",
+            "--no-build-isolation",
+            "-w",
+            str(tmp_path),
+        ],
         capture_output=True,
         text=True,
     )
