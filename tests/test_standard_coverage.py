@@ -14,6 +14,8 @@ from pathlib import Path
 import pytest
 from conftest import EXAMPLES_DIR
 
+pytestmark = pytest.mark.system
+
 STANDARD_DIR = EXAMPLES_DIR / "standard"
 FILES = sorted(p.name for p in STANDARD_DIR.glob("*.puml"))
 
@@ -65,7 +67,11 @@ CONSTRUCTS = [
     ("styling.puml", "foo --> bar9 #line:red;line.bold;text:red", "relation"),
     ("styling.puml", "class Demo3 #back:lightgreen\\yellow", "class_declaration"),
     ("skinparams.puml", "page 2x2", "raw_line"),
-    ("skinparams.puml", "skinparam stereotypeCBackgroundColor<<Foo>> DimGray", "raw_line"),
+    (
+        "skinparams.puml",
+        "skinparam stereotypeCBackgroundColor<<Foo>> DimGray",
+        "raw_line",
+    ),
     ("special.puml", "json JSON {", "raw_line"),
     ("special.puml", '"fruit": "Apple",', "colon_member"),
     # sequence chapter (plantuml.com/sequence-diagram)
@@ -75,8 +81,16 @@ CONSTRUCTS = [
     ("sequence-arrows.puml", "Bob o->o Alice", "relation"),
     ("sequence-arrows.puml", "A ->(10) B", "relation"),
     ("sequence-participants.puml", "actor Bob #red", "participant_declaration"),
-    ("sequence-participants.puml", "participant Last order 30", "participant_declaration"),
-    ("sequence-participants.puml", "participant Spot << (C,#ADD1B2) Testable >>", "participant_declaration"),
+    (
+        "sequence-participants.puml",
+        "participant Last order 30",
+        "participant_declaration",
+    ),
+    (
+        "sequence-participants.puml",
+        "participant Spot << (C,#ADD1B2) Testable >>",
+        "participant_declaration",
+    ),
     ("sequence-participants.puml", "participant Multi [", "participant_declaration"),
     ("sequence-lifecycle.puml", "Alice -> Bob ++ : activate target", "relation"),
     ("sequence-lifecycle.puml", "Alice -> Bob !! : destroy target", "relation"),
@@ -128,7 +142,11 @@ CONSTRUCTS = [
     ("activity-structure.puml", "group MyGroup {", "raw_line"),
     ("activity-structure.puml", "package Deployment {", "package_block"),
     ("activity-structure.puml", "floating note left : floating text", "raw_line"),
-    ("activity-structure.puml", ":action with stereotype; <<procedure>>", "activity_action"),
+    (
+        "activity-structure.puml",
+        ":action with stereotype; <<procedure>>",
+        "activity_action",
+    ),
 ]
 
 
@@ -151,8 +169,14 @@ def statement_node(tree, row: int, col: int):
     node = tree.root_node.named_descendant_for_point_range((row, col), (row, col + 1))
     lifted = node
     while node is not None:
-        if node.type in ("diagram", "entity_body", "package_block",
-                         "namespace_block", "together_block", "source_file"):
+        if node.type in (
+            "diagram",
+            "entity_body",
+            "package_block",
+            "namespace_block",
+            "together_block",
+            "source_file",
+        ):
             break
         lifted = node
         node = node.parent

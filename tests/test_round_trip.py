@@ -9,6 +9,8 @@ tree plus inter-token whitespace, byte-identically.
 import pytest
 from conftest import corpus_inputs, example_inputs
 
+pytestmark = pytest.mark.system
+
 CASES = {**corpus_inputs(), **example_inputs()}
 
 
@@ -32,7 +34,7 @@ def test_token_coverage(language, name):
     end = 0
     for leaf in leaves(tree.root_node):
         assert not leaf.is_missing, f"missing zero-width node {leaf.type}"
-        gap = cursor[end:leaf.start_byte]
+        gap = cursor[end : leaf.start_byte]
         assert gap.strip() == b"", f"non-whitespace bytes outside tokens: {gap!r}"
         end = leaf.end_byte
     tail = cursor[end:]

@@ -7,7 +7,7 @@ license = "MIT"
 readme = "README.md"
 keywords = ["incremental", "parsing", "tree-sitter", "plantuml"]
 categories = ["parser-implementations", "parsing", "text-editors"]
-repository = "https://gitlab.semantiqa.dev/deriva/plantuml/tree-sitter-plantuml"
+repository = "https://github.com/derivasoftware/tree-sitter-plantuml"
 edition = "2021"
 autoexamples = false
 

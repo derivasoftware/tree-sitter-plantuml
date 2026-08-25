@@ -19,7 +19,7 @@ license.text = "MIT"
 readme = "README.md"
 
 [project.urls]
-Homepage = "https://gitlab.semantiqa.dev/deriva/plantuml/tree-sitter-plantuml"
+Homepage = "https://github.com/derivasoftware/tree-sitter-plantuml"
 
 [project.optional-dependencies]
 core = ["tree-sitter~=0.24"]
@@ -27,3 +27,8 @@ core = ["tree-sitter~=0.24"]
 [tool.cibuildwheel]
 build = "cp310-*"
 build-frontend = "build"
+
+[tool.pytest.ini_options]
+markers = [
+  "system: whole-corpus sweeps — losslessness round-trips and standard conformance",
+]

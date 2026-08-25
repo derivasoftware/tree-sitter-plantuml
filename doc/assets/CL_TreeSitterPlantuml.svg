@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 490 2600" width="490" height="2600" class="pr-diagram" role="img">
+<title>CL_TreeSitterPlantuml</title>
+<style>
+  :root { color-scheme: light dark; }
+  .pr-diagram { font-family: var(--pr-font, ui-monospace, monospace); font-size: 12px; }
+  .pr-box rect { fill: var(--pr-box-fill, #fdfdf6); stroke: var(--pr-stroke, #3b3b33); }
+  .pr-container > rect { fill: var(--pr-container-fill, none); stroke: var(--pr-stroke, #3b3b33); stroke-dasharray: none; }
+  .pr-note rect { fill: var(--pr-note-fill, #fbf6d9); stroke: var(--pr-stroke, #3b3b33); }
+  text { fill: var(--pr-text, #1c1c14); }
+  .pr-header { font-weight: 600; }
+  .pr-abstract .pr-header { font-style: italic; }
+  .pr-sep { stroke: var(--pr-stroke, #3b3b33); }
+  .pr-edge { stroke: var(--pr-stroke, #3b3b33); fill: none; }
+  .pr-edge-realization, .pr-edge-dependency, .pr-edge-attachment { stroke-dasharray: 6 4; }
+</style>
+<defs>
+  <marker id="pr-tri" viewBox="0 0 14 12" refX="13" refY="6" markerWidth="14" markerHeight="12" orient="auto"><path d="M1,1 L13,6 L1,11 Z" fill="var(--pr-box-fill, #fdfdf6)" stroke="var(--pr-stroke, #3b3b33)"/></marker>
+  <marker id="pr-diamond-filled" viewBox="0 0 16 10" refX="15" refY="5" markerWidth="16" markerHeight="10" orient="auto"><path d="M1,5 L8,1 L15,5 L8,9 Z" fill="var(--pr-stroke, #3b3b33)"/></marker>
+  <marker id="pr-diamond" viewBox="0 0 16 10" refX="15" refY="5" markerWidth="16" markerHeight="10" orient="auto"><path d="M1,5 L8,1 L15,5 L8,9 Z" fill="var(--pr-box-fill, #fdfdf6)" stroke="var(--pr-stroke, #3b3b33)"/></marker>
+  <marker id="pr-arrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" orient="auto"><path d="M1,1 L11,6 L1,11" fill="none" stroke="var(--pr-stroke, #3b3b33)"/></marker>
+</defs>
+<g id="grammar.envelope" class="pr-container pr-classifier-namespace"><rect x="28" y="50" width="176" height="172"/><text class="pr-header" x="36" y="65">envelope</text></g>
+<g id="grammar.classes" class="pr-container pr-classifier-namespace"><rect x="28" y="254" width="240" height="316"/><text class="pr-header" x="36" y="269">classes</text></g>
+<g id="grammar.members" class="pr-container pr-classifier-namespace"><rect x="28" y="602" width="200" height="316"/><text class="pr-header" x="36" y="617">members</text></g>
+<g id="grammar.relations" class="pr-container pr-classifier-namespace"><rect x="28" y="950" width="208" height="208"/><text class="pr-header" x="36" y="965">relations</text></g>
+<g id="grammar.grouping" class="pr-container pr-classifier-namespace"><rect x="28" y="1190" width="192" height="154"/><text class="pr-header" x="36" y="1205">grouping</text></g>
+<g id="grammar.notes" class="pr-container pr-classifier-namespace"><rect x="28" y="1376" width="208" height="154"/><text class="pr-header" x="36" y="1391">notes</text></g>
+<g id="grammar.sequence" class="pr-container pr-classifier-namespace"><rect x="28" y="1562" width="256" height="172"/><text class="pr-header" x="36" y="1577">sequence</text></g>
+<g id="grammar.activity" class="pr-container pr-classifier-namespace"><rect x="28" y="1766" width="192" height="136"/><text class="pr-header" x="36" y="1781">activity</text></g>
+<g id="grammar.frontier" class="pr-container pr-classifier-namespace"><rect x="28" y="1934" width="424" height="212"/><text class="pr-header" x="36" y="1949">frontier</text></g>
+<g id="grammar.queries" class="pr-container pr-classifier-namespace"><rect x="28" y="2178" width="200" height="154"/><text class="pr-header" x="36" y="2193">queries</text></g>
+<g id="grammar" class="pr-container pr-classifier-namespace"><rect x="10" y="10" width="460" height="2340"/><text class="pr-header" x="18" y="25">grammar</text></g>
+<g id="bindings.python" class="pr-container pr-classifier-namespace"><rect x="28" y="2422" width="296" height="140"/><text class="pr-header" x="36" y="2437">python</text></g>
+<g id="bindings" class="pr-container pr-classifier-namespace"><rect x="10" y="2382" width="332" height="198"/><text class="pr-header" x="18" y="2397">bindings</text></g>
+<g id="grammar.envelope.Envelope" class="pr-box pr-classifier-class"><rect x="46" y="90" width="140" height="114"/><text class="pr-header" x="56" y="112">Envelope</text><line class="pr-sep" x1="46" y1="122" x2="186" y2="122"/><text x="56" y="134">+ source_file</text><text x="56" y="152">+ diagram</text><text x="56" y="170">+ comment</text><text x="56" y="188">+ block_comment</text></g>
+<g id="grammar.classes.ClassChapter" class="pr-box pr-classifier-class"><rect x="46" y="294" width="204" height="258"/><text class="pr-header" x="56" y="316">ClassChapter</text><line class="pr-sep" x1="46" y1="326" x2="250" y2="326"/><text x="56" y="338">+ class_declaration</text><text x="56" y="356">+ interface_declaration</text><text x="56" y="374">+ enum_declaration</text><text x="56" y="392">+ entity_declaration</text><text x="56" y="410">+ abstract</text><text x="56" y="428">+ tag</text><text x="56" y="446">+ entity_list</text><text x="56" y="464">+ color</text><text x="56" y="482">+ qualified_name</text><text x="56" y="500">+ member_ref</text><text x="56" y="518">+ generics</text><text x="56" y="536">+ stereotype</text></g>
+<g id="grammar.members.Members" class="pr-box pr-classifier-class"><rect x="46" y="642" width="164" height="258"/><text class="pr-header" x="56" y="664">Members</text><line class="pr-sep" x1="46" y1="674" x2="210" y2="674"/><text x="56" y="686">+ entity_body</text><text x="56" y="704">+ member</text><text x="56" y="722">+ member_separator</text><text x="56" y="740">+ colon_member</text><text x="56" y="758">+ visibility</text><text x="56" y="776">+ modifier</text><text x="56" y="794">+ method</text><text x="56" y="812">+ cpp_method_name</text><text x="56" y="830">+ parameter_list</text><text x="56" y="848">+ parameter</text><text x="56" y="866">+ attribute</text><text x="56" y="884">+ type</text></g>
+<g id="grammar.relations.Relations" class="pr-box pr-classifier-class"><rect x="46" y="990" width="172" height="150"/><text class="pr-header" x="56" y="1012">Relations</text><line class="pr-sep" x1="46" y1="1022" x2="218" y2="1022"/><text x="56" y="1034">+ relation</text><text x="56" y="1052">+ relation_operator</text><text x="56" y="1070">+ qualifier</text><text x="56" y="1088">+ label</text><text x="56" y="1106">+ activation</text><text x="56" y="1124">+ boundary_message</text></g>
+<g id="grammar.grouping.Grouping" class="pr-box pr-classifier-class"><rect x="46" y="1230" width="156" height="96"/><text class="pr-header" x="56" y="1252">Grouping</text><line class="pr-sep" x1="46" y1="1262" x2="202" y2="1262"/><text x="56" y="1274">+ package_block</text><text x="56" y="1292">+ namespace_block</text><text x="56" y="1310">+ together_block</text></g>
+<g id="grammar.notes.Notes" class="pr-box pr-classifier-class"><rect x="46" y="1416" width="172" height="96"/><text class="pr-header" x="56" y="1438">Notes</text><line class="pr-sep" x1="46" y1="1448" x2="218" y2="1448"/><text x="56" y="1460">+ note_statement</text><text x="56" y="1478">+ note_position</text><text x="56" y="1496">+ display_directive</text></g>
+<g id="grammar.sequence.SequenceChapter" class="pr-box pr-classifier-class"><rect x="46" y="1602" width="220" height="114"/><text class="pr-header" x="56" y="1624">SequenceChapter</text><line class="pr-sep" x1="46" y1="1634" x2="266" y2="1634"/><text x="56" y="1646">+ participant_declaration</text><text x="56" y="1664">+ frame_block</text><text x="56" y="1682">+ else_clause</text><text x="56" y="1700">+ divider</text></g>
+<g id="grammar.activity.ActivityChapter" class="pr-box pr-classifier-class"><rect x="46" y="1806" width="156" height="78"/><text class="pr-header" x="56" y="1828">ActivityChapter</text><line class="pr-sep" x1="46" y1="1838" x2="202" y2="1838"/><text x="56" y="1850">+ activity_action</text><text x="56" y="1868">+ swimlane</text></g>
+<g id="grammar.frontier.Frontier" class="pr-box pr-classifier-class"><rect x="46" y="1974" width="388" height="154"/><text class="pr-header" x="56" y="1996">Frontier</text><line class="pr-sep" x1="46" y1="2006" x2="434" y2="2006"/><text x="56" y="2018">+ raw_line</text><text x="56" y="2036">+ raw_block</text><line class="pr-sep" x1="46" y1="2046" x2="434" y2="2046"/><text x="56" y="2058">+ is_word()</text><text x="56" y="2076">+ eat_line()</text><text x="56" y="2094">+ claim()</text><text x="56" y="2112">+ tree_sitter_plantuml_external_scanner_scan()</text></g>
+<g id="grammar.queries.Queries" class="pr-box pr-classifier-class"><rect x="46" y="2218" width="164" height="96"/><text class="pr-header" x="56" y="2240">Queries</text><line class="pr-sep" x1="46" y1="2250" x2="210" y2="2250"/><text x="56" y="2262">+ highlights : scm</text><text x="56" y="2280">+ folds : scm</text><text x="56" y="2298">+ indents : scm</text></g>
+<g id="bindings.python.Packaging" class="pr-box pr-classifier-class"><rect x="46" y="2462" width="260" height="82"/><text class="pr-header" x="56" y="2484">Packaging</text><line class="pr-sep" x1="46" y1="2494" x2="306" y2="2494"/><text x="56" y="2506">+ wheel : tree_sitter_plantuml</text><line class="pr-sep" x1="46" y1="2516" x2="306" y2="2516"/><text x="56" y="2528">+ language()</text></g>
+</svg>

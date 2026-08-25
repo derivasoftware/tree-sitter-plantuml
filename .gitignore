@@ -9,3 +9,4 @@ __pycache__/
 bindings/python/*.egg-info/
 dist/
 *.abi3.so
+test-results/
