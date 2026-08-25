@@ -15,7 +15,7 @@ vocabulary; they stay visible until argos learns to read it.
 | Requirements | 27 |
 | Verifications | 28 |
 | Constraints | 0 |
-| Design diagrams | 0 |
+| Design diagrams | 13 |
 | Code classes | 0 |
 | Free functions | 0 |
 | Test cases | 25 |
@@ -26,11 +26,11 @@ vocabulary; they stay visible until argos learns to read it.
 | --- | --- |
 | Source files | 0 |
 | Source lines | 0 |
-| Documentation files | 6 |
-| Documentation lines (authored) | 278 |
+| Documentation files | 7 |
+| Documentation lines (authored) | 288 |
 | Tests executed (UT) | 236 |
 | Tests executed (ST) | ? |
 | UT line coverage | ? |
 | ST line coverage | ? |
-| argos diagnostics | 27 |
+| argos diagnostics | 0 |
 <!-- /folio -->
