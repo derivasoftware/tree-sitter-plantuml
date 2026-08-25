@@ -1,0 +1,16 @@
+@startuml CL_Packaging
+' requirement REQ-00015-1
+' requirement REQ-00016-1
+
+!startsub Packaging
+
+namespace bindings.python {
+  class "<<module>>" as Packaging {
+    + language()
+    + wheel : tree_sitter_plantuml
+  }
+}
+
+!endsub
+
+@enduml

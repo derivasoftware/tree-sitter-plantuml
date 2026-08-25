@@ -1,9 +1,0 @@
-verification:
-  id: VER-00002-1
-  req_id: REQ-00009-1
-  title: Query compilation test rejects unknown node types
-  description: >
-    Query compilation test rejects unknown node types
-  method: test
-  test_ids:
-    - tests/test_queries.py::test_highlights_reference_known_nodes

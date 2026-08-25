@@ -1,0 +1,17 @@
+@startuml CL_Notes
+' requirement REQ-00010-4
+' requirement REQ-00011-2
+
+!startsub Notes
+
+namespace grammar.notes {
+  class "<<module>>" as Notes {
+    + note_statement
+    + note_position
+    + display_directive
+  }
+}
+
+!endsub
+
+@enduml

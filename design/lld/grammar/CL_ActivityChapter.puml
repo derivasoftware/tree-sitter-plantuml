@@ -1,0 +1,15 @@
+@startuml CL_ActivityChapter
+' requirement REQ-00026-2
+
+!startsub ActivityChapter
+
+namespace grammar.activity {
+  class "<<module>>" as ActivityChapter {
+    + activity_action
+    + swimlane
+  }
+}
+
+!endsub
+
+@enduml

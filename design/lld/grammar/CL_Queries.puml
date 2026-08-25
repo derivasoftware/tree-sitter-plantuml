@@ -1,0 +1,17 @@
+@startuml CL_Queries
+' requirement REQ-00009-1
+' requirement REQ-00027-1
+
+!startsub Queries
+
+namespace grammar.queries {
+  class "<<module>>" as Queries {
+    + highlights : scm
+    + folds : scm
+    + indents : scm
+  }
+}
+
+!endsub
+
+@enduml
