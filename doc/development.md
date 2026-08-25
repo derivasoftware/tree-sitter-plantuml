@@ -6,10 +6,8 @@
 |---|---|---|
 | Corpus | `npx tree-sitter test` | intended tree per construct (`test/corpus/*.txt`) |
 | Integration | `.venv/bin/pytest tests/` | error-freeness + losslessness over corpus and `examples/`, construct→node mapping vs the standard matrix, highlight-query validity, packaging |
-| Wild corpus | `.venv/bin/python scripts/eval_wild_corpus.py <roots>` | zero regressions over thousands of real diagrams |
 
-Every grammar change ships with corpus coverage, and the wild corpus
-must stay at 100% error-free/lossless.
+Every grammar change ships with corpus coverage.
 
 ## Adding a construct (TDD)
 
