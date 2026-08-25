@@ -28,7 +28,7 @@ metric a grammar can honestly claim is standard conformance, below.
 | Source files | 0 |
 | Source lines | 0 |
 | Documentation files | 7 |
-| Documentation lines (authored) | 323 |
+| Documentation lines (authored) | 321 |
 | Tests executed (UT) | 24 |
 | Tests executed (ST) | 212 |
 | UT line coverage | ? |
