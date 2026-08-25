@@ -56,6 +56,17 @@ directory ships alongside the parser.
 machine-readable contract (120 node types, semver-governed); see
 [doc/node-vocabulary.md](doc/node-vocabulary.md).
 
+## Scope
+
+The family covers a standard-driven subset of PlantUML, never the whole
+language. Class diagrams: 125 of 149 standard constructs structural;
+sequence: 70 of 111, with the lifecycle verbs (activate, ref, box,
+delays) still raw; activity: actions and swimlanes structural, control
+flow raw. Everything else (deployment, components, state, mindmaps,
+gantt) parses lossless as raw lines, never an ERROR, but gets no
+structure. The conformance matrices are tests
+(`tests/test_standard_coverage.py`) and are the source of these numbers.
+
 ## Documentation
 
 - [Node vocabulary](doc/node-vocabulary.md): the grammar's public API
@@ -64,3 +75,5 @@ machine-readable contract (120 node types, semver-governed); see
 - [Development](doc/development.md): corpus tests, conformance matrices, releasing
 - [Requirements & status](doc/requirements.md): what was asked and the traceability matrix
 - [Repo quality](doc/quality.md): artefact inventory and health metrics
+
+*Not affiliated with or endorsed by the PlantUML project.*
