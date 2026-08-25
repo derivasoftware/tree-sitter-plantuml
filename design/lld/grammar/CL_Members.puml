@@ -1,0 +1,28 @@
+@startuml CL_Members
+' requirement REQ-00003-3
+' requirement REQ-00013-1
+' requirement REQ-00020-1
+' requirement REQ-00023-1
+
+!startsub Members
+
+namespace grammar.members {
+  class "<<module>>" as Members {
+    + entity_body
+    + member
+    + member_separator
+    + colon_member
+    + visibility
+    + modifier
+    + method
+    + cpp_method_name
+    + parameter_list
+    + parameter
+    + attribute
+    + type
+  }
+}
+
+!endsub
+
+@enduml

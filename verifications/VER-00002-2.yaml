@@ -1,0 +1,17 @@
+verification:
+  id: VER-00002-2
+  req_id: REQ-00009-1
+  title: Query compilation tests reject unknown node types in every shipped query
+  description: >
+    tests/test_queries.py::test_queries_reference_known_nodes compiles
+    each shipped query file (highlights, folds, indents) against the
+    built grammar and fails on any capture of a node type the grammar
+    does not define; test_all_editor_queries_ship pins that the three
+    files exist. Revision 2 repoints the test id: the original
+    highlights-only test grew into the parametrized per-file case and
+    the stale id read as dead.
+  method: test
+  test_ids:
+    - tests/test_queries.py::test_queries_reference_known_nodes
+    - tests/test_queries.py::test_all_editor_queries_ship
+  status: APPROVED

@@ -1,0 +1,21 @@
+@startuml CL_Relations
+' requirement REQ-00004-1
+' requirement REQ-00021-1
+' requirement REQ-00024-1
+
+!startsub Relations
+
+namespace grammar.relations {
+  class "<<module>>" as Relations {
+    + relation
+    + relation_operator
+    + qualifier
+    + label
+    + activation
+    + boundary_message
+  }
+}
+
+!endsub
+
+@enduml

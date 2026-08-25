@@ -1,0 +1,16 @@
+@startuml CL_Grouping
+' requirement REQ-00005-3
+
+!startsub Grouping
+
+namespace grammar.grouping {
+  class "<<module>>" as Grouping {
+    + package_block
+    + namespace_block
+    + together_block
+  }
+}
+
+!endsub
+
+@enduml

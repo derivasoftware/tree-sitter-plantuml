@@ -1,0 +1,27 @@
+@startuml CL_ClassChapter
+' requirement REQ-00002-2
+' requirement REQ-00014-1
+' requirement REQ-00022-1
+
+!startsub ClassChapter
+
+namespace grammar.classes {
+  class "<<module>>" as ClassChapter {
+    + class_declaration
+    + interface_declaration
+    + enum_declaration
+    + entity_declaration
+    + abstract
+    + tag
+    + entity_list
+    + color
+    + qualified_name
+    + member_ref
+    + generics
+    + stereotype
+  }
+}
+
+!endsub
+
+@enduml

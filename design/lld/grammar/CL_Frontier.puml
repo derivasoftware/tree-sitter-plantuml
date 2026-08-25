@@ -1,0 +1,20 @@
+@startuml CL_Frontier
+' requirement REQ-00007-1
+' requirement REQ-00012-2
+
+!startsub Frontier
+
+namespace grammar.frontier {
+  class "<<module>>" as Frontier {
+    + raw_line
+    + raw_block
+    + is_word()
+    + eat_line()
+    + claim()
+    + tree_sitter_plantuml_external_scanner_scan()
+  }
+}
+
+!endsub
+
+@enduml

@@ -1,0 +1,48 @@
+@startuml CL_TreeSitterPlantuml
+' requirement REQ-00008-1
+
+!startsub Envelope
+!includesub ./CL_Envelope.puml!Envelope
+!endsub
+
+!startsub ClassChapter
+!includesub ./CL_ClassChapter.puml!ClassChapter
+!endsub
+
+!startsub Members
+!includesub ./CL_Members.puml!Members
+!endsub
+
+!startsub Relations
+!includesub ./CL_Relations.puml!Relations
+!endsub
+
+!startsub Grouping
+!includesub ./CL_Grouping.puml!Grouping
+!endsub
+
+!startsub Notes
+!includesub ./CL_Notes.puml!Notes
+!endsub
+
+!startsub SequenceChapter
+!includesub ./CL_SequenceChapter.puml!SequenceChapter
+!endsub
+
+!startsub ActivityChapter
+!includesub ./CL_ActivityChapter.puml!ActivityChapter
+!endsub
+
+!startsub Frontier
+!includesub ./CL_Frontier.puml!Frontier
+!endsub
+
+!startsub Queries
+!includesub ./CL_Queries.puml!Queries
+!endsub
+
+!startsub Packaging
+!includesub ./CL_Packaging.puml!Packaging
+!endsub
+
+@enduml
