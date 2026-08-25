@@ -14,6 +14,8 @@ from pathlib import Path
 import pytest
 from conftest import EXAMPLES_DIR
 
+pytestmark = pytest.mark.system
+
 STANDARD_DIR = EXAMPLES_DIR / "standard"
 FILES = sorted(p.name for p in STANDARD_DIR.glob("*.puml"))
 

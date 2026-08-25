@@ -9,6 +9,8 @@ tree plus inter-token whitespace, byte-identically.
 import pytest
 from conftest import corpus_inputs, example_inputs
 
+pytestmark = pytest.mark.system
+
 CASES = {**corpus_inputs(), **example_inputs()}
 
 

@@ -28,7 +28,8 @@ test:
     - python3 -m venv .venv-ci
     - ./.venv-ci/bin/pip install -q pytest tree-sitter setuptools
     - mkdir -p test-results
-    - ./.venv-ci/bin/pytest tests/ -q --junitxml=test-results/junit.xml
+    - ./.venv-ci/bin/pytest tests/ -q -m "not system" --junitxml=test-results/junit.xml
+    - ./.venv-ci/bin/pytest tests/ -q -m system --junitxml=test-results/junit-st.xml
 
 # Release publishing: cut a vX.Y.Z tag from green main and both packages
 # land in this project's GitLab registries (PyPI + npm).
