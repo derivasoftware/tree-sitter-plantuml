@@ -3,7 +3,7 @@
   "version": "0.8.0",
   "description": "PlantUML grammar for tree-sitter",
   "type": "module",
-  "repository": "https://gitlab.semantiqa.dev/deriva/plantuml/tree-sitter-plantuml",
+  "repository": "https://github.com/derivasoftware/tree-sitter-plantuml",
   "license": "MIT",
   "author": "dcoello-dev",
   "main": "bindings/node",

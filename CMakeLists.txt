@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.13)
 project(tree-sitter-plantuml
         VERSION "0.1.0"
         DESCRIPTION "PlantUML grammar for tree-sitter"
-        HOMEPAGE_URL "https://gitlab.semantiqa.dev/deriva/tree-sitter-plantuml"
+        HOMEPAGE_URL "https://github.com/derivasoftware/tree-sitter-plantuml"
         LANGUAGES C)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)

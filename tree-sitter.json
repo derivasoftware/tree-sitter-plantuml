@@ -26,7 +26,7 @@
       }
     ],
     "links": {
-      "repository": "https://gitlab.semantiqa.dev/deriva/plantuml/tree-sitter-plantuml"
+      "repository": "https://github.com/derivasoftware/tree-sitter-plantuml"
     }
   },
   "bindings": {

@@ -20,7 +20,7 @@ ERROR.
 
 ## Install
 
-**Neovim**: [plantuml.nvim](https://gitlab.semantiqa.dev/deriva/plantuml/plantuml.nvim)
+**Neovim**: [plantuml.nvim](https://github.com/derivasoftware/plantuml.nvim)
 builds the pinned grammar for you; nothing else to do.
 
 **Python** (the binding the LSP uses), straight from git. Generated
@@ -28,10 +28,10 @@ from the manifest and the latest tag:
 
 <!-- folio: install -->
 ```bash
-pip install git+https://gitlab.semantiqa.dev/deriva/plantuml/tree-sitter-plantuml.git@v0.8.0
+pip install git+https://github.com/derivasoftware/tree-sitter-plantuml.git@v0.8.0
 ```
 
-Or from a clone: `git clone https://gitlab.semantiqa.dev/deriva/plantuml/tree-sitter-plantuml && pip install ./tree-sitter-plantuml`.
+Or from a clone: `git clone https://github.com/derivasoftware/tree-sitter-plantuml && pip install ./tree-sitter-plantuml`.
 <!-- /folio -->
 
 **C or anything else**: compile `src/parser.c` and `src/scanner.c` from a
