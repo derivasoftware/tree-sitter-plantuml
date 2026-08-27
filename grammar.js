@@ -350,7 +350,14 @@ export default grammar({
         `${id}${angle}(${ptr})?`,
         `${id}${ptr}`,
       ].join('|');
-      return token(prec(1, new RegExp(`(${konst})?(${core})`)));
+      // A single-quoted type is the Python forward-reference form
+      // ('Container[T]' create(), issue #4); without this branch the
+      // line-comment token swallowed the quote and the rest of the line.
+      // The quote must wrap something type-shaped — a dotted identifier
+      // with an optional bracket suffix — so quoted prose keeps its old
+      // parse instead of dragging the next line into a recovery.
+      const quoted = /'[A-Za-z_][\w.]*(\[[^'\n\]]*\])?'/.source;
+      return token(prec(1, new RegExp(`(${konst})?(${core})|${quoted}`)));
     },
 
     method_suffix: $ => choice(
@@ -377,7 +384,10 @@ export default grammar({
       /operator\s+new(\s*\[\s*\])?/,
       /operator\s+delete(\s*\[\s*\])?/,
       /operator\s+\w+/,
-      /operator\s*[^()\[\]\s\w][^()\[\]\s]*/,
+      // ':' excluded from the opening symbol: C++ has no operator: or
+      // operator::, and a field literally named operator (+ operator :
+      // bool) must stay on the attribute path (issue #3).
+      /operator\s*[^()\[\]\s\w:][^()\[\]\s]*/,
       ))),
     ),
 

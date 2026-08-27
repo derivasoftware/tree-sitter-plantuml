@@ -387,3 +387,78 @@ class C {
             (parameter_list
               (parameter))
             (type)))))))
+
+==================
+attribute literally named operator stays an attribute
+==================
+@startuml
+class Config {
+  + is_valid : bool
+  + operator : bool
+  + enabled : bool
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (attribute
+            (identifier)
+            (type)))
+        (member
+          (visibility)
+          (attribute
+            (identifier)
+            (type)))
+        (member
+          (visibility)
+          (attribute
+            (identifier)
+            (type)))))))
+
+==================
+quoted forward-reference return type
+==================
+@startuml
+class Container {
+  + 'Container[T]' create()
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (cpp_return_type)
+            (identifier)))))))
+
+==================
+quoted generic with bracketed arguments
+==================
+@startuml
+class P {
+  + 'Dict[str, int]' mapping()
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (cpp_return_type)
+            (identifier)))))))
