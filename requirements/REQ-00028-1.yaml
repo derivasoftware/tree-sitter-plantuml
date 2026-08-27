@@ -1,0 +1,31 @@
+requirement:
+  id: REQ-00028-1
+  title: The grammar shall parse C++-style member signatures structurally
+  description: >
+    Class-body members written in the C++ direction shall parse with the
+    method's fields populated: a return type left of the name (scope
+    paths, template arguments nested to four angle levels, pointer and
+    reference markers, a leading const), trailing qualifiers (const,
+    noexcept, override, = 0, = default, = delete) both at end of line
+    and between the parentheses and the canonical colon, and callable
+    parameters whose inner parentheses do not split the parameter list.
+    A C++-shaped line the rules cannot absorb (an unclosed template
+    bracket) shall keep a lossless parse, never an ERROR node.
+  rationale: >
+    Real corpora write members both ways: the deriva C++ fleet
+    (argos-framework-cpp and the rebuild corpora) mostly uses the
+    canonical name(): type direction, and external C++ projects write
+    std::string get_name(). Before this rule the second direction
+    mis-parsed on the :: colon and the formatter corrupted the type
+    (std : :string). The mirror pull requests
+    derivasoftware/tree-sitter-plantuml#1 and plantuml-fmt#1 defined
+    the problem; the shipped shape adds unbounded-feeling nesting via a
+    four-level unrolled token, keeps prose members on the attribute
+    path by requiring a C++ signal, and preserves the frontier with an
+    equal-precedence longest-match fallback for unclosed brackets.
+  owner: dcoello-dev
+  status: DRAFT
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags: [members, cpp]

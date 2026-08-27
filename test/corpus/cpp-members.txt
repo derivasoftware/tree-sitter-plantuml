@@ -73,3 +73,317 @@ class Result {
           (method
             (cpp_method_name)
             (type)))))))
+
+==================
+cpp left return type: qualified
+==================
+@startuml
+class C {
+  + std::string get_name()
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (cpp_return_type)
+            (identifier)))))))
+
+==================
+cpp left return type: static modifier and qualified result
+==================
+@startuml
+class C {
+  + {static} utils::FsResult open(path: std::string)
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (modifier)
+          (method
+            (cpp_return_type)
+            (identifier)
+            (parameter_list
+              (parameter))))))))
+
+==================
+cpp left return type: template with reference
+==================
+@startuml
+class C {
+  + std::vector<uint32_t>& items()
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (cpp_return_type)
+            (identifier)))))))
+
+==================
+cpp left return type: pointer
+==================
+@startuml
+class C {
+  - utils::Buffer* raw()
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (cpp_return_type)
+            (identifier)))))))
+
+==================
+cpp left return type: nested template arguments
+==================
+@startuml
+class C {
+  + std::map<std::string, std::vector<int>> table()
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (cpp_return_type)
+            (identifier)))))))
+
+==================
+cpp left return type: three levels of template nesting
+==================
+@startuml
+class C {
+  + std::map<std::string, std::map<int, std::vector<int>>> deep()
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (cpp_return_type)
+            (identifier)))))))
+
+==================
+cpp deleted copy constructor
+==================
+@startuml
+class C {
+  + ThreadPool(const ThreadPool&) = delete
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (identifier)
+            (parameter_list
+              (parameter))
+            (method_suffix)))))))
+
+==================
+cpp copy assignment with left type and delete
+==================
+@startuml
+class C {
+  + ThreadPool& operator=(const ThreadPool&) = delete
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (cpp_return_type)
+            (cpp_method_name)
+            (parameter_list
+              (parameter))
+            (method_suffix)))))))
+
+==================
+cpp const-led reference return with trailing const
+==================
+@startuml
+class C {
+  + const std::string& name() const
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (cpp_return_type)
+            (identifier)
+            (method_suffix)))))))
+
+==================
+cpp noexcept suffix on pointer return
+==================
+@startuml
+class C {
+  + T* release() noexcept
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (cpp_return_type)
+            (identifier)
+            (method_suffix)))))))
+
+==================
+cpp frontier: unbalanced template falls to raw member, never ERROR
+==================
+@startuml
+class C {
+  + std::map<std::string broken()
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (raw_text))))))
+
+==================
+cpp coexistence: canonical colon form is untouched
+==================
+@startuml
+class C {
+  + get_name(): std::string
+  + {static} make_number(value: double): std::unique_ptr<Node>
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (identifier)
+            (type)))
+        (member
+          (visibility)
+          (modifier)
+          (method
+            (identifier)
+            (parameter_list
+              (parameter))
+            (type)))))))
+
+==================
+cpp cv-qualifier between parens and canonical type
+==================
+@startuml
+class C {
+  + worker_count() const : std::size_t
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (identifier)
+            (method_suffix)
+            (type)))))))
+
+==================
+cpp callable parameter with inner parentheses survives whole
+==================
+@startuml
+class C {
+  + submit(task : std::function<void(int, bool)>) : void
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (identifier)
+            (parameter_list
+              (parameter))
+            (type)))))))

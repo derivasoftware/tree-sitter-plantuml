@@ -261,9 +261,17 @@ export default grammar({
     member: $ => seq(
       optional(field('visibility', $.visibility)),
       repeat(field('modifier', $.modifier)),
-      choice($.method, $.attribute),
+      choice($.method, $.attribute, alias($.cpp_unclosed, $.raw_text)),
       $._newline,
     ),
+
+    // Frontier inside class bodies, C++ edition: a scoped head whose
+    // template bracket never closes on the line would otherwise commit
+    // the lexer to a return type and die on the dangling `<`. This
+    // token shares the return type's precedence, so the longest match
+    // decides: any valid template out-lengths it, while on an unclosed
+    // bracket it swallows the member whole as raw text, never an ERROR.
+    cpp_unclosed: $ => token(prec(1, /[A-Za-z_]\w*(::\w+)+<[^>\n]*/)),
 
     visibility: $ => choice('+', '-', '#', '~'),
 
@@ -272,11 +280,52 @@ export default grammar({
     ),
 
     method: $ => seq(
+      // C++-style signature: the return type sits left of the name.
+      optional(field('type', $.cpp_return_type)),
       field('name', choice($.identifier, $.cpp_method_name)),
       '(',
       optional(field('parameters', $.parameter_list)),
       ')',
+      // C++ trailing qualifiers; before the canonical colon so
+      // `name() const : type` (the cv-qualifier between the parens and
+      // the PlantUML type) parses as written.
+      optional(field('suffix', $.method_suffix)),
+      // PlantUML canonical: the type after the colon (to end of line,
+      // so a trailing `const` there stays part of the type text).
       optional(seq(':', field('type', $.type))),
+    ),
+
+    // A C++ type expression strong enough to sit left of a method name,
+    // as one token: every alternative carries a C++ signal (a scope
+    // path, template arguments, pointer/reference markers, or a leading
+    // const), so prose members never match. Template nesting is
+    // unrolled to four angle-bracket levels — beyond that the token
+    // simply does not match and the line keeps its legacy parse, never
+    // an ERROR. Inner template structure stays opaque on purpose: no
+    // consumer reads it today, and a composed rule here traded the
+    // frontier guarantee for a prettier tree.
+    cpp_return_type: $ => {
+      const id = /[A-Za-z_]\w*/.source;
+      const scope = `(::${id})`;
+      let angle = /<[^<>\n]*>/.source;
+      for (let depth = 0; depth < 3; depth++) {
+        angle = `<([^<>\n]|${angle})*>`;
+      }
+      const ptr = /[ \t]*[&*]+/.source;
+      const konst = `const[ \t]+`;
+      const core = [
+        `${id}${scope}+(${angle})?(${ptr})?`,
+        `${id}${angle}(${ptr})?`,
+        `${id}${ptr}`,
+      ].join('|');
+      return token(prec(1, new RegExp(`(${konst})?(${core})`)));
+    },
+
+    method_suffix: $ => choice(
+      'const',
+      'noexcept',
+      'override',
+      seq('=', choice('0', 'default', 'delete')),
     ),
 
     // C++ member names beyond plain identifiers (BOK-mirrored from the
@@ -287,7 +336,10 @@ export default grammar({
       // stays a destructor (dynamic precedence) while ~name : type
       // parses as a package-private attribute.
       prec.dynamic(1, seq('~', $.identifier)),
-      token(prec(1, choice(
+      // prec 2: `operator*` must out-rank the cpp_return_type token's
+      // identifier-plus-pointer branch, or the lexer may read a return
+      // type where an operator name stands (runtime tie-breaks differ).
+      token(prec(2, choice(
       /operator\s*\(\s*\)/,
       /operator\s*\[\s*\]/,
       /operator\s+new(\s*\[\s*\])?/,
@@ -299,7 +351,10 @@ export default grammar({
 
     parameter_list: $ => sep1($.parameter, ','),
 
-    parameter: $ => /[^,()\n]+/,
+    // One nesting level of parentheses stays inside the parameter, so
+    // callable types (`std::function<void(int, bool)>`) survive whole;
+    // commas inside those inner parens do not split the list.
+    parameter: $ => /([^,()\n]|\([^()\n]*\))+/,
 
     attribute: $ => seq(
       field('name', $.identifier),

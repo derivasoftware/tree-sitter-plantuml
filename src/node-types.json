@@ -1035,6 +1035,10 @@
         {
           "type": "method",
           "named": true
+        },
+        {
+          "type": "raw_text",
+          "named": true
         }
       ]
     }
@@ -1095,10 +1099,24 @@
           }
         ]
       },
-      "type": {
+      "suffix": {
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "method_suffix",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "cpp_return_type",
+            "named": true
+          },
           {
             "type": "type",
             "named": true
@@ -1106,6 +1124,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "method_suffix",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "modifier",
@@ -1927,11 +1950,19 @@
     "named": false
   },
   {
+    "type": "0",
+    "named": false
+  },
+  {
     "type": ":",
     "named": false
   },
   {
     "type": "::",
+    "named": false
+  },
+  {
+    "type": "=",
     "named": false
   },
   {
@@ -2012,8 +2043,16 @@
     "named": true
   },
   {
+    "type": "const",
+    "named": false
+  },
+  {
     "type": "control",
     "named": false
+  },
+  {
+    "type": "cpp_return_type",
+    "named": true
   },
   {
     "type": "critical",
@@ -2021,6 +2060,14 @@
   },
   {
     "type": "database",
+    "named": false
+  },
+  {
+    "type": "default",
+    "named": false
+  },
+  {
+    "type": "delete",
     "named": false
   },
   {
@@ -2104,6 +2151,10 @@
     "named": false
   },
   {
+    "type": "noexcept",
+    "named": false
+  },
+  {
     "type": "note",
     "named": false
   },
@@ -2125,6 +2176,10 @@
   },
   {
     "type": "order",
+    "named": false
+  },
+  {
+    "type": "override",
     "named": false
   },
   {
