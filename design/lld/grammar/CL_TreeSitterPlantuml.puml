@@ -42,7 +42,7 @@
 !endsub
 
 !startsub Packaging
-!includesub ./CL_Packaging.puml!Packaging
+!includesub ../bindings/CL_Packaging.puml!Packaging
 !endsub
 
 @enduml
