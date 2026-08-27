@@ -1,9 +1,9 @@
 # tree-sitter-plantuml
 
 <!-- folio: colophon --project tree-sitter-plantuml --junit test-results/junit.xml --junit_st test-results/junit-st.xml -->
-![powered by: argos](https://img.shields.io/badge/powered%20by-argos-1f6feb) ![verified: 100%](https://img.shields.io/badge/verified-100%25-2ea44f) ![tests: 100%](https://img.shields.io/badge/tests-100%25-2ea44f) ![UT: n/a](https://img.shields.io/badge/UT-n%2Fa-lightgrey) ![ST: n/a](https://img.shields.io/badge/ST-n%2Fa-lightgrey) ![diagnostics: 0](https://img.shields.io/badge/diagnostics-0-2ea44f)
+![powered by: argos](https://img.shields.io/badge/powered%20by-argos-1f6feb) ![verified: 100%](https://img.shields.io/badge/verified-100%25-2ea44f) ![tests: 100%](https://img.shields.io/badge/tests-100%25-2ea44f) ![UT: n/a](https://img.shields.io/badge/UT-n%2Fa-lightgrey) ![ST: n/a](https://img.shields.io/badge/ST-n%2Fa-lightgrey) ![diagnostics: 2](https://img.shields.io/badge/diagnostics-2-dfb317)
 
-> **tree-sitter-plantuml** is powered by **argos**. **folio** generates this documentation from the repository's model: 27 requirements · 28 verifications · 0 constraints. Quality: 100% verified · 100% tests passing.
+> **tree-sitter-plantuml** is powered by **argos**. **folio** generates this documentation from the repository's model: 28 requirements · 29 verifications · 0 constraints. Quality: 100% verified · 100% tests passing.
 <!-- /folio -->
 
 A [tree-sitter](https://tree-sitter.github.io/) grammar for the
@@ -28,7 +28,7 @@ from the manifest and the latest tag:
 
 <!-- folio: install -->
 ```bash
-pip install git+https://github.com/derivasoftware/tree-sitter-plantuml.git@v0.8.1
+pip install git+https://github.com/derivasoftware/tree-sitter-plantuml.git@v0.9.0
 ```
 
 Or from a clone: `git clone https://github.com/derivasoftware/tree-sitter-plantuml && pip install ./tree-sitter-plantuml`.

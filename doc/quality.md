@@ -13,8 +13,8 @@ metric a grammar can honestly claim is standard conformance, below.
 | Artefact | Count |
 | --- | --- |
 | System requirements | 9 |
-| Requirements | 27 |
-| Verifications | 28 |
+| Requirements | 28 |
+| Verifications | 29 |
 | Constraints | 0 |
 | Design diagrams | 13 |
 | Code classes | 0 |
@@ -30,10 +30,10 @@ metric a grammar can honestly claim is standard conformance, below.
 | Documentation files | 7 |
 | Documentation lines (authored) | 321 |
 | Tests executed (UT) | 24 |
-| Tests executed (ST) | 212 |
+| Tests executed (ST) | 226 |
 | UT line coverage | ? |
 | ST line coverage | ? |
-| argos diagnostics | 0 |
+| argos diagnostics | 2 |
 <!-- /folio -->
 
 ### Standard conformance

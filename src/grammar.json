@@ -1351,6 +1351,15 @@
             {
               "type": "SYMBOL",
               "name": "attribute"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "cpp_unclosed"
+              },
+              "named": true,
+              "value": "raw_text"
             }
           ]
         },
@@ -1359,6 +1368,17 @@
           "name": "_newline"
         }
       ]
+    },
+    "cpp_unclosed": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[A-Za-z_]\\w*(::\\w+)+<[^>\\n]*"
+        }
+      }
     },
     "visibility": {
       "type": "CHOICE",
@@ -1410,6 +1430,22 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "cpp_return_type"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "FIELD",
           "name": "name",
           "content": {
@@ -1454,6 +1490,22 @@
           "type": "CHOICE",
           "members": [
             {
+              "type": "FIELD",
+              "name": "suffix",
+              "content": {
+                "type": "SYMBOL",
+                "name": "method_suffix"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
               "type": "SEQ",
               "members": [
                 {
@@ -1472,6 +1524,60 @@
             },
             {
               "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "cpp_return_type": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "(const[ \t]+)?([A-Za-z_]\\w*(::[A-Za-z_]\\w*)+(<([^<>\\n]|<([^<>\\n]|<([^<>\\n]|<[^<>\\n]*>)*>)*>)*>)?([ \\t]*[&*]+)?|[A-Za-z_]\\w*<([^<>\\n]|<([^<>\\n]|<([^<>\\n]|<[^<>\\n]*>)*>)*>)*>([ \\t]*[&*]+)?|[A-Za-z_]\\w*[ \\t]*[&*]+)"
+        }
+      }
+    },
+    "method_suffix": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "const"
+        },
+        {
+          "type": "STRING",
+          "value": "noexcept"
+        },
+        {
+          "type": "STRING",
+          "value": "override"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "="
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "0"
+                },
+                {
+                  "type": "STRING",
+                  "value": "default"
+                },
+                {
+                  "type": "STRING",
+                  "value": "delete"
+                }
+              ]
             }
           ]
         }
@@ -1501,7 +1607,7 @@
           "type": "TOKEN",
           "content": {
             "type": "PREC",
-            "value": 1,
+            "value": 2,
             "content": {
               "type": "CHOICE",
               "members": [
@@ -1562,7 +1668,7 @@
     },
     "parameter": {
       "type": "PATTERN",
-      "value": "[^,()\\n]+"
+      "value": "([^,()\\n]|\\([^()\\n]*\\))+"
     },
     "attribute": {
       "type": "SEQ",
