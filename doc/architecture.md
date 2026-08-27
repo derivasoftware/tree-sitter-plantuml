@@ -49,7 +49,7 @@ _cl · `design/lld/grammar/CL_TreeSitterPlantuml.puml`_
 </details>
 
 <details>
-<summary><code>CL_Members</code> · traces to <code>REQ-00003-3</code> <code>REQ-00013-1</code> <code>REQ-00020-1</code> <code>REQ-00023-1</code></summary>
+<summary><code>CL_Members</code> · traces to <code>REQ-00003-3</code> <code>REQ-00013-1</code> <code>REQ-00020-1</code> <code>REQ-00023-1</code> <code>REQ-00028-1</code></summary>
 <ul>
 <li>source: <code>design/lld/grammar/CL_Members.puml</code></li>
 <li>verified by: <code>tests/test_grammar.py</code> (4), <code>tests/test_standard_coverage.py</code> (1)</li>

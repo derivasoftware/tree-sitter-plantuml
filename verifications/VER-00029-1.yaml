@@ -17,4 +17,4 @@ verification:
   method: test
   test_ids:
     - tests/test_grammar.py::test_corpus_cpp_members
-  status: DRAFT
+  status: APPROVED
