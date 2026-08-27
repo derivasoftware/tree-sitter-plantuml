@@ -151,19 +151,43 @@ export default grammar({
     class_declaration: $ => seq(
       choice(seq(field('abstract', $.abstract), optional('class')), 'class'),
       $._entity_head,
-      choice($._newline, seq(field('body', $.entity_body), $._newline)),
+      choice(
+        $._newline,
+        seq(field('body', $.entity_body), $._newline),
+        // Allman style: the opening brace on its own line. Without this
+        // alternative the brace fell to a raw line and the closing one
+        // was captured by the enclosing namespace_block, silently
+        // corrupting every later entity's scope (issue #2).
+        seq($._newline, field('body', $.entity_body), $._newline),
+      ),
     ),
 
     interface_declaration: $ => seq(
       'interface',
       $._entity_head,
-      choice($._newline, seq(field('body', $.entity_body), $._newline)),
+      choice(
+        $._newline,
+        seq(field('body', $.entity_body), $._newline),
+        // Allman style: the opening brace on its own line. Without this
+        // alternative the brace fell to a raw line and the closing one
+        // was captured by the enclosing namespace_block, silently
+        // corrupting every later entity's scope (issue #2).
+        seq($._newline, field('body', $.entity_body), $._newline),
+      ),
     ),
 
     enum_declaration: $ => seq(
       'enum',
       $._entity_head,
-      choice($._newline, seq(field('body', $.entity_body), $._newline)),
+      choice(
+        $._newline,
+        seq(field('body', $.entity_body), $._newline),
+        // Allman style: the opening brace on its own line. Without this
+        // alternative the brace fell to a raw line and the closing one
+        // was captured by the enclosing namespace_block, silently
+        // corrupting every later entity's scope (issue #2).
+        seq($._newline, field('body', $.entity_body), $._newline),
+      ),
     ),
 
     // The remaining element keywords of the reference share one node;
@@ -174,7 +198,15 @@ export default grammar({
         'struct', 'record', 'dataclass',
       ), $.entity_kind)),
       $._entity_head,
-      choice($._newline, seq(field('body', $.entity_body), $._newline)),
+      choice(
+        $._newline,
+        seq(field('body', $.entity_body), $._newline),
+        // Allman style: the opening brace on its own line. Without this
+        // alternative the brace fell to a raw line and the closing one
+        // was captured by the enclosing namespace_block, silently
+        // corrupting every later entity's scope (issue #2).
+        seq($._newline, field('body', $.entity_body), $._newline),
+      ),
     ),
 
     // Activity actions and swimlanes are structural — the consumer is
