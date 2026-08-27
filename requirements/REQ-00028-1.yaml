@@ -24,7 +24,7 @@ requirement:
     path by requiring a C++ signal, and preserves the frontier with an
     equal-precedence longest-match fallback for unclosed brackets.
   owner: dcoello-dev
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids:
     - SREQ-00002-1
