@@ -99,3 +99,47 @@ class Alert #FFAAAA
     (class_declaration
       (identifier)
       (color))))
+
+==================
+allman body brace on the next line keeps namespace scoping
+==================
+@startuml
+namespace jlr {
+  namespace tldu {
+    enum SplParamDeployStatus
+    {
+      SUCCESS
+      FAIL
+    }
+
+    class Foo {
+      + void bar()
+    }
+  }
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (namespace_block
+      (identifier)
+      (namespace_block
+        (identifier)
+        (enum_declaration
+          (identifier)
+          (entity_body
+            (member
+              (attribute
+                (identifier)))
+            (member
+              (attribute
+                (identifier)))))
+        (class_declaration
+          (identifier)
+          (entity_body
+            (member
+              (visibility)
+              (attribute
+                (identifier)
+                (raw_text)))))))))
