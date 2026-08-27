@@ -73,3 +73,48 @@ class Result {
           (method
             (cpp_method_name)
             (type)))))))
+
+
+==================
+cpp qualified return types on the left
+==================
+@startuml
+class Serializer {
+  + std::string get_name()
+  - utils::FsResult decompress(std::string path)
+  + std::vector<uint32_t>& allowed_countries()
+  - {static} cockpit::EnumState map_state(State s)
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (cpp_return_type)
+            (identifier)))
+        (member
+          (visibility)
+          (method
+            (cpp_return_type)
+            (identifier)
+            (parameter_list
+              (parameter))))
+        (member
+          (visibility)
+          (method
+            (cpp_return_type)
+            (identifier)))
+        (member
+          (visibility)
+          (modifier)
+          (method
+            (cpp_return_type)
+            (identifier)
+            (parameter_list
+              (parameter))))))))

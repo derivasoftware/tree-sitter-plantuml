@@ -271,13 +271,34 @@ export default grammar({
       '{static}', '{abstract}', '{field}', '{method}', '{classifier}',
     ),
 
-    method: $ => seq(
-      field('name', choice($.identifier, $.cpp_method_name)),
-      '(',
-      optional(field('parameters', $.parameter_list)),
-      ')',
-      optional(seq(':', field('type', $.type))),
+    method: $ => choice(
+      // PlantUML canonical: name(params) : type
+      seq(
+        field('name', choice($.identifier, $.cpp_method_name)),
+        '(',
+        optional(field('parameters', $.parameter_list)),
+        ')',
+        optional(seq(':', field('type', $.type))),
+      ),
+      // C++ style: return_type name(params)
+      seq(
+        field('type', $.cpp_return_type),
+        field('name', choice($.identifier, $.cpp_method_name)),
+        '(',
+        optional(field('parameters', $.parameter_list)),
+        ')',
+      ),
     ),
+
+    // C++ qualified return types: identifiers joined by :: with optional
+    // trailing template, pointer/reference markers, and const qualifier.
+    // Examples: std::string, utils::FsResult, std::vector<uint32_t>&
+    cpp_return_type: $ => token(seq(
+      /[A-Za-z_]\w*/,
+      repeat1(seq('::', /[A-Za-z_]\w*/)),
+      optional(seq('<', /[^<>\n]+/, '>')),
+      optional(/[&*]+/),
+    )),
 
     // C++ member names beyond plain identifiers (BOK-mirrored from the
     // argos-design-plantuml reader): destructors and operator overloads.

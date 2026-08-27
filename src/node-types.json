@@ -1100,6 +1100,10 @@
         "required": false,
         "types": [
           {
+            "type": "cpp_return_type",
+            "named": true
+          },
+          {
             "type": "type",
             "named": true
           }
@@ -1980,8 +1984,7 @@
   },
   {
     "type": "block_comment",
-    "named": true,
-    "extra": true
+    "named": true
   },
   {
     "type": "bottom",
@@ -2014,6 +2017,10 @@
   {
     "type": "control",
     "named": false
+  },
+  {
+    "type": "cpp_return_type",
+    "named": true
   },
   {
     "type": "critical",
