@@ -1,0 +1,38 @@
+' Canonical PlantUML stereotype palette for argos HLD diagrams
+' (BOK-00186-1: HLD authoring with PlantUML class-diagram namespaces).
+' Every .puml HLD shall `!include` this file before any namespace
+' declaration so the palette stays one source of truth and palette
+' evolutions touch a single file (see CST on style-include policy).
+
+skinparam shadowing false
+skinparam roundCorner 8
+skinparam defaultFontName "Helvetica"
+skinparam defaultFontSize 12
+
+skinparam namespace {
+  BackgroundColor<<workspace>>  #BDD7EE
+  BackgroundColor<<container>>  #DEEBF7
+  BackgroundColor<<layer>>      #FFE699
+  BackgroundColor<<package>>    #C6E0B4
+  BackgroundColor<<store>>      #E2EFDA
+  BackgroundColor<<external>>   #DDDDDD
+  BackgroundColor<<library>>    #F4CCCC
+  BorderColor<<workspace>>      #2E75B6
+  BorderColor<<container>>      #2E75B6
+  BorderColor<<layer>>          #BF8F00
+  BorderColor<<package>>        #548235
+  BorderColor<<store>>          #548235
+  BorderColor<<external>>       #7F7F7F
+  BorderColor<<library>>        #A61C00
+  FontColor                     #000000
+}
+
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor     #7F7F7F
+}
+
+skinparam actor {
+  BackgroundColor #F4B084
+  BorderColor     #C65911
+}

@@ -33,7 +33,7 @@ metric a grammar can honestly claim is standard conformance, below.
 | Tests executed (ST) | 230 |
 | UT line coverage | ? |
 | ST line coverage | ? |
-| argos diagnostics | 0 |
+| argos diagnostics | 11 |
 <!-- /folio -->
 
 ### Standard conformance

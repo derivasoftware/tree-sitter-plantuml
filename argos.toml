@@ -9,3 +9,20 @@ asil = "NA"
 
 [sources]
 typescript = ["."]
+
+# The LLD chapters model the grammar itself — the rule families of
+# grammar.js (envelope, classes, members, relations, sequence, activity,
+# grouping, notes, queries) plus the external scanner's frontier and the
+# python packaging — as module boxes. They are the specification of a
+# DSL, not OO code: no reader extracts grammar.js rules, and the C
+# scanner's functions ride the generated parser.c's noise. The class-axis
+# correlator therefore cannot bind them by construction; the boxes stay
+# as design documentation, exempted with this cause (REQ-00516-1).
+[[diagnose.exempt]]
+code = "W-DESIGN-NO-CODE"
+sources = [
+  "CL_ActivityChapter", "CL_ClassChapter", "CL_Envelope", "CL_Frontier",
+  "CL_Grouping", "CL_Members", "CL_Notes", "CL_Packaging", "CL_Queries",
+  "CL_Relations", "CL_SequenceChapter",
+]
+reason = "grammar rule chapters are the DSL's specification, not OO code: no reader extracts grammar.js rules, so the class-axis correlator cannot bind these boxes by construction"

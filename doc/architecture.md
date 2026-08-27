@@ -123,7 +123,7 @@ _cl · `design/lld/grammar/CL_TreeSitterPlantuml.puml`_
 <details>
 <summary><code>CL_Packaging</code> · traces to <code>REQ-00015-1</code> <code>REQ-00016-1</code></summary>
 <ul>
-<li>source: <code>design/lld/grammar/CL_Packaging.puml</code></li>
+<li>source: <code>design/lld/bindings/CL_Packaging.puml</code></li>
 <li>verified by: <code>tests/test_packaging.py</code> (1)</li>
 </ul>
 <p><img alt="CL_Packaging" src="assets/CL_Packaging.svg"></p>
