@@ -585,3 +585,44 @@ class C {
             (generics)
             (parameter_list
               (parameter))))))))
+
+==================
+Template commas do not split the parameter list (issue #6)
+==================
+@startuml
+class C {
+  + lookup(std::map<K, std::vector<int>> m, std::pair<A, B> p) : int
+  + bind(std::map<K, std::function<void(int, int)>> m) : void
+  + open(std::map<K, V m) : void
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (identifier)
+            (parameter_list
+              (parameter)
+              (parameter))
+            (type)))
+        (member
+          (visibility)
+          (method
+            (identifier)
+            (parameter_list
+              (parameter))
+            (type)))
+        (member
+          (visibility)
+          (method
+            (identifier)
+            (parameter_list
+              (parameter)
+              (parameter))
+            (type)))))))

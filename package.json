@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-plantuml",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "description": "PlantUML grammar for tree-sitter",
   "type": "module",
   "repository": "https://github.com/derivasoftware/tree-sitter-plantuml",

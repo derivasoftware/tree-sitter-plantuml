@@ -28,7 +28,7 @@ export default grammar({
   // identifier-headed line no structural rule can parse; the sentinel
   // is never produced — it detects error recovery inside the scanner.
   // The two member-level tokens need lookahead the internal lexer lacks
-  // (issue #5, REQ-00028-2): see scanner.c. Both are aliased to
+  // (issue #5, REQ-00028-3): see scanner.c. Both are aliased to
   // identifier at their use site, so the vocabulary does not grow.
   externals: $ => [
     $._raw_statement,
@@ -422,7 +422,14 @@ export default grammar({
     // One nesting level of parentheses stays inside the parameter, so
     // callable types (`std::function<void(int, bool)>`) survive whole;
     // commas inside those inner parens do not split the list.
-    parameter: $ => /([^,()\n]|\([^()\n]*\))+/,
+    // A parameter runs to the next top-level comma. Parentheses nest one
+    // level (callable types, `std::function<void(int, bool)>`), and angle
+    // brackets nest four, like cpp_return_type (issue #6: `map<K, V>`,
+    // `map<K, vector<int>>`, deeper):
+    // a balanced span is one alternative of the token, so the longest
+    // match swallows the commas inside it; a lone `<` still matches as a
+    // plain character, so `a < b` keeps parsing as before.
+    parameter: $ => /([^,()\n]|\([^()\n]*\)|<([^<>\n]|<([^<>\n]|<([^<>\n]|<[^<>\n]*>)*>)*>)*>)+/,
 
     attribute: $ => seq(
       field('name', $.identifier),

@@ -63,7 +63,7 @@ static void eat_line(TSLexer *lexer) {
   }
 }
 
-/* Method-level template parameters (issue #5, REQ-00028-2): two
+/* Method-level template parameters (issue #5, REQ-00028-3): two
    lexical decisions inside class bodies that need lookahead. At member
    start, `get<T>(` is a method name followed by template parameters,
    yet the internal lexer's longest match reads `get<T>` as a templated
@@ -88,7 +88,7 @@ static bool template_clause_then_paren(TSLexer *lexer) {
   /* `name<>(` is not a template clause: the grammar's generics token
      needs at least one character, so claiming the name here would leave
      the parser with nothing to match and an ERROR — the line keeps the
-     attribute path 0.9.3 gave it (frontier, REQ-00028-2). */
+     attribute path 0.9.3 gave it (frontier, REQ-00028-3). */
   if (lexer->lookahead == '>') return false;
   while (lexer->lookahead != '>') {
     if (lexer->lookahead == '<' || lexer->lookahead == '\n' ||
