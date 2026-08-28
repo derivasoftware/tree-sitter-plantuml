@@ -27,7 +27,15 @@ export default grammar({
   // The frontier fallback (src/scanner.c): _raw_statement claims an
   // identifier-headed line no structural rule can parse; the sentinel
   // is never produced — it detects error recovery inside the scanner.
-  externals: $ => [$._raw_statement, $._error_sentinel],
+  // The two member-level tokens need lookahead the internal lexer lacks
+  // (issue #5, REQ-00028-1): see scanner.c. Both are aliased to
+  // identifier at their use site, so the vocabulary does not grow.
+  externals: $ => [
+    $._raw_statement,
+    $._template_method_name,
+    $._plain_return_type,
+    $._error_sentinel,
+  ],
 
   // ~ opens both a visibility marker and a destructor name; GLR keeps
   // both readings alive until the following token decides.
@@ -313,8 +321,26 @@ export default grammar({
 
     method: $ => seq(
       // C++-style signature: the return type sits left of the name.
-      optional(field('type', $.cpp_return_type)),
-      field('name', choice($.identifier, $.cpp_method_name)),
+      // A plain identifier (no C++ signal) may also stand there, but
+      // only when the name carries a template clause — the scanner
+      // confirms `T get<T>(` before claiming `T`, so prose members
+      // (`Callable Protocol — called as …`) keep the attribute path.
+      optional(field('type', choice(
+        $.cpp_return_type,
+        alias($._plain_return_type, $.identifier),
+      ))),
+      // `get<T>(` at member start is a name with template parameters,
+      // not a templated return type: the scanner decides on the `(`
+      // after the closing bracket, where the internal lexer would have
+      // committed to cpp_return_type.
+      field('name', choice(
+        $.identifier,
+        $.cpp_method_name,
+        alias($._template_method_name, $.identifier),
+      )),
+      // Method-level template parameters (issue #5): `name<T>(…)`,
+      // captured like class-level generics.
+      optional(field('template_parameters', $.generics)),
       '(',
       optional(field('parameters', $.parameter_list)),
       ')',

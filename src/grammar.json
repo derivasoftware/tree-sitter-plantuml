@@ -1520,8 +1520,22 @@
               "type": "FIELD",
               "name": "type",
               "content": {
-                "type": "SYMBOL",
-                "name": "cpp_return_type"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "cpp_return_type"
+                  },
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_plain_return_type"
+                    },
+                    "named": true,
+                    "value": "identifier"
+                  }
+                ]
               }
             },
             {
@@ -1542,9 +1556,34 @@
               {
                 "type": "SYMBOL",
                 "name": "cpp_method_name"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_template_method_name"
+                },
+                "named": true,
+                "value": "identifier"
               }
             ]
           }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "template_parameters",
+              "content": {
+                "type": "SYMBOL",
+                "name": "generics"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -3356,6 +3395,14 @@
     {
       "type": "SYMBOL",
       "name": "_raw_statement"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_template_method_name"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_plain_return_type"
     },
     {
       "type": "SYMBOL",
