@@ -30,7 +30,7 @@ metric a grammar can honestly claim is standard conformance, below.
 | Documentation files | 7 |
 | Documentation lines (authored) | 321 |
 | Tests executed (UT) | 24 |
-| Tests executed (ST) | 233 |
+| Tests executed (ST) | 234 |
 | UT line coverage | ? |
 | ST line coverage | ? |
 | argos diagnostics | 0 |
