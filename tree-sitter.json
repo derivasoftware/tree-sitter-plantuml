@@ -17,7 +17,7 @@
     }
   ],
   "metadata": {
-    "version": "0.9.2",
+    "version": "0.9.3",
     "license": "MIT",
     "description": "PlantUML grammar for tree-sitter",
     "authors": [
