@@ -555,3 +555,33 @@ class C {
           (method
             (cpp_return_type)
             (identifier)))))))
+
+==================
+Empty template clause keeps the frontier: name<>( is not a method (issue #5 follow-up)
+==================
+@startuml
+class C {
+  + T get<>(int index)
+  + T get<T>(int index)
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (attribute
+            (identifier)
+            (raw_text)))
+        (member
+          (visibility)
+          (method
+            (identifier)
+            (identifier)
+            (generics)
+            (parameter_list
+              (parameter))))))))

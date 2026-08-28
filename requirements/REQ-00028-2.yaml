@@ -1,5 +1,5 @@
 requirement:
-  id: REQ-00028-1
+  id: REQ-00028-2
   title: The grammar shall parse C++-style member signatures structurally
   description: >
     Class-body members written in the C++ direction shall parse with the
@@ -8,9 +8,12 @@ requirement:
     reference markers, a leading const), trailing qualifiers (const,
     noexcept, override, = 0, = default, = delete) both at end of line
     and between the parentheses and the canonical colon, and callable
-    parameters whose inner parentheses do not split the parameter list.
-    A C++-shaped line the rules cannot absorb (an unclosed template
-    bracket) shall keep a lossless parse, never an ERROR node.
+    parameters whose inner parentheses do not split the parameter list,
+    and method-level template parameters — name<T>(args) — captured as
+    the method's template_parameters behind a C++ return type, behind a
+    plain identifier type, or in the canonical colon form. A C++-shaped
+    line the rules cannot absorb (an unclosed template bracket, an empty
+    template clause) shall keep a lossless parse, never an ERROR node.
   rationale: >
     Real corpora write members both ways: the deriva C++ fleet
     (argos-framework-cpp and the rebuild corpora) mostly uses the
@@ -23,6 +26,10 @@ requirement:
     four-level unrolled token, keeps prose members on the attribute
     path by requiring a C++ signal, and preserves the frontier with an
     equal-precedence longest-match fallback for unclosed brackets.
+    Revision rationale (2): issue derivasoftware/tree-sitter-plantuml#5
+    adds the method-level template clause (two external-scanner
+    lookahead tokens, aliased to identifier); the follow-up pins the
+    empty clause back on the attribute path after 0.9.4 let it ERROR.
   owner: dcoello-dev
   status: APPROVED
   asil: QM
