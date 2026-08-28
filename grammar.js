@@ -28,7 +28,7 @@ export default grammar({
   // identifier-headed line no structural rule can parse; the sentinel
   // is never produced — it detects error recovery inside the scanner.
   // The two member-level tokens need lookahead the internal lexer lacks
-  // (issue #5, REQ-00028-1): see scanner.c. Both are aliased to
+  // (issue #5, REQ-00028-2): see scanner.c. Both are aliased to
   // identifier at their use site, so the vocabulary does not grow.
   externals: $ => [
     $._raw_statement,
