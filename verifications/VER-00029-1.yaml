@@ -11,6 +11,10 @@ verification:
     the canonical colon, callable parameters with inner parentheses,
     the coexistence of the canonical colon form, and the unclosed
     template bracket degrading to raw text with no ERROR node.
+    Issue #5 adds method-level template parameters: name<T>(…)
+    behind a C++ return type, behind a plain identifier type, and
+    in the canonical colon form — and pins the frontier that a
+    plain type without the template clause stays an attribute.
     tests/test_grammar.py runs the file through the tree-sitter
     harness; the losslessness sweep (tests/test_round_trip.py) covers
     the same inputs byte-for-byte.

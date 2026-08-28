@@ -35,7 +35,7 @@ and repeated `tag:` (`$tag`) children.
 |---|---|
 | `entity_body` | `{ … }` |
 | `member` | one line; optional `visibility:` (`+ - # ~`) and repeated `modifier:` (`{static}` `{abstract}` `{field}` `{method}` `{classifier}`) |
-| `method` | `name(params) : type`; name is `identifier` or `cpp_method_name` (destructors nest an `identifier`; operators are one token) |
+| `method` | `name(params) : type`; name is `identifier` or `cpp_method_name` (destructors nest an `identifier`; operators are one token); an optional `template_parameters:` (`generics`) sits between the name and the parens (`get<T>(int i)`); a return type left of the name is `cpp_return_type`, or a plain `identifier` when the name carries a template clause |
 | `attribute` | `name : type`, or `name` plus opaque `raw_text` for free-text lines |
 | `member_separator` | `--` `..` `==` `__ titled __` group separators |
 

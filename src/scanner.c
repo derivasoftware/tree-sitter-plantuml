@@ -21,7 +21,12 @@
 
 #include "tree_sitter/parser.h"
 
-enum TokenType { RAW_STATEMENT, ERROR_SENTINEL };
+enum TokenType {
+  RAW_STATEMENT,
+  TEMPLATE_METHOD_NAME,
+  PLAIN_RETURN_TYPE,
+  ERROR_SENTINEL,
+};
 
 static const char *const KEYWORDS[] = {
   /* declarations */
@@ -58,6 +63,62 @@ static void eat_line(TSLexer *lexer) {
   }
 }
 
+/* Method-level template parameters (issue #5, REQ-00028-1): two
+   lexical decisions inside class bodies that need lookahead. At member
+   start, `get<T>(` is a method name followed by template parameters,
+   yet the internal lexer's longest match reads `get<T>` as a templated
+   return type; and `T get<T>(` carries a plain identifier return type
+   that, without the template clause behind it, would be prose and must
+   stay an attribute. Both tokens end at the first identifier — the
+   grammar's generics token takes the clause — and both return false
+   unless the whole shape `ident [ws ident] <…> (` is on the line, so
+   every other member keeps its exact lexing. */
+
+static bool scan_identifier(TSLexer *lexer) {
+  if (!(lexer->lookahead == '_' || iswalpha(lexer->lookahead))) return false;
+  while (is_word(lexer->lookahead)) lexer->advance(lexer, false);
+  return true;
+}
+
+/* Mirrors the generics token: `<`, no nested bracket, `>`; then the
+   opening parenthesis that makes it a method's template clause. */
+static bool template_clause_then_paren(TSLexer *lexer) {
+  if (lexer->lookahead != '<') return false;
+  lexer->advance(lexer, false);
+  while (lexer->lookahead != '>') {
+    if (lexer->lookahead == '<' || lexer->lookahead == '\n' ||
+        lexer->lookahead == 0) {
+      return false;
+    }
+    lexer->advance(lexer, false);
+  }
+  lexer->advance(lexer, false);
+  return lexer->lookahead == '(';
+}
+
+static bool scan_template_member(TSLexer *lexer, const bool *valid_symbols) {
+  while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+    lexer->advance(lexer, true);
+  }
+  if (!scan_identifier(lexer)) return false;
+  lexer->mark_end(lexer);
+  if (lexer->lookahead == '<') {
+    if (!valid_symbols[TEMPLATE_METHOD_NAME]) return false;
+    if (!template_clause_then_paren(lexer)) return false;
+    lexer->result_symbol = TEMPLATE_METHOD_NAME;
+    return true;
+  }
+  if (lexer->lookahead != ' ' && lexer->lookahead != '\t') return false;
+  if (!valid_symbols[PLAIN_RETURN_TYPE]) return false;
+  while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+    lexer->advance(lexer, false);
+  }
+  if (!scan_identifier(lexer)) return false;
+  if (!template_clause_then_paren(lexer)) return false;
+  lexer->result_symbol = PLAIN_RETURN_TYPE;
+  return true;
+}
+
 static bool claim(TSLexer *lexer) {
   eat_line(lexer);
   lexer->result_symbol = RAW_STATEMENT;
@@ -70,6 +131,12 @@ bool tree_sitter_plantuml_external_scanner_scan(
   /* During error recovery every symbol is marked valid, the sentinel
      included — never invent tokens there. */
   if (valid_symbols[ERROR_SENTINEL]) return false;
+  /* Member states never carry _raw_statement, so the template scan can
+     own them outright; a false here resets the lexer for the internal
+     rules. */
+  if (valid_symbols[TEMPLATE_METHOD_NAME] || valid_symbols[PLAIN_RETURN_TYPE]) {
+    return scan_template_member(lexer, valid_symbols);
+  }
   if (!valid_symbols[RAW_STATEMENT]) return false;
 
   while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {

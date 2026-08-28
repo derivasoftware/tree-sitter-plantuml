@@ -28,7 +28,7 @@ from the manifest and the latest tag:
 
 <!-- folio: install -->
 ```bash
-pip install git+https://github.com/derivasoftware/tree-sitter-plantuml.git@v0.9.3
+pip install git+https://github.com/derivasoftware/tree-sitter-plantuml.git@v0.9.4
 ```
 
 Or from a clone: `git clone https://github.com/derivasoftware/tree-sitter-plantuml && pip install ./tree-sitter-plantuml`.

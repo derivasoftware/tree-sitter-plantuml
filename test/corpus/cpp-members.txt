@@ -462,3 +462,96 @@ class P {
           (method
             (cpp_return_type)
             (identifier)))))))
+
+==================
+method-level template parameters (issue #5)
+==================
+@startuml
+class Container {
+  + T get<T>(int index)
+  + void add<T>(T item)
+  + Widget* create<Args>(Config config)
+  + std::vector<T> collect<T, U>(U source)
+  + get<T>(int index) : T
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (identifier)
+            (identifier)
+            (generics)
+            (parameter_list
+              (parameter))))
+        (member
+          (visibility)
+          (method
+            (identifier)
+            (identifier)
+            (generics)
+            (parameter_list
+              (parameter))))
+        (member
+          (visibility)
+          (method
+            (cpp_return_type)
+            (identifier)
+            (generics)
+            (parameter_list
+              (parameter))))
+        (member
+          (visibility)
+          (method
+            (cpp_return_type)
+            (identifier)
+            (generics)
+            (parameter_list
+              (parameter))))
+        (member
+          (visibility)
+          (method
+            (identifier)
+            (generics)
+            (parameter_list
+              (parameter))
+            (type)))))))
+
+==================
+plain return type without a template clause stays on the attribute path
+==================
+@startuml
+class C {
+  + int plain(int x)
+  + Callable Protocol — called as a function
+  + vector<int> typed()
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (attribute
+            (identifier)
+            (raw_text)))
+        (member
+          (visibility)
+          (attribute
+            (identifier)
+            (raw_text)))
+        (member
+          (visibility)
+          (method
+            (cpp_return_type)
+            (identifier)))))))
