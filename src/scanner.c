@@ -63,20 +63,26 @@ static void eat_line(TSLexer *lexer) {
   }
 }
 
-/* Method-level template parameters (issue #5, REQ-00028-3): two
+/* C++-direction member signatures (issues #5 and #7, REQ-00028-4): two
    lexical decisions inside class bodies that need lookahead. At member
    start, `get<T>(` is a method name followed by template parameters,
    yet the internal lexer's longest match reads `get<T>` as a templated
-   return type; and `T get<T>(` carries a plain identifier return type
-   that, without the template clause behind it, would be prose and must
-   stay an attribute. Both tokens end at the first identifier — the
-   grammar's generics token takes the clause — and both return false
-   unless the whole shape `ident [ws ident] <…> (` is on the line, so
-   every other member keeps its exact lexing. */
+   return type; and `T get<T>(` / `void execute(` carry a plain
+   identifier return type that, without the parameter paren pinned to
+   the name behind it, would be prose and must stay an attribute. Both
+   tokens end at the first identifier — the grammar's generics token
+   takes the clause — and both return false unless the whole shape
+   `ident [ws ident] [<…>] (` is on the line, so every other member
+   keeps its exact lexing. */
 
-static bool scan_identifier(TSLexer *lexer) {
+static bool scan_identifier(TSLexer *lexer, char *head, size_t cap) {
   if (!(lexer->lookahead == '_' || iswalpha(lexer->lookahead))) return false;
-  while (is_word(lexer->lookahead)) lexer->advance(lexer, false);
+  size_t len = 0;
+  while (is_word(lexer->lookahead)) {
+    if (head != NULL && len < cap - 1) head[len++] = (char)lexer->lookahead;
+    lexer->advance(lexer, false);
+  }
+  if (head != NULL) head[len] = 0;
   return true;
 }
 
@@ -88,7 +94,7 @@ static bool template_clause_then_paren(TSLexer *lexer) {
   /* `name<>(` is not a template clause: the grammar's generics token
      needs at least one character, so claiming the name here would leave
      the parser with nothing to match and an ERROR — the line keeps the
-     attribute path 0.9.3 gave it (frontier, REQ-00028-3). */
+     attribute path 0.9.3 gave it (frontier, REQ-00028-4). */
   if (lexer->lookahead == '>') return false;
   while (lexer->lookahead != '>') {
     if (lexer->lookahead == '<' || lexer->lookahead == '\n' ||
@@ -101,11 +107,22 @@ static bool template_clause_then_paren(TSLexer *lexer) {
   return lexer->lookahead == '(';
 }
 
+/* What separates a method from an attribute is the position of the
+   parameter paren, not the return type (issue #7): a method pins `(`
+   to its name — directly (`execute(`) or behind a template clause
+   (`get<T>(`) — while an attribute's parens live inside its type,
+   right of the colon (`x : std::function<void(int)>`). */
+static bool method_clause_after_name(TSLexer *lexer) {
+  if (lexer->lookahead == '(') return true;
+  return template_clause_then_paren(lexer);
+}
+
 static bool scan_template_member(TSLexer *lexer, const bool *valid_symbols) {
   while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
     lexer->advance(lexer, true);
   }
-  if (!scan_identifier(lexer)) return false;
+  char head[16];
+  if (!scan_identifier(lexer, head, sizeof head)) return false;
   lexer->mark_end(lexer);
   if (lexer->lookahead == '<') {
     if (!valid_symbols[TEMPLATE_METHOD_NAME]) return false;
@@ -115,11 +132,16 @@ static bool scan_template_member(TSLexer *lexer, const bool *valid_symbols) {
   }
   if (lexer->lookahead != ' ' && lexer->lookahead != '\t') return false;
   if (!valid_symbols[PLAIN_RETURN_TYPE]) return false;
+  /* `operator` never heads a plain return type: `operator bool()` and
+     `operator new(...)` are operator-overload names owned by
+     cpp_method_name. The head buffer out-lengths the word, so a
+     truncated longer identifier can never compare equal. */
+  if (strcmp(head, "operator") == 0) return false;
   while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
     lexer->advance(lexer, false);
   }
-  if (!scan_identifier(lexer)) return false;
-  if (!template_clause_then_paren(lexer)) return false;
+  if (!scan_identifier(lexer, NULL, 0)) return false;
+  if (!method_clause_after_name(lexer)) return false;
   lexer->result_symbol = PLAIN_RETURN_TYPE;
   return true;
 }

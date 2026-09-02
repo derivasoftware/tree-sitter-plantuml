@@ -28,7 +28,7 @@ export default grammar({
   // identifier-headed line no structural rule can parse; the sentinel
   // is never produced — it detects error recovery inside the scanner.
   // The two member-level tokens need lookahead the internal lexer lacks
-  // (issue #5, REQ-00028-3): see scanner.c. Both are aliased to
+  // (issues #5, #7; REQ-00028-4): see scanner.c. Both are aliased to
   // identifier at their use site, so the vocabulary does not grow.
   externals: $ => [
     $._raw_statement,
@@ -321,10 +321,11 @@ export default grammar({
 
     method: $ => seq(
       // C++-style signature: the return type sits left of the name.
-      // A plain identifier (no C++ signal) may also stand there, but
-      // only when the name carries a template clause — the scanner
-      // confirms `T get<T>(` before claiming `T`, so prose members
-      // (`Callable Protocol — called as …`) keep the attribute path.
+      // A plain identifier (no C++ signal) may also stand there when
+      // the parameter paren is pinned to the name — the scanner
+      // confirms `T get<T>(` / `void execute(` before claiming the
+      // type (issue #7), so prose members (`Callable Protocol —
+      // called as …`) keep the attribute path.
       optional(field('type', choice(
         $.cpp_return_type,
         alias($._plain_return_type, $.identifier),

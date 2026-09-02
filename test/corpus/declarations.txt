@@ -140,6 +140,6 @@ namespace jlr {
           (entity_body
             (member
               (visibility)
-              (attribute
+              (method
                 (identifier)
-                (raw_text)))))))))
+                (identifier)))))))))

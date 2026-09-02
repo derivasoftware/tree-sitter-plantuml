@@ -1,6 +1,6 @@
 verification:
-  id: VER-00029-3
-  req_id: REQ-00028-3
+  id: VER-00029-4
+  req_id: REQ-00028-4
   title: The cpp-members corpus pins every C++ signature shape and the frontier
   description: >
     test/corpus/cpp-members.txt extends its destructor and
@@ -19,7 +19,12 @@ verification:
     as an attribute, never an ERROR. Revision (3) pins issue #6: template
     commas in parameters (two-level nesting, a callable inside a template)
     keep one parameter node each, and an unclosed bracket still splits
-    losslessly.
+    losslessly. Revision (4) pins issue #7: a plain identifier return
+    type with the paren pinned to the name (void start(), bool
+    isReady(int), Status init(), behind {abstract}) parses as a method;
+    the operator-overload guard (operator bool()) keeps cpp_method_name,
+    prose members and parens inside an attribute's type
+    (std::function<void(int)>) keep the attribute path.
     tests/test_grammar.py runs the file through the tree-sitter
     harness; the losslessness sweep (tests/test_round_trip.py) covers
     the same inputs byte-for-byte.
