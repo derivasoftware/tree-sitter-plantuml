@@ -524,7 +524,7 @@ class Container {
             (type)))))))
 
 ==================
-plain return type without a template clause stays on the attribute path
+plain return type binds when the paren is pinned to the name; prose stays an attribute (issue #7)
 ==================
 @startuml
 class C {
@@ -542,9 +542,11 @@ class C {
       (entity_body
         (member
           (visibility)
-          (attribute
+          (method
             (identifier)
-            (raw_text)))
+            (identifier)
+            (parameter_list
+              (parameter))))
         (member
           (visibility)
           (attribute
@@ -555,6 +557,61 @@ class C {
           (method
             (cpp_return_type)
             (identifier)))))))
+
+==================
+cpp plain return type binds the method path (issue #7)
+==================
+@startuml
+class Widget {
+  + void start()
+  + bool isReady(int t)
+  - Status init()
+  + {abstract} void render(Canvas c)
+  + operator bool()
+  + m_cb : std::function<void(int)>
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (identifier)
+            (identifier)))
+        (member
+          (visibility)
+          (method
+            (identifier)
+            (identifier)
+            (parameter_list
+              (parameter))))
+        (member
+          (visibility)
+          (method
+            (identifier)
+            (identifier)))
+        (member
+          (visibility)
+          (modifier)
+          (method
+            (identifier)
+            (identifier)
+            (parameter_list
+              (parameter))))
+        (member
+          (visibility)
+          (method
+            (cpp_method_name)))
+        (member
+          (visibility)
+          (attribute
+            (identifier)
+            (type)))))))
 
 ==================
 Empty template clause keeps the frontier: name<>( is not a method (issue #5 follow-up)
