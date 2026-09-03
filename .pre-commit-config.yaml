@@ -17,7 +17,7 @@ repos:
       - id: ruff-format
 
   - repo: https://github.com/derivasoftware/plantuml-fmt
-    rev: v0.3.2
+    rev: v0.4.1
     hooks:
       - id: plantuml-fmt
         # the standard corpus fixtures reproduce plantuml.com verbatim;
