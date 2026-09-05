@@ -19,5 +19,5 @@ requirement:
   parent_ids:
     - SREQ-00001-1
   tags:
-    - losslessness
-    - round-trip
+    - language-tooling
+    - data-stewardship

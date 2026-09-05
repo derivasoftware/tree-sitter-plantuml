@@ -23,5 +23,5 @@ requirement:
   parent_ids:
     - SREQ-00001-1
   tags:
-    - sequence-diagram
+    - language-tooling
     - roadmap

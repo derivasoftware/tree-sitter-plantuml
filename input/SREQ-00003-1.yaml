@@ -21,5 +21,4 @@ requirement:
   parent_ids:
     - SREQ-00001-1
   tags:
-    - frontier-policy
-    - error-tolerance
+    - language-tooling

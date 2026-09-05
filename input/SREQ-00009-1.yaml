@@ -22,5 +22,5 @@ requirement:
   parent_ids:
     - SREQ-00001-1
   tags:
-    - activity-diagram
+    - language-tooling
     - roadmap
