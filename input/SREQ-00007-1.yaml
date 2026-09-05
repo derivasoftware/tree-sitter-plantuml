@@ -20,5 +20,4 @@ requirement:
   parent_ids:
     - SREQ-00001-1
   tags:
-    - packaging
-    - distribution
+    - release-engineering

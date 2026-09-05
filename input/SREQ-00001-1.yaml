@@ -22,6 +22,4 @@ requirement:
   asil: QM
   parent_ids: []
   tags:
-    - domain
-    - grammar
-    - parsing
+    - language-tooling
