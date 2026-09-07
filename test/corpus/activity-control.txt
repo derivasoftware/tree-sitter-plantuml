@@ -251,7 +251,7 @@ end inside a frame still closes it
 @startuml
 alt ok
   a -> b
-end   
+end
 end
 @enduml
 ---

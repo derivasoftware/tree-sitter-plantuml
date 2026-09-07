@@ -85,19 +85,19 @@ _cl · `design/lld/grammar/CL_TreeSitterPlantuml.puml`_
 </details>
 
 <details>
-<summary><code>CL_SequenceChapter</code> · traces to <code>REQ-00017-1</code> <code>REQ-00018-1</code> <code>REQ-00019-1</code> <code>REQ-00025-1</code></summary>
+<summary><code>CL_SequenceChapter</code> · traces to <code>REQ-00017-1</code> <code>REQ-00018-1</code> <code>REQ-00019-1</code> <code>REQ-00025-1</code> <code>REQ-00030-1</code></summary>
 <ul>
 <li>source: <code>design/lld/grammar/CL_SequenceChapter.puml</code></li>
-<li>verified by: <code>tests/test_grammar.py</code> (4), <code>tests/test_standard_coverage.py</code> (1)</li>
+<li>verified by: <code>tests/test_grammar.py</code> (5), <code>tests/test_standard_coverage.py</code> (2)</li>
 </ul>
 <p><img alt="CL_SequenceChapter" src="assets/CL_SequenceChapter.svg"></p>
 </details>
 
 <details>
-<summary><code>CL_ActivityChapter</code> · traces to <code>REQ-00026-2</code></summary>
+<summary><code>CL_ActivityChapter</code> · traces to <code>REQ-00026-3</code> <code>REQ-00029-1</code></summary>
 <ul>
 <li>source: <code>design/lld/grammar/CL_ActivityChapter.puml</code></li>
-<li>verified by: <code>tests/test_grammar.py</code> (1), <code>tests/test_standard_coverage.py</code> (2)</li>
+<li>verified by: <code>tests/test_grammar.py</code> (2), <code>tests/test_standard_coverage.py</code> (2)</li>
 </ul>
 <p><img alt="CL_ActivityChapter" src="assets/CL_ActivityChapter.svg"></p>
 </details>
