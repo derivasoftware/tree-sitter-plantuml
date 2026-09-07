@@ -20,7 +20,7 @@ requirement:
     became a raw_block so that no `end X` token exists at statement
     level any more: such tokens drag the lexer past a bare `end` and
     break every closer that shares the keyword.
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids:
     - SREQ-00008-1

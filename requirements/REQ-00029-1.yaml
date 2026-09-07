@@ -30,7 +30,7 @@ requirement:
     and, when it dies, drops the line to raw (the `repeat :action;` and
     `end fork` lesson). Braced activity group, rectangle and card blocks
     stay raw: they are drawing surface, not flow.
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids:
     - SREQ-00009-1

@@ -13,3 +13,4 @@ verification:
     - tests/test_grammar.py::test_corpus_activity_control
     - tests/test_standard_coverage.py::test_construct_maps_to_intended_node
     - tests/test_standard_coverage.py::test_standard_file_is_error_free
+  status: APPROVED
