@@ -1,5 +1,6 @@
 @startuml CL_ActivityChapter
-' requirement REQ-00026-2
+' requirement REQ-00026-3
+' requirement REQ-00029-1
 
 !startsub ActivityChapter
 
@@ -7,6 +8,20 @@ namespace grammar.activity {
   class "<<module>>" as ActivityChapter {
     + activity_action
     + swimlane
+    + activity_control
+    + activity_arrow
+    + connector
+    + if_block
+    + elseif_clause
+    + while_block
+    + repeat_block
+    + switch_block
+    + case_clause
+    + fork_block
+    + fork_again
+    + split_block
+    + split_again
+    + partition_block
   }
 }
 

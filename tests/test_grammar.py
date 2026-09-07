@@ -87,3 +87,11 @@ def test_corpus_seq_standard():
 
 def test_corpus_activity():
     check_corpus("activity")
+
+
+def test_corpus_activity_control():
+    check_corpus("activity-control")
+
+
+def test_corpus_lifecycle():
+    check_corpus("lifecycle")

@@ -3,12 +3,102 @@
     "type": "activity_action",
     "named": true,
     "fields": {
+      "direction": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "backward",
+            "named": false
+          }
+        ]
+      },
       "text": {
         "multiple": false,
         "required": true,
         "types": [
           {
             "type": "action_text",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "activity_arrow",
+    "named": true,
+    "fields": {
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "label",
+            "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "arrow_operator",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "activity_control",
+    "named": true,
+    "fields": {
+      "kind": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "break",
+            "named": false
+          },
+          {
+            "type": "detach",
+            "named": false
+          },
+          {
+            "type": "end",
+            "named": false
+          },
+          {
+            "type": "goto",
+            "named": false
+          },
+          {
+            "type": "kill",
+            "named": false
+          },
+          {
+            "type": "label",
+            "named": false
+          },
+          {
+            "type": "start",
+            "named": false
+          },
+          {
+            "type": "stop",
+            "named": false
+          }
+        ]
+      },
+      "target": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
             "named": true
           }
         ]
@@ -49,6 +139,350 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "box_block",
+    "named": true,
+    "fields": {
+      "color": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "color",
+            "named": true
+          }
+        ]
+      },
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "label",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "activity_action",
+          "named": true
+        },
+        {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
+          "type": "class_declaration",
+          "named": true
+        },
+        {
+          "type": "colon_member",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
+          "named": true
+        },
+        {
+          "type": "display_directive",
+          "named": true
+        },
+        {
+          "type": "divider",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
+          "named": true
+        },
+        {
+          "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "fork_block",
+          "named": true
+        },
+        {
+          "type": "frame_block",
+          "named": true
+        },
+        {
+          "type": "if_block",
+          "named": true
+        },
+        {
+          "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
+          "named": true
+        },
+        {
+          "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
+          "named": true
+        },
+        {
+          "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
+          "named": true
+        },
+        {
+          "type": "partition_block",
+          "named": true
+        },
+        {
+          "type": "raw_block",
+          "named": true
+        },
+        {
+          "type": "raw_line",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "swimlane",
+          "named": true
+        },
+        {
+          "type": "switch_block",
+          "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "case_clause",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "condition",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "activity_action",
+          "named": true
+        },
+        {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
+          "type": "class_declaration",
+          "named": true
+        },
+        {
+          "type": "colon_member",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
+          "named": true
+        },
+        {
+          "type": "display_directive",
+          "named": true
+        },
+        {
+          "type": "divider",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
+          "named": true
+        },
+        {
+          "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "fork_block",
+          "named": true
+        },
+        {
+          "type": "frame_block",
+          "named": true
+        },
+        {
+          "type": "if_block",
+          "named": true
+        },
+        {
+          "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
+          "named": true
+        },
+        {
+          "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
+          "named": true
+        },
+        {
+          "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
+          "named": true
+        },
+        {
+          "type": "partition_block",
+          "named": true
+        },
+        {
+          "type": "raw_block",
+          "named": true
+        },
+        {
+          "type": "raw_line",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "swimlane",
+          "named": true
+        },
+        {
+          "type": "switch_block",
+          "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -228,6 +662,21 @@
     }
   },
   {
+    "type": "delay",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "delay_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "diagram",
     "named": true,
     "fields": {
@@ -251,6 +700,18 @@
           "named": true
         },
         {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
           "type": "class_declaration",
           "named": true
         },
@@ -260,6 +721,14 @@
         },
         {
           "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
           "named": true
         },
         {
@@ -279,11 +748,23 @@
           "named": true
         },
         {
+          "type": "fork_block",
+          "named": true
+        },
+        {
           "type": "frame_block",
           "named": true
         },
         {
+          "type": "if_block",
+          "named": true
+        },
+        {
           "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
           "named": true
         },
         {
@@ -303,6 +784,10 @@
           "named": true
         },
         {
+          "type": "partition_block",
+          "named": true
+        },
+        {
           "type": "raw_block",
           "named": true
         },
@@ -311,7 +796,27 @@
           "named": true
         },
         {
+          "type": "reference",
+          "named": true
+        },
+        {
           "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
           "named": true
         },
         {
@@ -319,7 +824,15 @@
           "named": true
         },
         {
+          "type": "switch_block",
+          "named": true
+        },
+        {
           "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
           "named": true
         }
       ]
@@ -377,6 +890,10 @@
         "required": false,
         "types": [
           {
+            "type": "branch_label",
+            "named": true
+          },
+          {
             "type": "label",
             "named": true
           }
@@ -392,6 +909,18 @@
           "named": true
         },
         {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
           "type": "class_declaration",
           "named": true
         },
@@ -401,6 +930,14 @@
         },
         {
           "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
           "named": true
         },
         {
@@ -420,11 +957,23 @@
           "named": true
         },
         {
+          "type": "fork_block",
+          "named": true
+        },
+        {
           "type": "frame_block",
           "named": true
         },
         {
+          "type": "if_block",
+          "named": true
+        },
+        {
           "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
           "named": true
         },
         {
@@ -444,6 +993,10 @@
           "named": true
         },
         {
+          "type": "partition_block",
+          "named": true
+        },
+        {
           "type": "raw_block",
           "named": true
         },
@@ -452,7 +1005,27 @@
           "named": true
         },
         {
+          "type": "reference",
+          "named": true
+        },
+        {
           "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
           "named": true
         },
         {
@@ -460,7 +1033,187 @@
           "named": true
         },
         {
+          "type": "switch_block",
+          "named": true
+        },
+        {
           "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "elseif_clause",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "condition",
+            "named": true
+          }
+        ]
+      },
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "branch_label",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "activity_action",
+          "named": true
+        },
+        {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
+          "type": "class_declaration",
+          "named": true
+        },
+        {
+          "type": "colon_member",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
+          "named": true
+        },
+        {
+          "type": "display_directive",
+          "named": true
+        },
+        {
+          "type": "divider",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
+          "named": true
+        },
+        {
+          "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "fork_block",
+          "named": true
+        },
+        {
+          "type": "frame_block",
+          "named": true
+        },
+        {
+          "type": "if_block",
+          "named": true
+        },
+        {
+          "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
+          "named": true
+        },
+        {
+          "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
+          "named": true
+        },
+        {
+          "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
+          "named": true
+        },
+        {
+          "type": "partition_block",
+          "named": true
+        },
+        {
+          "type": "raw_block",
+          "named": true
+        },
+        {
+          "type": "raw_line",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "swimlane",
+          "named": true
+        },
+        {
+          "type": "switch_block",
+          "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
           "named": true
         }
       ]
@@ -747,6 +1500,337 @@
     }
   },
   {
+    "type": "fork_again",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "activity_action",
+          "named": true
+        },
+        {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
+          "type": "class_declaration",
+          "named": true
+        },
+        {
+          "type": "colon_member",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
+          "named": true
+        },
+        {
+          "type": "display_directive",
+          "named": true
+        },
+        {
+          "type": "divider",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
+          "named": true
+        },
+        {
+          "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "fork_block",
+          "named": true
+        },
+        {
+          "type": "frame_block",
+          "named": true
+        },
+        {
+          "type": "if_block",
+          "named": true
+        },
+        {
+          "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
+          "named": true
+        },
+        {
+          "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
+          "named": true
+        },
+        {
+          "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
+          "named": true
+        },
+        {
+          "type": "partition_block",
+          "named": true
+        },
+        {
+          "type": "raw_block",
+          "named": true
+        },
+        {
+          "type": "raw_line",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "swimlane",
+          "named": true
+        },
+        {
+          "type": "switch_block",
+          "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fork_block",
+    "named": true,
+    "fields": {
+      "join": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "fork",
+            "named": false
+          },
+          {
+            "type": "merge",
+            "named": false
+          }
+        ]
+      },
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "fork_label",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "activity_action",
+          "named": true
+        },
+        {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
+          "type": "class_declaration",
+          "named": true
+        },
+        {
+          "type": "colon_member",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
+          "named": true
+        },
+        {
+          "type": "display_directive",
+          "named": true
+        },
+        {
+          "type": "divider",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
+          "named": true
+        },
+        {
+          "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "fork_again",
+          "named": true
+        },
+        {
+          "type": "fork_block",
+          "named": true
+        },
+        {
+          "type": "frame_block",
+          "named": true
+        },
+        {
+          "type": "if_block",
+          "named": true
+        },
+        {
+          "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
+          "named": true
+        },
+        {
+          "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
+          "named": true
+        },
+        {
+          "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
+          "named": true
+        },
+        {
+          "type": "partition_block",
+          "named": true
+        },
+        {
+          "type": "raw_block",
+          "named": true
+        },
+        {
+          "type": "raw_line",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "swimlane",
+          "named": true
+        },
+        {
+          "type": "switch_block",
+          "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "frame_block",
     "named": true,
     "fields": {
@@ -804,6 +1888,18 @@
           "named": true
         },
         {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
           "type": "class_declaration",
           "named": true
         },
@@ -813,6 +1909,14 @@
         },
         {
           "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
           "named": true
         },
         {
@@ -836,11 +1940,23 @@
           "named": true
         },
         {
+          "type": "fork_block",
+          "named": true
+        },
+        {
           "type": "frame_block",
           "named": true
         },
         {
+          "type": "if_block",
+          "named": true
+        },
+        {
           "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
           "named": true
         },
         {
@@ -860,6 +1976,10 @@
           "named": true
         },
         {
+          "type": "partition_block",
+          "named": true
+        },
+        {
           "type": "raw_block",
           "named": true
         },
@@ -868,7 +1988,27 @@
           "named": true
         },
         {
+          "type": "reference",
+          "named": true
+        },
+        {
           "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
           "named": true
         },
         {
@@ -876,7 +2016,195 @@
           "named": true
         },
         {
+          "type": "switch_block",
+          "named": true
+        },
+        {
           "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "if_block",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "condition",
+            "named": true
+          }
+        ]
+      },
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "branch_label",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "activity_action",
+          "named": true
+        },
+        {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
+          "type": "class_declaration",
+          "named": true
+        },
+        {
+          "type": "colon_member",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
+          "named": true
+        },
+        {
+          "type": "display_directive",
+          "named": true
+        },
+        {
+          "type": "divider",
+          "named": true
+        },
+        {
+          "type": "else_clause",
+          "named": true
+        },
+        {
+          "type": "elseif_clause",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
+          "named": true
+        },
+        {
+          "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "fork_block",
+          "named": true
+        },
+        {
+          "type": "frame_block",
+          "named": true
+        },
+        {
+          "type": "if_block",
+          "named": true
+        },
+        {
+          "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
+          "named": true
+        },
+        {
+          "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
+          "named": true
+        },
+        {
+          "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
+          "named": true
+        },
+        {
+          "type": "partition_block",
+          "named": true
+        },
+        {
+          "type": "raw_block",
+          "named": true
+        },
+        {
+          "type": "raw_line",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "swimlane",
+          "named": true
+        },
+        {
+          "type": "switch_block",
+          "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
           "named": true
         }
       ]
@@ -998,6 +2326,100 @@
     "type": "label",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "lifecycle_statement",
+    "named": true,
+    "fields": {
+      "color": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "color",
+            "named": true
+          }
+        ]
+      },
+      "kind": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "activate",
+            "named": false
+          },
+          {
+            "type": "create",
+            "named": false
+          },
+          {
+            "type": "deactivate",
+            "named": false
+          },
+          {
+            "type": "destroy",
+            "named": false
+          }
+        ]
+      },
+      "participant_kind": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "actor",
+            "named": false
+          },
+          {
+            "type": "boundary",
+            "named": false
+          },
+          {
+            "type": "collections",
+            "named": false
+          },
+          {
+            "type": "control",
+            "named": false
+          },
+          {
+            "type": "database",
+            "named": false
+          },
+          {
+            "type": "entity",
+            "named": false
+          },
+          {
+            "type": "participant",
+            "named": false
+          },
+          {
+            "type": "queue",
+            "named": false
+          }
+        ]
+      },
+      "target": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "member",
@@ -1191,6 +2613,18 @@
           "named": true
         },
         {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
           "type": "class_declaration",
           "named": true
         },
@@ -1200,6 +2634,14 @@
         },
         {
           "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
           "named": true
         },
         {
@@ -1219,11 +2661,23 @@
           "named": true
         },
         {
+          "type": "fork_block",
+          "named": true
+        },
+        {
           "type": "frame_block",
           "named": true
         },
         {
+          "type": "if_block",
+          "named": true
+        },
+        {
           "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
           "named": true
         },
         {
@@ -1243,6 +2697,10 @@
           "named": true
         },
         {
+          "type": "partition_block",
+          "named": true
+        },
+        {
           "type": "raw_block",
           "named": true
         },
@@ -1251,7 +2709,27 @@
           "named": true
         },
         {
+          "type": "reference",
+          "named": true
+        },
+        {
           "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
           "named": true
         },
         {
@@ -1259,7 +2737,15 @@
           "named": true
         },
         {
+          "type": "switch_block",
+          "named": true
+        },
+        {
           "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
           "named": true
         }
       ]
@@ -1408,6 +2894,18 @@
           "named": true
         },
         {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
           "type": "class_declaration",
           "named": true
         },
@@ -1417,6 +2915,14 @@
         },
         {
           "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
           "named": true
         },
         {
@@ -1436,11 +2942,23 @@
           "named": true
         },
         {
+          "type": "fork_block",
+          "named": true
+        },
+        {
           "type": "frame_block",
           "named": true
         },
         {
+          "type": "if_block",
+          "named": true
+        },
+        {
           "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
           "named": true
         },
         {
@@ -1460,6 +2978,10 @@
           "named": true
         },
         {
+          "type": "partition_block",
+          "named": true
+        },
+        {
           "type": "raw_block",
           "named": true
         },
@@ -1468,7 +2990,27 @@
           "named": true
         },
         {
+          "type": "reference",
+          "named": true
+        },
+        {
           "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
           "named": true
         },
         {
@@ -1476,7 +3018,15 @@
           "named": true
         },
         {
+          "type": "switch_block",
+          "named": true
+        },
+        {
           "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
           "named": true
         }
       ]
@@ -1618,6 +3168,182 @@
     }
   },
   {
+    "type": "partition_block",
+    "named": true,
+    "fields": {
+      "color": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "color",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "activity_action",
+          "named": true
+        },
+        {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
+          "type": "class_declaration",
+          "named": true
+        },
+        {
+          "type": "colon_member",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
+          "named": true
+        },
+        {
+          "type": "display_directive",
+          "named": true
+        },
+        {
+          "type": "divider",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
+          "named": true
+        },
+        {
+          "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "fork_block",
+          "named": true
+        },
+        {
+          "type": "frame_block",
+          "named": true
+        },
+        {
+          "type": "if_block",
+          "named": true
+        },
+        {
+          "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
+          "named": true
+        },
+        {
+          "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
+          "named": true
+        },
+        {
+          "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
+          "named": true
+        },
+        {
+          "type": "partition_block",
+          "named": true
+        },
+        {
+          "type": "raw_block",
+          "named": true
+        },
+        {
+          "type": "raw_line",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "swimlane",
+          "named": true
+        },
+        {
+          "type": "switch_block",
+          "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "qualified_name",
     "named": true,
     "fields": {},
@@ -1661,6 +3387,42 @@
       "types": [
         {
           "type": "label",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "reference",
+    "named": true,
+    "fields": {
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "label",
+            "named": true
+          }
+        ]
+      },
+      "target": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "entity_list",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "raw_line",
           "named": true
         }
       ]
@@ -1807,6 +3569,214 @@
     }
   },
   {
+    "type": "repeat_block",
+    "named": true,
+    "fields": {
+      "action": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "action_text",
+            "named": true
+          }
+        ]
+      },
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "condition",
+            "named": true
+          }
+        ]
+      },
+      "exit_label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "branch_label",
+            "named": true
+          }
+        ]
+      },
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "branch_label",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "activity_action",
+          "named": true
+        },
+        {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
+          "type": "class_declaration",
+          "named": true
+        },
+        {
+          "type": "colon_member",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
+          "named": true
+        },
+        {
+          "type": "display_directive",
+          "named": true
+        },
+        {
+          "type": "divider",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
+          "named": true
+        },
+        {
+          "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "fork_block",
+          "named": true
+        },
+        {
+          "type": "frame_block",
+          "named": true
+        },
+        {
+          "type": "if_block",
+          "named": true
+        },
+        {
+          "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
+          "named": true
+        },
+        {
+          "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
+          "named": true
+        },
+        {
+          "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
+          "named": true
+        },
+        {
+          "type": "partition_block",
+          "named": true
+        },
+        {
+          "type": "raw_block",
+          "named": true
+        },
+        {
+          "type": "raw_line",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "swimlane",
+          "named": true
+        },
+        {
+          "type": "switch_block",
+          "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "return_statement",
+    "named": true,
+    "fields": {
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "label",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "root": true,
@@ -1817,6 +3787,317 @@
       "types": [
         {
           "type": "diagram",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spacer",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "split_again",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "activity_action",
+          "named": true
+        },
+        {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
+          "type": "class_declaration",
+          "named": true
+        },
+        {
+          "type": "colon_member",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
+          "named": true
+        },
+        {
+          "type": "display_directive",
+          "named": true
+        },
+        {
+          "type": "divider",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
+          "named": true
+        },
+        {
+          "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "fork_block",
+          "named": true
+        },
+        {
+          "type": "frame_block",
+          "named": true
+        },
+        {
+          "type": "if_block",
+          "named": true
+        },
+        {
+          "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
+          "named": true
+        },
+        {
+          "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
+          "named": true
+        },
+        {
+          "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
+          "named": true
+        },
+        {
+          "type": "partition_block",
+          "named": true
+        },
+        {
+          "type": "raw_block",
+          "named": true
+        },
+        {
+          "type": "raw_line",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "swimlane",
+          "named": true
+        },
+        {
+          "type": "switch_block",
+          "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "split_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "activity_action",
+          "named": true
+        },
+        {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
+          "type": "class_declaration",
+          "named": true
+        },
+        {
+          "type": "colon_member",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
+          "named": true
+        },
+        {
+          "type": "display_directive",
+          "named": true
+        },
+        {
+          "type": "divider",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
+          "named": true
+        },
+        {
+          "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "fork_block",
+          "named": true
+        },
+        {
+          "type": "frame_block",
+          "named": true
+        },
+        {
+          "type": "if_block",
+          "named": true
+        },
+        {
+          "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
+          "named": true
+        },
+        {
+          "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
+          "named": true
+        },
+        {
+          "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
+          "named": true
+        },
+        {
+          "type": "partition_block",
+          "named": true
+        },
+        {
+          "type": "raw_block",
+          "named": true
+        },
+        {
+          "type": "raw_line",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_again",
+          "named": true
+        },
+        {
+          "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "swimlane",
+          "named": true
+        },
+        {
+          "type": "switch_block",
+          "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
           "named": true
         }
       ]
@@ -1839,15 +4120,42 @@
     }
   },
   {
-    "type": "together_block",
+    "type": "switch_block",
     "named": true,
-    "fields": {},
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "condition",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
       "types": [
         {
           "type": "activity_action",
+          "named": true
+        },
+        {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
+          "type": "case_clause",
           "named": true
         },
         {
@@ -1860,6 +4168,14 @@
         },
         {
           "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
           "named": true
         },
         {
@@ -1879,11 +4195,23 @@
           "named": true
         },
         {
+          "type": "fork_block",
+          "named": true
+        },
+        {
           "type": "frame_block",
           "named": true
         },
         {
+          "type": "if_block",
+          "named": true
+        },
+        {
           "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
           "named": true
         },
         {
@@ -1903,6 +4231,10 @@
           "named": true
         },
         {
+          "type": "partition_block",
+          "named": true
+        },
+        {
           "type": "raw_block",
           "named": true
         },
@@ -1911,7 +4243,27 @@
           "named": true
         },
         {
+          "type": "reference",
+          "named": true
+        },
+        {
           "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
           "named": true
         },
         {
@@ -1919,7 +4271,166 @@
           "named": true
         },
         {
+          "type": "switch_block",
+          "named": true
+        },
+        {
           "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "together_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "activity_action",
+          "named": true
+        },
+        {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
+          "type": "class_declaration",
+          "named": true
+        },
+        {
+          "type": "colon_member",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
+          "named": true
+        },
+        {
+          "type": "display_directive",
+          "named": true
+        },
+        {
+          "type": "divider",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
+          "named": true
+        },
+        {
+          "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "fork_block",
+          "named": true
+        },
+        {
+          "type": "frame_block",
+          "named": true
+        },
+        {
+          "type": "if_block",
+          "named": true
+        },
+        {
+          "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
+          "named": true
+        },
+        {
+          "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
+          "named": true
+        },
+        {
+          "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
+          "named": true
+        },
+        {
+          "type": "partition_block",
+          "named": true
+        },
+        {
+          "type": "raw_block",
+          "named": true
+        },
+        {
+          "type": "raw_line",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "swimlane",
+          "named": true
+        },
+        {
+          "type": "switch_block",
+          "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
           "named": true
         }
       ]
@@ -1934,6 +4445,198 @@
     "type": "visibility",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "while_block",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "condition",
+            "named": true
+          }
+        ]
+      },
+      "end_label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "branch_label",
+            "named": true
+          }
+        ]
+      },
+      "exit_label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "branch_label",
+            "named": true
+          }
+        ]
+      },
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "branch_label",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "activity_action",
+          "named": true
+        },
+        {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
+          "type": "class_declaration",
+          "named": true
+        },
+        {
+          "type": "colon_member",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
+          "named": true
+        },
+        {
+          "type": "display_directive",
+          "named": true
+        },
+        {
+          "type": "divider",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
+          "named": true
+        },
+        {
+          "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "fork_block",
+          "named": true
+        },
+        {
+          "type": "frame_block",
+          "named": true
+        },
+        {
+          "type": "if_block",
+          "named": true
+        },
+        {
+          "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
+          "named": true
+        },
+        {
+          "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
+          "named": true
+        },
+        {
+          "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
+          "named": true
+        },
+        {
+          "type": "partition_block",
+          "named": true
+        },
+        {
+          "type": "raw_block",
+          "named": true
+        },
+        {
+          "type": "raw_line",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "swimlane",
+          "named": true
+        },
+        {
+          "type": "switch_block",
+          "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "#",
@@ -2008,6 +4711,10 @@
     "named": true
   },
   {
+    "type": "activate",
+    "named": false
+  },
+  {
     "type": "activation",
     "named": true
   },
@@ -2016,11 +4723,23 @@
     "named": false
   },
   {
+    "type": "again",
+    "named": false
+  },
+  {
     "type": "alt",
     "named": false
   },
   {
+    "type": "arrow_operator",
+    "named": true
+  },
+  {
     "type": "as",
+    "named": false
+  },
+  {
+    "type": "backward",
     "named": false
   },
   {
@@ -2037,12 +4756,24 @@
     "named": false
   },
   {
+    "type": "box",
+    "named": false
+  },
+  {
+    "type": "branch_label",
+    "named": true
+  },
+  {
     "type": "break",
     "named": false
   },
   {
     "type": "cardinality",
     "named": true
+  },
+  {
+    "type": "case",
+    "named": false
   },
   {
     "type": "class",
@@ -2054,6 +4785,14 @@
   },
   {
     "type": "color",
+    "named": true
+  },
+  {
+    "type": "condition",
+    "named": true
+  },
+  {
+    "type": "connector",
     "named": true
   },
   {
@@ -2069,6 +4808,10 @@
     "named": true
   },
   {
+    "type": "create",
+    "named": false
+  },
+  {
     "type": "critical",
     "named": false
   },
@@ -2077,11 +4820,27 @@
     "named": false
   },
   {
+    "type": "deactivate",
+    "named": false
+  },
+  {
     "type": "default",
     "named": false
   },
   {
+    "type": "delay_text",
+    "named": true
+  },
+  {
     "type": "delete",
+    "named": false
+  },
+  {
+    "type": "destroy",
+    "named": false
+  },
+  {
+    "type": "detach",
     "named": false
   },
   {
@@ -2097,11 +4856,35 @@
     "named": false
   },
   {
+    "type": "elseif",
+    "named": false
+  },
+  {
     "type": "end",
     "named": false
   },
   {
+    "type": "end box",
+    "named": false
+  },
+  {
     "type": "end note",
+    "named": false
+  },
+  {
+    "type": "end ref",
+    "named": false
+  },
+  {
+    "type": "endif",
+    "named": false
+  },
+  {
+    "type": "endswitch",
+    "named": false
+  },
+  {
+    "type": "endwhile",
     "named": false
   },
   {
@@ -2117,12 +4900,28 @@
     "named": false
   },
   {
+    "type": "equals",
+    "named": false
+  },
+  {
     "type": "extends",
     "named": false
   },
   {
+    "type": "fork",
+    "named": false
+  },
+  {
+    "type": "fork_label",
+    "named": true
+  },
+  {
     "type": "generics",
     "named": true
+  },
+  {
+    "type": "goto",
+    "named": false
   },
   {
     "type": "group",
@@ -2137,11 +4936,27 @@
     "named": true
   },
   {
+    "type": "if",
+    "named": false
+  },
+  {
     "type": "implements",
     "named": false
   },
   {
     "type": "interface",
+    "named": false
+  },
+  {
+    "type": "is",
+    "named": false
+  },
+  {
+    "type": "kill",
+    "named": false
+  },
+  {
+    "type": "label",
     "named": false
   },
   {
@@ -2161,11 +4976,19 @@
     "named": false
   },
   {
+    "type": "merge",
+    "named": false
+  },
+  {
     "type": "namespace",
     "named": false
   },
   {
     "type": "noexcept",
+    "named": false
+  },
+  {
+    "type": "not",
     "named": false
   },
   {
@@ -2193,6 +5016,10 @@
     "named": false
   },
   {
+    "type": "over",
+    "named": false
+  },
+  {
     "type": "override",
     "named": false
   },
@@ -2213,6 +5040,10 @@
     "named": false
   },
   {
+    "type": "partition",
+    "named": false
+  },
+  {
     "type": "qualifier",
     "named": true
   },
@@ -2225,6 +5056,10 @@
     "named": true
   },
   {
+    "type": "ref",
+    "named": false
+  },
+  {
     "type": "relation_operator",
     "named": true
   },
@@ -2233,7 +5068,15 @@
     "named": false
   },
   {
+    "type": "repeat",
+    "named": false
+  },
+  {
     "type": "restore",
+    "named": false
+  },
+  {
+    "type": "return",
     "named": false
   },
   {
@@ -2249,16 +5092,36 @@
     "named": false
   },
   {
+    "type": "split",
+    "named": false
+  },
+  {
+    "type": "start",
+    "named": false
+  },
+  {
     "type": "stereotype",
     "named": true
+  },
+  {
+    "type": "stop",
+    "named": false
   },
   {
     "type": "string",
     "named": true
   },
   {
+    "type": "switch",
+    "named": false
+  },
+  {
     "type": "tag",
     "named": true
+  },
+  {
+    "type": "then",
+    "named": false
   },
   {
     "type": "together",
@@ -2266,6 +5129,10 @@
   },
   {
     "type": "top",
+    "named": false
+  },
+  {
+    "type": "while",
     "named": false
   },
   {

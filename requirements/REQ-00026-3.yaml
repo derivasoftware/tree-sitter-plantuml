@@ -1,9 +1,17 @@
 requirement:
-  id: REQ-00026-2
-  title: The grammar shall parse activity actions and swimlanes structurally and the rest of the chapter as raw
+  id: REQ-00026-3
+  title: The grammar shall parse activity actions and swimlanes structurally
   description: >
-    The grammar shall parse activity actions and swimlanes structurally and the rest of the chapter as raw
+    The grammar shall parse single-line activity actions (:text; and the
+    SDL terminators, an optional #color prefix, the backward marker,
+    trailing stereotypes tolerated) as activity_action with the text as
+    a child token, and swimlanes (|Name|, colored variant) as swimlane.
+    Multiline action bodies and the braced group, rectangle and card
+    blocks stay raw. Control flow is REQ-00029-1.
   rationale: >
+    Revision 3 (DDEV-464): control flow moved out of this requirement
+    into REQ-00029-1 and the colored action head joined the action
+    token, so "the rest of the chapter as raw" no longer holds.
     Revision 2: the consumer arrived — call-level correlation (an
     action invokes a method; the lane names the receiver), so
     single-line actions (:text; and the SDL terminators, trailing

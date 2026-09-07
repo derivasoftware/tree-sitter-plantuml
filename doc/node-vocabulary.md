@@ -71,6 +71,40 @@ reference implementation).
 | `frame_block` / `else_clause` | `alt`/`opt`/`loop`/`par`/`break`/`critical`/`group` … `end` |
 | `divider` | `== section ==` at statement level |
 
+## Sequence lifecycle
+
+| Node | Meaning |
+|---|---|
+| `lifecycle_statement` | `activate`/`deactivate`/`destroy` X (`kind:`, `target:`, optional `color:`) and `create [participant-kind] X` (`participant_kind:`) |
+| `return_statement` | `return [label]` (`label:`) |
+| `reference` | `ref over A, B : text` (`target:` an `entity_list`, `label:`) or the `ref over … end ref` block, whose body lines are `raw_line` |
+| `box_block` | `box "name" #color … end box` (`name:` a `string` with optional `color:`, or a free `label:`); the body holds statements |
+| `delay` | `...text...`; the text is a `delay_text` child |
+| `spacer` | `\|\|\|` and `\|\|n\|\|` |
+
+`autonumber` and `autoactivate` lines stay `raw_line`.
+
+## Activity control flow
+
+| Node | Meaning |
+|---|---|
+| `activity_action` | `:text;` with the SDL terminators; an optional `#color` prefix rides inside the `action_text`, and `backward:text;` carries `direction:` |
+| `activity_control` | one terminal or jump per line: `kind:` is `start`, `stop`, `end`, `kill`, `detach`, `break`, `label` or `goto` (the last two with a `target:` identifier) |
+| `activity_arrow` | `-> label;` and `-[#color,dashed]->`; `operator:` (`arrow_operator`), optional `label:` |
+| `connector` | `(A)` or `#color:(A)` on its own line |
+| `if_block` | `if (cond) then (label)` … `endif`; `condition:`, optional `label:` (`branch_label`); `elseif_clause` and `else_clause` children carry their own condition and label |
+| `while_block` | `while (cond) is (label) not (label)` … `endwhile (label)`; `condition:`, `label:`, `exit_label:`, `end_label:` |
+| `repeat_block` | `repeat [:action;]` … `repeat while (cond) is (label) not (label)`; `action:`, `condition:`, `label:`, `exit_label:` |
+| `switch_block` | `switch (test)` … `endswitch` with `case_clause` children (`condition:`) |
+| `fork_block` | `fork` … `fork again` … `end fork {label}` or `end merge`; `fork_again` children, `join:` (`fork`/`merge`), optional `label:` (`fork_label`) |
+| `split_block` | `split` … `split again` … `end split`; `split_again` children |
+| `partition_block` | `partition [#color] Name { … }`; `name:` (identifier or string), optional `color:` |
+
+`condition` and `branch_label` are parenthesised tokens, one nesting
+level deep. `end` and bare `break` are terminals everywhere except
+inside a sequence frame, where they keep closing (or opening) frames.
+The legacy activity syntax and closers with no opener are `raw_line`.
+
 ## Notes and display
 
 `note_statement` covers positional (`note left of X : t`), targeted at

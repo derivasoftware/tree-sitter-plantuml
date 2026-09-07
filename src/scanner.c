@@ -41,6 +41,10 @@ static const char *const KEYWORDS[] = {
   /* frames */
   "alt", "opt", "loop", "par", "break", "critical", "group",
   "else", "end",
+  /* activity control flow (DDEV-464) */
+  "start", "stop", "kill", "detach", "label", "goto",
+  "if", "elseif", "endif", "while", "endwhile", "repeat", "backward",
+  "switch", "case", "endswitch", "fork", "split", "partition",
   /* notes and display */
   "note", "hide", "show", "remove", "restore",
   /* keyword frontier (route 2) and raw blocks */
@@ -203,6 +207,15 @@ bool tree_sitter_plantuml_external_scanner_scan(
     /* Activity `group Label {` is a raw braced block head; the
        braceless sequence `group` frame keeps its structure. Peek the
        rest of the line before the keyword table gets a say. */
+    /* Legacy activity `if "test" then` is raw (SREQ-00009-1): the new
+       syntax always parenthesises its condition. Same peek as group. */
+    if (strcmp(head, "if") == 0) {
+      while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+        lexer->advance(lexer, false);
+      }
+      if (lexer->lookahead == '"') return claim(lexer);
+      return false;
+    }
     if (strcmp(head, "group") == 0) {
       bool brace = false;
       while (lexer->lookahead != 0 && lexer->lookahead != '\n') {

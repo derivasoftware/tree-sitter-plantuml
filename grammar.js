@@ -41,11 +41,16 @@ export default grammar({
   // both readings alive until the following token decides.
   conflicts: $ => [
     [$.visibility, $.cpp_method_name],
-    // bare `break` at diagram level: activity raw line vs an unlabeled
-    // sequence break frame — GLR forks and the dynamic precedence on
-    // the closer prefers raw when both parse (zero break frames in the
-    // wild corpus; labeled break frames are unambiguous).
-    [$._activity_closer, $.frame_block],
+    // `end` and bare `break` head both an activity terminal and a
+    // sequence frame token: GLR forks and the dynamic precedence on
+    // activity_control settles the tie — frame close wins for `end`,
+    // the activity reading for bare `break` (zero unlabeled break
+    // frames in the wild corpus; labeled break frames are unambiguous).
+    [$._activity_terminal, $.frame_block],
+    // `fork` after a `fork again` body: a nested fork or the next
+    // branch — the following token (`again` or a newline) decides.
+    [$.fork_again],
+    [$.split_again],
   ],
 
   rules: {
@@ -55,21 +60,43 @@ export default grammar({
       '@startuml',
       optional(field('name', alias($._to_eol, $.diagram_name))),
       $._newline,
-      repeat(choice($._statement, alias($._activity_closer, $.raw_line))),
+      repeat(choice($._activity_statement, alias($._stray_closer, $.raw_line))),
       '@enduml',
     ),
 
-    // Activity flow-control lines that reuse frame tokens (`end`,
-    // `else (label)`, bare `break`) are raw — but only at diagram
-    // level, where no frame is open. Inside a frame the same tokens
-    // keep their exact closing semantics, with no ambiguity: this
-    // alternative simply is not part of a frame's body.
-    _activity_closer: $ => seq(
+    // Block closers with no opener — the legacy activity syntax
+    // (`if "x" then` … `else` … `endif`, raw by SREQ-00009-1) and
+    // malformed files — are raw, but only at diagram level, where no
+    // block is open. Inside a block the same tokens keep their exact
+    // closing semantics: this alternative is not part of any body.
+    _stray_closer: $ => seq(
       choice(
-        'end',
         seq('else', optional($.label)),
-        prec.dynamic(1, 'break'),
+        seq('elseif', optional($.label)),
+        'endif',
+        seq('endwhile', optional($.label)),
+        'endswitch',
+        seq('case', optional($.label)),
+        seq('fork', 'again'),
+        seq('split', 'again'),
+        seq('end', choice('fork', 'merge', 'split')),
+        seq('repeat', 'while', optional($.label)),
       ),
+      $._newline,
+    ),
+
+    // `end` ends the flow and bare `break` leaves a loop; both are frame
+    // tokens too, so they live outside _statement: inside a sequence
+    // frame they keep closing (or opening) frames, everywhere else they
+    // are terminals. Bare `break` still forks against an unlabeled
+    // break frame; dynamic precedence keeps the activity reading.
+    _activity_statement: $ => choice(
+      $._statement,
+      alias($._activity_terminal, $.activity_control),
+    ),
+
+    _activity_terminal: $ => seq(
+      field('kind', choice('end', prec.dynamic(1, 'break'))),
       $._newline,
     ),
 
@@ -82,12 +109,28 @@ export default grammar({
       alias($.boundary_message, $.relation),
       $.colon_member,
       $.activity_action,
+      $.activity_control,
+      $.activity_arrow,
+      $.connector,
+      $.if_block,
+      $.while_block,
+      $.repeat_block,
+      $.switch_block,
+      $.fork_block,
+      $.split_block,
+      $.partition_block,
       $.swimlane,
       $.package_block,
       $.namespace_block,
       $.together_block,
       $.participant_declaration,
       $.frame_block,
+      $.lifecycle_statement,
+      $.return_statement,
+      $.reference,
+      $.box_block,
+      $.delay,
+      $.spacer,
       $.divider,
       $.note_statement,
       $.display_directive,
@@ -217,14 +260,164 @@ export default grammar({
       ),
     ),
 
-    // Activity actions and swimlanes are structural — the consumer is
-    // call-level correlation (an action invokes a method; the lane
-    // names the receiver). Control flow stays deliberately raw until
-    // native rendering demands it. Single-line actions only; multiline
-    // bodies keep falling to the raw frontier.
+    // ── Activity diagrams (new syntax) ─────────────────────────────────
+
+    // Actions and swimlanes are structural — the consumer is call-level
+    // correlation (an action invokes a method; the lane names the
+    // receiver) — and so is the control flow around them, which the
+    // GDD's activity model folds into steps (DDEV-464). Single-line
+    // actions only; multiline bodies keep falling to the raw frontier.
+    // A #color prefix rides inside the text token: a color alone is no
+    // statement, and a split token would leave `#blue:(B)` in ERROR.
     activity_action: $ => seq(
-      field('text', alias(
-        token(prec(1, /:[^;\n]*[;|<>/\\\]][^\n]*/)), $.action_text)),
+      optional(field('direction', 'backward')),
+      field('text', alias($._action_token, $.action_text)),
+      $._newline,
+    ),
+
+    _action_token: $ => token(prec(1, /(#\w+)?:[^;\n]*[;|<>/\\\]][^\n]*/)),
+
+    // Terminals and jumps, one keyword per line. Multi-word closers
+    // (`end fork`, `repeat while`, `fork again`) are keyword sequences,
+    // not regex tokens: a token that extends a keyword by whitespace
+    // keeps the lexer advancing past the keyword, and when it dies
+    // (`repeat :action;`) the line falls to raw instead of the keyword.
+    activity_control: $ => seq(
+      choice(
+        field('kind', choice('start', 'stop', 'kill', 'detach')),
+        seq(field('kind', choice('label', 'goto')), field('target', $.identifier)),
+      ),
+      $._newline,
+    ),
+
+    // -> label; and -[#color,dashed]-> label between actions. The legacy
+    // `-->[cond]` arrow does not match (two dashes) and stays raw.
+    activity_arrow: $ => seq(
+      field('operator', alias(token(prec(1, /-(\[[^\]\n]*\]-)?>/)), $.arrow_operator)),
+      optional(field('label', $.label)),
+      $._newline,
+    ),
+
+    // (A) connector, optionally colored (#blue:(B)). The token carries
+    // its own line end so a usecase relation `(a) --> (b)` never
+    // half-matches into an ERROR: it falls to raw as before.
+    connector: $ => token(prec(1, /(#\w+:)?\([^()\n]+\)[ \t]*\r?\n/)),
+
+    // (condition) and (label) — one nesting level of parentheses.
+    _paren: $ => token(prec(1, /\(([^()\n]|\([^()\n]*\))*\)/)),
+
+    // then (label) | is (label) [then] | equals (label) [then]
+    _branch_head: $ => choice(
+      seq('then', optional(field('label', alias($._paren, $.branch_label)))),
+      seq(
+        choice('is', 'equals'),
+        field('label', alias($._paren, $.branch_label)),
+        optional('then'),
+      ),
+    ),
+
+    if_block: $ => seq(
+      'if',
+      field('condition', alias($._paren, $.condition)),
+      optional($._branch_head),
+      $._newline,
+      repeat($._activity_statement),
+      repeat($.elseif_clause),
+      optional(alias($.activity_else_clause, $.else_clause)),
+      'endif',
+      $._newline,
+    ),
+
+    elseif_clause: $ => seq(
+      'elseif',
+      field('condition', alias($._paren, $.condition)),
+      optional($._branch_head),
+      $._newline,
+      repeat($._activity_statement),
+    ),
+
+    activity_else_clause: $ => seq(
+      'else',
+      optional(field('label', alias($._paren, $.branch_label))),
+      $._newline,
+      repeat($._activity_statement),
+    ),
+
+    while_block: $ => seq(
+      'while',
+      field('condition', alias($._paren, $.condition)),
+      optional(seq('is', field('label', alias($._paren, $.branch_label)))),
+      optional(seq('not', field('exit_label', alias($._paren, $.branch_label)))),
+      $._newline,
+      repeat($._activity_statement),
+      'endwhile',
+      optional(field('end_label', alias($._paren, $.branch_label))),
+      $._newline,
+    ),
+
+    repeat_block: $ => seq(
+      'repeat',
+      optional(field('action', alias($._action_token, $.action_text))),
+      $._newline,
+      repeat($._activity_statement),
+      'repeat',
+      'while',
+      field('condition', alias($._paren, $.condition)),
+      optional(seq('is', field('label', alias($._paren, $.branch_label)))),
+      optional(seq('not', field('exit_label', alias($._paren, $.branch_label)))),
+      $._newline,
+    ),
+
+    switch_block: $ => seq(
+      'switch',
+      field('condition', alias($._paren, $.condition)),
+      $._newline,
+      repeat($._activity_statement),
+      repeat($.case_clause),
+      'endswitch',
+      $._newline,
+    ),
+
+    case_clause: $ => seq(
+      'case',
+      field('condition', alias($._paren, $.condition)),
+      $._newline,
+      repeat($._activity_statement),
+    ),
+
+    fork_block: $ => seq(
+      'fork',
+      $._newline,
+      repeat($._activity_statement),
+      repeat($.fork_again),
+      'end',
+      field('join', choice('fork', 'merge')),
+      optional(field('label', alias(token(/\{[^}\n]*\}/), $.fork_label))),
+      $._newline,
+    ),
+
+    fork_again: $ => seq('fork', 'again', $._newline, repeat($._activity_statement)),
+
+    split_block: $ => seq(
+      'split',
+      $._newline,
+      repeat($._activity_statement),
+      repeat($.split_again),
+      'end',
+      'split',
+      $._newline,
+    ),
+
+    split_again: $ => seq('split', 'again', $._newline, repeat($._activity_statement)),
+
+    partition_block: $ => seq(
+      'partition',
+      optional(field('color', $.color)),
+      optional(field('name', choice($.string, $.identifier))),
+      optional(field('color', $.color)),
+      '{',
+      repeat($._activity_statement),
+      '}',
       $._newline,
     ),
 
@@ -588,6 +781,62 @@ export default grammar({
       repeat($._statement),
     ),
 
+    // Lifecycle verbs: activate/deactivate/destroy a participant,
+    // create one (optionally with its kind), return to the caller.
+    lifecycle_statement: $ => seq(
+      choice(
+        seq(
+          field('kind', choice('activate', 'deactivate', 'destroy')),
+          field('target', $._entity_name),
+          optional(field('color', $.color)),
+        ),
+        seq(
+          field('kind', 'create'),
+          optional(field('participant_kind', choice(
+            'participant', 'actor', 'boundary', 'control', 'entity',
+            'database', 'collections', 'queue',
+          ))),
+          field('target', $._entity_name),
+        ),
+      ),
+      $._newline,
+    ),
+
+    return_statement: $ => seq('return', optional(field('label', $.label)), $._newline),
+
+    // ref over A, B : text — or a block whose body lines are raw.
+    reference: $ => seq(
+      'ref',
+      'over',
+      field('target', $.entity_list),
+      choice(
+        seq(':', field('label', $.label), $._newline),
+        seq(
+          $._newline,
+          repeat(choice(alias($._raw_block_line, $.raw_line), $._newline)),
+          alias(token(prec(3, /end[ \t]+ref/)), 'end ref'),
+          $._newline,
+        ),
+      ),
+    ),
+
+    // box "name" #color … end box, grouping participants.
+    box_block: $ => seq(
+      'box',
+      optional(choice(
+        seq(field('name', $.string), optional(field('color', $.color))),
+        field('label', $.label),
+      )),
+      $._newline,
+      repeat($._statement),
+      alias(token(prec(3, /end[ \t]+box/)), 'end box'),
+      $._newline,
+    ),
+
+    // ...5 minutes later... and the ||| / ||45|| vertical spacers.
+    delay: $ => seq(alias(token(prec(1, /\.\.\.[^\n]*/)), $.delay_text), $._newline),
+    spacer: $ => seq(token(prec(1, /\|\|(\||\d+\|\|)/)), $._newline),
+
     // == section divider == (statement level; body separators are a
     // different construct inside entity bodies)
     divider: $ => seq(token(prec(1, /==[^\n]*/)), $._newline),
@@ -621,10 +870,13 @@ export default grammar({
         $._unsupported_keyword_line,
         // route 4: scanner-claimed identifier-headed unknowns
         $._raw_statement,
-        // closers of keyword-raw blocks (ref/title/box open as raw
-        // keyword lines; their `end X` must reach raw too, while a bare
-        // frame `end` keeps closing frames)
-        token(prec(3, /end[ \t]+(ref|title|box)([ \t][^\n]*)?/)),
+        // title with inline text: same precedence as the bare block head
+        // below so the longer single-line match wins (as header/footer).
+        // No `end[ \t]+title` token at statement level: a token that
+        // extends `end` by whitespace drags the lexer past the keyword
+        // at every statement start, and when it dies (`end fork`, `end`
+        // plus trailing blanks) the line falls to raw instead of closing.
+        token(prec(3, /title[ \t][^ \t\n][^\n]*/)),
         // activity `group X {` (braced) reaches raw through the
         // scanner, which claims group lines containing a brace; the
         // braceless sequence `group` frame keeps its structure.
@@ -638,7 +890,7 @@ export default grammar({
 
     _unsupported_keyword_line: $ => token(prec(2, seq(
       choice(
-        'title', 'skinparam', 'scale', 'caption',
+        'skinparam', 'scale', 'caption',
         'autonumber', 'set',
         'left', 'allowmixing', 'allow_mixing',
         'usecase', 'component', 'state',
@@ -647,10 +899,7 @@ export default grammar({
         'card', 'file', 'stack',
         'circle', 'diamond', 'page', 'json',
         'top', 'bottom',
-        // sequence lifecycle verbs: raw until evidence demands
-        // structure (zero occurrences in the wild corpus so far)
-        'activate', 'deactivate', 'return', 'ref',
-        'create', 'destroy', 'autoactivate', 'box',
+        'autoactivate',
       ),
       optional(/[ \t][^\n]*/),
     ))),
@@ -659,6 +908,7 @@ export default grammar({
     // raw lines and the closing token are valid, so arbitrary text is
     // safe. Notes used to route here; they are structured nodes now.
     raw_block: $ => choice(
+      $._title_block,
       $._legend_block,
       $._header_block,
       $._footer_block,
@@ -673,6 +923,14 @@ export default grammar({
       $._newline,
       repeat(choice(alias($._raw_block_line, $.raw_line), $._newline)),
       alias('}', $.raw_line),
+      $._newline,
+    ),
+
+    _title_block: $ => seq(
+      alias(token(prec(3, 'title')), $.raw_line),
+      $._newline,
+      repeat(choice(alias($._raw_block_line, $.raw_line), $._newline)),
+      alias(token(prec(3, /end[ \t]+title([ \t][^\n]*)?/)), $.raw_line),
       $._newline,
     ),
 

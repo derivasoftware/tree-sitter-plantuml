@@ -1,0 +1,140 @@
+==================
+activate, deactivate, destroy and create
+==================
+@startuml
+activate Alice
+activate Alice #FFBBBB
+deactivate Alice
+destroy "Bob Jr"
+create Bob
+create control Ctl
+@enduml
+---
+
+(source_file
+  (diagram
+    (lifecycle_statement
+      (identifier))
+    (lifecycle_statement
+      (identifier)
+      (color))
+    (lifecycle_statement
+      (identifier))
+    (lifecycle_statement
+      (string))
+    (lifecycle_statement
+      (identifier))
+    (lifecycle_statement
+      (identifier))))
+
+==================
+return with and without a label
+==================
+@startuml
+Alice -> Bob : call
+return result
+return
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (label))
+    (return_statement
+      (label))
+    (return_statement)))
+
+==================
+references inline and as a block
+==================
+@startuml
+ref over Alice, Bob : see other diagram
+ref over Alice
+  a multiline
+  end of story
+end ref
+@enduml
+---
+
+(source_file
+  (diagram
+    (reference
+      (entity_list
+        (identifier)
+        (identifier))
+      (label))
+    (reference
+      (entity_list
+        (identifier))
+      (raw_line)
+      (raw_line))))
+
+==================
+box with a name and color, a bare label, or nothing
+==================
+@startuml
+box "Internal Service" #LightBlue
+  participant Bob
+  actor Al
+end box
+box Unquoted words
+  participant C
+end box
+box
+  participant D
+end box
+@enduml
+---
+
+(source_file
+  (diagram
+    (box_block
+      (string)
+      (color)
+      (participant_declaration
+        (identifier))
+      (participant_declaration
+        (identifier)))
+    (box_block
+      (label)
+      (participant_declaration
+        (identifier)))
+    (box_block
+      (participant_declaration
+        (identifier)))))
+
+==================
+delays and spacers
+==================
+@startuml
+...
+...5 minutes later...
+|||
+||45||
+@enduml
+---
+
+(source_file
+  (diagram
+    (delay
+      (delay_text))
+    (delay
+      (delay_text))
+    (spacer)
+    (spacer)))
+
+==================
+autoactivate stays raw
+==================
+@startuml
+autoactivate on
+@enduml
+---
+
+(source_file
+  (diagram
+    (raw_line)))

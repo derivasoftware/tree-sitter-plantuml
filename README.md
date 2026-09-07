@@ -3,7 +3,7 @@
 <!-- folio: colophon --project tree-sitter-plantuml --junit test-results/junit.xml --junit_st test-results/junit-st.xml -->
 ![powered by: argos](https://img.shields.io/badge/powered%20by-argos-1f6feb) ![verified: 100%](https://img.shields.io/badge/verified-100%25-2ea44f) ![tests: 100%](https://img.shields.io/badge/tests-100%25-2ea44f) ![UT: n/a](https://img.shields.io/badge/UT-n%2Fa-lightgrey) ![ST: n/a](https://img.shields.io/badge/ST-n%2Fa-lightgrey) ![diagnostics: 0](https://img.shields.io/badge/diagnostics-0-2ea44f)
 
-> **tree-sitter-plantuml** is powered by **argos**. **folio** generates this documentation from the repository's model: 28 requirements · 29 verifications · 0 constraints. Quality: 100% verified · 100% tests passing.
+> **tree-sitter-plantuml** is powered by **argos**. **folio** generates this documentation from the repository's model: 30 requirements · 31 verifications · 0 constraints. Quality: 100% verified · 100% tests passing.
 <!-- /folio -->
 
 A [tree-sitter](https://tree-sitter.github.io/) grammar for the
@@ -15,8 +15,9 @@ The structural guarantee: **never ERROR**. Statements the grammar knows
 become structured nodes; anything else (deployment syntax, mindmaps, future
 PlantUML) passes through lossless as `raw_line` via the frontier fallback.
 Coverage is standard-driven: per-construct matrices of plantuml.com (class
-125/149 structural, sequence 70/111, activity at the raw tier), all at zero
-ERROR.
+125/149 structural; sequence with its frames, participants, arrows and
+lifecycle; activity with its actions, swimlanes and control flow), all at
+zero ERROR.
 
 ## Install
 
@@ -28,7 +29,7 @@ from the manifest and the latest tag:
 
 <!-- folio: install -->
 ```bash
-pip install git+https://github.com/derivasoftware/tree-sitter-plantuml.git@v0.9.8
+pip install git+https://github.com/derivasoftware/tree-sitter-plantuml.git@v0.10.0
 ```
 
 Or from a clone: `git clone https://github.com/derivasoftware/tree-sitter-plantuml && pip install ./tree-sitter-plantuml`.
@@ -53,16 +54,21 @@ tree = parser.parse(b"@startuml\nclass Cafetera\n@enduml\n")
 directory ships alongside the parser.
 
 **Build tooling on the node vocabulary**: `src/node-types.json` is the
-machine-readable contract (120 node types, semver-governed); see
+machine-readable contract (189 node types, 85 of them named,
+semver-governed); see
 [doc/node-vocabulary.md](doc/node-vocabulary.md).
 
 ## Scope
 
 The family covers a standard-driven subset of PlantUML, never the whole
 language. Class diagrams: 125 of 149 standard constructs structural;
-sequence: 70 of 111, with the lifecycle verbs (activate, ref, box,
-delays) still raw; activity: actions and swimlanes structural, control
-flow raw. Everything else (deployment, components, state, mindmaps,
+sequence: participants, arrows, frames, notes and the lifecycle verbs
+(activate, create, destroy, return, ref, box, delays, spacers)
+structural, with autonumber, autoactivate and the styling surface raw;
+activity: actions, swimlanes and the whole new-syntax control flow
+(if/while/repeat/switch/fork/split/partition, arrows, connectors)
+structural, with the legacy syntax and the braced drawing blocks raw.
+Everything else (deployment, components, state, mindmaps,
 gantt) parses lossless as raw lines, never an ERROR, but gets no
 structure. The conformance matrices are tests
 (`tests/test_standard_coverage.py`) and are the source of these numbers.

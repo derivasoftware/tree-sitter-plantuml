@@ -13,14 +13,14 @@ stop
 
 (source_file
   (diagram
-    (raw_line)
+    (activity_control)
     (activity_action
       (action_text))
-    (raw_line)
+    (activity_control)
     (raw_line
       (label))
-    (raw_line)
-    (raw_line)))
+    (activity_control)
+    (activity_control)))
 
 ==================
 braced group is raw while braceless group stays a frame

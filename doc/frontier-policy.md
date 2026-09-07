@@ -22,7 +22,7 @@ Four routes:
 1. A first character that cannot start any supported token
    (`!directives`, separators, …).
 2. A line headed by a known-but-unsupported keyword
-   (`skinparam`, `title`, `circle`, `json`, sequence lifecycle verbs, …).
+   (`skinparam`, `title`, `circle`, `json`, `autonumber`, `autoactivate`, …).
 3. Block heads (`legend`/`header`/`footer`/braced `skinparam`) open a
    `raw_block` whose body lines are all raw.
 4. **The fallback** (`src/scanner.c`, REQ-00012-2): an external scanner
@@ -43,6 +43,14 @@ per-construct matrix (149 constructs, `examples/standard/*.puml`,
 raw, 0 ERROR**. The deliberately-raw set is style/config surface
 (`skinparam`, `set separator`, `page`, diagram-level direction), the
 drawn-but-unmodeled shapes (`circle`, `diamond`) and `json` bodies.
+
+The sequence and activity chapters follow the same matrix
+(`examples/standard/sequence-*.puml`, `activity-*.puml`). Since 0.10.0
+the sequence lifecycle verbs and the activity control flow are
+structural (REQ-00029-1, REQ-00030-1); the legacy activity syntax
+(`if "test" then`, `-->[cond]`) and block closers with no opener stay
+raw by design, as do the braced `group`/`rectangle`/`card` drawing
+blocks.
 
 ## Growing the frontier
 
