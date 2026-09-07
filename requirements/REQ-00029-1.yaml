@@ -1,0 +1,39 @@
+requirement:
+  id: REQ-00029-1
+  title: The grammar shall parse activity control flow structurally
+  description: >
+    The grammar shall parse the control flow of the new activity syntax
+    into structural nodes: the terminals and jumps (start, stop, end,
+    kill, detach, break, label, goto) as activity_control with a kind
+    field; if/elseif/else/endif as if_block with elseif_clause and
+    else_clause children carrying condition and branch_label; while and
+    endwhile as while_block; repeat and repeat while as repeat_block
+    (with the optional inline action and the backward marker on the
+    action); switch/case/endswitch as switch_block with case_clause;
+    fork/fork again/end fork|merge as fork_block with fork_again and an
+    optional fork_label; split/split again/end split as split_block;
+    partition Name { } as partition_block; -> label; arrows as
+    activity_arrow with an arrow_operator; (A) connectors, colored or
+    not, as connector; and colored #color:action; heads as
+    activity_action. The legacy activity syntax (if "test" then, -->[cond])
+    and closers with no opener stay raw, never ERROR.
+  rationale: >
+    The consumer arrived (DDEV-464): the GDD's activity model folds the
+    control flow into ControlStep entries and the argos reader classified
+    raw_line heads by regex to get there. The nodes give it the kind, the
+    condition and the branch labels as fields. Nested blocks mirror the
+    sequence frame_block so editors fold and indent them; end and bare
+    break stay outside the shared statement list so sequence frames keep
+    their closers (GLR with dynamic precedence settles bare break, as
+    before). Multi-word closers are keyword sequences, not tokens: a token
+    that extends a keyword by whitespace drags the lexer past the keyword
+    and, when it dies, drops the line to raw (the `repeat :action;` and
+    `end fork` lesson). Braced activity group, rectangle and card blocks
+    stay raw: they are drawing surface, not flow.
+  status: DRAFT
+  asil: QM
+  parent_ids:
+    - SREQ-00009-1
+  tags:
+    - activity
+    - frontier-policy

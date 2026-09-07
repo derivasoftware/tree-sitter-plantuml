@@ -1,0 +1,15 @@
+verification:
+  id: VER-00031-1
+  req_id: REQ-00030-1
+  title: Corpus and matrix tests cover sequence lifecycle statements
+  description: >
+    The lifecycle corpus parses activate/deactivate/destroy/create,
+    return, inline and block references, boxes with every head form,
+    delays and spacers into their nodes and keeps autoactivate raw; the
+    standard matrix maps the sequence chapter's lifecycle constructs to
+    the intended nodes with zero ERROR.
+  method: test
+  test_ids:
+    - tests/test_grammar.py::test_corpus_lifecycle
+    - tests/test_standard_coverage.py::test_construct_maps_to_intended_node
+    - tests/test_standard_coverage.py::test_standard_file_is_error_free

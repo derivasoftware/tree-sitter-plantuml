@@ -1,0 +1,29 @@
+requirement:
+  id: REQ-00030-1
+  title: The grammar shall parse sequence lifecycle statements structurally
+  description: >
+    The grammar shall parse the sequence lifecycle statements into
+    structural nodes: activate, deactivate and destroy (with an optional
+    color) and create (with an optional participant kind) as
+    lifecycle_statement with kind and target fields; return with an
+    optional label as return_statement; ref over A, B : text and the
+    ref over … end ref block (raw body lines) as reference with a target
+    entity_list and a label; box "name" #color … end box as box_block
+    whose body holds statements; ...text... as delay with a delay_text
+    child; and the ||| and ||n|| spacers as spacer. autoactivate and
+    autonumber stay raw keyword lines.
+  rationale: >
+    The GDD's sequence model (DDEV-460) carries activation and the
+    participants a box groups; the argos reader must see participants
+    declared inside a box and the activation verbs to bind them, and
+    plantuml-lsp resolves the receiver of a return. Multi-line title
+    became a raw_block so that no `end X` token exists at statement
+    level any more: such tokens drag the lexer past a bare `end` and
+    break every closer that shares the keyword.
+  status: DRAFT
+  asil: QM
+  parent_ids:
+    - SREQ-00008-1
+  tags:
+    - sequence
+    - frontier-policy

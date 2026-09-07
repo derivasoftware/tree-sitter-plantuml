@@ -15,8 +15,9 @@ The structural guarantee: **never ERROR**. Statements the grammar knows
 become structured nodes; anything else (deployment syntax, mindmaps, future
 PlantUML) passes through lossless as `raw_line` via the frontier fallback.
 Coverage is standard-driven: per-construct matrices of plantuml.com (class
-125/149 structural, sequence 70/111, activity at the raw tier), all at zero
-ERROR.
+125/149 structural; sequence with its frames, participants, arrows and
+lifecycle; activity with its actions, swimlanes and control flow), all at
+zero ERROR.
 
 ## Install
 
@@ -53,16 +54,21 @@ tree = parser.parse(b"@startuml\nclass Cafetera\n@enduml\n")
 directory ships alongside the parser.
 
 **Build tooling on the node vocabulary**: `src/node-types.json` is the
-machine-readable contract (120 node types, semver-governed); see
+machine-readable contract (189 node types, 85 of them named,
+semver-governed); see
 [doc/node-vocabulary.md](doc/node-vocabulary.md).
 
 ## Scope
 
 The family covers a standard-driven subset of PlantUML, never the whole
 language. Class diagrams: 125 of 149 standard constructs structural;
-sequence: 70 of 111, with the lifecycle verbs (activate, ref, box,
-delays) still raw; activity: actions and swimlanes structural, control
-flow raw. Everything else (deployment, components, state, mindmaps,
+sequence: participants, arrows, frames, notes and the lifecycle verbs
+(activate, create, destroy, return, ref, box, delays, spacers)
+structural, with autonumber, autoactivate and the styling surface raw;
+activity: actions, swimlanes and the whole new-syntax control flow
+(if/while/repeat/switch/fork/split/partition, arrows, connectors)
+structural, with the legacy syntax and the braced drawing blocks raw.
+Everything else (deployment, components, state, mindmaps,
 gantt) parses lossless as raw lines, never an ERROR, but gets no
 structure. The conformance matrices are tests
 (`tests/test_standard_coverage.py`) and are the source of these numbers.

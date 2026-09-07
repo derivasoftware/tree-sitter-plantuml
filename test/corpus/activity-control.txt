@@ -1,0 +1,267 @@
+==================
+terminals, jumps and arrows
+==================
+@startuml
+start
+:first;
+-> label text;
+-[#blue,dashed]->
+:second;
+label mylabel
+goto mylabel
+kill
+detach
+stop
+end
+@enduml
+---
+
+(source_file
+  (diagram
+    (activity_control)
+    (activity_action
+      (action_text))
+    (activity_arrow
+      (arrow_operator)
+      (label))
+    (activity_arrow
+      (arrow_operator))
+    (activity_action
+      (action_text))
+    (activity_control
+      (identifier))
+    (activity_control
+      (identifier))
+    (activity_control)
+    (activity_control)
+    (activity_control)
+    (activity_control)))
+
+==================
+if, elseif and else with branch labels
+==================
+@startuml
+if (condition?) then (yes)
+  :a;
+elseif (other?) is (maybe) then
+  :b;
+else (no)
+  :c;
+endif
+if(x)
+  :d;
+endif
+@enduml
+---
+
+(source_file
+  (diagram
+    (if_block
+      (condition)
+      (branch_label)
+      (activity_action
+        (action_text))
+      (elseif_clause
+        (condition)
+        (branch_label)
+        (activity_action
+          (action_text)))
+      (else_clause
+        (branch_label)
+        (activity_action
+          (action_text))))
+    (if_block
+      (condition)
+      (activity_action
+        (action_text)))))
+
+==================
+while and repeat loops
+==================
+@startuml
+while (more?) is (yes) not (no)
+  :body;
+  break
+endwhile (done)
+repeat :init;
+  :step;
+  backward:undo;
+repeat while (again?) is (yes) not (no)
+@enduml
+---
+
+(source_file
+  (diagram
+    (while_block
+      (condition)
+      (branch_label)
+      (branch_label)
+      (activity_action
+        (action_text))
+      (activity_control)
+      (branch_label))
+    (repeat_block
+      (action_text)
+      (activity_action
+        (action_text))
+      (activity_action
+        (action_text))
+      (condition)
+      (branch_label)
+      (branch_label))))
+
+==================
+switch and case
+==================
+@startuml
+switch (test?)
+case (A)
+  :a;
+case ( B )
+  :b;
+endswitch
+@enduml
+---
+
+(source_file
+  (diagram
+    (switch_block
+      (condition)
+      (case_clause
+        (condition)
+        (activity_action
+          (action_text)))
+      (case_clause
+        (condition)
+        (activity_action
+          (action_text))))))
+
+==================
+fork, split and their branches
+==================
+@startuml
+fork
+  :one;
+fork again
+  fork
+    :nested;
+  end fork
+fork again
+  :two;
+end fork {or}
+fork
+  :three;
+end merge
+split
+  :s1;
+split again
+  :s2;
+end split
+@enduml
+---
+
+(source_file
+  (diagram
+    (fork_block
+      (activity_action
+        (action_text))
+      (fork_again
+        (fork_block
+          (activity_action
+            (action_text))))
+      (fork_again
+        (activity_action
+          (action_text)))
+      (fork_label))
+    (fork_block
+      (activity_action
+        (action_text)))
+    (split_block
+      (activity_action
+        (action_text))
+      (split_again
+        (activity_action
+          (action_text))))))
+
+==================
+partition, colored actions and connectors
+==================
+@startuml
+partition #Pink "Long name" {
+  #lightblue:colored;
+}
+partition Init {
+  :plain;
+}
+(A)
+#blue:(B)
+@enduml
+---
+
+(source_file
+  (diagram
+    (partition_block
+      (color)
+      (string)
+      (activity_action
+        (action_text)))
+    (partition_block
+      (identifier)
+      (activity_action
+        (action_text)))
+    (connector)
+    (connector)))
+
+==================
+legacy syntax and stray closers stay raw
+==================
+@startuml
+if "legacy test" then
+  -->[true] "act 1"
+else
+  -->[false] "act 2"
+endif
+endwhile (x)
+end fork
+repeat while (z)
+case (c)
+(UC1) --> (UC2)
+@enduml
+---
+
+(source_file
+  (diagram
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line
+      (label))
+    (raw_line)
+    (raw_line
+      (label))
+    (raw_line
+      (label))
+    (raw_line)))
+
+==================
+end inside a frame still closes it
+==================
+@startuml
+alt ok
+  a -> b
+end   
+end
+@enduml
+---
+
+(source_file
+  (diagram
+    (frame_block
+      (label)
+      (relation
+        (identifier)
+        (relation_operator)
+        (identifier)))
+    (activity_control)))

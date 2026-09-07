@@ -44,6 +44,41 @@
   "group"
   "else"
   "end"
+  "start"
+  "stop"
+  "kill"
+  "detach"
+  "label"
+  "goto"
+  "backward"
+  "if"
+  "then"
+  "is"
+  "equals"
+  "not"
+  "elseif"
+  "endif"
+  "while"
+  "endwhile"
+  "repeat"
+  "switch"
+  "case"
+  "endswitch"
+  "fork"
+  "split"
+  "again"
+  "merge"
+  "partition"
+  "activate"
+  "deactivate"
+  "create"
+  "destroy"
+  "return"
+  "ref"
+  "over"
+  "end ref"
+  "box"
+  "end box"
 ] @keyword
 
 (divider) @punctuation.special
@@ -112,3 +147,15 @@
 
 (action_text) @string
 (lane_text) @module
+
+(condition) @string.special
+(branch_label) @string
+(fork_label) @string
+(arrow_operator) @operator
+(connector) @label
+(delay_text) @comment
+(activity_control target: (identifier) @label)
+(partition_block name: (identifier) @module)
+(partition_block name: (string) @module)
+(lifecycle_statement target: (identifier) @type)
+(reference target: (entity_list (identifier) @type))

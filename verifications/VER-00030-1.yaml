@@ -1,0 +1,15 @@
+verification:
+  id: VER-00030-1
+  req_id: REQ-00029-1
+  title: Corpus and matrix tests cover activity control flow
+  description: >
+    The activity-control corpus parses every control construct into its
+    block or activity_control node, keeps the legacy syntax and stray
+    closers raw, and keeps `end` closing a sequence frame; the standard
+    matrix maps the activity chapter's constructs to the intended nodes
+    with zero ERROR.
+  method: test
+  test_ids:
+    - tests/test_grammar.py::test_corpus_activity_control
+    - tests/test_standard_coverage.py::test_construct_maps_to_intended_node
+    - tests/test_standard_coverage.py::test_standard_file_is_error_free

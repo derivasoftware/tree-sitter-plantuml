@@ -85,7 +85,12 @@ deactivate Worker
 
 (source_file
   (diagram
+    (lifecycle_statement
+      (identifier))
     (raw_line)
-    (raw_line)
-    (raw_line)
-    (raw_line)))
+    (reference
+      (entity_list
+        (identifier))
+      (label))
+    (lifecycle_statement
+      (identifier))))

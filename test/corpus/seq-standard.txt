@@ -222,13 +222,15 @@ end box
 
 (source_file
   (diagram
-    (raw_line)
-    (raw_line)
-    (raw_line)
-    (raw_line)
-    (raw_line)
-    (raw_line)
-    (raw_line)
-    (participant_declaration
-      (identifier))
-    (raw_line)))
+    (raw_block
+      (raw_line)
+      (raw_line)
+      (raw_line))
+    (reference
+      (entity_list
+        (identifier))
+      (raw_line))
+    (box_block
+      (string)
+      (participant_declaration
+        (identifier)))))
