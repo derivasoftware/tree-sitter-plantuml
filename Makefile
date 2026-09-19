@@ -1,6 +1,6 @@
 LANGUAGE_NAME := tree-sitter-plantuml
 HOMEPAGE_URL := https://github.com/derivasoftware/tree-sitter-plantuml
-VERSION := 0.1.0
+VERSION := 0.11.0
 DESCRIPTION := PlantUML grammar for tree-sitter
 
 # repository

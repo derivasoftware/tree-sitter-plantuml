@@ -1,4 +1,5 @@
 @startuml CL_ClassChapter
+' requirement REQ-00031-1
 ' requirement REQ-00002-2
 ' requirement REQ-00014-1
 ' requirement REQ-00022-1
@@ -19,6 +20,7 @@ namespace grammar.classes {
     + member_ref
     + generics
     + stereotype
+    + hyperlink
   }
 }
 

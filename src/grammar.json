@@ -2374,8 +2374,48 @@
               "name": "tag"
             }
           }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "link",
+              "content": {
+                "type": "SYMBOL",
+                "name": "hyperlink"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
+    },
+    "hyperlink": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 2,
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "[["
+            },
+            {
+              "type": "PATTERN",
+              "value": "[^\\]\\n]+"
+            },
+            {
+              "type": "STRING",
+              "value": "]]"
+            }
+          ]
+        }
+      }
     },
     "tag": {
       "type": "TOKEN",
