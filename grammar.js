@@ -446,7 +446,13 @@ export default grammar({
       optional(seq('implements', field('implements', $.entity_list))),
       optional(field('color', $.color)),
       repeat(field('tag', $.tag)),
+      optional(field('link', $.hyperlink)),
     ),
+
+    // A PlantUML hyperlink on an entity head: [[url]], [[url{tooltip}]],
+    // [[url label]]. One token, decoded by the consumer; links inside
+    // member and relation text ride in the text token (frontier).
+    hyperlink: $ => token(prec(2, seq('[[', /[^\]\n]+/, ']]'))),
 
     tag: $ => token(/\$[\w-]+/),
 

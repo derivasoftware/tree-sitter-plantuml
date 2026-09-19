@@ -1,0 +1,26 @@
+requirement:
+  id: REQ-00031-1
+  title: The grammar shall parse hyperlinks on entity heads structurally
+  description: >
+    The grammar shall parse hyperlinks on entity heads structurally
+  rationale: >
+    The consumer arrived (PUML-48): plantuml-render 0.10 links diagram
+    entities (href, title and refs in its render-IR, <a href> in the SVG)
+    and folio hands it a link map, so a hyperlink written in the source
+    itself must reach the frontend as a node, not as raw text. PlantUML's
+    form is `[[url]]`, `[[url{tooltip}]]` or `[[url label]]` after the
+    declaration head; it becomes one `hyperlink` token in the `link:`
+    field of every declaration head (class, interface, enum, entity
+    kinds), after the color and the tags, decoded by the consumer.
+    Frontier kept on purpose: a link inside a member's type text or a
+    relation label rides in that text token (splitting `_to_eol` on `[`
+    would change how `list[str]` and friends parse), and a link in
+    prose stays a raw line, as the fallback corpus pins. The
+    hyperlink token wins over a relation qualifier by length where both
+    could lex.
+  status: DRAFT
+  asil: QM
+  parent_ids:
+    - SREQ-00002-1
+  tags:
+    - language-tooling

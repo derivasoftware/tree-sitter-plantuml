@@ -95,3 +95,7 @@ def test_corpus_activity_control():
 
 def test_corpus_lifecycle():
     check_corpus("lifecycle")
+
+
+def test_corpus_hyperlinks():
+    check_corpus("hyperlinks")

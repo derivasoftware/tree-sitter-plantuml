@@ -1,0 +1,68 @@
+==================
+hyperlink on a class head
+==================
+@startuml
+class Foo [[http://example.com/foo]]
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (hyperlink))))
+
+==================
+hyperlink with tooltip after stereotype and tag
+==================
+@startuml
+class Bar <<entity>> $core [[https://docs/bar{The bar page}]]
+interface Drawable [[#cls-Drawable Drawable panel]]
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (stereotype)
+      (tag)
+      (hyperlink))
+    (interface_declaration
+      (identifier)
+      (hyperlink))))
+
+==================
+hyperlink on an aliased head with a body
+==================
+@startuml
+class "Quoted name" as Q [[http://e.com/q]] {
+  + run() : None
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (string)
+      (identifier)
+      (hyperlink)
+      (entity_body
+        (member
+          (visibility)
+          (method
+            (identifier)
+            (type)))))))
+
+==================
+a link in prose is not a hyperlink node
+==================
+@startuml
+url of x is [[http://e.com]]
+@enduml
+---
+
+(source_file
+  (diagram
+    (raw_line)))

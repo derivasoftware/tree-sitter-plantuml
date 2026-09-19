@@ -87,6 +87,7 @@
 
 (entity_list (identifier) @type)
 (color) @string.special
+(hyperlink) @string.special.url
 (member_separator) @punctuation.special
 (qualified_name (identifier) @type)
 (member_ref (identifier) @type)

@@ -25,7 +25,7 @@ on these names.
 | `colon_member` | single-line member: `Entity : member text` |
 | `participant_declaration` | sequence participants (all eight kinds); `entity` is one of them |
 
-Shared head fields on declarations: `name:`, `generics:`, `stereotype:`,
+Shared head fields on declarations: `name:`, `generics:`, `stereotype:`, `link:` (a `hyperlink`, `[[url]]` / `[[url{tooltip}]]` / `[[url label]]`),
 `alias:` (`as X`), `extends:`/`implements:` (`entity_list`), `color:`,
 and repeated `tag:` (`$tag`) children.
 
