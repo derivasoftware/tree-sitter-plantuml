@@ -1,0 +1,14 @@
+requirement:
+  id: REQ-00032-1
+  title: The project shall publish a manylinux-tagged linux wheel on release tags
+  description: >
+    The project shall publish a manylinux-tagged linux wheel on release tags
+  rationale: >
+    setuptools tags the wheel with the build platform — `linux_x86_64` — which no index may serve and which promises nothing to any other distribution, so consumers fall back to a source build and need a compiler. The binary requires no external shared library and GLIBC 2.4 at most, so there is nothing to repair: `auditwheel show` proves the wheel is manylinux-clean and `wheel tags` corrects the tag, neither of which needs patchelf or docker — the release runner stays a plain shell runner. The script then installs the retagged wheel in a venv that never saw the source tree and parses a diagram with it, so the artefact that ships is the artefact that was verified.
+  status: DRAFT
+  asil: QM
+  parent_ids:
+    - SREQ-00007-1
+  tags:
+    - packaging
+    - ci

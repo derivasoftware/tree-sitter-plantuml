@@ -1,0 +1,7 @@
+verification:
+  id: VER-00034-1
+  req_id: REQ-00033-1
+  title: Release review of the wheels workflow for a tag
+  description: >
+    Evidence: the wheels workflow run for tag vX.Y.Z with the ubuntu, windows and macos jobs green — each wheel smoke-tested on its own platform by cibuildwheel's test command — and the wheels plus the sdist attached to the release. The windows half of the artefact was also proved off-runner before the first tag: `py -3.13 -m build --wheel` on Windows 11 with MSVC 14.44 and Windows SDK 10.0.26100 produced tree_sitter_plantuml-0.11.1-cp310-abi3-win_amd64.whl, and installing it with `--only-binary :all:` — which forbids pip from building anything from source — then running scripts/smoke_wheel.py passed on python 3.13. Re-verify on each release tag.
+  method: review

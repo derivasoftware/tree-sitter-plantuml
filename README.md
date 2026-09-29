@@ -24,8 +24,18 @@ zero ERROR.
 **Neovim**: [plantuml.nvim](https://github.com/derivasoftware/plantuml.nvim)
 builds the pinned grammar for you; nothing else to do.
 
-**Python** (the binding the LSP uses), straight from git. Generated
-from the manifest and the latest tag:
+**Python** (the binding the LSP uses) — a prebuilt wheel, no compiler
+required. Every release carries one `cp310-abi3` wheel per platform
+(`manylinux2014_x86_64`, `win_amd64`, `macosx_arm64`), each serving python
+3.10+, plus the sdist for platforms with no wheel. Pick yours from the
+[latest release](https://github.com/derivasoftware/tree-sitter-plantuml/releases/latest):
+
+```bash
+pip install tree_sitter_plantuml-<version>-cp310-abi3-<platform>.whl
+```
+
+Installing from git also works, and is what the manifest and the latest
+tag generate below — it compiles the extension, so it needs a C toolchain:
 
 <!-- folio: install -->
 ```bash

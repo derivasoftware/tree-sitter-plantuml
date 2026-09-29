@@ -1,0 +1,9 @@
+verification:
+  id: VER-00033-1
+  req_id: REQ-00032-1
+  title: Packaging test asserts the release wheel is manylinux-tagged and installs
+  description: >
+    Packaging test asserts the release wheel is manylinux-tagged and installs
+  method: test
+  test_ids:
+    - tests/test_packaging.py::test_release_wheel_is_manylinux_tagged_and_installs
