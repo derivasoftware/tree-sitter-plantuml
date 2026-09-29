@@ -25,7 +25,10 @@ class BuildExt(build_ext):
         if self.compiler.compiler_type != "msvc":
             ext.extra_compile_args = ["-std=c11", "-fvisibility=hidden"]
         else:
-            ext.extra_compile_args = ["/std:c11", "/utf-8"]
+            # /bigobj: the generated parser is a single ~17 MB translation
+            # unit and overruns MSVC's default object-file section limit
+            # (fatal error C1128) without it.
+            ext.extra_compile_args = ["/std:c11", "/utf-8", "/bigobj"]
         if path.exists("src/scanner.c"):
             ext.sources.append("src/scanner.c")
         if ext.py_limited_api:
