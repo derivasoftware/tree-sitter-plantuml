@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tree-sitter-plantuml"
 description = "PlantUML grammar for tree-sitter"
-version = "0.11.0"
+version = "0.11.1"
 keywords = ["incremental", "parsing", "tree-sitter", "plantuml"]
 classifiers = [
   "Intended Audience :: Developers",
@@ -25,8 +25,19 @@ Homepage = "https://github.com/derivasoftware/tree-sitter-plantuml"
 core = ["tree-sitter~=0.24"]
 
 [tool.cibuildwheel]
+# One wheel per platform: the extension targets the stable ABI, so
+# cp310-abi3 serves python 3.10+. Every built wheel is smoke-tested
+# against the same script the release path uses.
 build = "cp310-*"
 build-frontend = "build"
+test-requires = "tree-sitter"
+test-command = "python {project}/scripts/smoke_wheel.py"
+
+[tool.cibuildwheel.linux]
+# glibc 2.17 floor: the binary itself needs no more than 2.4 (see
+# scripts/build_wheels.sh), and 2.17 is the widest tag pip resolves
+# without argument.
+manylinux-x86_64-image = "manylinux2014"
 
 [tool.pytest.ini_options]
 markers = [

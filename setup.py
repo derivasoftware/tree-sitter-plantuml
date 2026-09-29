@@ -5,7 +5,11 @@ from setuptools import Extension, find_packages, setup
 from setuptools.command.build import build
 from setuptools.command.build_ext import build_ext
 from setuptools.command.egg_info import egg_info
-from wheel.bdist_wheel import bdist_wheel
+
+try:  # setuptools >= 70.1 owns bdist_wheel; the wheel shim is deprecated
+    from setuptools.command.bdist_wheel import bdist_wheel
+except ImportError:  # pragma: no cover - older build environments
+    from wheel.bdist_wheel import bdist_wheel
 
 
 class Build(build):

@@ -32,20 +32,25 @@ test:
     - ./.venv-ci/bin/pytest tests/ -q -m system --junitxml=test-results/junit-st.xml
 
 # Release publishing: cut a vX.Y.Z tag from green main and both packages
-# land in this project's GitLab registries (PyPI + npm).
+# land in this project's GitLab registries (PyPI + npm). The linux wheel
+# is built, proved manylinux-clean, retagged and smoke-installed by
+# scripts/build_wheels.sh before it is uploaded; the windows and macos
+# wheels come from the cibuildwheel workflow on the GitHub mirror
+# (.github/workflows/wheels.yml), because these runners are shell runners
+# with neither platform.
 publish-pypi:
   stage: deploy
   rules:
     - if: $CI_COMMIT_TAG
   script:
+    - ./scripts/build_wheels.sh dist
     - python3 -m venv .venv-pub
-    - ./.venv-pub/bin/pip install -q build twine
-    - ./.venv-pub/bin/python -m build --wheel
+    - ./.venv-pub/bin/pip install -q twine
     - >
       TWINE_USERNAME=gitlab-ci-token TWINE_PASSWORD=$CI_JOB_TOKEN
       ./.venv-pub/bin/twine upload
       --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi
-      dist/*
+      dist/*.whl
 
 publish-npm:
   stage: deploy

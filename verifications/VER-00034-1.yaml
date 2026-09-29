@@ -1,0 +1,7 @@
+verification:
+  id: VER-00034-1
+  req_id: REQ-00033-1
+  title: Release review of the wheels workflow for a tag
+  description: >
+    Evidence: the wheels workflow run for tag vX.Y.Z with the ubuntu, windows and macos jobs green — each wheel smoke-tested on its own platform by cibuildwheel's test command — the wheels and the sdist attached to the release, and pip install of the win_amd64 wheel on a Windows machine with no Build Tools installed. Re-verify on each release tag.
+  method: review

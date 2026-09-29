@@ -1,0 +1,88 @@
+# Prebuilt wheels for the platforms GitLab cannot reach (REQ-00033-1).
+#
+# This project's CI lives in GitLab, on self-hosted *shell* runners: no
+# docker images, no Windows, no macOS. Consumers without a C toolchain
+# therefore cannot install the grammar at all — on stock Windows the
+# source build stops at "Microsoft Visual C++ 14.0 or greater is
+# required" (issue #8). GitHub's hosted runners have the three platforms,
+# so the mirror carries this one workflow.
+#
+# cibuildwheel builds a single cp310-abi3 wheel per platform (the stable
+# ABI covers python 3.10+), runs scripts/smoke_wheel.py against each one,
+# and the release job attaches them — plus the sdist, the fallback for
+# platforms with no wheel — to the release for the tag. The GitHub mirror
+# is pushed by hand, so pushing the tag there is what triggers this; the
+# linux wheel published to the GitLab registry comes from
+# scripts/build_wheels.sh in the tag pipeline instead.
+#
+# cibuildwheel reads its own options from pyproject.toml
+# ([tool.cibuildwheel]) so that a local `cibuildwheel` run and this
+# workflow build the same wheel.
+name: wheels
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  wheels:
+    name: wheel · ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            archs: x86_64
+          - os: windows-latest
+            archs: AMD64
+          # macos-latest is arm64. Intel wheels would have to be
+          # cross-built, and a cross-built wheel cannot run the smoke
+          # test on this runner — so they are left out until asked for.
+          - os: macos-latest
+            archs: arm64
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: pypa/cibuildwheel@v4.2.1
+        env:
+          CIBW_ARCHS: ${{ matrix.archs }}
+      - uses: actions/upload-artifact@v7.0.1
+        with:
+          name: wheels-${{ matrix.os }}
+          path: wheelhouse/*.whl
+
+  sdist:
+    name: sdist
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - run: pipx run build --sdist
+      - uses: actions/upload-artifact@v7.0.1
+        with:
+          name: sdist
+          path: dist/*.tar.gz
+
+  release:
+    name: attach to the release
+    needs: [wheels, sdist]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/download-artifact@v7.0.1
+        with:
+          path: assets
+          merge-multiple: true
+      - name: upload
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          ls -l assets
+          gh release view "$TAG" >/dev/null 2>&1 ||
+            gh release create "$TAG" --title "$TAG" --generate-notes
+          gh release upload "$TAG" assets/* --clobber
