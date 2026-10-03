@@ -6,5 +6,5 @@ verification:
     Corpus and matrix tests cover participant decorations and multiline bodies
   method: test
   test_ids:
-    - tests/test_grammar.py::test_corpus_seq_standard
-    - tests/test_standard_coverage.py::test_construct_maps_to_intended_node
+    - tests/integration/test_grammar.py::test_corpus_seq_standard
+    - tests/integration/test_standard_coverage.py::test_construct_maps_to_intended_node

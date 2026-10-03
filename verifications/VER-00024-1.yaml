@@ -6,4 +6,4 @@ verification:
     Fallback corpus covers hostile heads, deep lookahead and structural neighbours
   method: test
   test_ids:
-    - tests/test_grammar.py::test_corpus_fallback
+    - tests/integration/test_grammar.py::test_corpus_fallback

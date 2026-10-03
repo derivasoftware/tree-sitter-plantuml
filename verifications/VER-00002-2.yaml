@@ -12,6 +12,6 @@ verification:
     the stale id read as dead.
   method: test
   test_ids:
-    - tests/test_queries.py::test_queries_reference_known_nodes
-    - tests/test_queries.py::test_all_editor_queries_ship
+    - tests/integration/test_queries.py::test_queries_reference_known_nodes
+    - tests/integration/test_queries.py::test_all_editor_queries_ship
   status: APPROVED

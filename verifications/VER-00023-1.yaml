@@ -9,4 +9,4 @@ verification:
     the directory up recursively).
   method: test
   test_ids:
-    - tests/test_standard_coverage.py::test_standard_file_is_error_free
+    - tests/integration/test_standard_coverage.py::test_standard_file_is_error_free
