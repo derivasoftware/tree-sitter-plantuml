@@ -6,4 +6,4 @@ verification:
     Corpus tests cover the diagram envelope
   method: test
   test_ids:
-    - tests/test_grammar.py::test_corpus_envelope
+    - tests/integration/test_grammar.py::test_corpus_envelope

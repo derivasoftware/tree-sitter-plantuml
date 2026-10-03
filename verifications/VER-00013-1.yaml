@@ -6,4 +6,4 @@ verification:
     Corpus tests cover hyphenated and qualified names
   method: test
   test_ids:
-    - tests/test_grammar.py::test_corpus_names
+    - tests/integration/test_grammar.py::test_corpus_names

@@ -6,4 +6,4 @@ verification:
     Corpus tests cover the raw pass-through frontier
   method: test
   test_ids:
-    - tests/test_grammar.py::test_corpus_frontier
+    - tests/integration/test_grammar.py::test_corpus_frontier

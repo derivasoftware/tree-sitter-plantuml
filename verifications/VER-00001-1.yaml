@@ -6,4 +6,4 @@ verification:
     Round-trip tests assert token-span coverage over corpus and examples
   method: test
   test_ids:
-    - tests/test_round_trip.py::test_token_coverage
+    - tests/integration/test_round_trip.py::test_token_coverage

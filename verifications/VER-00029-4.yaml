@@ -30,5 +30,5 @@ verification:
     the same inputs byte-for-byte.
   method: test
   test_ids:
-    - tests/test_grammar.py::test_corpus_cpp_members
+    - tests/integration/test_grammar.py::test_corpus_cpp_members
   status: APPROVED

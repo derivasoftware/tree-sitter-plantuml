@@ -19,10 +19,6 @@ typescript = ["."]
 # correlator therefore cannot bind them by construction; the boxes stay
 # as design documentation, exempted with this cause (REQ-00516-1).
 [[diagnose.exempt]]
-code = "W-DESIGN-NO-CODE"
-sources = [
-  "CL_ActivityChapter", "CL_ClassChapter", "CL_Envelope", "CL_Frontier",
-  "CL_Grouping", "CL_Members", "CL_Notes", "CL_Packaging", "CL_Queries",
-  "CL_Relations", "CL_SequenceChapter",
-]
-reason = "grammar rule chapters are the DSL's specification, not OO code: no reader extracts grammar.js rules, so the class-axis correlator cannot bind these boxes by construction"
+code = "W-DESIGN-NO-FUNCTION"
+sources = ["CL_Packaging", "CL_Frontier"]
+reason = "two boxes document code no reader scans: CL_Packaging names the wheel build steps (language(), build_wheels(), smoke_wheel()) that live in the CI and the build scripts, CL_Frontier names the C functions of the external scanner (src/scanner.c); both stay as design documentation of the grammar, as the chapters do (REQ-00516-1)"

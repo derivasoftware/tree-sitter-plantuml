@@ -10,7 +10,7 @@ verification:
     the intended nodes with zero ERROR.
   method: test
   test_ids:
-    - tests/test_grammar.py::test_corpus_lifecycle
-    - tests/test_standard_coverage.py::test_construct_maps_to_intended_node
-    - tests/test_standard_coverage.py::test_standard_file_is_error_free
+    - tests/integration/test_grammar.py::test_corpus_lifecycle
+    - tests/integration/test_standard_coverage.py::test_construct_maps_to_intended_node
+    - tests/integration/test_standard_coverage.py::test_standard_file_is_error_free
   status: APPROVED

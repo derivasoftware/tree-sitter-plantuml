@@ -6,6 +6,6 @@ verification:
     Corpus tests cover hyperlinks on entity heads and keep links in prose raw
   method: test
   test_ids:
-    - tests/test_grammar.py::test_corpus_hyperlinks
-    - tests/test_round_trip.py::test_token_coverage
+    - tests/integration/test_grammar.py::test_corpus_hyperlinks
+    - tests/integration/test_round_trip.py::test_token_coverage
   status: DRAFT

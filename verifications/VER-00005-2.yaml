@@ -6,5 +6,5 @@ verification:
     Corpus tests cover members with visibility and the five modifiers
   method: test
   test_ids:
-    - tests/test_grammar.py::test_corpus_members
-    - tests/test_grammar.py::test_corpus_standard
+    - tests/integration/test_grammar.py::test_corpus_members
+    - tests/integration/test_grammar.py::test_corpus_standard

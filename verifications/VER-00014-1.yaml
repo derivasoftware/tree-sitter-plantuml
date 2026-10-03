@@ -6,4 +6,4 @@ verification:
     Packaging test builds the wheel and asserts its contents
   method: test
   test_ids:
-    - tests/test_packaging.py::test_wheel_builds
+    - tests/integration/test_packaging.py::test_wheel_builds
