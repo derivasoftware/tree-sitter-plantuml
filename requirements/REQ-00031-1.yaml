@@ -18,7 +18,7 @@ requirement:
     prose stays a raw line, as the fallback corpus pins. The
     hyperlink token wins over a relation qualifier by length where both
     could lex.
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids:
     - SREQ-00002-1
