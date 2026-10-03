@@ -5,7 +5,7 @@ requirement:
     The project shall publish windows and macos wheels on release tags
   rationale: >
     A stock Windows machine has no C compiler, so the source build stops at "Microsoft Visual C++ 14.0 or greater is required" and the grammar cannot be installed at all (issue #8). This project's CI runs on self-hosted shell runners that have neither Windows nor macOS, so the GitHub mirror carries a cibuildwheel workflow over hosted runners for the three platforms. The stable ABI keeps it at one wheel per platform for python 3.10+, and each wheel is smoke-tested on its own platform by the same script the linux path uses. The sdist rides along as the fallback for platforms that have no wheel.
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids:
     - SREQ-00007-1
