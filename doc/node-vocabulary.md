@@ -77,7 +77,7 @@ reference implementation).
 |---|---|
 | `lifecycle_statement` | `activate`/`deactivate`/`destroy` X (`kind:`, `target:`, optional `color:`) and `create [participant-kind] X` (`participant_kind:`) |
 | `return_statement` | `return [label]` (`label:`) |
-| `reference` | `ref over A, B : text` (`target:` an `entity_list`, `label:`) or the `ref over … end ref` block, whose body lines are `raw_line` |
+| `reference` | `ref over A, B : text` (`target:` an `entity_list`, `label:`) or the `ref over … end ref` block, whose body lines are `raw_line`. The head is the single keyword node `"ref over"`: on its own `ref` is a plausible entity name, and a parser that commits on the first word turns `ref --> Sum` into an error |
 | `box_block` | `box "name" #color … end box` (`name:` a `string` with optional `color:`, or a free `label:`); the body holds statements |
 | `delay` | `...text...`; the text is a `delay_text` child |
 | `spacer` | `\|\|\|` and `\|\|n\|\|` |

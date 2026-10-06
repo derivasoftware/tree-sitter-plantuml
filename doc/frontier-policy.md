@@ -23,6 +23,14 @@ Four routes:
    (`!directives`, separators, …).
 2. A line headed by a known-but-unsupported keyword
    (`skinparam`, `title`, `circle`, `json`, `autonumber`, `autoactivate`, …).
+   The keyword has to end where a word ends: nearly all of them head a line
+   that carries something after them, so they demand a space, and only the
+   few that are a whole statement on their own (`autonumber`, `allowmixing`,
+   `allow_mixing`) match bare. Without that separator the keyword wins
+   against any longer name that begins with it — these tokens carry explicit
+   precedence, and precedence beats match length — so `setpoint --> Sum`
+   parses as `point --> Sum`, and `nodeA` turns a class diagram into a
+   deployment one.
 3. Block heads (`legend`/`header`/`footer`/braced `skinparam`) open a
    `raw_block` whose body lines are all raw.
 4. **The fallback** (`src/scanner.c`, REQ-00012-2): an external scanner

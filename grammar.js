@@ -811,9 +811,12 @@ export default grammar({
     return_statement: $ => seq('return', optional(field('label', $.label)), $._newline),
 
     // ref over A, B : text — or a block whose body lines are raw.
+    // The head is one token: on its own, `ref` is a plausible entity name
+    // (`ref --> Sum`), and a parser that commits to the construct on the
+    // first word turns that relation into an ERROR. `over` is what makes
+    // the line a reference, so the two words are matched together.
     reference: $ => seq(
-      'ref',
-      'over',
+      alias(token(seq('ref', /[ \t]+/, 'over')), 'ref over'),
       field('target', $.entity_list),
       choice(
         seq(':', field('label', $.label), $._newline),
@@ -894,21 +897,35 @@ export default grammar({
       $._newline,
     ),
 
-    _unsupported_keyword_line: $ => token(prec(2, seq(
-      choice(
-        'skinparam', 'scale', 'caption',
-        'autonumber', 'set',
-        'left', 'allowmixing', 'allow_mixing',
-        'usecase', 'component', 'state',
-        'object', 'folder', 'frame',
-        'cloud', 'node', 'rectangle', 'artifact', 'agent',
-        'card', 'file', 'stack',
-        'circle', 'diamond', 'page', 'json',
-        'top', 'bottom',
-        'autoactivate',
-      ),
-      optional(/[ \t][^\n]*/),
-    ))),
+    // The keyword has to end where a word ends. These tokens carry explicit
+    // precedence, and in tree-sitter precedence beats match length, so a
+    // keyword that may stand alone also wins against any longer identifier
+    // that begins with it: `set` swallows the head of `setpoint` and leaves
+    // `point` behind, `node` turns a class diagram into a deployment one.
+    // Hence two forms. Nearly every one of these keywords heads a line that
+    // carries something after it, so it demands the separator; only the few
+    // that are a whole statement by themselves stay bare, and none of those
+    // is a plausible prefix of an entity name (REQ-00004-1, REQ-00007-1).
+    _unsupported_keyword_line: $ => choice(
+      token(prec(2, seq(
+        choice(
+          'skinparam', 'scale', 'caption',
+          'set',
+          'left', 'usecase', 'component', 'state',
+          'object', 'folder', 'frame',
+          'cloud', 'node', 'rectangle', 'artifact', 'agent',
+          'card', 'file', 'stack',
+          'circle', 'diamond', 'page', 'json',
+          'top', 'bottom',
+          'autoactivate',
+        ),
+        /[ \t][^\n]*/,
+      ))),
+      token(prec(2, seq(
+        choice('autonumber', 'allowmixing', 'allow_mixing'),
+        optional(/[ \t][^\n]*/),
+      ))),
+    ),
 
     // Multi-line raw blocks (legend/header/footer): inside the body only
     // raw lines and the closing token are valid, so arbitrary text is

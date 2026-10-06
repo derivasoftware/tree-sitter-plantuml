@@ -4158,12 +4158,29 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "ref"
-        },
-        {
-          "type": "STRING",
-          "value": "over"
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "ref"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "[ \\t]+"
+                },
+                {
+                  "type": "STRING",
+                  "value": "over"
+                }
+              ]
+            }
+          },
+          "named": false,
+          "value": "ref over"
         },
         {
           "type": "FIELD",
@@ -4513,149 +4530,175 @@
       ]
     },
     "_unsupported_keyword_line": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 2,
-        "content": {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "CHOICE",
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 2,
+            "content": {
+              "type": "SEQ",
               "members": [
                 {
-                  "type": "STRING",
-                  "value": "skinparam"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "skinparam"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "scale"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "caption"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "set"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "left"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "usecase"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "component"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "state"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "object"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "folder"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "frame"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "cloud"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "node"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "rectangle"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "artifact"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "agent"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "card"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "file"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "stack"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "circle"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "diamond"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "page"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "json"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "top"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "bottom"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "autoactivate"
+                    }
+                  ]
                 },
-                {
-                  "type": "STRING",
-                  "value": "scale"
-                },
-                {
-                  "type": "STRING",
-                  "value": "caption"
-                },
-                {
-                  "type": "STRING",
-                  "value": "autonumber"
-                },
-                {
-                  "type": "STRING",
-                  "value": "set"
-                },
-                {
-                  "type": "STRING",
-                  "value": "left"
-                },
-                {
-                  "type": "STRING",
-                  "value": "allowmixing"
-                },
-                {
-                  "type": "STRING",
-                  "value": "allow_mixing"
-                },
-                {
-                  "type": "STRING",
-                  "value": "usecase"
-                },
-                {
-                  "type": "STRING",
-                  "value": "component"
-                },
-                {
-                  "type": "STRING",
-                  "value": "state"
-                },
-                {
-                  "type": "STRING",
-                  "value": "object"
-                },
-                {
-                  "type": "STRING",
-                  "value": "folder"
-                },
-                {
-                  "type": "STRING",
-                  "value": "frame"
-                },
-                {
-                  "type": "STRING",
-                  "value": "cloud"
-                },
-                {
-                  "type": "STRING",
-                  "value": "node"
-                },
-                {
-                  "type": "STRING",
-                  "value": "rectangle"
-                },
-                {
-                  "type": "STRING",
-                  "value": "artifact"
-                },
-                {
-                  "type": "STRING",
-                  "value": "agent"
-                },
-                {
-                  "type": "STRING",
-                  "value": "card"
-                },
-                {
-                  "type": "STRING",
-                  "value": "file"
-                },
-                {
-                  "type": "STRING",
-                  "value": "stack"
-                },
-                {
-                  "type": "STRING",
-                  "value": "circle"
-                },
-                {
-                  "type": "STRING",
-                  "value": "diamond"
-                },
-                {
-                  "type": "STRING",
-                  "value": "page"
-                },
-                {
-                  "type": "STRING",
-                  "value": "json"
-                },
-                {
-                  "type": "STRING",
-                  "value": "top"
-                },
-                {
-                  "type": "STRING",
-                  "value": "bottom"
-                },
-                {
-                  "type": "STRING",
-                  "value": "autoactivate"
-                }
-              ]
-            },
-            {
-              "type": "CHOICE",
-              "members": [
                 {
                   "type": "PATTERN",
                   "value": "[ \\t][^\\n]*"
-                },
-                {
-                  "type": "BLANK"
                 }
               ]
             }
-          ]
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 2,
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "autonumber"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "allowmixing"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "allow_mixing"
+                    }
+                  ]
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "PATTERN",
+                      "value": "[ \\t][^\\n]*"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
         }
-      }
+      ]
     },
     "raw_block": {
       "type": "CHOICE",

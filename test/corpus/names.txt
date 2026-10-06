@@ -38,3 +38,61 @@ LspServer ..> "argos.surfaces.lsp".WorkspaceManager : delegates
         (string)
         (identifier))
       (label))))
+
+==================
+names that begin with a keyword
+==================
+@startuml
+class setpoint
+class stateMachine
+class nodeA
+class fileReader
+setpoint --> stateMachine
+nodeA --> fileReader : reads
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier))
+    (class_declaration
+      (identifier))
+    (class_declaration
+      (identifier))
+    (class_declaration
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (label))))
+
+==================
+the keyword itself still heads its own line
+==================
+@startuml
+set separator none
+state Idle
+node Server
+file config.yml
+autonumber
+allowmixing
+class Foo
+@enduml
+---
+
+(source_file
+  (diagram
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (raw_line)
+    (class_declaration
+      (identifier))))
