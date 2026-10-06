@@ -23,6 +23,7 @@
 
 enum TokenType {
   RAW_STATEMENT,
+  BRACE_AHEAD,
   TEMPLATE_METHOD_NAME,
   PLAIN_RETURN_TYPE,
   ERROR_SENTINEL,
@@ -162,6 +163,26 @@ bool tree_sitter_plantuml_external_scanner_scan(
   /* During error recovery every symbol is marked valid, the sentinel
      included — never invent tokens there. */
   if (valid_symbols[ERROR_SENTINEL]) return false;
+  /* A statement ends at a newline or at the brace that closes the block
+     it is in: `class A { + x }` and `namespace o { class A }` are one
+     line in PlantUML. The token is zero width — it only says the brace
+     is next, and the brace itself is consumed by the block rule. Blank
+     lines keep taking the real newline, so no rule can repeat on it. */
+  if (valid_symbols[BRACE_AHEAD]) {
+    for (;;) {
+      if (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+        lexer->advance(lexer, true);
+        continue;
+      }
+      break;
+    }
+    if (lexer->lookahead == '}') {
+      lexer->result_symbol = BRACE_AHEAD;
+      lexer->mark_end(lexer);
+      return true;
+    }
+    return false;
+  }
   /* Member states never carry _raw_statement, so the template scan can
      own them outright; a false here resets the lexer for the internal
      rules. */

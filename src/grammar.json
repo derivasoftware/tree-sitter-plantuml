@@ -903,7 +903,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_newline"
+              "name": "_eos"
             },
             {
               "type": "SEQ",
@@ -918,7 +918,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_newline"
+                  "name": "_eos"
                 }
               ]
             },
@@ -939,7 +939,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_newline"
+                  "name": "_eos"
                 }
               ]
             }
@@ -963,7 +963,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_newline"
+              "name": "_eos"
             },
             {
               "type": "SEQ",
@@ -978,7 +978,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_newline"
+                  "name": "_eos"
                 }
               ]
             },
@@ -999,7 +999,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_newline"
+                  "name": "_eos"
                 }
               ]
             }
@@ -1023,7 +1023,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_newline"
+              "name": "_eos"
             },
             {
               "type": "SEQ",
@@ -1038,7 +1038,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_newline"
+                  "name": "_eos"
                 }
               ]
             },
@@ -1059,7 +1059,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_newline"
+                  "name": "_eos"
                 }
               ]
             }
@@ -1121,7 +1121,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_newline"
+              "name": "_eos"
             },
             {
               "type": "SEQ",
@@ -1136,7 +1136,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_newline"
+                  "name": "_eos"
                 }
               ]
             },
@@ -1157,7 +1157,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_newline"
+                  "name": "_eos"
                 }
               ]
             }
@@ -2711,7 +2711,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_newline"
+          "name": "_eos"
         }
       ]
     },
@@ -3342,7 +3342,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_newline"
+          "name": "_eos"
         }
       ]
     },
@@ -3595,7 +3595,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_newline"
+          "name": "_eos"
         }
       ]
     },
@@ -3653,7 +3653,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_newline"
+                  "name": "_eos"
                 }
               ]
             },
@@ -3689,7 +3689,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_newline"
+          "name": "_eos"
         }
       ]
     },
@@ -5099,13 +5099,26 @@
         "value": -1,
         "content": {
           "type": "PATTERN",
-          "value": "[^ \\t\\n][^\\n]*"
+          "value": "[^ \\t\\n]([^\\n]*[^ \\t\\n}])?"
         }
       }
     },
     "_newline": {
       "type": "PATTERN",
       "value": "\\r?\\n"
+    },
+    "_eos": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_brace_ahead"
+        }
+      ]
     }
   },
   "extras": [
@@ -5139,6 +5152,10 @@
     {
       "type": "SYMBOL",
       "name": "_raw_statement"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_brace_ahead"
     },
     {
       "type": "SYMBOL",

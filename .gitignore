@@ -12,3 +12,6 @@ dist/
 test-results/
 *.tgz
 *.whl
+
+# Worktrees of other sessions; never part of a commit.
+.worktrees/

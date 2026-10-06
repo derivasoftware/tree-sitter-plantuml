@@ -58,3 +58,56 @@ namespace adapters <<package>>
     (namespace_block
       (identifier)
       (stereotype))))
+
+==================
+one-line blocks, one after another
+==================
+@startuml
+namespace o { class A }
+namespace p { class B }
+@enduml
+---
+
+(source_file
+  (diagram
+    (namespace_block
+      (identifier)
+      (class_declaration
+        (identifier)))
+    (namespace_block
+      (identifier)
+      (class_declaration
+        (identifier)))))
+
+==================
+a one-line body closes where it was written
+==================
+@startuml
+package T {
+class A { + x : int }
+class B
+namespace o {
+  class C
+}
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (package_block
+      (identifier)
+      (class_declaration
+        (identifier)
+        (entity_body
+          (member
+            (visibility)
+            (attribute
+              (identifier)
+              (type)))))
+      (class_declaration
+        (identifier))
+      (namespace_block
+        (identifier)
+        (class_declaration
+          (identifier))))))

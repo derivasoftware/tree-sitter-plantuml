@@ -113,6 +113,29 @@ block (`note as N … end note`) forms. `display_directive` covers
 `hide`/`show`/`remove`/`restore` with the target kept as one
 `display_target` token.
 
+## Where a statement ends
+
+A statement ends at the line break **or** at the brace that closes the block
+around it, so PlantUML's one-line forms parse as written:
+
+```plantuml
+namespace o { class A }
+class Point { + x : int }
+package T { A --> B : wires }
+```
+
+The closing brace is produced by the block, never by the statement, and a
+blank line still takes a real line break — a zero-width terminator there
+would let the body repeat on the brace forever.
+
+One consequence is worth knowing. A value that runs to the end of its line
+(`type`, `label`, a diagram name) stops before a closing brace that ends the
+line, because that brace belongs to the block. A value whose own last
+character is a brace loses it: write `+ Name : string { get; set; }` and the
+type reads `string { get; set;`. The alternative was worse — the type ate the
+brace, the body never closed, and every statement after it was swallowed as a
+member with no error anywhere.
+
 ## Lexical
 
 `identifier` allows dots, hyphens-into-word and a leading `$`
