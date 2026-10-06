@@ -77,7 +77,7 @@ reference implementation).
 |---|---|
 | `lifecycle_statement` | `activate`/`deactivate`/`destroy` X (`kind:`, `target:`, optional `color:`) and `create [participant-kind] X` (`participant_kind:`) |
 | `return_statement` | `return [label]` (`label:`) |
-| `reference` | `ref over A, B : text` (`target:` an `entity_list`, `label:`) or the `ref over … end ref` block, whose body lines are `raw_line` |
+| `reference` | `ref over A, B : text` (`target:` an `entity_list`, `label:`) or the `ref over … end ref` block, whose body lines are `raw_line`. The head is the single keyword node `"ref over"`: on its own `ref` is a plausible entity name, and a parser that commits on the first word turns `ref --> Sum` into an error |
 | `box_block` | `box "name" #color … end box` (`name:` a `string` with optional `color:`, or a free `label:`); the body holds statements |
 | `delay` | `...text...`; the text is a `delay_text` child |
 | `spacer` | `\|\|\|` and `\|\|n\|\|` |
@@ -112,6 +112,29 @@ members (`X::member`), `note on link`, floating (`note "t" as N`) and
 block (`note as N … end note`) forms. `display_directive` covers
 `hide`/`show`/`remove`/`restore` with the target kept as one
 `display_target` token.
+
+## Where a statement ends
+
+A statement ends at the line break **or** at the brace that closes the block
+around it, so PlantUML's one-line forms parse as written:
+
+```plantuml
+namespace o { class A }
+class Point { + x : int }
+package T { A --> B : wires }
+```
+
+The closing brace is produced by the block, never by the statement, and a
+blank line still takes a real line break — a zero-width terminator there
+would let the body repeat on the brace forever.
+
+One consequence is worth knowing. A value that runs to the end of its line
+(`type`, `label`, a diagram name) stops before a closing brace that ends the
+line, because that brace belongs to the block. A value whose own last
+character is a brace loses it: write `+ Name : string { get; set; }` and the
+type reads `string { get; set;`. The alternative was worse — the type ate the
+brace, the body never closed, and every statement after it was swallowed as a
+member with no error anywhere.
 
 ## Lexical
 

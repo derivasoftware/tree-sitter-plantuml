@@ -38,6 +38,16 @@ Every grammar change ships with corpus coverage.
 - **Keep `relation_operator` a single token.** Splitting it invites
   conflicts with identifiers containing hyphens; consumers decode the
   token text instead.
+- **A rule that only ends at a newline breaks on one-line bodies.** The
+  parser recovers by inserting a hidden `MISSING` terminator, which no
+  corpus test and no ERROR count can see — so a single one-line block
+  looks perfect while the same block repeated collapses the whole file.
+  Check `root_node.has_error`, not just ERROR nodes. The terminator to
+  use is `_eos`, which also accepts the zero-width `_brace_ahead`.
+- **A zero-width external token must not be reachable from a `repeat`.**
+  `_newline` stays strict for exactly this reason: it is also the
+  blank-line statement, and `repeat($._statement)` would spin on a
+  zero-width match at the brace.
 
 ## wasm and packaging
 

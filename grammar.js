@@ -32,6 +32,7 @@ export default grammar({
   // identifier at their use site, so the vocabulary does not grow.
   externals: $ => [
     $._raw_statement,
+    $._brace_ahead,
     $._template_method_name,
     $._plain_return_type,
     $._error_sentinel,
@@ -203,13 +204,13 @@ export default grammar({
       choice(seq(field('abstract', $.abstract), optional('class')), 'class'),
       $._entity_head,
       choice(
-        $._newline,
-        seq(field('body', $.entity_body), $._newline),
+        $._eos,
+        seq(field('body', $.entity_body), $._eos),
         // Allman style: the opening brace on its own line. Without this
         // alternative the brace fell to a raw line and the closing one
         // was captured by the enclosing namespace_block, silently
         // corrupting every later entity's scope (issue #2).
-        seq($._newline, field('body', $.entity_body), $._newline),
+        seq($._newline, field('body', $.entity_body), $._eos),
       ),
     ),
 
@@ -217,13 +218,13 @@ export default grammar({
       'interface',
       $._entity_head,
       choice(
-        $._newline,
-        seq(field('body', $.entity_body), $._newline),
+        $._eos,
+        seq(field('body', $.entity_body), $._eos),
         // Allman style: the opening brace on its own line. Without this
         // alternative the brace fell to a raw line and the closing one
         // was captured by the enclosing namespace_block, silently
         // corrupting every later entity's scope (issue #2).
-        seq($._newline, field('body', $.entity_body), $._newline),
+        seq($._newline, field('body', $.entity_body), $._eos),
       ),
     ),
 
@@ -231,13 +232,13 @@ export default grammar({
       'enum',
       $._entity_head,
       choice(
-        $._newline,
-        seq(field('body', $.entity_body), $._newline),
+        $._eos,
+        seq(field('body', $.entity_body), $._eos),
         // Allman style: the opening brace on its own line. Without this
         // alternative the brace fell to a raw line and the closing one
         // was captured by the enclosing namespace_block, silently
         // corrupting every later entity's scope (issue #2).
-        seq($._newline, field('body', $.entity_body), $._newline),
+        seq($._newline, field('body', $.entity_body), $._eos),
       ),
     ),
 
@@ -250,13 +251,13 @@ export default grammar({
       ), $.entity_kind)),
       $._entity_head,
       choice(
-        $._newline,
-        seq(field('body', $.entity_body), $._newline),
+        $._eos,
+        seq(field('body', $.entity_body), $._eos),
         // Allman style: the opening brace on its own line. Without this
         // alternative the brace fell to a raw line and the closing one
         // was captured by the enclosing namespace_block, silently
         // corrupting every later entity's scope (issue #2).
-        seq($._newline, field('body', $.entity_body), $._newline),
+        seq($._newline, field('body', $.entity_body), $._eos),
       ),
     ),
 
@@ -501,7 +502,7 @@ export default grammar({
       optional(field('visibility', $.visibility)),
       repeat(field('modifier', $.modifier)),
       choice($.method, $.attribute, alias($.cpp_unclosed, $.raw_text)),
-      $._newline,
+      $._eos,
     ),
 
     // Frontier inside class bodies, C++ edition: a scoped head whose
@@ -662,7 +663,7 @@ export default grammar({
       optional(field('activation', $.activation)),
       optional(field('color', $.color)),
       optional(seq(':', field('label', $.label))),
-      $._newline,
+      $._eos,
     ),
 
     // Sequence activation shorthands after the target: A -> B ++ #gold
@@ -720,7 +721,7 @@ export default grammar({
       '{',
       repeat($._statement),
       '}',
-      $._newline,
+      $._eos,
     ),
 
     namespace_block: $ => seq(
@@ -728,7 +729,7 @@ export default grammar({
       field('name', $._entity_name),
       optional(field('stereotype', $.stereotype)),
       choice(
-        seq('{', repeat($._statement), '}', $._newline),
+        seq('{', repeat($._statement), '}', $._eos),
         // bodyless declaration, common in HLD overviews
         $._newline,
       ),
@@ -739,7 +740,7 @@ export default grammar({
       '{',
       repeat($._statement),
       '}',
-      $._newline,
+      $._eos,
     ),
 
     // ── Sequence diagrams ──────────────────────────────────────────────
@@ -811,9 +812,12 @@ export default grammar({
     return_statement: $ => seq('return', optional(field('label', $.label)), $._newline),
 
     // ref over A, B : text — or a block whose body lines are raw.
+    // The head is one token: on its own, `ref` is a plausible entity name
+    // (`ref --> Sum`), and a parser that commits to the construct on the
+    // first word turns that relation into an ERROR. `over` is what makes
+    // the line a reference, so the two words are matched together.
     reference: $ => seq(
-      'ref',
-      'over',
+      alias(token(seq('ref', /[ \t]+/, 'over')), 'ref over'),
       field('target', $.entity_list),
       choice(
         seq(':', field('label', $.label), $._newline),
@@ -894,21 +898,35 @@ export default grammar({
       $._newline,
     ),
 
-    _unsupported_keyword_line: $ => token(prec(2, seq(
-      choice(
-        'skinparam', 'scale', 'caption',
-        'autonumber', 'set',
-        'left', 'allowmixing', 'allow_mixing',
-        'usecase', 'component', 'state',
-        'object', 'folder', 'frame',
-        'cloud', 'node', 'rectangle', 'artifact', 'agent',
-        'card', 'file', 'stack',
-        'circle', 'diamond', 'page', 'json',
-        'top', 'bottom',
-        'autoactivate',
-      ),
-      optional(/[ \t][^\n]*/),
-    ))),
+    // The keyword has to end where a word ends. These tokens carry explicit
+    // precedence, and in tree-sitter precedence beats match length, so a
+    // keyword that may stand alone also wins against any longer identifier
+    // that begins with it: `set` swallows the head of `setpoint` and leaves
+    // `point` behind, `node` turns a class diagram into a deployment one.
+    // Hence two forms. Nearly every one of these keywords heads a line that
+    // carries something after it, so it demands the separator; only the few
+    // that are a whole statement by themselves stay bare, and none of those
+    // is a plausible prefix of an entity name (REQ-00004-1, REQ-00007-1).
+    _unsupported_keyword_line: $ => choice(
+      token(prec(2, seq(
+        choice(
+          'skinparam', 'scale', 'caption',
+          'set',
+          'left', 'usecase', 'component', 'state',
+          'object', 'folder', 'frame',
+          'cloud', 'node', 'rectangle', 'artifact', 'agent',
+          'card', 'file', 'stack',
+          'circle', 'diamond', 'page', 'json',
+          'top', 'bottom',
+          'autoactivate',
+        ),
+        /[ \t][^\n]*/,
+      ))),
+      token(prec(2, seq(
+        choice('autonumber', 'allowmixing', 'allow_mixing'),
+        optional(/[ \t][^\n]*/),
+      ))),
+    ),
 
     // Multi-line raw blocks (legend/header/footer): inside the body only
     // raw lines and the closing token are valid, so arbitrary text is
@@ -975,8 +993,28 @@ export default grammar({
 
     string: $ => token(seq('"', /[^"\n]*/, '"')),
 
-    _to_eol: $ => token(prec(-1, /[^ \t\n][^\n]*/)),
+    // Everything to the end of the line, except a closing brace sitting at
+    // the end of it: that brace belongs to the block, not to the value.
+    // Without this a one-line body (`class A { + x : int }`) ends with the
+    // type eating the brace, the body never closes, and every statement
+    // after it is swallowed as a member — no error anywhere, just a
+    // diagram missing half its boxes. The cost is a value whose own last
+    // character is a brace, which loses it; the gain is that a block
+    // always closes where it was written.
+    _to_eol: $ => token(prec(-1, /[^ \t\n]([^\n]*[^ \t\n}])?/)),
 
     _newline: $ => /\r?\n/,
+
+    /**
+     * Where a statement ends: the line break, or the brace that closes
+     * the block around it. PlantUML writes `class A { + x }` on one line,
+     * and a rule that only accepts the line break leaves the last
+     * statement unterminated — recovered invisibly when the block stands
+     * alone, and a parse-wide error as soon as a second block follows.
+     *
+     * `_newline` itself stays strict: it is also the blank-line statement,
+     * and a zero-width blank line would let `repeat` spin at the brace.
+     */
+    _eos: $ => choice($._newline, $._brace_ahead),
   },
 });
