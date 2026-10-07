@@ -161,10 +161,20 @@ static bool scan_template_member(TSLexer *lexer, const bool *valid_symbols) {
 static bool opens_relation(TSLexer *lexer) {
   int32_t c = lexer->lookahead;
   if (c == '-' || c == '.') return true;
-  if (c == '<' || c == '*' || c == '+' || c == 'o' || c == 'x') {
+  if (c == '<' || c == '*' || c == '+') {
     lexer->advance(lexer, false);
     int32_t d = lexer->lookahead;
     return d == '-' || d == '.' || (c == '<' && d == '|');
+  }
+  /* `o` and `x` are also letters, so `o--` and `x..` have to be told from
+     the name `o.i` and from `x-ray`: the operator doubles its character,
+     the name does not. */
+  if (c == 'o' || c == 'x') {
+    lexer->advance(lexer, false);
+    int32_t d = lexer->lookahead;
+    if (d != '-' && d != '.') return false;
+    lexer->advance(lexer, false);
+    return lexer->lookahead == d;
   }
   if (c == '(') {
     lexer->advance(lexer, false);

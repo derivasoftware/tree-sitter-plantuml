@@ -165,3 +165,35 @@ class Foo
         (action_text)))
     (class_declaration
       (identifier))))
+
+==================
+a dotted name after a keyword head is a name
+==================
+@startuml
+namespace o.i {
+  class A
+}
+namespace x.y {
+  class B
+}
+class Sum
+node o-- Sum
+@enduml
+---
+
+(source_file
+  (diagram
+    (namespace_block
+      (identifier)
+      (class_declaration
+        (identifier)))
+    (namespace_block
+      (identifier)
+      (class_declaration
+        (identifier)))
+    (class_declaration
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))))
