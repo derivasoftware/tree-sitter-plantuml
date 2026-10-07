@@ -3138,6 +3138,15 @@
               {
                 "type": "SYMBOL",
                 "name": "member_ref"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_keyword_name"
+                },
+                "named": true,
+                "value": "identifier"
               }
             ]
           }
@@ -5152,6 +5161,10 @@
     {
       "type": "SYMBOL",
       "name": "_raw_statement"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_keyword_name"
     },
     {
       "type": "SYMBOL",

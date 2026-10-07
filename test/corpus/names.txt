@@ -96,3 +96,72 @@ class Foo
     (raw_line)
     (class_declaration
       (identifier))))
+
+==================
+a keyword is a name when a relation follows it
+==================
+@startuml
+class Sum
+state --> Sum
+node --> Sum
+group --> Sum
+if --> Sum
+end --> Sum
+file o-- Sum
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))))
+
+==================
+and still heads its own construct otherwise
+==================
+@startuml
+hide empty members
+state Idle
+if (ok) then (yes)
+  :Work;
+endif
+class Foo
+@enduml
+---
+
+(source_file
+  (diagram
+    (display_directive
+      (display_target))
+    (raw_line)
+    (if_block
+      (condition)
+      (branch_label)
+      (activity_action
+        (action_text)))
+    (class_declaration
+      (identifier))))

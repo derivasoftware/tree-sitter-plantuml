@@ -32,6 +32,7 @@ export default grammar({
   // identifier at their use site, so the vocabulary does not grow.
   externals: $ => [
     $._raw_statement,
+    $._keyword_name,
     $._brace_ahead,
     $._template_method_name,
     $._plain_return_type,
@@ -648,7 +649,11 @@ export default grammar({
     // ── Relations ──────────────────────────────────────────────────────
 
     relation: $ => seq(
-      field('left', choice($._entity_name, $.member_ref)),
+      // A keyword written as an entity name is a name here: the scanner says
+      // so by emitting `_keyword_name`, which it only does when a relation
+      // operator follows the word (`state --> Sum`). Aliased to identifier,
+      // so the tree says what it is and the vocabulary does not grow.
+      field('left', choice($._entity_name, $.member_ref, alias($._keyword_name, $.identifier))),
       optional(field('qualifier', $.qualifier)),
       optional(seq(
         field('left_cardinality', alias($.string, $.cardinality)),
