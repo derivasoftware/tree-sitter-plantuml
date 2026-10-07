@@ -44,6 +44,13 @@ Every grammar change ships with corpus coverage.
   looks perfect while the same block repeated collapses the whole file.
   Check `root_node.has_error`, not just ERROR nodes. The terminator to
   use is `_eos`, which also accepts the zero-width `_brace_ahead`.
+- **An external token can out-rank a keyword where the grammar cannot.**
+  At a statement head the lexer takes the keyword whenever the construct is
+  valid there, and no precedence on the identifier changes that. The scanner
+  can, because it runs first: it reads the word, looks at what follows, and
+  emits a different token when the line is not that construct. Keep such a
+  token to the word itself (`mark_end` before looking ahead), so the rest of
+  the line is parsed by the ordinary rules.
 - **A zero-width external token must not be reachable from a `repeat`.**
   `_newline` stays strict for exactly this reason: it is also the
   blank-line statement, and `repeat($._statement)` would spin on a

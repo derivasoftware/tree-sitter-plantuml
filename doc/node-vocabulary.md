@@ -113,6 +113,22 @@ block (`note as N … end note`) forms. `display_directive` covers
 `hide`/`show`/`remove`/`restore` with the target kept as one
 `display_target` token.
 
+## A keyword as the name of an entity
+
+`state --> Sum` is a relation, not a state declaration. At the head of a
+statement the lexer prefers the keyword token over an identifier, because the
+construct is valid in that state, so the line used to be lost — as a raw line,
+or as an error. No keyword construct carries a relation operator after its
+head, so that single question tells the two apart: the scanner emits a token
+covering the word alone when one follows, and the rest of the line is parsed
+as the relation it is. The token is aliased to `identifier`, so the tree says
+what it is and the vocabulary does not grow.
+
+The match is on the whole word and is case sensitive: `State`, `Node` and
+`File` were never affected. What is not covered is a name that carries a
+cardinality or a qualifier before the operator (`state "1" --> Sum`), where
+the operator is no longer what follows the word.
+
 ## Where a statement ends
 
 A statement ends at the line break **or** at the brace that closes the block

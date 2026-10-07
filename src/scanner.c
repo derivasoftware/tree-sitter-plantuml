@@ -23,6 +23,7 @@
 
 enum TokenType {
   RAW_STATEMENT,
+  KEYWORD_NAME,
   BRACE_AHEAD,
   TEMPLATE_METHOD_NAME,
   PLAIN_RETURN_TYPE,
@@ -151,6 +152,27 @@ static bool scan_template_member(TSLexer *lexer, const bool *valid_symbols) {
   return true;
 }
 
+/**
+ * Does a relation operator start here? The operators are `--`, `..`, `-->`,
+ * `..>`, `<|--`, `*--`, `o--`, `+--`, `x--` and the lollipop `()--`, so the
+ * first character narrows it and the second settles it: `o` and `x` also
+ * begin ordinary words, and `(` also begins a parameter list.
+ */
+static bool opens_relation(TSLexer *lexer) {
+  int32_t c = lexer->lookahead;
+  if (c == '-' || c == '.') return true;
+  if (c == '<' || c == '*' || c == '+' || c == 'o' || c == 'x') {
+    lexer->advance(lexer, false);
+    int32_t d = lexer->lookahead;
+    return d == '-' || d == '.' || (c == '<' && d == '|');
+  }
+  if (c == '(') {
+    lexer->advance(lexer, false);
+    return lexer->lookahead == ')';
+  }
+  return false;
+}
+
 static bool claim(TSLexer *lexer) {
   eat_line(lexer);
   lexer->result_symbol = RAW_STATEMENT;
@@ -189,7 +211,7 @@ bool tree_sitter_plantuml_external_scanner_scan(
   if (valid_symbols[TEMPLATE_METHOD_NAME] || valid_symbols[PLAIN_RETURN_TYPE]) {
     return scan_template_member(lexer, valid_symbols);
   }
-  if (!valid_symbols[RAW_STATEMENT]) return false;
+  if (!valid_symbols[RAW_STATEMENT] && !valid_symbols[KEYWORD_NAME]) return false;
 
   while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
     lexer->advance(lexer, true);
@@ -230,6 +252,24 @@ bool tree_sitter_plantuml_external_scanner_scan(
        rest of the line before the keyword table gets a say. */
     /* Legacy activity `if "test" then` is raw (SREQ-00009-1): the new
        syntax always parenthesises its condition. Same peek as group. */
+    /* A keyword written as the name of an entity. The word heads a construct
+       unless a relation operator follows it, and no keyword construct carries
+       one after its head, so that single question tells the two apart. The
+       token covers the word and nothing else: the rest of the line is parsed
+       as the relation it is. This runs before the constructs that read the
+       rest of their own line, because `if` and `group` are names too. */
+    if (valid_symbols[KEYWORD_NAME]) {
+      for (size_t i = 0; i < sizeof(KEYWORDS) / sizeof(KEYWORDS[0]); i++) {
+        if (strcmp(head, KEYWORDS[i]) != 0) continue;
+        lexer->mark_end(lexer);
+        while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+          lexer->advance(lexer, false);
+        }
+        if (!opens_relation(lexer)) break;
+        lexer->result_symbol = KEYWORD_NAME;
+        return true;
+      }
+    }
     if (strcmp(head, "if") == 0) {
       while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
         lexer->advance(lexer, false);
