@@ -3140,6 +3140,10 @@
                 "name": "member_ref"
               },
               {
+                "type": "SYMBOL",
+                "name": "pseudostate"
+              },
+              {
                 "type": "ALIAS",
                 "content": {
                   "type": "SYMBOL",
@@ -3288,6 +3292,10 @@
               {
                 "type": "SYMBOL",
                 "name": "member_ref"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "pseudostate"
               }
             ]
           }
@@ -3328,6 +3336,22 @@
           "type": "CHOICE",
           "members": [
             {
+              "type": "FIELD",
+              "name": "link",
+              "content": {
+                "type": "SYMBOL",
+                "name": "hyperlink"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
               "type": "SEQ",
               "members": [
                 {
@@ -3354,6 +3378,17 @@
           "name": "_eos"
         }
       ]
+    },
+    "pseudostate": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 2,
+        "content": {
+          "type": "PATTERN",
+          "value": "\\[(\\*|[Hh]\\*?)\\]"
+        }
+      }
     },
     "activation": {
       "type": "TOKEN",

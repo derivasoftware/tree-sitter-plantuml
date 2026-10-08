@@ -43,6 +43,11 @@ Four routes:
    `grammar.js` but missing from the C table turns its construct raw
    and its corpus test red.
 
+The state-diagram chapter parses without a single ERROR as of 0.14.0, which
+is what `examples/standard/state.puml` holds it to. Most of it is still raw —
+`state X { … }` is not a block yet — and that is the policy working: a
+construct is structural or it is opaque, and a valid line is never an error.
+
 ## Standard conformance
 
 The class-diagram chapter of the reference is tracked as a

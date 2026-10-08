@@ -1,0 +1,59 @@
+@startuml state
+' plantuml.com/state-diagram, one of every construct the chapter documents.
+[*] --> Idle
+Idle --> Running : start
+Running --> Idle : stop
+Running --> [*]
+
+state "A long name" as Long1
+Long1 : a description line
+Long1 : another one
+
+state Composite {
+  [*] --> Warming
+  Warming --> Hot : ready
+  Hot --> [*]
+}
+
+state Regions {
+  [*] --> Left
+  --
+  [*] --> Right
+}
+
+state Deep {
+  state Inner {
+    [*] --> Nested
+  }
+}
+
+Composite --> [H]
+Composite --> [H*]
+
+state Choice <<choice>>
+state Fork1 <<fork>>
+state Join1 <<join>>
+state Entry1 <<entryPoint>>
+state Exit1 <<exitPoint>>
+state InPin <<inputPin>>
+state OutPin <<outputPin>>
+state ExpIn <<expansionInput>>
+state ExpOut <<expansionOutput>>
+
+Idle -right-> Choice
+Choice -[#green]-> Fork1 : guard
+Fork1 --> Join1
+Join1 -[dashed]-> Exit1
+
+Idle --> Running : trigger [guard] / action
+
+note left of Idle : a note on a state
+note on link : a note on a transition
+note "floating" as N1
+
+state Styled #line:red;line.bold;text:navy
+Styled -[#blue,dashed,thickness=2]-> Idle
+
+hide empty description
+scale 600 width
+@enduml

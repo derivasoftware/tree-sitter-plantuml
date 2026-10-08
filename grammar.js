@@ -653,7 +653,7 @@ export default grammar({
       // so by emitting `_keyword_name`, which it only does when a relation
       // operator follows the word (`state --> Sum`). Aliased to identifier,
       // so the tree says what it is and the vocabulary does not grow.
-      field('left', choice($._entity_name, $.member_ref, alias($._keyword_name, $.identifier))),
+      field('left', choice($._entity_name, $.member_ref, $.pseudostate, alias($._keyword_name, $.identifier))),
       optional(field('qualifier', $.qualifier)),
       optional(seq(
         field('left_cardinality', alias($.string, $.cardinality)),
@@ -664,12 +664,24 @@ export default grammar({
         field('right_cardinality', alias($.string, $.cardinality)),
         optional(field('right_role', alias(token.immediate(/\/[\w.-]+/), $.role))),
       )),
-      field('right', choice($._entity_name, $.member_ref)),
+      field('right', choice($._entity_name, $.member_ref, $.pseudostate)),
       optional(field('activation', $.activation)),
       optional(field('color', $.color)),
+      // `A --> B [[{why}]]`: a relation may carry a link, and a link may be
+      // nothing but an explanation. With a label present the label token
+      // takes the rest of the line, so a consumer reads it from there.
+      optional(field('link', $.hyperlink)),
       optional(seq(':', field('label', $.label))),
       $._eos,
     ),
+
+    /**
+     * `[*]` and `[H]`: the ends of a state machine, not entities. They sit
+     * where a name sits, so a relation takes one at either end; what they
+     * mean is for the consumer to say. The qualifier `[k]` matches the same
+     * shape, so this token outranks it.
+     */
+    pseudostate: $ => token(prec(2, /\[(\*|[Hh]\*?)\]/)),
 
     // Sequence activation shorthands after the target: A -> B ++ #gold
     activation: $ => token(choice('++', '--', '**', '!!')),

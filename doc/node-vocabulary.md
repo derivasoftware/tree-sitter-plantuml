@@ -113,6 +113,20 @@ block (`note as N … end note`) forms. `display_directive` covers
 `hide`/`show`/`remove`/`restore` with the target kept as one
 `display_target` token.
 
+## The ends of a state machine
+
+`[*]`, `[H]` and `[H*]` are `pseudostate` nodes, and a relation takes one at
+either end: `[*] --> Idle` and `Idle --> [*]` are both relations. They are not
+entities and are never declared, so what they mean — the start of a machine,
+its end, the history of a composite — is for the consumer to say. The
+qualifier `[k]` matches the same shape and keeps its own node; the pseudostate
+token outranks it, which is why `[k]` still has to say something inside the
+brackets.
+
+A relation also takes a `link`, which is how it carries an explanation:
+`A --> B [[{why}]]`. With a label present the label token takes the rest of the
+line, link and all, so a consumer reads it from the end of the label instead.
+
 ## A keyword as the name of an entity
 
 `state --> Sum` is a relation, not a state declaration. At the head of a
