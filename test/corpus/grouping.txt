@@ -111,3 +111,51 @@ namespace o {
         (identifier)
         (class_declaration
           (identifier))))))
+
+==================
+states: declarations and the composite block
+==================
+@startuml
+state Idle
+state "A long name" as Long1
+state Choice <<choice>>
+Long1 : una línea
+state Comp {
+  [*] --> Warm
+  Warm --> [*]
+  state Inner {
+    [*] --> Deep
+  }
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (state_block
+      (identifier))
+    (state_block
+      (string)
+      (identifier))
+    (state_block
+      (identifier)
+      (stereotype))
+    (colon_member
+      (identifier)
+      (label))
+    (state_block
+      (identifier)
+      (relation
+        (pseudostate)
+        (relation_operator)
+        (identifier))
+      (relation
+        (identifier)
+        (relation_operator)
+        (pseudostate))
+      (state_block
+        (identifier)
+        (relation
+          (pseudostate)
+          (relation_operator)
+          (identifier))))))

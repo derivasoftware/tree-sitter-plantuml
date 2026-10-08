@@ -44,9 +44,10 @@ Four routes:
    and its corpus test red.
 
 The state-diagram chapter parses without a single ERROR as of 0.14.0, which
-is what `examples/standard/state.puml` holds it to. Most of it is still raw —
-`state X { … }` is not a block yet — and that is the policy working: a
-construct is structural or it is opaque, and a valid line is never an error.
+is what `examples/standard/state.puml` holds it to. As of 0.15.0 none of it is
+raw either: of its 45 lines, 28 belong to a `state_block`, 10 are relations,
+and the rest are notes and display directives. What stays opaque inside a
+composite is the `--` that separates concurrent regions.
 
 ## Standard conformance
 

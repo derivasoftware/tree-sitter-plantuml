@@ -305,6 +305,10 @@
           "named": true
         },
         {
+          "type": "state_block",
+          "named": true
+        },
+        {
           "type": "swimlane",
           "named": true
         },
@@ -464,6 +468,10 @@
         },
         {
           "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "state_block",
           "named": true
         },
         {
@@ -830,6 +838,10 @@
           "named": true
         },
         {
+          "type": "state_block",
+          "named": true
+        },
+        {
           "type": "swimlane",
           "named": true
         },
@@ -1039,6 +1051,10 @@
           "named": true
         },
         {
+          "type": "state_block",
+          "named": true
+        },
+        {
           "type": "swimlane",
           "named": true
         },
@@ -1208,6 +1224,10 @@
         },
         {
           "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "state_block",
           "named": true
         },
         {
@@ -1662,6 +1682,10 @@
           "named": true
         },
         {
+          "type": "state_block",
+          "named": true
+        },
+        {
           "type": "swimlane",
           "named": true
         },
@@ -1839,6 +1863,10 @@
         },
         {
           "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "state_block",
           "named": true
         },
         {
@@ -2042,6 +2070,10 @@
           "named": true
         },
         {
+          "type": "state_block",
+          "named": true
+        },
+        {
           "type": "swimlane",
           "named": true
         },
@@ -2219,6 +2251,10 @@
         },
         {
           "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "state_block",
           "named": true
         },
         {
@@ -2773,6 +2809,10 @@
           "named": true
         },
         {
+          "type": "state_block",
+          "named": true
+        },
+        {
           "type": "swimlane",
           "named": true
         },
@@ -3051,6 +3091,10 @@
         },
         {
           "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "state_block",
           "named": true
         },
         {
@@ -3362,6 +3406,10 @@
         },
         {
           "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "state_block",
           "named": true
         },
         {
@@ -3800,6 +3848,10 @@
           "named": true
         },
         {
+          "type": "state_block",
+          "named": true
+        },
+        {
           "type": "swimlane",
           "named": true
         },
@@ -3988,6 +4040,10 @@
           "named": true
         },
         {
+          "type": "state_block",
+          "named": true
+        },
+        {
           "type": "swimlane",
           "named": true
         },
@@ -4140,6 +4196,232 @@
         },
         {
           "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "state_block",
+          "named": true
+        },
+        {
+          "type": "swimlane",
+          "named": true
+        },
+        {
+          "type": "switch_block",
+          "named": true
+        },
+        {
+          "type": "together_block",
+          "named": true
+        },
+        {
+          "type": "while_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state_block",
+    "named": true,
+    "fields": {
+      "alias": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "color": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "color",
+            "named": true
+          }
+        ]
+      },
+      "description": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "label",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      },
+      "stereotype": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "stereotype",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "activity_action",
+          "named": true
+        },
+        {
+          "type": "activity_arrow",
+          "named": true
+        },
+        {
+          "type": "activity_control",
+          "named": true
+        },
+        {
+          "type": "box_block",
+          "named": true
+        },
+        {
+          "type": "class_declaration",
+          "named": true
+        },
+        {
+          "type": "colon_member",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "connector",
+          "named": true
+        },
+        {
+          "type": "delay",
+          "named": true
+        },
+        {
+          "type": "display_directive",
+          "named": true
+        },
+        {
+          "type": "divider",
+          "named": true
+        },
+        {
+          "type": "entity_declaration",
+          "named": true
+        },
+        {
+          "type": "enum_declaration",
+          "named": true
+        },
+        {
+          "type": "fork_block",
+          "named": true
+        },
+        {
+          "type": "frame_block",
+          "named": true
+        },
+        {
+          "type": "if_block",
+          "named": true
+        },
+        {
+          "type": "interface_declaration",
+          "named": true
+        },
+        {
+          "type": "lifecycle_statement",
+          "named": true
+        },
+        {
+          "type": "namespace_block",
+          "named": true
+        },
+        {
+          "type": "note_statement",
+          "named": true
+        },
+        {
+          "type": "package_block",
+          "named": true
+        },
+        {
+          "type": "participant_declaration",
+          "named": true
+        },
+        {
+          "type": "partition_block",
+          "named": true
+        },
+        {
+          "type": "raw_block",
+          "named": true
+        },
+        {
+          "type": "raw_line",
+          "named": true
+        },
+        {
+          "type": "reference",
+          "named": true
+        },
+        {
+          "type": "relation",
+          "named": true
+        },
+        {
+          "type": "repeat_block",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "spacer",
+          "named": true
+        },
+        {
+          "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "state_block",
           "named": true
         },
         {
@@ -4325,6 +4607,10 @@
           "named": true
         },
         {
+          "type": "state_block",
+          "named": true
+        },
+        {
           "type": "swimlane",
           "named": true
         },
@@ -4473,6 +4759,10 @@
         },
         {
           "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "state_block",
           "named": true
         },
         {
@@ -4675,6 +4965,10 @@
         },
         {
           "type": "split_block",
+          "named": true
+        },
+        {
+          "type": "state_block",
           "named": true
         },
         {
@@ -5159,6 +5453,10 @@
   },
   {
     "type": "start",
+    "named": false
+  },
+  {
+    "type": "state",
     "named": false
   },
   {

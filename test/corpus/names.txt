@@ -89,7 +89,8 @@ class Foo
 (source_file
   (diagram
     (raw_line)
-    (raw_line)
+    (state_block
+      (identifier))
     (raw_line)
     (raw_line)
     (raw_line)
@@ -157,7 +158,8 @@ class Foo
   (diagram
     (display_directive
       (display_target))
-    (raw_line)
+    (state_block
+      (identifier))
     (if_block
       (condition)
       (branch_label)

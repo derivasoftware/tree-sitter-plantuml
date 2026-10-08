@@ -77,10 +77,11 @@ sequence: participants, arrows, frames, notes and the lifecycle verbs
 structural, with autonumber, autoactivate and the styling surface raw;
 activity: actions, swimlanes and the whole new-syntax control flow
 (if/while/repeat/switch/fork/split/partition, arrows, connectors)
-structural, with the legacy syntax and the braced drawing blocks raw.
-Everything else (deployment, components, state, mindmaps,
-gantt) parses lossless as raw lines, never an ERROR, but gets no
-structure. The conformance matrices are tests
+structural, with the legacy syntax and the braced drawing blocks raw;
+state: declarations, descriptions and the composite block structural,
+with concurrent regions raw. Everything else (deployment, components,
+mindmaps, gantt) parses lossless as raw lines, never an ERROR, but gets
+no structure. The conformance matrices are tests
 (`tests/test_standard_coverage.py`) and are the source of these numbers.
 
 ## Documentation
