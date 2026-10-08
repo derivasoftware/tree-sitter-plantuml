@@ -113,6 +113,18 @@ block (`note as N … end note`) forms. `display_directive` covers
 `hide`/`show`/`remove`/`restore` with the target kept as one
 `display_target` token.
 
+## States
+
+`state_block` is both the declaration and the composite: `state Idle`,
+`state "a long name" as X`, `state X <<choice>>`, `state X : a description`
+and `state X { … }` with a body that nests. It is a container like
+`namespace_block`, which is what puts the nesting in the tree — before it, a
+composite's body was a flat run of opaque lines.
+
+What a stereotype means is the consumer's business: `<<choice>>`, `<<fork>>`
+and the rest are stereotypes like any other. Concurrent regions (`--` inside a
+composite) stay opaque.
+
 ## The ends of a state machine
 
 `[*]`, `[H]` and `[H*]` are `pseudostate` nodes, and a relation takes one at

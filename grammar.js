@@ -124,6 +124,7 @@ export default grammar({
       $.swimlane,
       $.package_block,
       $.namespace_block,
+      $.state_block,
       $.together_block,
       $.participant_declaration,
       $.frame_block,
@@ -752,6 +753,30 @@ export default grammar({
       ),
     ),
 
+    /**
+     * `state X`, `state "a long name" as X`, `state X <<choice>>`,
+     * `state X : a description` and the composite `state X { … }`.
+     *
+     * A composite is a container like a namespace: without the block its
+     * body was a flat run of opaque lines and the nesting simply was not in
+     * the tree. The description form is the chapter's way of adding a line
+     * of text to a state, and it reads like a member because it is one.
+     */
+    state_block: $ => seq(
+      'state',
+      field('name', $._entity_name),
+      optional(seq('as', field('alias', $._entity_name))),
+      repeat(choice(
+        field('stereotype', $.stereotype),
+        field('color', $.color),
+      )),
+      choice(
+        seq('{', repeat($._statement), '}', $._eos),
+        seq(':', field('description', $.label), $._eos),
+        $._eos,
+      ),
+    ),
+
     together_block: $ => seq(
       'together',
       '{',
@@ -929,7 +954,7 @@ export default grammar({
         choice(
           'skinparam', 'scale', 'caption',
           'set',
-          'left', 'usecase', 'component', 'state',
+          'left', 'usecase', 'component',
           'object', 'folder', 'frame',
           'cloud', 'node', 'rectangle', 'artifact', 'agent',
           'card', 'file', 'stack',
