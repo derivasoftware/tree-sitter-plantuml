@@ -46,3 +46,68 @@ Client -left-> Server
       (identifier)
       (relation_operator)
       (identifier))))
+
+==================
+a transition reaches a pseudostate, at either end
+==================
+@startuml
+[*] --> Idle
+Idle --> [*]
+Idle --> [H]
+Idle --> [H*] : restaurar
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (pseudostate)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (pseudostate))
+    (relation
+      (identifier)
+      (relation_operator)
+      (pseudostate))
+    (relation
+      (identifier)
+      (relation_operator)
+      (pseudostate)
+      (label))))
+
+==================
+a relation carries a link, and a link may be only an explanation
+==================
+@startuml
+class A
+class B
+A --> B [[{por qué}]]
+A --> B [[http://x{por qué}]]
+A [k] --> B
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier))
+    (class_declaration
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (hyperlink))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (hyperlink))
+    (relation
+      (identifier)
+      (qualifier)
+      (relation_operator)
+      (identifier))))

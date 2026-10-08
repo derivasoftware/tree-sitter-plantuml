@@ -3515,6 +3515,10 @@
             "named": true
           },
           {
+            "type": "pseudostate",
+            "named": true
+          },
+          {
             "type": "qualified_name",
             "named": true
           },
@@ -3540,6 +3544,16 @@
         "types": [
           {
             "type": "role",
+            "named": true
+          }
+        ]
+      },
+      "link": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "hyperlink",
             "named": true
           }
         ]
@@ -3574,6 +3588,10 @@
           },
           {
             "type": "member_ref",
+            "named": true
+          },
+          {
+            "type": "pseudostate",
             "named": true
           },
           {
@@ -5082,6 +5100,10 @@
   {
     "type": "partition",
     "named": false
+  },
+  {
+    "type": "pseudostate",
+    "named": true
   },
   {
     "type": "qualifier",
