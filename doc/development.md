@@ -61,10 +61,12 @@ Every grammar change ships with corpus coverage.
 - `npx tree-sitter build --wasm` — the CLI (≥0.26) auto-downloads
   wasi-sdk; no emscripten needed. CI does this on release tags.
 - Release = tag `vX.Y.Z` on main **after** the MR merged. The tag
-  pipeline publishes npm + PyPI wheels + the wasm to the generic
+  pipeline publishes the PyPI wheels and the wasm to the generic
   registry (`packages/generic/wasm/vX.Y.Z/tree-sitter-plantuml.wasm`).
-  Downstream pins: render (npm git tag), fmt/lsp (pip git tag), vscode
-  (wasm file staged into `media/`), argos plugin (wheel range).
+  There is no npm package and no native Node, Rust or C binding: nobody
+  consumed them (PUML-98). Downstream pins: render (clones the git tag
+  and builds the wasm), fmt/lsp (pip git tag), vscode (wasm file staged
+  into `media/`), argos plugin (wheel range).
 
 ## Governance
 

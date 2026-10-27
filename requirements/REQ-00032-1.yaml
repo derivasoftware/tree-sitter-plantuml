@@ -8,7 +8,7 @@ requirement:
   status: APPROVED
   asil: QM
   parent_ids:
-    - SREQ-00007-1
+    - SREQ-00007-2
   tags:
     - packaging
     - ci

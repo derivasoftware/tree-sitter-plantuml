@@ -1,0 +1,25 @@
+requirement:
+  id: SREQ-00007-2
+  title: The project shall publish the grammar as an installable python package and a wasm module
+  description: >
+    The project shall publish the generated parser as an installable python
+    package (wheels with the compiled binding) and as a wasm module, so that
+    downstream tools consume the grammar as a versioned dependency rather
+    than by vendoring the repository. Further runtimes (a native node, rust
+    or c binding) are published only once a consumer needs one.
+  rationale: >
+    The consumers live in two runtimes: the formatter, the language server
+    and the argos plugin import the python binding; the renderer and the
+    editor previews load the wasm. Revision 2 (PUML-98, 2026-10-27): the
+    native node package and the rust and c bindings were published or kept
+    for consumers that never came; no tool in the fleet required them.
+    Versioned packages are what make the semver contract on the node
+    vocabulary (SREQ-00005-1) enforceable in practice: a consumer can only
+    pin what is published.
+  owner: dcoello-dev
+  status: DRAFT
+  asil: QM
+  parent_ids:
+    - SREQ-00001-1
+  tags:
+    - release-engineering

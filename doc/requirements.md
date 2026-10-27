@@ -17,7 +17,7 @@ implemented column reads from that gap, not from missing work.
 | `SREQ-00004-1` | The syntax tree shall preserve every byte of the source text | ? | ✗ | ✓ |
 | `SREQ-00005-1` | The project shall version the syntax-tree node names under semantic versioning | ? | ✓ | ✗ |
 | `SREQ-00006-1` | The grammar shall provide editor highlight queries for the supported subset | ? | ✓ | ✗ |
-| `SREQ-00007-1` | The project shall publish the grammar as installable node and python packages | ? | ~ | ✗ |
+| `SREQ-00007-2` | The project shall publish the grammar as installable node and python packages | ? | ~ | ✗ |
 | `SREQ-00008-1` | The grammar shall parse PlantUML sequence diagrams | ? | ✓ | ~ |
 | `SREQ-00009-1` | The grammar shall parse PlantUML activity diagrams in the new syntax | ? | ✓ | ✓ |
 <!-- /folio -->
@@ -33,7 +33,7 @@ implemented column reads from that gap, not from missing work.
 | `SREQ-00004-1` | `REQ-00008-1` | `CL_TreeSitterPlantuml` | `bindings.python`<br>`grammar.activity`<br>`grammar.classes`<br>`grammar.envelope`<br>`grammar.frontier`<br>`grammar.grouping`<br>`grammar.members`<br>`grammar.notes`<br>`grammar.queries`<br>`grammar.relations`<br>`grammar.sequence` | 0 | 1 | `VER-00001-1` |
 | `SREQ-00005-1` | `REQ-00009-1`<br>`REQ-00027-1` | `CL_Queries` | `grammar.queries` | 2 | 0 | `VER-00002-2`<br>`VER-00028-1` |
 | `SREQ-00006-1` | `REQ-00009-1` | `CL_Queries` | `grammar.queries` | 2 | 0 | `VER-00002-2` |
-| `SREQ-00007-1` | `REQ-00015-1`<br>`REQ-00016-1` | `CL_Packaging` | `bindings.python` | 1 | 0 | `VER-00014-1`<br>`VER-00015-1` |
+| `SREQ-00007-2` | `REQ-00015-1`<br>`REQ-00016-2` | `CL_Packaging` | `bindings.python` | 1 | 0 | `VER-00014-1`<br>`VER-00015-2` |
 | `SREQ-00008-1` | `REQ-00017-1`<br>`REQ-00018-1`<br>`REQ-00019-1`<br>`REQ-00024-1`<br>`REQ-00025-1`<br>`REQ-00030-1` | `CL_Relations`<br>`CL_SequenceChapter` | `grammar.relations`<br>`grammar.sequence` | 5 | 2 | `VER-00016-1`<br>`VER-00017-1`<br>`VER-00018-1`<br>`VER-00025-1`<br>`VER-00026-1`<br>`VER-00031-1` |
 | `SREQ-00009-1` | `REQ-00026-3`<br>`REQ-00029-1` | `CL_ActivityChapter` | `grammar.activity` | 2 | 2 | `VER-00027-2`<br>`VER-00030-1` |
 <!-- /folio -->

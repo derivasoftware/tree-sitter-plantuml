@@ -17,7 +17,7 @@
     }
   ],
   "metadata": {
-    "version": "0.15.1",
+    "version": "0.15.2",
     "license": "MIT",
     "description": "PlantUML grammar for tree-sitter",
     "authors": [
@@ -30,12 +30,12 @@
     }
   },
   "bindings": {
-    "c": true,
+    "c": false,
     "go": false,
     "java": false,
-    "node": true,
+    "node": false,
     "python": true,
-    "rust": true,
+    "rust": false,
     "swift": false,
     "zig": false
   }
