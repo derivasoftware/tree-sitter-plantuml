@@ -5262,8 +5262,17 @@
         "type": "PREC",
         "value": -1,
         "content": {
-          "type": "PATTERN",
-          "value": "[^ \\t\\n]([^\\n]*[^ \\t\\n}])?"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[^ \\t\\n]([^\\n]*[^ \\t\\n}])?"
+            },
+            {
+              "type": "PATTERN",
+              "value": "([^ \\t\\n][^\\n]*)?\\{[^{}\\n]*\\}"
+            }
+          ]
         }
       }
     },

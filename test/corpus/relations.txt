@@ -111,3 +111,19 @@ A [k] --> B
       (qualifier)
       (relation_operator)
       (identifier))))
+
+==================
+a label keeps the brace that closes its own map
+==================
+@startuml
+argos_toml --> readers_cfg : {python: [src], typescript: [web/src]}
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (label))))
