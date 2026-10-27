@@ -1,9 +1,9 @@
 # tree-sitter-plantuml
 
 <!-- folio: colophon --project tree-sitter-plantuml --junit test-results/junit.xml --junit_st test-results/junit-st.xml -->
-![powered by: argos](https://img.shields.io/badge/powered%20by-argos-1f6feb) ![verified: 100%](https://img.shields.io/badge/verified-100%25-2ea44f) ![tests: 100%](https://img.shields.io/badge/tests-100%25-2ea44f) ![UT: n/a](https://img.shields.io/badge/UT-n%2Fa-lightgrey) ![ST: n/a](https://img.shields.io/badge/ST-n%2Fa-lightgrey) ![diagnostics: 0](https://img.shields.io/badge/diagnostics-0-2ea44f)
+![powered by: argos](https://img.shields.io/badge/powered%20by-argos-1f6feb) ![verified: 100%](https://img.shields.io/badge/verified-100%25-2ea44f) ![tests: 100%](https://img.shields.io/badge/tests-100%25-2ea44f) ![UT: n/a](https://img.shields.io/badge/UT-n%2Fa-lightgrey) ![ST: n/a](https://img.shields.io/badge/ST-n%2Fa-lightgrey) ![diagnostics: 38](https://img.shields.io/badge/diagnostics-38-dfb317)
 
-> **tree-sitter-plantuml** is powered by **argos**. **folio** generates this documentation from the repository's model: 30 requirements · 31 verifications · 0 constraints. Quality: 100% verified · 100% tests passing.
+> **tree-sitter-plantuml** is powered by **argos**. **folio** generates this documentation from the repository's model: 33 requirements · 34 verifications · 0 constraints. Quality: 100% verified · 100% tests passing.
 <!-- /folio -->
 
 A [tree-sitter](https://tree-sitter.github.io/) grammar for the
@@ -39,7 +39,7 @@ tag generate below — it compiles the extension, so it needs a C toolchain:
 
 <!-- folio: install -->
 ```bash
-pip install git+https://github.com/derivasoftware/tree-sitter-plantuml.git@v0.10.0
+pip install git+https://github.com/derivasoftware/tree-sitter-plantuml.git@v0.16.1
 ```
 
 Or from a clone: `git clone https://github.com/derivasoftware/tree-sitter-plantuml && pip install ./tree-sitter-plantuml`.
@@ -64,7 +64,7 @@ tree = parser.parse(b"@startuml\nclass Cafetera\n@enduml\n")
 directory ships alongside the parser.
 
 **Build tooling on the node vocabulary**: `src/node-types.json` is the
-machine-readable contract (189 node types, 85 of them named,
+machine-readable contract (192 node types, 88 of them named,
 semver-governed); see
 [doc/node-vocabulary.md](doc/node-vocabulary.md).
 
