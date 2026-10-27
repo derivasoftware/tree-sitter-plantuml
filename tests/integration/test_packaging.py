@@ -1,4 +1,4 @@
-"""The python wheel builds and carries the compiled binding (SREQ-00007-1)."""
+"""The python wheel builds and carries the compiled binding (SREQ-00007-2)."""
 
 import subprocess
 import sys
