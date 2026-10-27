@@ -51,6 +51,11 @@ Every grammar change ships with corpus coverage.
   emits a different token when the line is not that construct. Keep such a
   token to the word itself (`mark_end` before looking ahead), so the rest of
   the line is parsed by the ordinary rules.
+- **A value that runs to the end of its line stops before a closing
+  brace** (`_to_eol`), so a one-line block closes where it was written —
+  unless that brace closes a `{...}` group the value itself opened, so a
+  label that is a map (`a --> b : {x: [1]}`) keeps its last byte. Only a
+  value ending in nested braces (`{a: {b}}`) still loses it.
 - **A zero-width external token must not be reachable from a `repeat`.**
   `_newline` stays strict for exactly this reason: it is also the
   blank-line statement, and `repeat($._statement)` would spin on a
