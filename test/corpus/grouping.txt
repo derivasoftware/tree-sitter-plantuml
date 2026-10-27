@@ -181,3 +181,21 @@ class B
             (type)))))
     (class_declaration
       (identifier))))
+
+==================
+package color
+==================
+@startuml
+package "Classic Collections" #DDDDDD {
+  class A
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (package_block
+      (string)
+      (color)
+      (class_declaration
+        (identifier)))))

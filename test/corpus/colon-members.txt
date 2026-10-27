@@ -1,0 +1,17 @@
+==================
+colon members
+==================
+@startuml
+Object : equals()
+Object : -hash : int
+@enduml
+---
+
+(source_file
+  (diagram
+    (colon_member
+      (identifier)
+      (label))
+    (colon_member
+      (identifier)
+      (label))))

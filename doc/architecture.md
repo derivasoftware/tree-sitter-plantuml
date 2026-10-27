@@ -52,7 +52,7 @@ _cl · `design/lld/grammar/CL_TreeSitterPlantuml.puml`_
 <summary><code>CL_Members</code> · traces to <code>REQ-00003-3</code> <code>REQ-00013-1</code> <code>REQ-00020-1</code> <code>REQ-00023-1</code> <code>REQ-00028-4</code></summary>
 <ul>
 <li>source: <code>design/lld/grammar/CL_Members.puml</code></li>
-<li>verified by: <code>tests/integration/test_grammar.py</code> (4), <code>tests/integration/test_standard_coverage.py</code> (1)</li>
+<li>verified by: <code>tests/integration/test_grammar.py</code> (5), <code>tests/integration/test_standard_coverage.py</code> (1)</li>
 </ul>
 <p><img alt="CL_Members" src="assets/CL_Members.svg"></p>
 </details>
@@ -115,7 +115,7 @@ _cl · `design/lld/grammar/CL_TreeSitterPlantuml.puml`_
 <summary><code>CL_Queries</code> · traces to <code>REQ-00009-1</code> <code>REQ-00027-1</code></summary>
 <ul>
 <li>source: <code>design/lld/grammar/CL_Queries.puml</code></li>
-<li>verified by: <code>tests/integration/test_queries.py</code> (2)</li>
+<li>verified by: <code>tests/integration/test_queries.py</code> (3)</li>
 </ul>
 <p><img alt="CL_Queries" src="assets/CL_Queries.svg"></p>
 </details>

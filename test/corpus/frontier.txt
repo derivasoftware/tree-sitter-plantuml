@@ -94,3 +94,34 @@ deactivate Worker
       (label))
     (lifecycle_statement
       (identifier))))
+
+==================
+block closers reach raw
+==================
+@startuml
+title
+a body line
+end title
+ref over Alice
+ref body
+end ref
+box "Grouped"
+participant B
+end box
+@enduml
+---
+
+(source_file
+  (diagram
+    (raw_block
+      (raw_line)
+      (raw_line)
+      (raw_line))
+    (reference
+      (entity_list
+        (identifier))
+      (raw_line))
+    (box_block
+      (string)
+      (participant_declaration
+        (identifier)))))

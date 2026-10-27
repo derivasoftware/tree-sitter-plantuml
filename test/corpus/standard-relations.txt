@@ -1,0 +1,110 @@
+==================
+qualified association
+==================
+@startuml
+Shop [customerId] ---> "1" Customer
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (identifier)
+      (qualifier)
+      (relation_operator)
+      (cardinality)
+      (identifier))))
+
+==================
+role-slash cardinalities
+==================
+@startuml
+User "owner"/1 -- "0..n"/items Item
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (identifier)
+      (cardinality)
+      (role)
+      (relation_operator)
+      (cardinality)
+      (role)
+      (identifier))))
+
+==================
+decorated relation operators
+==================
+@startuml
+foo -[bold]-> bar1
+foo -[#red,dashed,thickness=2]-> bar2
+foo -l-> bar3
+bar4 ()- foo
+foo -() bar5
+foo1.foo2 +-- foo1.foo2.foo3
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier))))
+
+==================
+relation inline style color
+==================
+@startuml
+foo --> bar #line:red;line.bold;text:red
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (identifier)
+      (relation_operator)
+      (identifier)
+      (color))))
+
+==================
+member endpoint relations
+==================
+@startuml
+Foo::field1 --> Bar::field3
+@enduml
+---
+
+(source_file
+  (diagram
+    (relation
+      (member_ref
+        (identifier)
+        (identifier))
+      (relation_operator)
+      (member_ref
+        (identifier)
+        (identifier)))))
