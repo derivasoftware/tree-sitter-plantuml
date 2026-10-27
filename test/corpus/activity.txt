@@ -47,3 +47,29 @@ end
         (identifier)
         (relation_operator)
         (identifier)))))
+
+==================
+swimlanes name the lane of the actions below them
+==================
+@startuml
+|Cocina|
+start
+:preparar(pedido);
+|#AntiqueWhite|Barra|
+:servir();
+stop
+@enduml
+---
+
+(source_file
+  (diagram
+    (swimlane
+      (lane_text))
+    (activity_control)
+    (activity_action
+      (action_text))
+    (swimlane
+      (lane_text))
+    (activity_action
+      (action_text))
+    (activity_control)))
