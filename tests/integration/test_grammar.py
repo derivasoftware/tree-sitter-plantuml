@@ -73,16 +73,8 @@ def test_corpus_cpp_members():
     check_corpus("cpp-members")
 
 
-def test_corpus_standard():
-    check_corpus("standard")
-
-
 def test_corpus_fallback():
     check_corpus("fallback")
-
-
-def test_corpus_seq_standard():
-    check_corpus("seq-standard")
 
 
 def test_corpus_activity():
@@ -99,3 +91,27 @@ def test_corpus_lifecycle():
 
 def test_corpus_hyperlinks():
     check_corpus("hyperlinks")
+
+
+def test_corpus_standard_relations():
+    check_corpus("standard-relations")
+
+
+def test_corpus_standard_entities():
+    check_corpus("standard-entities")
+
+
+def test_corpus_colon_members():
+    check_corpus("colon-members")
+
+
+def test_corpus_seq_messages():
+    check_corpus("seq-messages")
+
+
+def test_corpus_seq_participants():
+    check_corpus("seq-participants")
+
+
+def test_corpus_cpp_member_names():
+    check_corpus("cpp-member-names")

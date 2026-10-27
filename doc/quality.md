@@ -19,7 +19,7 @@ metric a grammar can honestly claim is standard conformance, below.
 | Design diagrams | 13 |
 | Code classes | 0 |
 | Free functions | 0 |
-| Test cases | 29 |
+| Test cases | 34 |
 
 ### Metrics
 
@@ -29,11 +29,11 @@ metric a grammar can honestly claim is standard conformance, below.
 | Source lines | 0 |
 | Documentation files | 7 |
 | Documentation lines (authored) | 483 |
-| Tests executed (UT) | 27 |
+| Tests executed (UT) | 31 |
 | Tests executed (ST) | 290 |
 | UT line coverage | ? |
 | ST line coverage | ? |
-| argos diagnostics | 38 |
+| argos diagnostics | 0 |
 <!-- /folio -->
 
 ### Standard conformance

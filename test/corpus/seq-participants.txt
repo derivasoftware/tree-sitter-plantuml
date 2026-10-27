@@ -1,0 +1,29 @@
+==================
+participant decorations
+==================
+@startuml
+actor Bob #red
+participant Last order 30
+participant Gen << Generated >>
+participant Multi [
+  =Title
+  ----
+]
+@enduml
+---
+
+(source_file
+  (diagram
+    (participant_declaration
+      (identifier)
+      (color))
+    (participant_declaration
+      (identifier)
+      (number))
+    (participant_declaration
+      (identifier)
+      (stereotype))
+    (participant_declaration
+      (identifier)
+      (raw_line)
+      (raw_line))))

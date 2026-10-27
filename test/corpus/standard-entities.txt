@@ -1,0 +1,63 @@
+==================
+extended entity kinds
+==================
+@startuml
+annotation SuppressWarnings
+exception OutOfRange
+metaclass MetaCls
+protocol Speaks
+record Pair
+dataclass Config
+struct Point {
+  x : int
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (entity_declaration
+      (entity_kind)
+      (identifier))
+    (entity_declaration
+      (entity_kind)
+      (identifier))
+    (entity_declaration
+      (entity_kind)
+      (identifier))
+    (entity_declaration
+      (entity_kind)
+      (identifier))
+    (entity_declaration
+      (entity_kind)
+      (identifier))
+    (entity_declaration
+      (entity_kind)
+      (identifier))
+    (entity_declaration
+      (entity_kind)
+      (identifier)
+      (entity_body
+        (member
+          (attribute
+            (identifier)
+            (type)))))))
+
+==================
+entity tags
+==================
+@startuml
+class C1 $tag13
+class C2 $tag1 $tag2
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (tag))
+    (class_declaration
+      (identifier)
+      (tag)
+      (tag))))

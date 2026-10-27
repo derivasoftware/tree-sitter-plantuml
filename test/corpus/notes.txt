@@ -166,3 +166,26 @@ note left of Box::width : pixels
         (identifier)
         (identifier))
       (label))))
+
+==================
+sequence note variants
+==================
+@startuml
+participant Alice
+note right of Alice #aqua : colored
+note across : spanning
+@enduml
+---
+
+(source_file
+  (diagram
+    (participant_declaration
+      (identifier))
+    (note_statement
+      (note_position)
+      (identifier)
+      (color)
+      (label))
+    (note_statement
+      (note_position)
+      (label))))

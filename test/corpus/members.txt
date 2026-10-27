@@ -64,3 +64,55 @@ class Contract {
           (attribute
             (identifier)
             (type)))))))
+
+==================
+package-private visibility member
+==================
+@startuml
+class A {
+  ~x : int
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (attribute
+            (identifier)
+            (type)))))))
+
+==================
+field method and classifier modifiers
+==================
+@startuml
+class A {
+  {field} area()
+  {method} plain
+  {classifier} String id
+}
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (modifier)
+          (method
+            (identifier)))
+        (member
+          (modifier)
+          (attribute
+            (identifier)))
+        (member
+          (modifier)
+          (attribute
+            (identifier)
+            (raw_text)))))))

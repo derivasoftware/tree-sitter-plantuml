@@ -22,3 +22,55 @@ typescript = ["."]
 code = "W-DESIGN-NO-FUNCTION"
 sources = ["CL_Packaging", "CL_Frontier"]
 reason = "two boxes document code no reader scans: CL_Packaging names the wheel build steps (language(), build_wheels(), smoke_wheel()) that live in the CI and the build scripts, CL_Frontier names the C functions of the external scanner (src/scanner.c); both stay as design documentation of the grammar, as the chapters do (REQ-00516-1)"
+
+# The grammar's rules live in grammar.js, a DSL no argos reader extracts:
+# every requirement a rule realises has its design and its verification but
+# reads "no implementation", and the sheet that groups the rule chapters
+# cannot be the grammar package's encapsulation while argos sees no package.
+# design_optional is ruled out (DDEV-261: runtime behaviour). Both are the
+# reader gap the grammar-reader epic closes (DDEV-891); retire these two
+# exemptions with DDEV-894. Listed one by one so a new partial requirement
+# still reports (PUML-112).
+[[diagnose.exempt]]
+code = "W-REQ-PARTIAL"
+sources = [
+  "REQ-00001-1",
+  "REQ-00002-2",
+  "REQ-00003-3",
+  "REQ-00004-1",
+  "REQ-00005-3",
+  "REQ-00006-1",
+  "REQ-00007-1",
+  "REQ-00008-1",
+  "REQ-00009-1",
+  "REQ-00010-4",
+  "REQ-00011-2",
+  "REQ-00012-2",
+  "REQ-00013-1",
+  "REQ-00014-1",
+  "REQ-00015-1",
+  "REQ-00016-2",
+  "REQ-00017-1",
+  "REQ-00018-1",
+  "REQ-00019-1",
+  "REQ-00020-1",
+  "REQ-00021-1",
+  "REQ-00022-1",
+  "REQ-00023-1",
+  "REQ-00024-1",
+  "REQ-00025-1",
+  "REQ-00026-3",
+  "REQ-00027-1",
+  "REQ-00028-4",
+  "REQ-00029-1",
+  "REQ-00030-1",
+  "REQ-00031-1",
+  "REQ-00032-1",
+  "REQ-00033-1",
+]
+reason = "realised by rules of grammar.js, a DSL no argos reader extracts; design and verification present, design_optional vetoed (DDEV-261); closed by the grammar reader (DDEV-891, retire with DDEV-894)"
+
+[[diagnose.exempt]]
+code = "W-AGGREGATE-UNDECIDED"
+sources = ["CL_TreeSitterPlantuml"]
+reason = "the sheet is the grammar package's boundary over its rule chapters; argos sees no package until a reader extracts grammar.js (DDEV-891, retire with DDEV-894)"
