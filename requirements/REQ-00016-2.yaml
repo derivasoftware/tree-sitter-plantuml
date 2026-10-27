@@ -5,7 +5,7 @@ requirement:
     The pipeline shall publish the python wheels and the wasm module on release tags
   rationale: >
     Tag vX.Y.Z from green main → publish-pypi (build + twine, job token) uploads the wheels to this project's PyPI registry and publish-wasm uploads tree-sitter-plantuml.wasm to its generic registry; the shared workflow is overridden to admit tag pipelines. Revision 2 (PUML-98): publish-npm is gone with the npm package.
-  status: DRAFT
+  status: APPROVED
   asil: QM
   parent_ids:
     - SREQ-00007-2

@@ -5,4 +5,4 @@ verification:
   description: >
     Evidence: the tag pipeline of the release with publish-pypi and publish-wasm green, the wheels in the project's PyPI registry and tree-sitter-plantuml.wasm under packages/generic/wasm/<tag>/. Re-verify on each release tag. Revision 2 (PUML-98): no npm package any more.
   method: review
-  status: DRAFT
+  status: APPROVED
