@@ -159,3 +159,25 @@ state Comp {
           (pseudostate)
           (relation_operator)
           (identifier))))))
+
+==================
+a one-line body closes after a value that ends in its own braces
+==================
+@startuml
+class A { + x : {a} }
+class B
+@enduml
+---
+
+(source_file
+  (diagram
+    (class_declaration
+      (identifier)
+      (entity_body
+        (member
+          (visibility)
+          (attribute
+            (identifier)
+            (type)))))
+    (class_declaration
+      (identifier))))

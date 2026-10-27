@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-plantuml",
-  "version": "0.15.3",
+  "version": "0.16.0",
   "private": true,
   "description": "PlantUML grammar for tree-sitter",
   "type": "module",

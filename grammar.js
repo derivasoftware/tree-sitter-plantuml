@@ -1040,10 +1040,15 @@ export default grammar({
     // Without this a one-line body (`class A { + x : int }`) ends with the
     // type eating the brace, the body never closes, and every statement
     // after it is swallowed as a member — no error anywhere, just a
-    // diagram missing half its boxes. The cost is a value whose own last
-    // character is a brace, which loses it; the gain is that a block
-    // always closes where it was written.
-    _to_eol: $ => token(prec(-1, /[^ \t\n]([^\n]*[^ \t\n}])?/)),
+    // diagram missing half its boxes. A value keeps its last brace when
+    // that brace closes one the value itself opened (`a -> b : {x: [1]}`,
+    // a map in a label, outside any block or inside one): the second
+    // alternative ends at a `{...}` group with no brace inside it. Only a
+    // value ending in nested braces (`{a: {b}}`) still loses its last one.
+    _to_eol: $ => token(prec(-1, choice(
+      /[^ \t\n]([^\n]*[^ \t\n}])?/,
+      /([^ \t\n][^\n]*)?\{[^{}\n]*\}/,
+    ))),
 
     _newline: $ => /\r?\n/,
 

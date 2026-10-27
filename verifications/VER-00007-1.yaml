@@ -4,6 +4,7 @@ verification:
   title: Corpus tests cover grouping blocks
   description: >
     Corpus tests cover grouping blocks
+    A one-line body closes after a value ending in its own braces (PUML-102).
   method: test
   test_ids:
     - tests/integration/test_grammar.py::test_corpus_grouping
