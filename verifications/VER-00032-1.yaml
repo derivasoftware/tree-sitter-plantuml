@@ -8,4 +8,4 @@ verification:
   test_ids:
     - tests/integration/test_grammar.py::test_corpus_hyperlinks
     - tests/integration/test_round_trip.py::test_token_coverage
-  status: DRAFT
+  status: APPROVED
