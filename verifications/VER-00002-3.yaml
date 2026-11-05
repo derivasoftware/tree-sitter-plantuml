@@ -12,4 +12,4 @@ verification:
   method: test
   test_ids:
     - tests/integration/test_queries.py::test_highlights_reference_known_nodes
-  status: DRAFT
+  status: APPROVED
