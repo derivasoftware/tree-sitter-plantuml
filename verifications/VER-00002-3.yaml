@@ -1,0 +1,15 @@
+verification:
+  id: VER-00002-3
+  req_id: REQ-00009-1
+  title: Query compilation test rejects unknown node types in the highlight query
+  description: >
+    tests/integration/test_queries.py::test_highlights_reference_known_nodes
+    runs highlights.scm against the built grammar and fails on any capture
+    of a node type the grammar does not define. Revision 3 narrows the text
+    to what the test proves: the split of the query test (PUML-112) moved
+    folds, indents and the "three files ship" case to VER-00028-1 under
+    REQ-00027-1, and revision 2 kept claiming them (PUML-117).
+  method: test
+  test_ids:
+    - tests/integration/test_queries.py::test_highlights_reference_known_nodes
+  status: APPROVED

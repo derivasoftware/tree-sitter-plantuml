@@ -39,7 +39,7 @@ tag generate below — it compiles the extension, so it needs a C toolchain:
 
 <!-- folio: install -->
 ```bash
-pip install git+https://github.com/derivasoftware/tree-sitter-plantuml.git@v0.16.3
+pip install git+https://github.com/derivasoftware/tree-sitter-plantuml.git@v0.16.5
 ```
 
 Or from a clone: `git clone https://github.com/derivasoftware/tree-sitter-plantuml && pip install ./tree-sitter-plantuml`.
